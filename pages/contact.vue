@@ -33,11 +33,11 @@ useSeoMeta({
         <div>
           <p class="text-gray-500 text-xs uppercase tracking-widest mb-0.5">Email</p>
           <a
-            href="mailto:hello@example.com"
+            href="mailto:kimwong.wwk@gmail.com"
             class="text-white font-medium hover:text-brand transition-colors"
-            aria-label="Send email to hello@example.com"
+            aria-label="Send email to kimwong.wwk@gmail.com"
           >
-            hello@example.com
+            kimwong.wwk@gmail.com
           </a>
         </div>
       </div>
