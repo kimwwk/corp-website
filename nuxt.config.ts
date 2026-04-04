@@ -11,9 +11,9 @@ export default defineNuxtConfig({
     cssPath: '~/assets/css/main.css',
   },
 
-  // Cloudflare Workers deployment
+  // Static Site Generation (works on Vercel + Cloudflare Pages)
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: 'static',
   },
 
   // App-level head defaults
