@@ -4,8 +4,8 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Privacy Policy — Corp',
-  description: 'Privacy Policy for Corp.',
+  title: 'Privacy Policy — Kivov Digital',
+  description: 'Privacy Policy for Kivov Digital.',
   robots: 'noindex',
 })
 </script>
@@ -18,28 +18,25 @@ useSeoMeta({
         <NuxtLink
           to="/"
           class="text-gray-500 hover:text-gray-300 transition-colors text-sm mb-8 inline-flex items-center gap-2"
-          aria-label="Back to Corp homepage"
+          aria-label="Back to Kivov Digital homepage"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Corp
+          Kivov Digital
         </NuxtLink>
       </div>
 
       <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3">
         Privacy Policy
       </h1>
-      <p class="text-gray-500 text-sm mb-10">Last updated: April 2026</p>
+      <p class="text-gray-500 text-sm mb-10">Last updated: May 1, 2026</p>
 
-      <div class="prose prose-invert prose-sm max-w-none">
-        <p class="text-gray-400 leading-relaxed text-base">
-          <strong class="text-gray-200">Coming Soon.</strong> This page will contain our privacy policy.
-        </p>
-        <p class="text-gray-500 mt-4 text-sm leading-relaxed">
-          Our privacy policy is currently being prepared. Please check back soon for the full policy detailing how we collect, use, and protect your information.
-        </p>
-      </div>
+      <iframe
+        src="/privacy.html"
+        class="w-full h-screen border-0 bg-white"
+        title="Privacy Policy"
+      />
     </div>
   </div>
 </template>

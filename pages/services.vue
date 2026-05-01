@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Services — Corp',
+  title: 'Services — Kivov Digital',
   description: 'AI-powered applications, full-stack software development, and technical consulting for AI architecture and automation.',
-  ogTitle: 'Services — Corp',
+  ogTitle: 'Services — Kivov Digital',
   ogDescription: 'AI-powered applications, full-stack software development, and technical consulting for AI architecture and automation.',
   ogType: 'website',
   twitterCard: 'summary_large_image',

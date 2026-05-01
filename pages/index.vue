@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Corp — We build intelligent software.',
+  title: 'Kivov Digital — We build intelligent software.',
   description: 'We design and develop AI-powered applications that solve real problems — from productivity tools to autonomous systems. Based in Ontario, Canada.',
-  ogTitle: 'Corp — We build intelligent software.',
+  ogTitle: 'Kivov Digital — We build intelligent software.',
   ogDescription: 'We design and develop AI-powered applications that solve real problems — from productivity tools to autonomous systems. Based in Ontario, Canada.',
   ogType: 'website',
   twitterCard: 'summary_large_image',

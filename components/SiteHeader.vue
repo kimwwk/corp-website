@@ -27,9 +27,9 @@ function toggleMobile() {
         <NuxtLink
           to="/"
           class="text-white font-semibold text-lg tracking-tight hover:text-brand transition-colors"
-          aria-label="Corp — Home"
+          aria-label="Kivov Digital — Home"
         >
-          Corp
+          Kivov Digital
         </NuxtLink>
 
         <!-- Desktop nav -->

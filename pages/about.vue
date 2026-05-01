@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'About — Corp',
+  title: 'About — Kivov Digital',
   description: 'We\'re a small, independent software studio focused on practical AI. Founded in 2026. Ontario, Canada.',
-  ogTitle: 'About — Corp',
+  ogTitle: 'About — Kivov Digital',
   ogDescription: 'We\'re a small, independent software studio focused on practical AI. Founded in 2026. Ontario, Canada.',
   ogType: 'website',
   twitterCard: 'summary_large_image',

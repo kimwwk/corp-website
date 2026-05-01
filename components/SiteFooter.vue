@@ -3,7 +3,7 @@
     <div class="max-w-5xl mx-auto px-6 py-8">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-gray-500 text-sm">
-          © 2026 Corp. All rights reserved.
+          © 2026 Kivov Digital. All rights reserved.
         </p>
         <nav aria-label="Footer navigation" class="flex items-center gap-6">
           <NuxtLink

@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   // Site config for SEO modules
   site: {
     url: 'https://kuma544514.shop',
-    name: 'Corp',
+    name: 'Kivov Digital',
   },
 
   typescript: {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Contact — Corp',
-  description: 'Get in touch with Corp. We\'d love to hear about your project.',
-  ogTitle: 'Contact — Corp',
-  ogDescription: 'Get in touch with Corp. We\'d love to hear about your project.',
+  title: 'Contact — Kivov Digital',
+  description: 'Get in touch with Kivov Digital. We\'d love to hear about your project.',
+  ogTitle: 'Contact — Kivov Digital',
+  ogDescription: 'Get in touch with Kivov Digital. We\'d love to hear about your project.',
   ogType: 'website',
   twitterCard: 'summary_large_image',
 })

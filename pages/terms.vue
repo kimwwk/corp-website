@@ -4,8 +4,8 @@ definePageMeta({
 })
 
 useSeoMeta({
-  title: 'Terms of Use — Corp',
-  description: 'Terms of Use for Corp.',
+  title: 'Terms of Use — Kivov Digital',
+  description: 'Terms of Use for Kivov Digital.',
   robots: 'noindex',
 })
 </script>
@@ -18,19 +18,19 @@ useSeoMeta({
         <NuxtLink
           to="/"
           class="text-gray-500 hover:text-gray-300 transition-colors text-sm mb-8 inline-flex items-center gap-2"
-          aria-label="Back to Corp homepage"
+          aria-label="Back to Kivov Digital homepage"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Corp
+          Kivov Digital
         </NuxtLink>
       </div>
 
       <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3">
         Terms of Use
       </h1>
-      <p class="text-gray-500 text-sm mb-10">Last updated: April 2026</p>
+      <p class="text-gray-500 text-sm mb-10">Last updated: May 1, 2026</p>
 
       <div class="prose prose-invert prose-sm max-w-none">
         <p class="text-gray-400 leading-relaxed text-base">
