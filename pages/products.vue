@@ -14,7 +14,7 @@ const products = [
     tagline: 'AI-Assisted Expense Tracking',
     description: 'Your AI assistant for the household pot. Tell it what you spent, review the proposed entry, approve.',
     status: 'Available on Android',
-    href: 'https://our-pot.com',
+    href: 'https://our-pot-site.our-pot-backend-production.workers.dev/',
     icon: '/our-pot-icon.png',
   },
 ]
