@@ -12,10 +12,10 @@ const products = [
   {
     title: 'our-pot',
     tagline: 'AI-Assisted Expense Tracking',
-    description: 'Your AI assistant for the household pot. Stop the tedious manual entry — our AI proposes expense entries for you to review and approve. You stay in control while your assistant does the heavy lifting.',
+    description: 'Your AI assistant for the household pot. Tell it what you spent, review the proposed entry, approve.',
     status: 'Available on Android',
-    primaryHref: 'https://drive.google.com/file/d/1q-_Q07lBgg8f0S_B11nVOp8cIu-FAAbx/view?usp=drive_link',
-    primaryLabel: 'Download for Android',
+    href: 'https://our-pot.com',
+    icon: '/our-pot-icon.png',
   },
 ]
 </script>
@@ -35,32 +35,35 @@ const products = [
     </div>
 
     <div class="grid md:grid-cols-1 gap-6 max-w-3xl">
-      <article
+      <a
         v-for="product in products"
         :key="product.title"
-        class="card"
+        :href="product.href"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card group flex gap-5 items-start hover:border-brand transition-colors"
+        :aria-label="`Learn more about ${product.title}`"
       >
-        <div class="flex items-baseline justify-between gap-4 mb-3">
-          <h2 class="text-white font-semibold text-xl">{{ product.title }}</h2>
-          <span class="text-brand text-xs font-mono uppercase tracking-widest flex-shrink-0">
-            {{ product.status }}
-          </span>
-        </div>
-        <p class="text-gray-300 mb-2">{{ product.tagline }}</p>
-        <p class="text-gray-400 leading-relaxed mb-6">{{ product.description }}</p>
-
-        <a
-          :href="product.primaryHref"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn-primary"
+        <img
+          :src="product.icon"
+          :alt="`${product.title} icon`"
+          class="w-16 h-16 rounded-xl flex-shrink-0"
+          width="64"
+          height="64"
         >
-          {{ product.primaryLabel }}
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
-      </article>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="text-white font-semibold text-xl group-hover:text-brand transition-colors">
+              {{ product.title }}
+            </h2>
+            <span class="text-brand text-xs font-mono uppercase tracking-widest flex-shrink-0">
+              {{ product.status }}
+            </span>
+          </div>
+          <p class="text-gray-300 text-sm mb-1">{{ product.tagline }}</p>
+          <p class="text-gray-400 text-sm leading-relaxed">{{ product.description }}</p>
+        </div>
+      </a>
     </div>
 
     <div class="mt-12 pt-8 border-t border-gray-800 max-w-3xl">
