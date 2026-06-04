@@ -7,7 +7,6 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Products', to: '/products' },
   { label: 'Services', to: '/services' },
-  { label: 'Contact', to: '/contact' },
 ]
 
 // Close mobile menu on route change
@@ -45,6 +44,13 @@ function toggleMobile() {
           >
             {{ link.label }}
           </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-brand text-gray-950 text-sm font-semibold rounded-lg hover:bg-emerald-400 transition-colors"
+            :aria-current="route.path === '/contact' ? 'page' : undefined"
+          >
+            Free Assessment
+          </NuxtLink>
         </nav>
 
         <!-- Mobile menu button -->
@@ -81,6 +87,13 @@ function toggleMobile() {
           :aria-current="route.path === link.to ? 'page' : undefined"
         >
           {{ link.label }}
+        </NuxtLink>
+        <NuxtLink
+          to="/contact"
+          class="mt-2 py-3 px-3 rounded-lg bg-brand text-gray-950 text-sm font-semibold text-center hover:bg-emerald-400 transition-colors"
+          :aria-current="route.path === '/contact' ? 'page' : undefined"
+        >
+          Book a Free Assessment
         </NuxtLink>
       </nav>
     </div>

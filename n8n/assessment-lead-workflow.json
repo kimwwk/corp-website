@@ -1,0 +1,51 @@
+{
+  "name": "Kivov — Assessment Lead Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kivov-assessment-lead",
+        "responseMode": "onReceived",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "webhook-node",
+      "name": "Form Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "sendTo": "kimwong.wwk@gmail.com",
+        "subject": "=🟢 New assessment lead: {{ $json.body.name }} ({{ $json.body.company || 'no company given' }})",
+        "emailType": "text",
+        "message": "=New inquiry from the Kivov Digital website\n==========================================\n\nName:          {{ $json.body.name }}\nWork email:    {{ $json.body.email }}\nCompany:       {{ $json.body.company || '—' }}\nCompany size:  {{ $json.body.companySize || '—' }}\nInterested in: {{ $json.body.interest || '—' }}\nTimeline:      {{ $json.body.timeline || '—' }}\nSubmitted at:  {{ $json.body.submittedAt }}\n\nTheir situation:\n----------------\n{{ $json.body.message }}\n\nNext step (your SLA): reply within 1 business day with proposed assessment call times.",
+        "options": {}
+      },
+      "id": "gmail-node",
+      "name": "Email Me",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [220, 0]
+    }
+  ],
+  "connections": {
+    "Form Webhook": {
+      "main": [
+        [
+          {
+            "node": "Email Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

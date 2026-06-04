@@ -16,6 +16,13 @@ export default defineNuxtConfig({
     preset: 'static',
   },
 
+  // Public config — override at build time with NUXT_PUBLIC_N8N_WEBHOOK_URL
+  runtimeConfig: {
+    public: {
+      n8nWebhookUrl: '',
+    },
+  },
+
   // App-level head defaults
   app: {
     head: {

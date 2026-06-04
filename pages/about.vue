@@ -17,12 +17,15 @@ useSeoMeta({
       </p>
 
       <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-10">
-        Small team. Practical tools.
+        Small studio. Practical tools.
       </h1>
 
       <div class="space-y-6 text-gray-400 leading-relaxed text-lg">
         <p>
           We're a small, independent software studio focused on practical AI. We believe the best tools are the ones that work quietly in the background — doing the hard work so people don't have to.
+        </p>
+        <p>
+          We help small and mid-sized businesses put AI to work — starting with a free assessment that finds the quick wins, and going as deep as automation projects and custom-built software when it's worth it.
         </p>
         <p>
           We're not building hype. We're building software that solves real problems, ships reliably, and gets better over time.
