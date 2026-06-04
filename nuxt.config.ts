@@ -20,6 +20,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       n8nWebhookUrl: 'https://automation.getjustgo.com/webhook/kivov-assessment-lead',
+      n8nBookingWebhookUrl: 'https://automation.getjustgo.com/webhook/kivov-assessment-booking',
     },
   },
 

@@ -51,7 +51,7 @@ const steps = [
         </p>
 
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-          <NuxtLink to="/contact" class="btn-primary">
+          <NuxtLink to="/book" class="btn-primary">
             Book your free assessment
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -156,7 +156,7 @@ const steps = [
           <p class="text-gray-400 leading-relaxed mb-8">
             You don't need to be technical. You don't need to know anything about AI. That's our job.
           </p>
-          <NuxtLink to="/contact" class="btn-primary">
+          <NuxtLink to="/book" class="btn-primary">
             Book your free assessment
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

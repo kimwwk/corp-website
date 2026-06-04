@@ -84,7 +84,8 @@ const afterYouSend = [
           We reply within one business day. The assessment is a free 45-minute call to understand how your business runs and where AI can give you time back. No card required, no commitment to go further.
         </p>
         <p class="text-gray-400 text-lg leading-relaxed mb-12">
-          If we spot real opportunities, you'll have them in writing within 48 hours.
+          If we spot real opportunities, you'll have them in writing within 48 hours. Want to skip the back-and-forth?
+          <NuxtLink to="/book" class="text-brand hover:text-emerald-400 transition-colors font-medium">Pick a time directly</NuxtLink>.
         </p>
 
         <!-- Success state -->

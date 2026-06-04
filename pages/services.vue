@@ -67,7 +67,7 @@ const services = [
 
     <div class="mt-12 pt-8 border-t border-gray-800 max-w-3xl">
       <p class="text-gray-400 mb-4">Not sure where to start? That's exactly what the assessment is for.</p>
-      <NuxtLink to="/contact" class="btn-primary">
+      <NuxtLink to="/book" class="btn-primary">
         Book your free assessment
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

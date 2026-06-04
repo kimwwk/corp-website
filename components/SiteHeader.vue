@@ -45,9 +45,9 @@ function toggleMobile() {
             {{ link.label }}
           </NuxtLink>
           <NuxtLink
-            to="/contact"
+            to="/book"
             class="inline-flex items-center gap-2 px-4 py-2 bg-brand text-gray-950 text-sm font-semibold rounded-lg hover:bg-emerald-400 transition-colors"
-            :aria-current="route.path === '/contact' ? 'page' : undefined"
+            :aria-current="route.path === '/book' ? 'page' : undefined"
           >
             Free Assessment
           </NuxtLink>
@@ -89,9 +89,9 @@ function toggleMobile() {
           {{ link.label }}
         </NuxtLink>
         <NuxtLink
-          to="/contact"
+          to="/book"
           class="mt-2 py-3 px-3 rounded-lg bg-brand text-gray-950 text-sm font-semibold text-center hover:bg-emerald-400 transition-colors"
-          :aria-current="route.path === '/contact' ? 'page' : undefined"
+          :aria-current="route.path === '/book' ? 'page' : undefined"
         >
           Book a Free Assessment
         </NuxtLink>

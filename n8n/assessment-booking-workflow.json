@@ -1,0 +1,91 @@
+{
+  "name": "Kivov — Assessment Booking",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kivov-assessment-booking",
+        "responseMode": "onReceived",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "booking-webhook-node",
+      "webhookId": "kivov-assessment-booking",
+      "name": "Booking Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.test }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "booking-filter-node",
+      "name": "Is Real Booking?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "sendTo": "kimwong.wwk@gmail.com",
+        "subject": "=📅 Assessment booking: {{ $json.body.name }} — {{ $json.body.date }} at {{ $json.body.time }} ET",
+        "emailType": "text",
+        "message": "=New assessment booking from the Kivov Digital website\n=====================================================\n\nRequested slot: {{ $json.body.date }} at {{ $json.body.time }} ({{ $json.body.timezone }})\n\nName:    {{ $json.body.name }}\nEmail:   {{ $json.body.email }}\nCompany: {{ $json.body.company || '—' }}\nPhone:   {{ $json.body.phone || '—' }}\n\nNotes:\n------\n{{ $json.body.notes || '—' }}\n\nSubmitted at: {{ $json.body.submittedAt }}\n\nNext steps:\n1. Confirm the slot by email (visitor was told: \"we'll confirm within the business day\")\n2. Send the Zoom/Meet invite for the slot\n3. Send the pre-call intake form: https://form.jotform.com/261544889641267",
+        "options": {}
+      },
+      "id": "booking-gmail-node",
+      "name": "Email Me",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [440, 0]
+    }
+  ],
+  "connections": {
+    "Booking Webhook": {
+      "main": [
+        [
+          {
+            "node": "Is Real Booking?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Real Booking?": {
+      "main": [
+        [
+          {
+            "node": "Email Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}
