@@ -19,7 +19,7 @@ export default defineNuxtConfig({
   // Public config — override at build time with NUXT_PUBLIC_N8N_WEBHOOK_URL
   runtimeConfig: {
     public: {
-      n8nWebhookUrl: '',
+      n8nWebhookUrl: 'https://automation.getjustgo.com/webhook/kivov-assessment-lead',
     },
   },
 

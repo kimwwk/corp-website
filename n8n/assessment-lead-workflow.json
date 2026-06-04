@@ -11,6 +11,7 @@
         }
       },
       "id": "webhook-node",
+      "webhookId": "kivov-assessment-lead",
       "name": "Form Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
