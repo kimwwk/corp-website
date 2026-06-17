@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects
+# Products page was renamed to Showcase — permanent redirect for SEO.
+/products   /showcase   301
+/products/  /showcase   301
