@@ -19,3 +19,6 @@ node_modules
 *.local
 .vercel
 .gstack/
+
+# Local design exploration / scratch (not part of the site)
+prototypes/

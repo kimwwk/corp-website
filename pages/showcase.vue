@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Products — Kivov Digital',
+  title: 'Showcase — Kivov Digital',
   description: 'Applications we have built. AI-powered tools designed to be practical, fast, and useful.',
-  ogTitle: 'Products — Kivov Digital',
+  ogTitle: 'Showcase — Kivov Digital',
   ogDescription: 'Applications we have built. AI-powered tools designed to be practical, fast, and useful.',
   ogType: 'website',
   twitterCard: 'summary_large_image',
@@ -23,13 +23,13 @@ const products = [
 <template>
   <div class="section">
     <div class="max-w-3xl mb-12">
-      <p class="text-brand text-sm font-mono font-medium tracking-widest uppercase mb-6">
-        Products
+      <p class="eyebrow text-brand text-xs font-medium mb-6">
+        Showcase
       </p>
-      <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
+      <h1 class="font-display text-3xl md:text-5xl font-semibold text-ink tracking-tight mb-4">
         Applications we&#39;ve built
       </h1>
-      <p class="text-gray-400 text-lg leading-relaxed">
+      <p class="text-body text-lg leading-relaxed">
         Practical AI-powered tools, shipped and in use today.
       </p>
     </div>
@@ -53,21 +53,21 @@ const products = [
         >
         <div class="flex-1 min-w-0">
           <div class="flex items-baseline justify-between gap-4 mb-2">
-            <h2 class="text-white font-semibold text-xl group-hover:text-brand transition-colors">
+            <h2 class="text-ink font-semibold text-xl group-hover:text-brand transition-colors">
               {{ product.title }}
             </h2>
             <span class="text-brand text-xs font-mono uppercase tracking-widest flex-shrink-0">
               {{ product.status }}
             </span>
           </div>
-          <p class="text-gray-300 text-sm mb-1">{{ product.tagline }}</p>
-          <p class="text-gray-400 text-sm leading-relaxed">{{ product.description }}</p>
+          <p class="text-body text-sm mb-1">{{ product.tagline }}</p>
+          <p class="text-body text-sm leading-relaxed">{{ product.description }}</p>
         </div>
       </a>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-800 max-w-3xl">
-      <p class="text-gray-400 mb-4">More applications in development. Want to talk about a project?</p>
+    <div class="mt-12 pt-8 border-t border-line max-w-3xl">
+      <p class="text-body mb-4">More applications in development. Want to talk about a project?</p>
       <NuxtLink to="/contact" class="btn-primary">
         Get in touch
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

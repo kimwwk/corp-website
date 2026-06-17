@@ -16,6 +16,16 @@ export default defineNuxtConfig({
     preset: 'static',
   },
 
+  // Redirects (old /products now lives at /showcase)
+  routeRules: {
+    '/products': { redirect: '/showcase' },
+  },
+
+  // Sitemap — keep the noindex legal pages out
+  sitemap: {
+    exclude: ['/privacy', '/terms'],
+  },
+
   // Public config — override at build time with NUXT_PUBLIC_N8N_WEBHOOK_URL
   runtimeConfig: {
     public: {

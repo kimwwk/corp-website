@@ -130,9 +130,9 @@ async function submit() {
         </svg>
       </div>
       <div>
-        <h3 class="text-white font-semibold mb-2">Request received!</h3>
-        <p class="text-gray-400 leading-relaxed">
-          You asked for <span class="text-white font-medium">{{ prettyDate(selectedDate) }} at {{ selectedTime }} (ET)</span>.
+        <h3 class="text-ink font-semibold mb-2">Request received!</h3>
+        <p class="text-body leading-relaxed">
+          You asked for <span class="text-ink font-medium">{{ prettyDate(selectedDate) }} at {{ selectedTime }} (ET)</span>.
           We'll confirm by email within the business day and send you the meeting link.
         </p>
       </div>
@@ -143,14 +143,14 @@ async function submit() {
     <div class="grid lg:grid-cols-2 gap-10">
       <!-- Step 1: date & time -->
       <div>
-        <h3 class="text-white font-semibold text-lg mb-1">1. Select date &amp; time</h3>
-        <p class="text-gray-500 text-sm mb-6">Weekdays, next two weeks · All times Eastern (ET)</p>
+        <h3 class="text-ink font-semibold text-lg mb-1">1. Select date &amp; time</h3>
+        <p class="text-muted text-sm mb-6">Weekdays, next two weeks · All times Eastern (ET)</p>
 
         <!-- Month nav -->
         <div class="flex items-center justify-between mb-4">
           <button
             type="button"
-            class="p-2 rounded-md border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            class="p-2 rounded-md border border-line text-body hover:text-ink hover:border-ink/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             :disabled="!canPrev"
             aria-label="Go to previous month"
             @click="prevMonth"
@@ -159,10 +159,10 @@ async function submit() {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <p class="text-white font-medium">{{ monthLabel }}</p>
+          <p class="text-ink font-medium">{{ monthLabel }}</p>
           <button
             type="button"
-            class="p-2 rounded-md border border-gray-800 text-gray-400 hover:text-white hover:border-gray-600 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            class="p-2 rounded-md border border-line text-body hover:text-ink hover:border-ink/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             :disabled="!canNext"
             aria-label="Go to next month"
             @click="nextMonth"
@@ -175,7 +175,7 @@ async function submit() {
 
         <!-- Weekday header -->
         <div class="grid grid-cols-7 mb-1" aria-hidden="true">
-          <span v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" :key="d" class="text-center text-gray-500 text-xs font-mono py-1">{{ d }}</span>
+          <span v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" :key="d" class="text-center text-muted text-xs font-mono py-1">{{ d }}</span>
         </div>
 
         <!-- Day grid -->
@@ -186,12 +186,12 @@ async function submit() {
             type="button"
             class="aspect-square rounded-md text-sm transition-colors"
             :class="[
-              !cell.inMonth ? 'text-gray-700' : '',
+              !cell.inMonth ? 'text-muted/40' : '',
               cell.bookable
                 ? (selectedDate === cell.ymd
-                  ? 'bg-brand text-gray-950 font-semibold'
-                  : 'text-white hover:bg-gray-800 border border-gray-800')
-                : 'text-gray-600 cursor-not-allowed',
+                  ? 'bg-brand text-white font-semibold'
+                  : 'text-ink hover:bg-black/5 border border-line')
+                : 'text-muted/50 cursor-not-allowed',
               cell.isToday && selectedDate !== cell.ymd ? 'border border-brand/50' : '',
             ]"
             :disabled="!cell.bookable"
@@ -205,7 +205,7 @@ async function submit() {
 
         <!-- Time slots -->
         <div v-if="selectedDate" class="mt-6">
-          <p class="text-gray-300 text-sm mb-3">Available times for <span class="text-white font-medium">{{ prettyDate(selectedDate) }}</span></p>
+          <p class="text-body text-sm mb-3">Available times for <span class="text-ink font-medium">{{ prettyDate(selectedDate) }}</span></p>
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
             <button
               v-for="slot in slots"
@@ -213,8 +213,8 @@ async function submit() {
               type="button"
               class="py-2.5 px-3 rounded-md text-sm border transition-colors"
               :class="selectedTime === slot
-                ? 'bg-brand text-gray-950 font-semibold border-brand'
-                : 'text-gray-300 border-gray-800 hover:border-gray-600 hover:text-white'"
+                ? 'bg-brand text-white font-semibold border-brand'
+                : 'text-body border-line hover:border-ink/30 hover:text-ink'"
               :aria-pressed="selectedTime === slot"
               @click="selectedTime = slot"
             >
@@ -222,13 +222,13 @@ async function submit() {
             </button>
           </div>
         </div>
-        <p v-else class="mt-6 text-gray-500 text-sm">Pick a date to see available times.</p>
+        <p v-else class="mt-6 text-muted text-sm">Pick a date to see available times.</p>
       </div>
 
       <!-- Step 2: details -->
       <div>
-        <h3 class="text-white font-semibold text-lg mb-1">2. Your details</h3>
-        <p class="text-gray-500 text-sm mb-6">We'll confirm your slot by email — no card, no commitment.</p>
+        <h3 class="text-ink font-semibold text-lg mb-1">2. Your details</h3>
+        <p class="text-muted text-sm mb-6">We'll confirm your slot by email — no card, no commitment.</p>
 
         <form @submit.prevent="submit">
           <div class="space-y-5">
@@ -254,10 +254,10 @@ async function submit() {
             </div>
           </div>
 
-          <div v-if="status === 'error'" class="mt-5 card border-red-900/60" role="alert">
-            <p class="text-gray-300 text-sm leading-relaxed">
+          <div v-if="status === 'error'" class="mt-5 card border-red-300 bg-red-50" role="alert">
+            <p class="text-body text-sm leading-relaxed">
               Hmm — something went wrong. Please email us at
-              <a href="mailto:kimwong.wwk@gmail.com?subject=Free%20AI%20assessment%20booking" class="text-brand hover:text-emerald-400 transition-colors font-medium">kimwong.wwk@gmail.com</a>
+              <a href="mailto:kimwong.wwk@gmail.com?subject=Free%20AI%20assessment%20booking" class="text-brand hover:text-brand-deep transition-colors font-medium">kimwong.wwk@gmail.com</a>
               with your preferred time.
             </p>
           </div>
@@ -271,7 +271,7 @@ async function submit() {
             >
               {{ status === 'sending' ? 'Sending…' : 'Confirm assessment' }}
             </button>
-            <p class="text-gray-500 text-sm mt-3 text-center">
+            <p class="text-muted text-sm mt-3 text-center">
               <template v-if="selectedDate && selectedTime">
                 {{ prettyDate(selectedDate) }} at {{ selectedTime }} (ET) · 45 minutes · Free
               </template>

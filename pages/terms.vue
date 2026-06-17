@@ -11,13 +11,13 @@ useSeoMeta({
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-950 text-gray-100">
+  <div class="min-h-screen bg-canvas text-body">
     <div class="max-w-3xl mx-auto px-6 py-12 md:py-16">
       <!-- Minimal header for standalone / iframe use -->
       <div class="mb-10">
         <NuxtLink
           to="/"
-          class="text-gray-500 hover:text-gray-300 transition-colors text-sm mb-8 inline-flex items-center gap-2"
+          class="text-muted hover:text-ink transition-colors text-sm mb-8 inline-flex items-center gap-2"
           aria-label="Back to Kivov Digital homepage"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -27,16 +27,16 @@ useSeoMeta({
         </NuxtLink>
       </div>
 
-      <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight mb-3">
+      <h1 class="font-display text-2xl md:text-3xl font-semibold text-ink tracking-tight mb-3">
         Terms of Use
       </h1>
-      <p class="text-gray-500 text-sm mb-10">Last updated: May 1, 2026</p>
+      <p class="text-muted text-sm mb-10">Last updated: May 1, 2026</p>
 
-      <div class="prose prose-invert prose-sm max-w-none">
-        <p class="text-gray-400 leading-relaxed text-base">
-          <strong class="text-gray-200">Coming Soon.</strong> This page will contain our terms of use.
+      <div class="prose prose-sm max-w-none">
+        <p class="text-body leading-relaxed text-base">
+          <strong class="text-ink">Coming Soon.</strong> This page will contain our terms of use.
         </p>
-        <p class="text-gray-500 mt-4 text-sm leading-relaxed">
+        <p class="text-muted mt-4 text-sm leading-relaxed">
           Our terms of use are currently being prepared. Please check back soon for the complete terms governing use of our website and services.
         </p>
       </div>

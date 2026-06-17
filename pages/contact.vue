@@ -16,7 +16,6 @@ const form = reactive({
   company: '',
   companySize: '',
   interest: '',
-  timeline: '',
   message: '',
 })
 
@@ -76,16 +75,16 @@ const afterYouSend = [
           Contact · Book Your Assessment
         </p>
 
-        <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
+        <h1 class="text-3xl md:text-4xl font-bold text-ink tracking-tight mb-6">
           Send us a few lines.
         </h1>
 
-        <p class="text-gray-400 text-lg leading-relaxed mb-4">
+        <p class="text-body text-lg leading-relaxed mb-4">
           We reply within one business day. The assessment is a free 45-minute call to understand how your business runs and where AI can give you time back. No card required, no commitment to go further.
         </p>
-        <p class="text-gray-400 text-lg leading-relaxed mb-12">
+        <p class="text-body text-lg leading-relaxed mb-12">
           If we spot real opportunities, you'll have them in writing within 48 hours. Want to skip the back-and-forth?
-          <NuxtLink to="/book" class="text-brand hover:text-emerald-400 transition-colors font-medium">Pick a time directly</NuxtLink>.
+          <NuxtLink to="/book" class="text-brand hover:text-brand-deep transition-colors font-medium">Pick a time directly</NuxtLink>.
         </p>
 
         <!-- Success state -->
@@ -97,8 +96,8 @@ const afterYouSend = [
               </svg>
             </div>
             <div>
-              <h2 class="text-white font-semibold mb-2">Thanks — we got it.</h2>
-              <p class="text-gray-400 leading-relaxed">
+              <h2 class="text-ink font-semibold mb-2">Thanks — we got it.</h2>
+              <p class="text-body leading-relaxed">
                 You'll hear from us within one business day with a couple of proposed times for your free assessment call. Talk soon.
               </p>
             </div>
@@ -149,33 +148,21 @@ const afterYouSend = [
               >
             </div>
 
-            <div class="grid sm:grid-cols-2 gap-6">
-              <div>
-                <label for="companySize" class="form-label">04 / Company size</label>
-                <select id="companySize" v-model="form.companySize" name="companySize" class="form-input" :class="{ 'text-gray-500': !form.companySize }">
-                  <option value="" disabled>Select…</option>
-                  <option>Just me</option>
-                  <option>2–10</option>
-                  <option>11–50</option>
-                  <option>51–200</option>
-                  <option>200+</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="timeline" class="form-label">05 / When would you like to start</label>
-                <select id="timeline" v-model="form.timeline" name="timeline" class="form-input" :class="{ 'text-gray-500': !form.timeline }">
-                  <option value="" disabled>Select…</option>
-                  <option>As soon as possible</option>
-                  <option>Next 1–3 months</option>
-                  <option>Exploring — no fixed date</option>
-                </select>
-              </div>
+            <div>
+              <label for="companySize" class="form-label">04 / Company size</label>
+              <select id="companySize" v-model="form.companySize" name="companySize" class="form-input" :class="{ 'text-muted': !form.companySize }">
+                <option value="" disabled>Select…</option>
+                <option>Just me</option>
+                <option>2–10</option>
+                <option>11–50</option>
+                <option>51–200</option>
+                <option>200+</option>
+              </select>
             </div>
 
             <div>
-              <label for="interest" class="form-label">06 / What you're after</label>
-              <select id="interest" v-model="form.interest" name="interest" class="form-input" :class="{ 'text-gray-500': !form.interest }">
+              <label for="interest" class="form-label">05 / What you're after</label>
+              <select id="interest" v-model="form.interest" name="interest" class="form-input" :class="{ 'text-muted': !form.interest }">
                 <option value="" disabled>Select…</option>
                 <option>Free AI Tools Assessment</option>
                 <option>AI Automation (project)</option>
@@ -185,7 +172,7 @@ const afterYouSend = [
             </div>
 
             <div>
-              <label for="message" class="form-label">07 / Tell us about your situation <span class="text-brand">*</span></label>
+              <label for="message" class="form-label">06 / Tell us about your situation <span class="text-brand">*</span></label>
               <textarea
                 id="message"
                 v-model="form.message"
@@ -199,12 +186,12 @@ const afterYouSend = [
           </div>
 
           <!-- Error state -->
-          <div v-if="status === 'error'" class="mt-6 card border-red-900/60" role="alert">
-            <p class="text-gray-300 text-sm leading-relaxed">
+          <div v-if="status === 'error'" class="mt-6 card border-red-300 bg-red-50" role="alert">
+            <p class="text-body text-sm leading-relaxed">
               Hmm — something went wrong sending your message. Please email us directly at
               <a
                 href="mailto:kimwong.wwk@gmail.com?subject=Free%20AI%20assessment"
-                class="text-brand hover:text-emerald-400 transition-colors font-medium"
+                class="text-brand hover:text-brand-deep transition-colors font-medium"
               >kimwong.wwk@gmail.com</a>
               — we read everything.
             </p>
@@ -217,7 +204,7 @@ const afterYouSend = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </button>
-            <p class="text-gray-500 text-sm mt-4">
+            <p class="text-muted text-sm mt-4">
               First reply within 1 business day · Free, no commitment
             </p>
           </div>
@@ -227,20 +214,20 @@ const afterYouSend = [
       <!-- Right column: what happens next + other ways -->
       <aside class="lg:col-span-2 space-y-10">
         <div>
-          <h2 class="text-white font-semibold text-lg mb-6">What happens after you send</h2>
+          <h2 class="text-ink font-semibold text-lg mb-6">What happens after you send</h2>
           <ol class="space-y-5">
             <li v-for="(item, i) in afterYouSend" :key="i" class="flex gap-4">
               <span class="text-brand font-mono text-sm flex-shrink-0 mt-0.5" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
               <div>
-                <p class="text-white text-sm font-medium mb-1">{{ item.when }}</p>
-                <p class="text-gray-400 text-sm leading-relaxed">{{ item.what }}</p>
+                <p class="text-ink text-sm font-medium mb-1">{{ item.when }}</p>
+                <p class="text-body text-sm leading-relaxed">{{ item.what }}</p>
               </div>
             </li>
           </ol>
         </div>
 
         <div>
-          <h2 class="text-white font-semibold text-lg mb-4">Other ways to reach us</h2>
+          <h2 class="text-ink font-semibold text-lg mb-4">Other ways to reach us</h2>
           <div class="card flex items-center gap-4">
             <div class="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -248,10 +235,10 @@ const afterYouSend = [
               </svg>
             </div>
             <div>
-              <p class="text-gray-500 text-xs uppercase tracking-widest mb-0.5">Email</p>
+              <p class="text-muted text-xs uppercase tracking-widest mb-0.5">Email</p>
               <a
                 href="mailto:kimwong.wwk@gmail.com"
-                class="text-white font-medium hover:text-brand transition-colors"
+                class="text-ink font-medium hover:text-brand transition-colors"
                 aria-label="Send email to kimwong.wwk@gmail.com"
               >
                 kimwong.wwk@gmail.com
