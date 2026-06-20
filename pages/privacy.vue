@@ -30,7 +30,7 @@ useSeoMeta({
       <h1 class="font-display text-2xl md:text-3xl font-semibold text-ink tracking-tight mb-3">
         Privacy Policy
       </h1>
-      <p class="text-muted text-sm mb-10">Last updated: May 1, 2026</p>
+      <p class="text-muted text-sm mb-10">Last updated: June 20, 2026</p>
 
       <iframe
         src="/privacy.html"
