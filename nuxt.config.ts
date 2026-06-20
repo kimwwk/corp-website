@@ -46,6 +46,17 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       ],
+      script: [
+        // Google tag (gtag.js)
+        { src: 'https://www.googletagmanager.com/gtag/js?id=G-9VVXS7BY20', async: true },
+        {
+          innerHTML:
+            "window.dataLayer = window.dataLayer || [];" +
+            "function gtag(){dataLayer.push(arguments);}" +
+            "gtag('js', new Date());" +
+            "gtag('config', 'G-9VVXS7BY20');",
+        },
+      ],
     },
   },
 
