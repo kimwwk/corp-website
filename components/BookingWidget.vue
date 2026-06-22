@@ -257,7 +257,7 @@ async function submit() {
           <div v-if="status === 'error'" class="mt-5 card border-red-300 bg-red-50" role="alert">
             <p class="text-body text-sm leading-relaxed">
               Hmm — something went wrong. Please email us at
-              <a href="mailto:kimwong.wwk@gmail.com?subject=Free%20AI%20assessment%20booking" class="text-brand hover:text-brand-deep transition-colors font-medium">kimwong.wwk@gmail.com</a>
+              <a href="mailto:hello@kivov.work?subject=Free%20AI%20assessment%20booking" class="text-brand hover:text-brand-deep transition-colors font-medium">hello@kivov.work</a>
               with your preferred time.
             </p>
           </div>

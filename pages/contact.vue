@@ -190,9 +190,9 @@ const afterYouSend = [
             <p class="text-body text-sm leading-relaxed">
               Hmm — something went wrong sending your message. Please email us directly at
               <a
-                href="mailto:kimwong.wwk@gmail.com?subject=Free%20AI%20assessment"
+                href="mailto:hello@kivov.work?subject=Free%20AI%20assessment"
                 class="text-brand hover:text-brand-deep transition-colors font-medium"
-              >kimwong.wwk@gmail.com</a>
+              >hello@kivov.work</a>
               — we read everything.
             </p>
           </div>
@@ -237,11 +237,11 @@ const afterYouSend = [
             <div>
               <p class="text-muted text-xs uppercase tracking-widest mb-0.5">Email</p>
               <a
-                href="mailto:kimwong.wwk@gmail.com"
+                href="mailto:hello@kivov.work"
                 class="text-ink font-medium hover:text-brand transition-colors"
-                aria-label="Send email to kimwong.wwk@gmail.com"
+                aria-label="Send email to hello@kivov.work"
               >
-                kimwong.wwk@gmail.com
+                hello@kivov.work
               </a>
             </div>
           </div>
