@@ -125,7 +125,8 @@ onMounted(() => {
             <li class="flex gap-3 text-sm text-body"><span class="font-mono text-xs text-brand pt-0.5 shrink-0">02</span><span><span class="text-ink font-medium">We build custom Claude skills</span> around those workflows.</span></li>
             <li class="flex gap-3 text-sm text-body"><span class="font-mono text-xs text-brand pt-0.5 shrink-0">03</span><span><span class="text-ink font-medium">We automate the repetitive parts</span> of your workflow.</span></li>
           </ol>
-          <p class="text-xs text-muted mb-5">Billed every 4 weeks — two bi-weekly calls.</p>
+          <p class="text-xs text-muted mb-1.5">Billed every 4 weeks — two bi-weekly calls.</p>
+          <p class="text-xs text-brand font-medium mb-5">100% money-back guarantee — if you're not satisfied with the results, you get a full refund.</p>
           <div class="mt-auto">
             <div class="mb-5">
               <div class="flex justify-between eyebrow text-[0.6rem] text-muted mb-2"><span>You</span><span>Us</span></div>
