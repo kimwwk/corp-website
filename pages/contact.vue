@@ -40,6 +40,7 @@ async function submit() {
     })
     if (!res.ok) throw new Error(`status-${res.status}`)
     status.value = 'success'
+    trackLead('contact_form')
   } catch (err) {
     console.error('Form submission failed:', err)
     status.value = 'error'
