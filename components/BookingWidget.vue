@@ -3,7 +3,20 @@
 // `x-frame-options: ALLOWALL`, so we don't need the widget.js script at all —
 // this renders in any browser, with or without JavaScript.
 const calendlyUrl = 'https://calendly.com/kimwong-wwk/let-s-meet'
-const embedSrc = `${calendlyUrl}?hide_gdpr_banner=1&embed_type=Inline`
+// `embed_domain` is required for Calendly to post booking events
+// (calendly.event_scheduled) back to the parent window — that's what we listen
+// for below to fire the GA4 `generate_lead` conversion.
+const embedSrc = `${calendlyUrl}?hide_gdpr_banner=1&embed_type=Inline&embed_domain=kivov.work`
+
+// Fire the GA conversion when a visitor completes a booking in the Calendly iframe.
+function onCalendlyMessage(e: MessageEvent) {
+  if (e.origin !== 'https://calendly.com') return
+  const data = e.data as { event?: unknown } | null | undefined
+  if (data?.event === 'calendly.event_scheduled') trackLead('book_call')
+}
+
+onMounted(() => window.addEventListener('message', onCalendlyMessage))
+onBeforeUnmount(() => window.removeEventListener('message', onCalendlyMessage))
 </script>
 
 <template>
