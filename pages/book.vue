@@ -17,35 +17,34 @@ const walkAway = [
 </script>
 
 <template>
-  <div class="section">
-    <div class="max-w-3xl mb-12">
+  <!-- Wider than the standard .section (max-w-5xl) so the Calendly iframe
+       clears ~1000px and renders its two-column horizontal layout. -->
+  <div class="px-6 py-16 md:py-24 max-w-6xl mx-auto">
+    <div class="max-w-3xl mb-10">
       <p class="eyebrow text-brand text-xs font-medium mb-6">
         Book Your Assessment
       </p>
       <h1 class="font-display text-3xl md:text-5xl font-semibold text-ink tracking-tight mb-4">
         Pick a time. We'll do the rest.
       </h1>
-      <p class="text-body text-lg leading-relaxed mb-6">
+      <p class="text-body text-lg leading-relaxed">
         45 minutes live, on Zoom, about how your business actually runs. Free, no card, no commitment. Within 48 hours you'll have your written report.
       </p>
-      <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2">
-        <li v-for="item in walkAway" :key="item" class="flex items-start gap-2 text-body text-sm">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-          {{ item }}
-        </li>
-      </ul>
     </div>
 
-    <ClientOnly>
-      <BookingWidget />
-      <template #fallback>
-        <div class="card md:p-10 text-muted">Loading calendar…</div>
-      </template>
-    </ClientOnly>
+    <BookingWidget />
 
-    <div class="mt-10 max-w-3xl">
+    <!-- Benefits live below the scheduler now, so the calendar leads. -->
+    <ul class="mt-12 grid sm:grid-cols-2 gap-x-8 gap-y-3 max-w-3xl">
+      <li v-for="item in walkAway" :key="item" class="flex items-start gap-2 text-body text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-brand flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        {{ item }}
+      </li>
+    </ul>
+
+    <div class="mt-8 max-w-3xl">
       <p class="text-muted text-sm">
         Prefer to write a few lines first instead?
         <NuxtLink to="/contact" class="text-brand hover:text-brand-deep transition-colors font-medium">Send an inquiry</NuxtLink>
