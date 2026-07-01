@@ -10,6 +10,14 @@ useSeoMeta({
 
 const products = [
   {
+    title: 'sprinting.run',
+    tagline: 'Periodization Software for Sprint Coaches',
+    description: 'Plan periodized sprint training, prescribe sets against Training Max with live effort %, and run AI session planning — built for speed and power, not generic gym logging.',
+    status: 'Live on Web',
+    href: 'https://sprinting.run',
+    icon: '/sprinting-run-icon.png',
+  },
+  {
     title: 'our-pot',
     tagline: 'AI-Assisted Expense Tracking',
     description: 'Your AI assistant for the household pot. Tell it what you spent, review the proposed entry, approve.',
