@@ -9,6 +9,7 @@ useSeoMeta({
 })
 
 const config = useRuntimeConfig()
+const posthog = usePostHog()
 
 const form = reactive({
   name: '',
@@ -41,9 +42,14 @@ async function submit() {
     if (!res.ok) throw new Error(`status-${res.status}`)
     status.value = 'success'
     trackLead('contact_form')
+    posthog?.capture('contact_form_submitted', {
+      company_size: form.companySize,
+      interest: form.interest,
+    })
   } catch (err) {
     console.error('Form submission failed:', err)
     status.value = 'error'
+    posthog?.capture('contact_form_failed')
   }
 }
 

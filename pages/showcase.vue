@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const posthog = usePostHog()
+
 useSeoMeta({
   title: 'Showcase — Kivov Digital',
   description: 'Applications we have built. AI-powered tools designed to be practical, fast, and useful.',
@@ -51,6 +53,7 @@ const products = [
         rel="noopener noreferrer"
         class="card group flex gap-5 items-start hover:border-brand transition-colors"
         :aria-label="`Learn more about ${product.title}`"
+        @click="posthog?.capture('showcase_product_clicked', { product_title: product.title, product_status: product.status })"
       >
         <img
           :src="product.icon"

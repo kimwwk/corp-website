@@ -8,11 +8,16 @@ const calendlyUrl = 'https://calendly.com/kimwong-wwk/let-s-meet'
 // for below to fire the GA4 `generate_lead` conversion.
 const embedSrc = `${calendlyUrl}?hide_gdpr_banner=1&embed_type=Inline&embed_domain=kivov.work`
 
+const posthog = usePostHog()
+
 // Fire the GA conversion when a visitor completes a booking in the Calendly iframe.
 function onCalendlyMessage(e: MessageEvent) {
   if (e.origin !== 'https://calendly.com') return
   const data = e.data as { event?: unknown } | null | undefined
-  if (data?.event === 'calendly.event_scheduled') trackLead('book_call')
+  if (data?.event === 'calendly.event_scheduled') {
+    trackLead('book_call')
+    posthog?.capture('assessment_booked', { method: 'calendly' })
+  }
 }
 
 onMounted(() => window.addEventListener('message', onCalendlyMessage))

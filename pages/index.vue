@@ -1,4 +1,10 @@
 <script setup lang="ts">
+const posthog = usePostHog()
+
+function trackAssessmentCta(location: string) {
+  posthog?.capture('assessment_cta_clicked', { source_page: 'home', cta_location: location })
+}
+
 useSeoMeta({
   title: 'Kivov Digital — Free AI Tools Assessment for Small Business',
   description: 'Reclaim 5–10 hours a week with AI tools that fit how you already work. Book a free AI assessment — a 45-minute call, a written report of practical quick wins, no obligation.',
@@ -51,7 +57,7 @@ const steps = [
         </p>
 
         <div class="flex flex-col sm:flex-row sm:items-center gap-4">
-          <NuxtLink to="/book" class="btn-primary">
+          <NuxtLink to="/book" class="btn-primary" @click="trackAssessmentCta('hero')">
             Book your free assessment
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -131,7 +137,7 @@ const steps = [
           <p class="text-body leading-relaxed mb-8">
             You don't need to be technical. You don't need to know anything about AI. That's our job.
           </p>
-          <NuxtLink to="/book" class="btn-primary">
+          <NuxtLink to="/book" class="btn-primary" @click="trackAssessmentCta('bottom_cta')">
             Book your free assessment
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
