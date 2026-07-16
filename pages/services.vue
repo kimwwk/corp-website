@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const posthog = usePostHog()
+
 useSeoMeta({
   title: 'Services — Kivov Digital',
   description: 'Start free with an AI Tools Assessment, then grow: Do It With You coaching at $1,000/mo, or Do It For You builds priced per project. Practical AI and automation for small & mid-sized businesses.',
@@ -132,7 +134,7 @@ onMounted(() => {
               <div class="flex justify-between eyebrow text-[0.6rem] text-muted mb-2"><span>You</span><span>Us</span></div>
               <div class="meter-track" style="--to-us:55%"><div class="meter-fill" /><div class="meter-knob" /></div>
             </div>
-            <NuxtLink to="/contact" class="btn-secondary w-full">Get in touch</NuxtLink>
+            <NuxtLink to="/contact" class="btn-secondary w-full" @click="posthog?.capture('service_inquiry_clicked', { service_tier: 'do_it_with_you' })">Get in touch</NuxtLink>
           </div>
         </article>
 
@@ -158,7 +160,7 @@ onMounted(() => {
               <div class="flex justify-between eyebrow text-[0.6rem] text-white/45 mb-2"><span>You</span><span>Us</span></div>
               <div class="meter-track on-dark" style="--to-us:90%"><div class="meter-fill on-dark" /><div class="meter-knob on-dark" /></div>
             </div>
-            <NuxtLink to="/contact" class="inline-flex items-center justify-center gap-2 px-6 py-3 w-full border border-white/25 text-white font-semibold rounded-xl hover:border-white/50 transition-colors">Get in touch</NuxtLink>
+            <NuxtLink to="/contact" class="inline-flex items-center justify-center gap-2 px-6 py-3 w-full border border-white/25 text-white font-semibold rounded-xl hover:border-white/50 transition-colors" @click="posthog?.capture('service_inquiry_clicked', { service_tier: 'do_it_for_you' })">Get in touch</NuxtLink>
           </div>
         </article>
       </div>

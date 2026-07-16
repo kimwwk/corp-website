@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/sitemap',
+    '@posthog/nuxt',
   ],
 
   tailwindcss: {
@@ -31,6 +32,18 @@ export default defineNuxtConfig({
     public: {
       n8nWebhookUrl: 'https://automation.getjustgo.com/webhook/kivov-assessment-lead',
       n8nBookingWebhookUrl: 'https://automation.getjustgo.com/webhook/kivov-assessment-booking',
+      posthog: {
+        publicKey: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '',
+        host: process.env.NUXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+      },
+    },
+  },
+
+  posthogConfig: {
+    publicKey: process.env.NUXT_PUBLIC_POSTHOG_PROJECT_TOKEN || '',
+    host: process.env.NUXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    clientConfig: {
+      capture_exceptions: true,
     },
   },
 
