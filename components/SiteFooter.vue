@@ -20,6 +20,12 @@
             Privacy Policy
           </NuxtLink>
           <NuxtLink
+            to="/cookies"
+            class="text-muted hover:text-ink transition-colors text-sm"
+          >
+            Cookie Policy
+          </NuxtLink>
+          <NuxtLink
             to="/terms"
             class="text-muted hover:text-ink transition-colors text-sm"
           >

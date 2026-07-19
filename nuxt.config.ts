@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   // Sitemap — keep the noindex legal pages out
   sitemap: {
-    exclude: ['/privacy', '/terms'],
+    exclude: ['/privacy', '/cookies', '/terms'],
   },
 
   // Public config — override at build time with NUXT_PUBLIC_N8N_WEBHOOK_URL
