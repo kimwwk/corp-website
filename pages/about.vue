@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'About — Kivov Digital',
-  description: 'We\'re a small, independent software studio focused on practical AI. Founded in 2026. Ontario, Canada.',
+  description: 'I\'m Kim Wong. Six years in corporate IT consulting, most of it at Deloitte and EY. Now I build practical AI and automation for small businesses, from Toronto, Canada.',
   ogTitle: 'About — Kivov Digital',
-  ogDescription: 'We\'re a small, independent software studio focused on practical AI. Founded in 2026. Ontario, Canada.',
+  ogDescription: 'I\'m Kim Wong. Six years in corporate IT consulting, most of it at Deloitte and EY. Now I build practical AI and automation for small businesses, from Toronto, Canada.',
   ogType: 'website',
   twitterCard: 'summary_large_image',
 })
@@ -16,37 +16,51 @@ useSeoMeta({
         About
       </p>
 
+      <!--
+        HEADSHOT DROPS IN HERE. When a real square photo of Kim exists at public/kim-headshot.jpg,
+        uncomment the line below. Until then this page ships copy-only: no placeholder, no stock face.
+        <img src="/kim-headshot.jpg" alt="Kim Wong" width="128" height="128" class="w-32 h-32 rounded-2xl mb-8">
+      -->
       <h1 class="font-display text-3xl md:text-5xl font-semibold text-ink tracking-tight mb-10">
-        Small studio. Practical tools.
+        Hi, I'm Kim Wong.
       </h1>
 
       <div class="space-y-6 text-body leading-relaxed text-lg">
         <p>
-          We're a small, independent software studio focused on practical AI. We believe the best tools are the ones that work quietly in the background — doing the hard work so people don't have to.
+          I spent six years in corporate IT consulting, most of it at Deloitte and EY. Enterprise integration work: APIs, data migrations, the systems large companies run on. I worked out of Hong Kong first, then Toronto.
         </p>
         <p>
-          We help small and mid-sized businesses put AI to work — starting with a free assessment that finds the quick wins, and going as deep as automation projects and custom-built software when it's worth it.
+          Working at Deloitte and EY pushed me onto enterprise-scale projects I couldn't have imagined before. It wasn't just a career move. It changed me at the core. I left earlier this year to build Kivov.
         </p>
         <p>
-          We're not building hype. We're building software that solves real problems, ships reliably, and gets better over time.
+          Every one of those companies could afford someone to look at how the work actually flows before buying software. Small businesses can't. So they buy the tool they're told is best, then bend their work around it. I work the other way round: figure out your flow first, then find or build the system that fits it.
+        </p>
+        <p>
+          I run my own stack at home. My own AI agents, my own automation, my own data on my own hardware. I test most of what I recommend on myself first.
         </p>
       </div>
 
       <div class="mt-12 pt-8 border-t border-line">
         <dl class="flex flex-col sm:flex-row gap-8">
           <div>
-            <dt class="text-muted text-sm mb-1">Founded</dt>
-            <dd class="text-ink font-medium">2026</dd>
+            <dt class="text-muted text-sm mb-1">Experience</dt>
+            <dd class="text-ink font-medium">6 years, corporate IT consulting</dd>
           </div>
           <div>
-            <dt class="text-muted text-sm mb-1">Location</dt>
-            <dd class="text-ink font-medium">Ontario, Canada</dd>
+            <dt class="text-muted text-sm mb-1">Before Kivov</dt>
+            <dd class="text-ink font-medium">Deloitte, EY</dd>
           </div>
           <div>
-            <dt class="text-muted text-sm mb-1">Focus</dt>
-            <dd class="text-ink font-medium">AI Software</dd>
+            <dt class="text-muted text-sm mb-1">Based in</dt>
+            <dd class="text-ink font-medium">Toronto, Canada</dd>
           </div>
         </dl>
+
+        <p class="mt-8 text-sm text-muted">
+          <a href="https://www.linkedin.com/in/kim-wong-wwk/" target="_blank" rel="noopener noreferrer" class="text-body hover:text-ink transition-colors font-medium">LinkedIn</a>
+          <span aria-hidden="true" class="mx-2">·</span>
+          <a href="https://github.com/kimwwk" target="_blank" rel="noopener noreferrer" class="text-body hover:text-ink transition-colors font-medium">GitHub</a>
+        </p>
       </div>
     </div>
   </div>
