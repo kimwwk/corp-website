@@ -106,11 +106,8 @@ const steps = [
     <!-- Founder -->
     <section class="px-6 py-16 md:py-24 max-w-5xl mx-auto" aria-label="Who you'll be talking to">
       <div class="max-w-3xl">
-        <!--
-          HEADSHOT DROPS IN HERE. When a real square photo of Kim exists at public/kim-headshot.jpg,
-          uncomment the line below. Until then this block ships copy-only: no placeholder, no stock face.
-          <img src="/kim-headshot.jpg" alt="Kim Wong" width="96" height="96" class="w-24 h-24 rounded-full mb-6">
-        -->
+        <!-- Portrait-orientation photo (614x1024); object-cover + upward bias keeps the crop on the face. -->
+        <img src="/kim-headshot.jpg" alt="Kim Wong" width="96" height="96" class="w-24 h-24 rounded-full object-cover object-[center_20%] mb-6">
         <p class="text-brand text-sm font-mono font-medium tracking-widest uppercase mb-6">
           Who You'll Be Talking To
         </p>

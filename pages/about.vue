@@ -16,11 +16,8 @@ useSeoMeta({
         About
       </p>
 
-      <!--
-        HEADSHOT DROPS IN HERE. When a real square photo of Kim exists at public/kim-headshot.jpg,
-        uncomment the line below. Until then this page ships copy-only: no placeholder, no stock face.
-        <img src="/kim-headshot.jpg" alt="Kim Wong" width="128" height="128" class="w-32 h-32 rounded-2xl mb-8">
-      -->
+      <!-- Portrait-orientation photo (614x1024); object-cover + upward bias keeps the crop on the face, not the coffee cup. -->
+      <img src="/kim-headshot.jpg" alt="Kim Wong" width="128" height="128" class="w-32 h-32 rounded-2xl object-cover object-[center_20%] mb-8">
       <h1 class="font-display text-3xl md:text-5xl font-semibold text-ink tracking-tight mb-10">
         Hi, I'm Kim Wong.
       </h1>
@@ -42,14 +39,6 @@ useSeoMeta({
 
       <div class="mt-12 pt-8 border-t border-line">
         <dl class="flex flex-col sm:flex-row gap-8">
-          <div>
-            <dt class="text-muted text-sm mb-1">Experience</dt>
-            <dd class="text-ink font-medium">6 years, corporate IT consulting</dd>
-          </div>
-          <div>
-            <dt class="text-muted text-sm mb-1">Before Kivov</dt>
-            <dd class="text-ink font-medium">Deloitte, EY</dd>
-          </div>
           <div>
             <dt class="text-muted text-sm mb-1">Based in</dt>
             <dd class="text-ink font-medium">Toronto, Canada</dd>
