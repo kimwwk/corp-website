@@ -11,13 +11,25 @@ useSeoMeta({
 
 <template>
   <div class="section">
-    <div class="max-w-2xl">
+    <div class="md:flex md:gap-12 lg:gap-16 md:items-start">
+      <!-- Portrait: stacked on top on mobile, larger on the right on desktop. -->
+      <div class="mb-10 md:mb-0 md:order-2 md:ml-auto md:flex-shrink-0 md:sticky md:top-24">
+        <!-- Portrait-orientation photo (614x1024); object-cover + upward bias keeps the crop on the face, not the coffee cup. -->
+        <img
+          src="/kim-headshot.jpg"
+          alt="Kim Wong"
+          width="576"
+          height="768"
+          class="w-48 md:w-64 lg:w-80 aspect-[3/4] rounded-2xl object-cover object-[center_20%]"
+        >
+      </div>
+
+      <!-- Intro + story -->
+      <div class="max-w-2xl md:order-1 md:min-w-0">
       <p class="eyebrow text-brand text-xs font-medium mb-6">
         About
       </p>
 
-      <!-- Portrait-orientation photo (614x1024); object-cover + upward bias keeps the crop on the face, not the coffee cup. -->
-      <img src="/kim-headshot.jpg" alt="Kim Wong" width="128" height="128" class="w-32 h-32 rounded-2xl object-cover object-[center_20%] mb-8">
       <h1 class="font-display text-3xl md:text-5xl font-semibold text-ink tracking-tight mb-10">
         Hi, I'm Kim Wong.
       </h1>
@@ -54,6 +66,7 @@ useSeoMeta({
           <span aria-hidden="true" class="mx-2">·</span>
           <a href="https://github.com/kimwwk" target="_blank" rel="noopener noreferrer" class="text-body hover:text-ink transition-colors font-medium">GitHub</a>
         </p>
+      </div>
       </div>
     </div>
   </div>
