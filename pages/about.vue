@@ -40,6 +40,10 @@ useSeoMeta({
       <div class="mt-12 pt-8 border-t border-line">
         <dl class="flex flex-col sm:flex-row gap-8">
           <div>
+            <dt class="text-muted text-sm mb-1">Experience</dt>
+            <dd class="text-ink font-medium">corporate IT consulting</dd>
+          </div>
+          <div>
             <dt class="text-muted text-sm mb-1">Based in</dt>
             <dd class="text-ink font-medium">Toronto, Canada</dd>
           </div>
