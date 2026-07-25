@@ -1,0 +1,288 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /*
+   * Fonts — literal family names (next/font/google emits these @font-face
+   * names); `@theme inline` cannot resolve runtime-injected CSS variables.
+   */
+  --font-sans: "Inter", "Inter Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+  --font-heading: "Fraunces", "Fraunces Fallback", ui-serif, Georgia, serif;
+  --font-display: "Fraunces", "Fraunces Fallback", ui-serif, Georgia, serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* Kivov brand extensions (beyond the shadcn contract) */
+  --color-primary-hover: var(--primary-hover);
+  --color-inkdeep: var(--inkdeep);
+  --color-brand-mint: var(--brand-mint);
+  --color-brand-soft: var(--brand-soft);
+  --color-caption: var(--caption);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Kivov Digital light "studio" palette (2026 brand) mapped onto the shadcn
+ * CSS-variable contract. Deep mint #0A6E48 is the only CTA/link color on
+ * light surfaces; bright mint #6EE7B7 appears ONLY on dark surfaces.
+ */
+:root {
+  --background: #f7f6f2; /* canvas — warm off-white */
+  --foreground: #15191f; /* ink — headings / strong text */
+  --card: #ffffff; /* surface */
+  --card-foreground: #15191f;
+  --popover: #ffffff;
+  --popover-foreground: #15191f;
+  --primary: #0a6e48; /* deep mint — AA on light */
+  --primary-foreground: #ffffff;
+  --secondary: #eaf6f0; /* soft mint — badge backgrounds */
+  --secondary-foreground: #0a6e48;
+  --muted: #edebe4; /* hover washes on canvas */
+  --muted-foreground: #54606e; /* body copy */
+  --accent: #eaf6f0;
+  --accent-foreground: #0a6e48;
+  --destructive: #dc2626;
+  --border: #e7e5de; /* line */
+  --input: #e7e5de;
+  --ring: #0a6e48;
+  --chart-1: #0a6e48;
+  --chart-2: #12b981;
+  --chart-3: #54606e;
+  --chart-4: #8a93a0;
+  --chart-5: #15191f;
+  --radius: 0.75rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #15191f;
+  --sidebar-primary: #0a6e48;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eaf6f0;
+  --sidebar-accent-foreground: #0a6e48;
+  --sidebar-border: #e7e5de;
+  --sidebar-ring: #0a6e48;
+  /* Kivov extensions */
+  --primary-hover: #085639;
+  --inkdeep: #10141a; /* dark sections (CTA bands, For-you card) */
+  --brand-mint: #6ee7b7; /* bright accent — dark surfaces only */
+  --brand-soft: #eaf6f0;
+  /* Captions darkened from brand #8A93A0 → 4.5:1+ on canvas (ui-ux-pro-max
+     a11y rule: color-contrast). */
+  --caption: #67717e;
+}
+
+/*
+ * `.dark` doubles as the "on inkdeep surface" scope: the closing CTA band and
+ * the Do It For You card wrap themselves in `.dark` so every shadcn component
+ * inside re-themes (primary flips to bright mint per brand rules).
+ */
+.dark {
+  --background: #10141a;
+  --foreground: #ffffff;
+  --card: #10141a;
+  --card-foreground: #ffffff;
+  --popover: #151b23;
+  --popover-foreground: #ffffff;
+  --primary: #6ee7b7; /* bright mint on dark only */
+  --primary-foreground: #10141a;
+  --secondary: rgba(255, 255, 255, 0.08);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: rgba(255, 255, 255, 0.7);
+  --accent: rgba(255, 255, 255, 0.08);
+  --accent-foreground: #6ee7b7;
+  --destructive: #f87171;
+  --border: rgba(255, 255, 255, 0.14);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #6ee7b7;
+  --sidebar: #10141a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #6ee7b7;
+  --sidebar-primary-foreground: #10141a;
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.14);
+  --sidebar-ring: #6ee7b7;
+  /* Kivov extensions */
+  --primary-hover: #ffffff; /* mint CTA hovers to white on dark bands */
+  --caption: rgba(255, 255, 255, 0.66);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply scroll-smooth font-sans;
+  }
+  body {
+    @apply bg-background text-muted-foreground antialiased;
+  }
+  /* MASTER.md checklist: all clickable elements get cursor:pointer
+     (Tailwind v4 preflight no longer does this for buttons). */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ── Hand-off meter (services page signature device) ─────────────── */
+@layer components {
+  .meter-track {
+    position: relative;
+    height: 6px;
+    border-radius: 999px;
+    background: #e7e5de;
+    overflow: hidden;
+  }
+  .meter-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0a6e48, #12b981);
+    width: var(--to-us, 50%);
+  }
+  .meter-knob {
+    position: absolute;
+    top: 50%;
+    left: var(--to-us, 50%);
+    width: 13px;
+    height: 13px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: #fff;
+    border: 2.5px solid #0a6e48;
+    box-shadow: 0 1px 4px rgba(16, 20, 26, 0.25);
+  }
+  .meter-track.on-dark {
+    background: rgba(255, 255, 255, 0.14);
+  }
+  .meter-fill.on-dark {
+    background: linear-gradient(90deg, #34d399, #6ee7b7);
+  }
+  .meter-knob.on-dark {
+    background: #10141a;
+    border-color: #6ee7b7;
+  }
+
+  .hero-fill {
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s;
+  }
+  .hero-knob {
+    left: 0;
+    transition: left 1.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.25s;
+  }
+  .hero-meter.run .hero-fill {
+    width: var(--to-us, 90%);
+  }
+  .hero-meter.run .hero-knob {
+    left: var(--to-us, 90%);
+  }
+
+  /* Reveal-on-scroll (IntersectionObserver adds .in). Delay is set per
+     element via --reveal-delay for 30–50ms stagger sequences. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Load-in entrance for hero content (ease-out, transform/opacity only). */
+  .rise {
+    animation: rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  /* Journey-rail stop dots (services hero) */
+  .rail-stop {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: #ffffff;
+    border: 2px solid #cfd6cd;
+  }
+  .rail-stop.reached {
+    border-color: #0a6e48;
+    background: #eaf6f0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fill {
+    width: var(--to-us, 90%) !important;
+    transition: none;
+  }
+  .hero-knob {
+    left: var(--to-us, 90%) !important;
+    transition: none;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .rise {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
