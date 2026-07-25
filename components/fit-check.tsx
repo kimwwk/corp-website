@@ -446,7 +446,8 @@ export function FitCheck() {
         </Card>
 
         <p className="mt-6 text-sm text-caption">
-          A copy is on its way to {email || "your inbox"}.
+          I&apos;ll follow up at {email || "your inbox"} with one practical
+          next step.
         </p>
       </div>
     );
@@ -536,9 +537,8 @@ export function FitCheck() {
           </div>
 
           <p className="mt-6 text-sm leading-relaxed text-caption">
-            You&apos;ll see your result immediately. I&apos;ll also send it to
-            your email, along with one practical next step. No spam, no drip
-            sequence.
+            You&apos;ll see your result right away. I&apos;ll follow up by
+            email with one practical next step. No spam, no drip sequence.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
