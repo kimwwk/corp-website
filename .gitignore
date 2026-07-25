@@ -1,16 +1,25 @@
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist
+# Dependencies
+/node_modules
 
-# Node dependencies
-node_modules
+# Next.js build outputs
+/.next/
+/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Wrangler local dev state
+/.wrangler/
+
+# Legacy Nuxt outputs (pre-migration checkouts)
+.output
+.nuxt
+dist
 
 # Logs
 *.log
+
+# Env
+.env*
 
 # Misc
 .DS_Store
@@ -22,7 +31,6 @@ node_modules
 
 # Local design exploration / scratch (not part of the site)
 prototypes/
-.env
 
 # Raw Termly exports — the trimmed fragments in public/*.html are what ship
 termly-*.html
