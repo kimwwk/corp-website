@@ -24,6 +24,7 @@ import {
 
 const navLinks = [
   { label: "Services", href: "/services" },
+  { label: "AI Audit", href: "/audit" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -79,10 +80,10 @@ export function SiteHeader() {
             <Button
               size="lg"
               className="rounded-xl px-5 font-semibold"
-              render={<Link href="/book" />}
-              aria-current={pathname === "/book" ? "page" : undefined}
+              render={<Link href="/fit-check" />}
+              aria-current={pathname === "/fit-check" ? "page" : undefined}
             >
-              Book a call
+              Free fit check
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>
@@ -132,11 +133,11 @@ export function SiteHeader() {
                 <Button
                   size="xl"
                   className="mt-3 w-full"
-                  render={<Link href="/book" />}
-                  aria-current={pathname === "/book" ? "page" : undefined}
+                  render={<Link href="/fit-check" />}
+                  aria-current={pathname === "/fit-check" ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Book a call
+                  Free fit check
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
               </nav>

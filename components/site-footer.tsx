@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const footerLinks = [
+  { label: "AI Audit", href: "/audit" },
+  { label: "Fit Check", href: "/fit-check" },
   { label: "Showcase", href: "/showcase" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Cookie Policy", href: "/cookies" },
@@ -23,7 +25,10 @@ export function SiteFooter() {
             />
             <p className="text-sm text-caption">© 2026 Kivov Digital</p>
           </div>
-          <nav aria-label="Footer navigation" className="flex items-center gap-6">
+          <nav
+            aria-label="Footer navigation"
+            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
+          >
             {footerLinks.map((link) => (
               <Link
                 key={link.label}

@@ -8,10 +8,17 @@ const SITE_URL = "https://kivov.work";
 /* Legal pages (/privacy, /cookies, /terms) are noindex — kept out, matching
    the Nuxt sitemap exclude list. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/services", "/about", "/book", "/contact", "/showcase"].map(
-    (path) => ({
-      url: `${SITE_URL}${path}`,
-      lastModified: new Date(),
-    }),
-  );
+  return [
+    "",
+    "/fit-check",
+    "/audit",
+    "/services",
+    "/about",
+    "/book",
+    "/contact",
+    "/showcase",
+  ].map((path) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: new Date(),
+  }));
 }

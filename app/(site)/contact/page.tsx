@@ -1,3 +1,4 @@
+import * as React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail } from "lucide-react";
@@ -7,13 +8,13 @@ import { ContactForm } from "@/components/contact-form";
 import { Eyebrow } from "@/components/eyebrow";
 
 export const metadata: Metadata = {
-  title: "Book a Free AI Assessment — Kivov Digital",
+  title: "Contact — Kivov Digital",
   description:
-    "Send us a few lines — we reply within one business day. The assessment is a free 45-minute call, no card, no commitment.",
+    "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
   openGraph: {
-    title: "Book a Free AI Assessment — Kivov Digital",
+    title: "Contact — Kivov Digital",
     description:
-      "Send us a few lines — we reply within one business day. The assessment is a free 45-minute call, no card, no commitment.",
+      "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
     type: "website",
   },
   twitter: {
@@ -24,21 +25,39 @@ export const metadata: Metadata = {
 const afterYouSend = [
   {
     when: "Within 1 business day",
-    what: "First reply, with a couple of proposed times for your free assessment call.",
+    what: "My first reply, with any questions I need answered before I can be useful.",
   },
   {
-    when: "The assessment call",
-    what: "45 minutes on Zoom about how your business actually runs. No prep needed — you talk, we listen.",
+    when: "If you're booking the audit",
+    what: "The intake questionnaire, plus times for your 60-minute workflow-mapping session.",
   },
   {
-    when: "Within 48 hours of the call",
-    what: "Your written report: practical AI quick wins mapped by effort vs. impact, with the hours each gives back.",
-  },
-  {
-    when: "A 30-minute walkthrough",
-    what: "We go through the report together. What you do next is entirely up to you.",
+    when: "If you're not sure yet",
+    what: "I'll point you at the smallest useful next step, even when that isn't hiring me.",
   },
 ];
+
+/* The form reads `?interest=` via useSearchParams, so it has to sit inside a
+   Suspense boundary for the static export build to prerender this page. */
+function FormFallback() {
+  return (
+    <div
+      aria-hidden="true"
+      className="space-y-6"
+      style={{ minHeight: "42rem" }}
+    >
+      {[11, 11, 11, 11, 11, 24].map((h, i) => (
+        <div key={i} className="space-y-2">
+          <div className="h-4 w-32 rounded bg-muted" />
+          <div
+            className="w-full rounded-lg bg-muted"
+            style={{ height: `${h * 0.25}rem` }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function ContactPage() {
   return (
@@ -46,33 +65,38 @@ export default function ContactPage() {
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         {/* Left column: intro + form */}
         <div className="lg:col-span-3">
-          <Eyebrow className="mb-6 tracking-widest">
-            Contact · Book Your Assessment
-          </Eyebrow>
+          <Eyebrow className="mb-6 tracking-widest">Contact</Eyebrow>
 
           <h1 className="mb-6 font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            Send us a few lines.
+            Send me a few lines.
           </h1>
 
           <p className="mb-4 text-lg leading-relaxed">
-            We reply within one business day. The assessment is a free
-            45-minute call to understand how your business runs and where AI
-            can give you time back. No card required, no commitment to go
-            further.
+            Tell me what your business does and where the work is getting
+            stuck. I reply within one business day, and I read everything
+            myself.
           </p>
           <p className="mb-12 text-lg leading-relaxed">
-            If we spot real opportunities, you&apos;ll have them in writing
-            within 48 hours. Want to skip the back-and-forth?{" "}
+            Not sure what to ask for yet? Take the{" "}
             <Link
-              href="/book"
+              href="/fit-check"
               className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
             >
-              Pick a time directly
-            </Link>
-            .
+              free fit check
+            </Link>{" "}
+            first, or read how the{" "}
+            <Link
+              href="/audit"
+              className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+            >
+              Workflow-First AI Audit
+            </Link>{" "}
+            works.
           </p>
 
-          <ContactForm />
+          <React.Suspense fallback={<FormFallback />}>
+            <ContactForm />
+          </React.Suspense>
         </div>
 
         {/* Right column: what happens next + other ways */}
@@ -105,8 +129,18 @@ export default function ContactPage() {
 
           <div>
             <h2 className="mb-4 text-lg font-semibold text-foreground">
-              Other ways to reach us
+              Other ways to reach me
             </h2>
+            <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+              Would rather talk it through?{" "}
+              <Link
+                href="/book"
+                className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+              >
+                Book a call
+              </Link>{" "}
+              and pick a time directly.
+            </p>
             <Card className="ring-border [--card-spacing:--spacing(5)]">
               <CardContent>
                 <div className="flex items-center gap-4">
