@@ -2,7 +2,7 @@
 
 import posthog from "posthog-js";
 
-type LeadMethod = "contact_form" | "book_call";
+type LeadMethod = "contact_form" | "book_call" | "fit_check";
 
 let posthogReady = false;
 

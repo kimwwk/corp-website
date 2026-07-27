@@ -25,9 +25,9 @@ const GA_ID = "G-9VVXS7BY20";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kivov.work"),
-  title: "Kivov Digital — Free AI Tools Assessment for Small Business",
+  title: "Kivov Digital — Workflow-First AI for Small Business",
   description:
-    "Reclaim 5–10 hours a week with AI tools that fit how you already work. Book a free AI assessment — a 45-minute call, a written report of practical quick wins, no obligation.",
+    "AI should fit your business, not force your business to fit the tool. I help small and mid-sized teams fix repetitive, disconnected workflows with practical AI, automation, integrations, and custom software.",
   verification: {
     google: "V86yYgZYa0b2uAqQxbhb9teevK2zoUKKHVYPdT3IZHo",
   },
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
-    title: "Kivov Digital — Free AI Tools Assessment for Small Business",
+    title: "Kivov Digital — Workflow-First AI for Small Business",
     description:
-      "Reclaim 5–10 hours a week with AI tools that fit how you already work. Book a free AI assessment — a 45-minute call, a written report of practical quick wins, no obligation.",
+      "AI should fit your business, not force your business to fit the tool. I help small and mid-sized teams fix repetitive, disconnected workflows with practical AI, automation, integrations, and custom software.",
     type: "website",
   },
   twitter: {

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -16,18 +17,25 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { capture, trackLead } from "@/lib/analytics";
-
-const WEBHOOK_URL =
-  process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL ||
-  "https://automation.getjustgo.com/webhook/kivov-assessment-lead";
+import { WEBHOOK_URL } from "@/lib/webhook";
 
 const COMPANY_SIZES = ["Just me", "2–10", "11–50", "51–200", "200+"];
+
+const AUDIT_INTEREST = "Workflow-First AI Audit";
 const INTERESTS = [
-  "Free AI Tools Assessment",
-  "AI Automation (project)",
-  "Custom Software Development (project)",
-  "Not sure — want to discuss",
+  AUDIT_INTEREST,
+  "Build With You (ongoing)",
+  "Build For You (project)",
+  "Something else / not sure",
 ];
+
+/* `/contact?interest=audit` and friends preselect the dropdown, so the CTA
+   the visitor clicked carries through to the form. */
+const INTEREST_BY_PARAM: Record<string, string> = {
+  audit: AUDIT_INTEREST,
+  "build-with-you": "Build With You (ongoing)",
+  "build-for-you": "Build For You (project)",
+};
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -35,13 +43,18 @@ const labelClass =
   "mb-2 block font-mono text-sm font-normal text-muted-foreground";
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
+  const presetInterest =
+    INTEREST_BY_PARAM[searchParams.get("interest") ?? ""] ?? null;
+
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [company, setCompany] = React.useState("");
   const [companySize, setCompanySize] = React.useState<string | null>(null);
-  const [interest, setInterest] = React.useState<string | null>(null);
+  const [interest, setInterest] = React.useState<string | null>(presetInterest);
   const [message, setMessage] = React.useState("");
   const [status, setStatus] = React.useState<Status>("idle");
+  const [sentInterest, setSentInterest] = React.useState<string | null>(null);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -65,6 +78,7 @@ export function ContactForm() {
         }),
       });
       if (!res.ok) throw new Error(`status-${res.status}`);
+      setSentInterest(interest);
       setStatus("success");
       trackLead("contact_form");
       capture("contact_form_submitted", {
@@ -91,11 +105,12 @@ export function ContactForm() {
             </div>
             <div>
               <h2 className="mb-2 font-semibold text-foreground">
-                Thanks — we got it.
+                Thanks, I got it.
               </h2>
               <p className="leading-relaxed text-muted-foreground">
-                You&apos;ll hear from us within one business day with a couple
-                of proposed times for your free assessment call. Talk soon.
+                {sentInterest === AUDIT_INTEREST
+                  ? "You'll hear from me within one business day with the intake questionnaire and available times for your mapping session."
+                  : "You'll hear from me within one business day."}
               </p>
             </div>
           </div>
@@ -195,7 +210,7 @@ export function ContactForm() {
 
         <div>
           <Label htmlFor="message" className={labelClass}>
-            06 / Tell us about your situation{" "}
+            06 / Tell me about your situation{" "}
             <span className="text-primary">*</span>
           </Label>
           <Textarea
@@ -218,15 +233,15 @@ export function ContactForm() {
         >
           <CardContent>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Hmm — something went wrong sending your message. Please email us
+              Something went wrong sending your message. Please email me
               directly at{" "}
               <a
-                href="mailto:hello@kivov.work?subject=Free%20AI%20assessment"
+                href="mailto:hello@kivov.work?subject=Workflow%20enquiry"
                 className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
               >
                 hello@kivov.work
               </a>{" "}
-              — we read everything.
+              and I&apos;ll pick it up from there.
             </p>
           </CardContent>
         </Card>
@@ -243,13 +258,13 @@ export function ContactForm() {
             "Sending…"
           ) : (
             <>
-              Book my free assessment
+              Send it over
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </>
           )}
         </Button>
         <p className="mt-4 text-sm text-caption">
-          First reply within 1 business day · Free, no commitment
+          First reply within 1 business day
         </p>
       </div>
     </form>
