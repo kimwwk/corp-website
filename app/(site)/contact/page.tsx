@@ -5,7 +5,6 @@ import { Mail } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/contact-form";
-import { Eyebrow } from "@/components/eyebrow";
 
 export const metadata: Metadata = {
   title: "Contact — Kivov Digital",
@@ -65,9 +64,11 @@ export default function ContactPage() {
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         {/* Left column: intro + form */}
         <div className="lg:col-span-3">
-          <Eyebrow className="mb-6 tracking-widest">Contact</Eyebrow>
+          <p className="mb-6 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
+            Contact
+          </p>
 
-          <h1 className="mb-6 font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+          <h1 className="mb-6 font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground">
             Send me a few lines.
           </h1>
 
@@ -80,14 +81,14 @@ export default function ContactPage() {
             Not sure what to ask for yet? Take the{" "}
             <Link
               href="/fit-check"
-              className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+              className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
               free fit check
             </Link>{" "}
             first, or read how the{" "}
             <Link
               href="/audit"
-              className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+              className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
               Workflow-First AI Audit
             </Link>{" "}
@@ -102,7 +103,7 @@ export default function ContactPage() {
         {/* Right column: what happens next + other ways */}
         <aside className="space-y-10 lg:col-span-2">
           <div>
-            <h2 className="mb-6 text-lg font-semibold text-foreground">
+            <h2 className="mb-6 font-display text-lg font-extrabold tracking-tight text-foreground">
               What happens after you send
             </h2>
             <ol className="space-y-5">
@@ -128,14 +129,14 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <h2 className="mb-4 text-lg font-semibold text-foreground">
+            <h2 className="mb-4 font-display text-lg font-extrabold tracking-tight text-foreground">
               Other ways to reach me
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
               Would rather talk it through?{" "}
               <Link
                 href="/book"
-                className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+                className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
               >
                 Book a call
               </Link>{" "}
@@ -151,7 +152,7 @@ export default function ContactPage() {
                     <Mail className="size-5 text-primary" strokeWidth={1.6} />
                   </div>
                   <div>
-                    <p className="mb-0.5 font-mono text-[0.65rem] tracking-[0.2em] uppercase text-caption">
+                    <p className="mb-0.5 font-mono text-[0.65rem] tracking-[0.14em] uppercase text-caption">
                       Email
                     </p>
                     <a

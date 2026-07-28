@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { BookingWidget } from "@/components/booking-widget";
-import { Eyebrow } from "@/components/eyebrow";
 
 export const metadata: Metadata = {
   title: "Book a Call — Kivov Digital",
@@ -25,8 +24,10 @@ export default function BookPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
       <div className="mb-10 max-w-3xl">
-        <Eyebrow className="mb-6 text-xs">Book a call</Eyebrow>
-        <h1 className="mb-4 font-display text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
+        <p className="mb-6 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
+          Book a call
+        </p>
+        <h1 className="mb-4 font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground">
           Book a call.
         </h1>
         <p className="text-lg leading-relaxed">
@@ -34,7 +35,7 @@ export default function BookPage() {
           exploring, start with the{" "}
           <Link
             href="/fit-check"
-            className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
           >
             free fit check
           </Link>{" "}
@@ -49,7 +50,7 @@ export default function BookPage() {
           Prefer to write a few lines first instead?{" "}
           <Link
             href="/contact"
-            className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
           >
             Send an inquiry
           </Link>{" "}
