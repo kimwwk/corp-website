@@ -362,8 +362,8 @@ export function FitCheck() {
   if (phase === "intro") {
     return (
       <div className="rise">
-        <Eyebrow className="mb-6 text-xs">Free · Three minutes</Eyebrow>
-        <h1 className="font-display text-[2.5rem] leading-[1.06] font-semibold tracking-tight text-foreground md:text-5xl">
+        <Eyebrow className="mb-6 text-xs tracking-[0.14em]">Free · Three minutes</Eyebrow>
+        <h1 className="font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground md:text-5xl">
           Where is work getting stuck?
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed">
@@ -403,15 +403,15 @@ export function FitCheck() {
     const copy = RESULTS[result];
     return (
       <div className="rise">
-        <Eyebrow className="mb-6 text-xs">Your result</Eyebrow>
-        <h1 className="font-display text-[2.25rem] leading-[1.08] font-semibold tracking-tight text-foreground md:text-5xl">
+        <Eyebrow className="mb-6 text-xs tracking-[0.14em]">Your result</Eyebrow>
+        <h1 className="font-display text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.06] font-black tracking-tight text-foreground md:text-5xl">
           {copy.title}
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed">{copy.body}</p>
 
         <Card className="mt-10 ring-border [--card-spacing:--spacing(7)]">
           <CardContent>
-            <p className="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-caption">
+            <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-caption">
               Want the full picture?
             </p>
             <p className="mt-4 leading-relaxed">
@@ -464,7 +464,7 @@ export function FitCheck() {
           className="mt-8 outline-none"
           aria-live="polite"
         >
-          <h2 className="font-display text-2xl leading-snug font-semibold tracking-tight text-foreground md:text-3xl">
+          <h2 className="font-display text-2xl leading-snug font-extrabold tracking-tight text-foreground md:text-3xl">
             Where should I send your result?
           </h2>
         </div>
@@ -577,7 +577,7 @@ export function FitCheck() {
         className="mt-8 outline-none"
         aria-live="polite"
       >
-        <h2 className="font-display text-2xl leading-snug font-semibold tracking-tight text-foreground md:text-3xl">
+        <h2 className="font-display text-2xl leading-snug font-extrabold tracking-tight text-foreground md:text-3xl">
           {question.prompt}
         </h2>
         {question.hint ? (
@@ -666,7 +666,7 @@ function ProgressRail({ current, total }: { current: number; total: number }) {
   const pct = Math.round((current / total) * 100);
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between font-mono text-[0.7rem] tracking-[0.2em] uppercase">
+      <div className="mb-3 flex items-center justify-between font-mono text-[0.7rem] tracking-[0.14em] uppercase">
         <span className="text-primary">{label}</span>
         <span className="text-caption tabular-nums">{pct}%</span>
       </div>

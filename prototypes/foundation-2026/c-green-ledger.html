@@ -1,0 +1,1086 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kivov Digital — Green Ledger Foundation v2 · Pattern Spec</title>
+<meta name="description" content="Direction C — Green Ledger. The pattern source of truth for kivov.work: contract, templates, tokens, type, chrome, section patterns, components, motion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=IBM+Plex+Mono:wght@500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root{
+    --green:   #0A6E48;  /* deep green — large surfaces, primary on cream */
+    --forest:  #07452E;  /* depth inside green bands, hover of green */
+    --cream:   #FBFAF4;  /* page background */
+    --ink:     #17201B;  /* headings on cream */
+    --body:    #4C564F;  /* body text on cream */
+    --white:   #FFFFFF;  /* card surface */
+    --leaf:    #8FE3AE;  /* marks and accents — green surfaces ONLY */
+    --leaf-text:#B4F1CB; /* small text on green, 4.9:1 */
+    --hairline:#E2E4DC;  /* rules and dividers */
+    --caption: #6B756D;  /* captions on cream, 4.5:1+ */
+    --green-row-hover:#085C3C;
+
+    --display:"Archivo", sans-serif;
+    --sans:"Work Sans", sans-serif;
+    --mono:"IBM Plex Mono", monospace;
+
+    --pad: clamp(20px, 5vw, 64px);
+    --measure: 62ch;
+    --sec-pad: clamp(4rem, 9vw, 7rem);
+    --sec-pad-quiet: clamp(3rem, 7vw, 5rem);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+  html{ -webkit-text-size-adjust:100%; }
+  @media (prefers-reduced-motion: no-preference){ html{ scroll-behavior:smooth; } }
+  body{
+    background:var(--cream);
+    color:var(--body);
+    font:400 17px/1.6 var(--sans);
+    overflow-x:clip;
+  }
+  ::selection{ background:var(--green); color:var(--cream); }
+  .on-green ::selection{ background:var(--cream); color:var(--green); }
+
+  h1,h2,h3{ font-family:var(--display); color:var(--ink); }
+  a{ color:inherit; }
+  svg{ display:block; }
+  .wrap{ max-width:1200px; margin-inline:auto; padding-inline:var(--pad); }
+
+  :focus-visible{ outline:3px solid var(--green); outline-offset:3px; }
+  .on-green :focus-visible{ outline-color:var(--leaf); }
+
+  /* ---------- doc banner ---------- */
+  .review-banner{
+    background:var(--ink); color:var(--cream);
+    font:500 11px/1.6 var(--mono); letter-spacing:.12em; text-transform:uppercase;
+    text-align:center; padding:.6rem var(--pad);
+  }
+
+  /* ---------- labels ---------- */
+  .eyebrow{
+    font:500 12px/1.5 var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--green);
+  }
+  .on-green .eyebrow{ color:var(--leaf-text); }
+  .support{
+    font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--caption);
+  }
+  .on-green .support{ color:var(--leaf-text); }
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:.55em;
+    min-height:52px; padding:.95rem 1.9rem;
+    border:0; border-radius:999px;
+    font:600 1.0625rem/1.2 var(--sans);
+    text-decoration:none; cursor:pointer;
+    transition:background-color .18s ease, color .18s ease;
+  }
+  .btn--green{ background:var(--green); color:var(--cream); }
+  .btn--green:hover{ background:var(--forest); }
+  .btn--cream{ background:var(--cream); color:var(--green); }
+  .btn--cream:hover{ background:var(--leaf); color:var(--forest); }
+  .btn--sm{ min-height:44px; padding:.6rem 1.35rem; font-size:.9375rem; }
+
+  /* ---------- text links ---------- */
+  .link-green{
+    display:inline-flex; align-items:center; min-height:44px;
+    font:600 1.0625rem/1.3 var(--sans); color:var(--ink);
+    text-decoration:underline; text-decoration-color:var(--green);
+    text-decoration-thickness:2px; text-underline-offset:7px;
+  }
+  .link-green:hover{ color:var(--green); text-decoration-thickness:3px; }
+  .link-leaf{
+    display:inline-flex; align-items:center; min-height:44px;
+    font:600 1.0625rem/1.3 var(--sans); color:var(--cream);
+    text-decoration:underline; text-decoration-color:var(--leaf);
+    text-decoration-thickness:2px; text-underline-offset:7px;
+  }
+  .link-leaf:hover{ color:var(--leaf-text); text-decoration-thickness:3px; }
+  .link-inline{
+    font-weight:500; color:var(--green);
+    text-decoration:underline; text-decoration-thickness:2px;
+    text-decoration-color:rgba(10,110,72,.3); text-underline-offset:4px;
+    border-radius:2px;
+  }
+  .link-inline:hover{ text-decoration-color:var(--green); }
+
+  /* ---------- nav (canonical chrome) ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    border-bottom:1px solid var(--hairline);
+    background:rgba(251,250,244,.85); backdrop-filter:blur(6px);
+  }
+  .nav .wrap{ display:flex; align-items:center; gap:1.5rem; min-height:64px; }
+  .wordmark{ display:flex; align-items:center; text-decoration:none; }
+  .wordmark img{ height:32px; width:auto; }
+  .wordmark-text{
+    font:900 1.1rem/1 var(--display); letter-spacing:.05em; color:var(--ink);
+  }
+  .nav-links{ display:flex; gap:.25rem; margin-left:auto; list-style:none; }
+  .nav-links a{
+    display:inline-flex; align-items:center; min-height:44px; padding:.5rem .85rem;
+    font:500 .9875rem/1 var(--sans); color:var(--body);
+    text-decoration:none; border-radius:999px;
+  }
+  .nav-links a:hover{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-decoration-thickness:2px; text-underline-offset:6px; }
+  .nav-links a[aria-current="page"]{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-decoration-thickness:2px; text-underline-offset:6px; }
+  @media (max-width:760px){
+    .nav-links{ display:none; } /* production: sheet menu behind a burger */
+    .nav .wrap{ justify-content:space-between; }
+  }
+
+  /* ---------- green bands ---------- */
+  .band{ position:relative; background:var(--green); color:var(--cream); overflow:hidden; }
+  .band h1,.band h2,.band h3{ color:var(--cream); }
+  .band p{ color:var(--cream); }
+  .band-depth{
+    position:absolute; width:min(58vw,560px); aspect-ratio:1;
+    border:2.6rem solid var(--forest); border-radius:50%; pointer-events:none;
+  }
+  .band-depth--hero{ right:-14%; bottom:-52%; }
+  .band-depth--mid{ right:-16%; top:-58%; }
+  .band-depth--close{ left:-12%; top:-58%; }
+
+  /* ---------- marker underline ---------- */
+  .mark{ position:relative; display:inline-block; isolation:isolate; white-space:nowrap; }
+  .mark svg{
+    position:absolute; left:-2.5%; bottom:-0.1em; width:105%; height:.26em;
+    z-index:-1; pointer-events:none; overflow:visible;
+  }
+  .mark path{
+    fill:none; stroke:var(--leaf); stroke-width:7; stroke-linecap:round;
+    stroke-dasharray:1; stroke-dashoffset:1;
+  }
+  .mark--green path{ stroke:var(--green); }
+  .reveal.is-in .mark path{ animation:draw .9s cubic-bezier(.65,0,.35,1) .35s forwards; }
+  html:not(.js) .mark path{ stroke-dashoffset:0; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* ---------- reveal ---------- */
+  html.js .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  html.js .reveal.is-in{ opacity:1; transform:none; }
+
+  /* ---------- sections ---------- */
+  .section{ padding-block:var(--sec-pad); }
+  .section--quiet{ padding-block:var(--sec-pad-quiet); }
+  .section--hairline{ border-top:1px solid var(--hairline); }
+  .prose{ max-width:var(--measure); }
+  .prose p{ margin-top:1.1rem; }
+  .prose p:first-child{ margin-top:0; }
+  .prose .strong{ color:var(--ink); font-weight:500; }
+  .band .prose .strong{ color:var(--cream); font-weight:500; }
+  .lead{ font-size:1.125rem; }
+
+  /* ---------- type scale classes ---------- */
+  .t-hero{ font:900 clamp(2.1rem,8vw,6rem)/1.02 var(--display); letter-spacing:-0.022em; overflow-wrap:break-word; }
+  .t-h1{ font:900 clamp(2.6rem,6vw,4.5rem)/1.02 var(--display); letter-spacing:-0.022em; overflow-wrap:break-word; }
+  .t-band-h2{ font:900 clamp(2.1rem,5vw,3.6rem)/1.05 var(--display); letter-spacing:-0.02em; overflow-wrap:break-word; }
+  .t-close-h2{ font:900 clamp(2.3rem,6vw,4.4rem)/1.04 var(--display); letter-spacing:-0.02em; overflow-wrap:break-word; }
+  .t-h2{ font:800 clamp(1.9rem,4.2vw,3rem)/1.06 var(--display); letter-spacing:-0.015em; overflow-wrap:break-word; }
+  .t-h3{ font:800 clamp(1.25rem,2.4vw,1.5rem)/1.2 var(--display); letter-spacing:-0.01em; }
+  .t-bigline{ font:800 clamp(1.55rem,3.4vw,2.4rem)/1.16 var(--display); letter-spacing:-0.015em; color:var(--ink); max-width:24em; overflow-wrap:break-word; }
+  .band .t-bigline{ color:var(--cream); }
+  .t-interlude{ font:900 clamp(2rem,5.5vw,4.2rem)/1.05 var(--display); letter-spacing:-0.02em; color:var(--ink); max-width:16em; margin-inline:auto; overflow-wrap:break-word; }
+
+  /* ---------- P4 mini list ---------- */
+  .mini-list{ list-style:none; margin-top:1.1rem; }
+  .mini-list li{
+    display:flex; align-items:flex-start; gap:.8rem;
+    border-top:1px solid var(--hairline); padding-block:.75rem; font-size:1rem;
+  }
+  .mini-list li::before{
+    content:""; flex:none; width:8px; height:8px; border-radius:2px;
+    background:var(--green); margin-top:.55em;
+  }
+  .mini-list li:last-child{ border-bottom:1px solid var(--hairline); }
+
+  /* ---------- P5 check list ---------- */
+  .checklist{ list-style:none; margin-top:1.5rem; }
+  .checklist--2col{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:0 clamp(2rem,5vw,4rem);
+  }
+  .checklist li{
+    display:flex; align-items:flex-start; gap:.85rem;
+    border-top:1px solid var(--hairline); padding-block:1rem;
+    font-size:1.0625rem; color:var(--ink);
+  }
+  .checklist .check{ flex:none; width:1.15rem; height:1.15rem; margin-top:.3rem; }
+  .checklist .check path{ fill:none; stroke:var(--green); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+  @media (max-width:700px){ .checklist--2col{ grid-template-columns:1fr; } }
+  .on-green .checklist li{ border-top-color:rgba(251,250,244,.28); color:var(--cream); }
+  .on-green .checklist .check path{ stroke:var(--leaf); }
+
+  /* ---------- P6 statement pairs ---------- */
+  .pairs{ margin-top:2rem; border-bottom:1px solid var(--hairline); }
+  .pair{
+    display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);
+    gap:.6rem clamp(2rem,5vw,4rem);
+    border-top:1px solid var(--hairline); padding-block:clamp(1.4rem,3vw,2rem);
+  }
+  .pair h3{ font:800 clamp(1.3rem,2.4vw,1.8rem)/1.15 var(--display); letter-spacing:-0.01em; }
+  .pair p{ font-size:1rem; max-width:52ch; }
+  @media (max-width:760px){ .pair{ grid-template-columns:1fr; } }
+
+  /* ---------- P7 numbered steps ---------- */
+  .steps4{ list-style:none; margin-top:2rem; border-top:1px solid var(--hairline); }
+  .step4{
+    display:grid; grid-template-columns:minmax(3.4rem,6rem) minmax(0,1fr);
+    column-gap:clamp(1.25rem,3.5vw,3rem); align-items:start;
+    border-bottom:1px solid var(--hairline); padding-block:clamp(1.9rem,4vw,2.75rem);
+  }
+  .step4-num{ font:900 clamp(2.4rem,6vw,4.2rem)/1 var(--display); color:var(--green); }
+  .step4 h3{ font:800 clamp(1.3rem,2.6vw,1.9rem)/1.15 var(--display); letter-spacing:-0.01em; padding-top:.2rem; }
+  .step4 p{ margin-top:.7rem; max-width:60ch; }
+  @media (max-width:560px){ .step4{ grid-template-columns:minmax(2.4rem,3rem) minmax(0,1fr); } }
+
+  /* ---------- P8 ladder rows ---------- */
+  .ladder{ border-top:1px solid var(--hairline); }
+  .rung{
+    display:block; text-decoration:none;
+    border-bottom:1px solid var(--hairline); background:var(--cream);
+    transition:background-color .2s ease;
+  }
+  .rung:hover{ background:var(--white); }
+  .rung-inner{
+    display:grid; grid-template-columns:minmax(0,1fr) auto;
+    column-gap:clamp(1.25rem,3vw,2.5rem); row-gap:.35rem; align-items:start;
+    padding-block:clamp(1.75rem,4vw,2.75rem);
+  }
+  .rung-name{
+    font:800 clamp(1.55rem,3.4vw,2.5rem)/1.06 var(--display);
+    letter-spacing:-0.015em; color:var(--ink); overflow-wrap:break-word;
+  }
+  .rung-desc{ max-width:46em; margin-top:.55rem; font-size:1rem; color:var(--body); }
+  .rung-side{
+    grid-column:2; grid-row:1 / span 2;
+    display:flex; flex-direction:column; align-items:flex-end; gap:1rem;
+    padding-top:.5rem; text-align:right;
+  }
+  .rung-meta{
+    font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink); white-space:nowrap;
+  }
+  .rung-cta{
+    display:inline-flex; align-items:center; gap:.5em;
+    font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase;
+    color:var(--green); white-space:nowrap;
+  }
+  .rung-cta .arrow{
+    display:inline-block; opacity:0; transform:translateX(-8px);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .rung:hover .rung-cta .arrow, .rung:focus-visible .rung-cta .arrow{ opacity:1; transform:none; }
+  .rung:focus-visible{ outline-offset:-3px; }
+  .rung--featured{ background:var(--green); border-bottom-color:var(--green); }
+  .rung--featured:hover{ background:var(--green-row-hover); }
+  .rung--featured .rung-name, .rung--featured .rung-desc{ color:var(--cream); }
+  .rung--featured .rung-meta, .rung--featured .rung-cta{ color:var(--leaf-text); }
+  @media (max-width:760px){
+    .rung-inner{ grid-template-columns:1fr; }
+    .rung-side{
+      grid-column:1; grid-row:3;
+      flex-direction:row; flex-wrap:wrap; justify-content:space-between; align-items:center;
+      width:100%; gap:.5rem 1.25rem; margin-top:1rem; padding-top:0; text-align:left;
+    }
+  }
+
+  /* ---------- P9 interlude ---------- */
+  .interlude{ padding-block:clamp(4.5rem,11vw,8.5rem); text-align:center; }
+
+  /* ---------- P10 quote ---------- */
+  .quote-xl{
+    margin-top:1.5rem; padding-left:clamp(1.1rem,3vw,1.75rem);
+    border-left:.35rem solid var(--green); max-width:24em;
+  }
+  .quote-xl p{
+    font:800 clamp(1.55rem,3.4vw,2.4rem)/1.16 var(--display);
+    letter-spacing:-0.015em; color:var(--ink); margin:0; overflow-wrap:break-word;
+  }
+
+  /* ---------- duo split ---------- */
+  .duo{
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(2.5rem,6vw,5rem); align-items:start;
+  }
+  @media (max-width:860px){ .duo{ grid-template-columns:1fr; } }
+
+  /* ---------- CTA rows ---------- */
+  .cta-row{ margin-top:2.4rem; display:flex; align-items:center; flex-wrap:wrap; gap:1.25rem 2rem; }
+  .cta-row + .support{ display:block; margin-top:1.6rem; }
+
+  /* ---------- price card (only permitted card) ---------- */
+  .price-card{
+    background:var(--white); border-radius:14px;
+    border:2px solid rgba(10,110,72,.4);
+    box-shadow:0 16px 40px -24px rgba(16,20,26,.22);
+    padding:1.75rem; max-width:420px;
+  }
+  .price-card .amount{ font:900 3rem/1 var(--display); color:var(--ink); font-variant-numeric:tabular-nums; }
+  .price-card .amount-unit{ font:500 12px/1 var(--mono); letter-spacing:.14em; color:var(--caption); text-transform:uppercase; margin-left:.5rem; }
+  .price-card hr{ border:0; border-top:1px solid var(--hairline); margin-block:1.1rem; }
+
+  /* ---------- P13 price slots ---------- */
+  .slots{
+    margin-top:2.5rem; display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr)); gap:1.25rem; align-items:stretch;
+  }
+  @media (max-width:960px){ .slots{ grid-template-columns:1fr; } }
+  .slot{
+    display:flex; flex-direction:column;
+    background:var(--white); border:1px solid var(--hairline); border-radius:16px;
+    padding:1.75rem;
+  }
+  .slot--featured{ border:2px solid rgba(10,110,72,.4); }
+  .slot--green{ background:var(--green); border-color:var(--green); }
+  .slot h3{ font:800 1.5rem/1.2 var(--display); letter-spacing:-0.01em; }
+  .slot--green h3, .slot--green p, .slot--green li{ color:var(--cream); }
+  .slot .price{ margin-top:.9rem; display:flex; align-items:baseline; gap:.6rem; }
+  .slot .price .amount{ font:900 2.25rem/1 var(--display); color:var(--ink); font-variant-numeric:tabular-nums; }
+  .slot--featured .price .amount{ color:var(--green); }
+  .slot--green .price .amount{ color:var(--cream); }
+  .slot .price .unit{ font:500 11px/1.5 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--caption); }
+  .slot--green .price .unit{ color:var(--leaf-text); }
+  .slot .slot-desc{ margin-top:1.1rem; border-top:1px solid var(--hairline); padding-top:1.1rem; font-size:.9375rem; }
+  .slot--green .slot-desc{ border-top-color:rgba(251,250,244,.28); }
+  .slot .slot-list{ list-style:none; margin-top:.9rem; }
+  .slot .slot-list li{ display:flex; align-items:flex-start; gap:.7rem; padding-block:.35rem; font-size:.9375rem; }
+  .slot .slot-list li::before{
+    content:""; flex:none; width:7px; height:7px; border-radius:2px;
+    background:var(--green); margin-top:.5em;
+  }
+  .slot--green .slot-list li::before{ background:var(--leaf); }
+  .slot .slot-cta{ margin-top:auto; padding-top:1.5rem; }
+  .slot .slot-cta .btn{ width:100%; }
+
+  /* ---------- footer (canonical chrome) ---------- */
+  .footer{ border-top:1px solid var(--hairline); }
+  .footer .wrap{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:.5rem 2rem; padding-block:1.75rem;
+  }
+  .footer .legal{
+    display:flex; align-items:center; gap:1rem;
+    font:500 12px/1.6 var(--mono); letter-spacing:.1em; text-transform:uppercase;
+    color:var(--caption); padding-block:.55rem;
+  }
+  .footer .legal img{ height:20px; width:auto; opacity:.8; }
+  .footer-links{ display:flex; flex-wrap:wrap; list-style:none; gap:.25rem; }
+  .footer-links a{
+    display:inline-flex; align-items:center; min-height:44px; padding:.5rem .7rem;
+    font:500 .875rem/1 var(--sans); color:var(--caption);
+    text-decoration:none; border-radius:999px;
+  }
+  .footer-links a:hover{ color:var(--ink); text-decoration:underline; text-decoration-color:var(--green); text-decoration-thickness:2px; text-underline-offset:5px; }
+
+  /* ═════════ SPEC-DOC APPARATUS (not part of the design language) ═════════ */
+  .spec-head{ border-top:3px solid var(--ink); }
+  .spec-head .wrap{ padding-block:2.4rem 0; }
+  .spec-head h2{ font:900 clamp(1.6rem,3.4vw,2.4rem)/1.1 var(--display); letter-spacing:-0.015em; margin-top:.6rem; }
+  .spec-note{
+    margin-top:1rem; max-width:72ch;
+    font-size:.9375rem; color:var(--body);
+  }
+  .spec-bar{
+    border-top:1px solid var(--hairline);
+    background:#F4F3EA;
+  }
+  .spec-bar .wrap{
+    display:flex; flex-wrap:wrap; gap:.35rem 2.5rem; align-items:baseline;
+    padding-block:1rem;
+  }
+  .spec-id{ font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ink); }
+  .spec-use{ font:500 11px/1.6 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--caption); }
+  .rules{ list-style:none; margin-top:1.5rem; max-width:78ch; counter-reset:rule; }
+  .rules li{
+    counter-increment:rule;
+    display:grid; grid-template-columns:3rem 1fr; column-gap:1rem;
+    border-top:1px solid var(--hairline); padding-block:1rem;
+  }
+  .rules li::before{
+    content:counter(rule, decimal-leading-zero);
+    font:500 12px/1.9 var(--mono); letter-spacing:.14em; color:var(--green);
+  }
+  .rules li:last-child{ border-bottom:1px solid var(--hairline); }
+  .rules .strong{ color:var(--ink); font-weight:500; }
+  .tmpl-grid{
+    margin-top:2rem; display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:clamp(1.5rem,3vw,2.5rem);
+  }
+  .tmpl h3{ font:800 1.05rem/1.3 var(--display); }
+  .tmpl .support{ display:block; margin-top:.15rem; }
+  .tmpl-stack{ margin-top:.9rem; display:grid; gap:4px; }
+  .tmpl-stack span{
+    border:1px dashed #B9BEB2; border-radius:6px;
+    padding:.45rem .7rem;
+    font:500 11px/1.5 var(--mono); letter-spacing:.08em; text-transform:uppercase;
+    color:var(--body); background:var(--cream);
+  }
+  .tmpl-stack .g{ background:var(--green); border:1px solid var(--green); color:var(--cream); }
+  .tmpl-stack .i{ background:#F4F3EA; text-align:center; }
+  .swatches{
+    margin-top:1.75rem; display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:1.25rem;
+  }
+  .swatch-chip{ height:72px; border-radius:10px; }
+  .swatch-chip--bordered{ border:1px solid var(--hairline); }
+  .swatch figcaption{
+    margin-top:.6rem;
+    font:500 11px/1.6 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--body);
+  }
+  .tok-table{ margin-top:2rem; width:100%; border-collapse:collapse; }
+  .tok-table th, .tok-table td{
+    text-align:left; padding:.7rem .9rem .7rem 0;
+    border-top:1px solid var(--hairline); vertical-align:top;
+    font-size:.9375rem;
+  }
+  .tok-table th{ font:500 11px/1.6 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--caption); border-top:0; }
+  .tok-table td:first-child{ white-space:nowrap; font-weight:500; color:var(--ink); }
+  .tok-table code{ font:500 .8125rem/1.5 var(--mono); color:var(--green); }
+  .type-row{ border-bottom:1px solid var(--hairline); padding-block:1.6rem; }
+  .type-row .sample{ color:var(--ink); overflow-wrap:break-word; }
+  .band-sample .type-row .sample{ color:var(--cream); }
+  .type-row .meta{
+    margin-top:.65rem;
+    font:500 11px/1.6 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--body);
+  }
+  .btn-panels{
+    margin-top:1.75rem; display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(290px,1fr)); gap:1.25rem;
+  }
+  .btn-panel{
+    border-radius:14px; padding:2rem 1.5rem;
+    display:flex; flex-wrap:wrap; align-items:center; gap:1rem 1.25rem;
+  }
+  .btn-panel--cream{ background:var(--cream); border:1px solid var(--hairline); }
+  .btn-panel--green{ background:var(--green); }
+  .state-note{
+    flex-basis:100%;
+    font:500 11px/1.6 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--body);
+  }
+  .btn-panel--green .state-note{ color:var(--leaf-text); }
+  .btn--green.demo-hover{ background:var(--forest); }
+  .btn--cream.demo-hover{ background:var(--leaf); color:var(--forest); }
+  .demo-focus{ outline:3px solid var(--green); outline-offset:3px; border-radius:999px; }
+  .btn-panel--green .demo-focus{ outline-color:var(--leaf); }
+  .field{ margin-top:1.75rem; max-width:420px; }
+  .field label{
+    display:block; margin-bottom:.6rem;
+    font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--ink);
+  }
+  .field input{
+    width:100%; min-height:52px; padding:.8rem 1.1rem;
+    font:400 1.0625rem/1.4 var(--sans); color:var(--ink);
+    background:var(--white); border:1px solid #6F796F; border-radius:10px;
+  }
+  .field input::placeholder{ color:#68726A; }
+  .dodont{ margin-top:2rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:clamp(1.5rem,3vw,2.5rem); }
+  .dodont ul{ list-style:none; margin-top:1rem; }
+  .dodont li{
+    border-top:1px solid var(--hairline); padding-block:.8rem;
+    display:flex; gap:.8rem; align-items:flex-start; font-size:1rem;
+  }
+  .dodont li:last-child{ border-bottom:1px solid var(--hairline); }
+  .dodont .yes::before{ content:"✓"; color:var(--green); font-weight:700; }
+  .dodont .no::before{ content:"✕"; color:#B4543B; font-weight:700; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    html.js .reveal{ opacity:1; transform:none; transition:none; }
+    .mark path{ stroke-dashoffset:0 !important; animation:none !important; }
+    .btn, .rung, .rung-cta .arrow{ transition:none; }
+    .rung-cta .arrow{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<p class="review-banner">Green Ledger Foundation v2&nbsp;·&nbsp;Pattern spec — source of truth for kivov.work&nbsp;·&nbsp;2026-07-27</p>
+
+<!-- ═══════════ CANONICAL NAV — identical on every page ═══════════ -->
+<header class="nav">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="Kivov Digital — Home">
+      <img src="../../public/kivov-wordmark.png" alt="Kivov Digital"
+           onerror="this.outerHTML='&lt;span class=&quot;wordmark-text&quot;&gt;KIVOV&amp;nbsp;DIGITAL&lt;/span&gt;'">
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#p8">Services</a></li>
+        <li><a href="#p2" aria-current="page">AI Audit</a></li>
+        <li><a href="#p10">About</a></li>
+        <li><a href="#chrome">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn--green btn--sm" href="#p11">Free Fit Check</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ══════════════ §01 THE CONTRACT ══════════════ -->
+  <section class="section spec-head" id="contract">
+    <div class="wrap">
+      <p class="eyebrow">§01 · The contract</p>
+      <h2>Twelve rules. Every page follows all of them.</h2>
+      <p class="spec-note">Consistency beats novelty. A page is composed only from the chrome in §05 and the patterns in §06 — nothing else. If a page needs a new pattern, it gets added to this file first, reviewed, and only then built.</p>
+      <ol class="rules">
+        <li><span><span class="strong">Chrome is identical everywhere.</span> The nav and footer in §05, exactly — same links, same order, same CTA label ("Free Fit Check"), same hover rules. No page-specific variants.</span></li>
+        <li><span><span class="strong">Every page opens with P1 or P2.</span> Home opens with the green hero band (P1). Every other page opens with the cream page header (P2).</span></li>
+        <li><span><span class="strong">Offer pages end on green.</span> Home, About, Audit, Services close with P12. Utility pages (Contact, Book, Fit Check, Showcase) end quietly on cream — no band.</span></li>
+        <li><span><span class="strong">Green bands per page:</span> Home max three (hero, featured, close). Interior pages max two. Never two bands adjacent.</span></li>
+        <li><span><span class="strong">One depth ring per band,</span> at a fixed position: hero → right/bottom, featured → right/top, close → left/top. Nothing else decorates a band.</span></li>
+        <li><span><span class="strong">Section rhythm:</span> standard padding <code style="font-family:var(--mono);font-size:.85em">clamp(4rem, 9vw, 7rem)</code>, quiet sections <code style="font-family:var(--mono);font-size:.85em">clamp(3rem, 7vw, 5rem)</code>. Consecutive cream sections are separated by a hairline top rule. Never a hairline touching a band.</span></li>
+        <li><span><span class="strong">Any list of three or more items is hairline rows</span> — P4 (facts) or P5 (benefits/symptoms). No floating bullets, no icon tiles, no card grids for content.</span></li>
+        <li><span><span class="strong">Numbers appear only as P7 big numerals.</span> No "01/02" mono chips, no numbered circles, no counters in any other style.</span></li>
+        <li><span><span class="strong">One primary pill per section, max.</span> Optionally one underlined text link beside it (link-green on cream, link-leaf on green). Pills are always fully rounded. The same action keeps the same label on every page.</span></li>
+        <li><span><span class="strong">Markers are scarce.</span> Max one marker underline per heading; max two interludes on Home, at most one on any interior page. Markers never appear in body text.</span></li>
+        <li><span><span class="strong">White cards are reserved</span> for the price panel, forms, and product tiles. Editorial content never sits in a card.</span></li>
+        <li><span><span class="strong">Color discipline:</span> leaf and leaf-tint exist only on green surfaces; deep green is the only accent on cream. Body text on green bands is cream — never a grey tint.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════════ §02 PAGE TEMPLATES ══════════════ -->
+  <section class="section spec-head" id="templates">
+    <div class="wrap">
+      <p class="eyebrow">§02 · Page templates</p>
+      <h2>Four page shapes. Pick one, fill it with patterns.</h2>
+      <div class="tmpl-grid">
+        <div class="tmpl">
+          <h3>Home</h3>
+          <span class="support">The conversion spine</span>
+          <div class="tmpl-stack">
+            <span class="g">P1 · hero band + marker</span>
+            <span>P3 · prose duo (intro)</span>
+            <span>P5 · check list (pain points)</span>
+            <span>P3 + P10 · philosophy + quote</span>
+            <span class="i">P9 · interlude</span>
+            <span class="g">P11 · featured band (fit check)</span>
+            <span>P6 · statement pairs</span>
+            <span>P3 · offer teaser + CTA row</span>
+            <span>P7 · numbered steps</span>
+            <span>P8 · ladder rows (services)</span>
+            <span>P3 · founder teaser + portrait</span>
+            <span class="i">P9 · interlude</span>
+            <span class="g">P12 · closing band (centered)</span>
+          </div>
+        </div>
+        <div class="tmpl">
+          <h3>Offer page</h3>
+          <span class="support">Audit · Services</span>
+          <div class="tmpl-stack">
+            <span>P2 · page header (+ price card)</span>
+            <span>P13 · price slots (the paid tiers)</span>
+            <span>P8 · ladder rows (the sequence, free rung featured)</span>
+            <span>P4 · mini list (who it's for)</span>
+            <span>P5 · check list (what's included)</span>
+            <span>P7 · numbered steps</span>
+            <span>P6 · statement pairs (scope, terms)</span>
+            <span>P3 · prose (objections, FAQ lead)</span>
+            <span class="g">P12 · closing band (left)</span>
+          </div>
+        </div>
+        <div class="tmpl">
+          <h3>About</h3>
+          <span class="support">Identity</span>
+          <div class="tmpl-stack">
+            <span>P2 · page header + portrait</span>
+            <span>P3 + P10 · difference duo + quote</span>
+            <span>P4 · mini list (ownership)</span>
+            <span class="g">P12 · founder band, CTAs inside</span>
+          </div>
+        </div>
+        <div class="tmpl">
+          <h3>Utility page</h3>
+          <span class="support">Contact · Book · Fit Check · Showcase</span>
+          <div class="tmpl-stack">
+            <span>P2 · page header (short)</span>
+            <span>tool · form / calendar / quiz / tiles</span>
+            <span>P3 · quiet cross-link, no band</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ §03 PALETTE + TOKEN MAP ══════════════ -->
+  <section class="section spec-head" id="palette">
+    <div class="wrap">
+      <p class="eyebrow">§03 · Palette &amp; token map</p>
+      <h2>Nine colors. Two surfaces. One mapping.</h2>
+      <div class="swatches">
+        <figure class="swatch"><div class="swatch-chip" style="background:#0A6E48;"></div><figcaption>Deep green #0A6E48<br>Bands · primary on cream</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip" style="background:#07452E;"></div><figcaption>Forest #07452E<br>Depth ring · green hover</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip swatch-chip--bordered" style="background:#FBFAF4;"></div><figcaption>Cream #FBFAF4<br>Page background</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip swatch-chip--bordered" style="background:#FFFFFF;"></div><figcaption>White #FFFFFF<br>Cards only</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip" style="background:#17201B;"></div><figcaption>Ink #17201B<br>Headings on cream</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip" style="background:#4C564F;"></div><figcaption>Body #4C564F<br>Text on cream</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip" style="background:#8FE3AE;"></div><figcaption>Leaf #8FE3AE<br>Marks — green surfaces only</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip" style="background:#0A6E48;display:flex;align-items:center;justify-content:center;"><span style="font:500 12px/1 var(--mono);letter-spacing:.12em;color:#B4F1CB;">AA 4.9:1</span></div><figcaption>Leaf tint #B4F1CB<br>Small text on green</figcaption></figure>
+        <figure class="swatch"><div class="swatch-chip swatch-chip--bordered" style="background:#E2E4DC;"></div><figcaption>Hairline #E2E4DC<br>Rules and dividers</figcaption></figure>
+      </div>
+
+      <table class="tok-table">
+        <thead><tr><th>Color</th><th>Role on cream (:root)</th><th>Role on green (.band-green / .dark)</th></tr></thead>
+        <tbody>
+          <tr><td>Cream</td><td><code>--background</code>, <code>--primary-foreground</code></td><td>body text (<code>--muted-foreground</code> + re-applied <code>color</code>), <code>--foreground</code>, pill bg (<code>--primary</code>)</td></tr>
+          <tr><td>Deep green</td><td><code>--primary</code>, <code>--ring</code>, eyebrows, checks</td><td>surface (<code>--background</code>), pill text (<code>--primary-foreground</code>)</td></tr>
+          <tr><td>Forest</td><td><code>--primary-hover</code>, <code>--inkdeep</code></td><td>depth ring, cream-pill hover text</td></tr>
+          <tr><td>Ink</td><td><code>--foreground</code> (headings, strong)</td><td>—</td></tr>
+          <tr><td>Body green-grey</td><td><code>--muted-foreground</code> (paragraphs)</td><td>— (never on green)</td></tr>
+          <tr><td>Leaf</td><td>— (never on cream)</td><td><code>--brand-mint</code>, <code>--ring</code>, marks, cream-pill hover bg</td></tr>
+          <tr><td>Leaf tint</td><td>—</td><td><code>--caption</code> (eyebrows, support lines)</td></tr>
+          <tr><td>Hairline</td><td><code>--border</code></td><td><code>--border</code> = rgba(251,250,244,.25)</td></tr>
+          <tr><td>Caption grey</td><td><code>--caption</code> #6B756D</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══════════════ §04 TYPE SCALE ══════════════ -->
+  <section class="section spec-head" id="type">
+    <div class="wrap">
+      <p class="eyebrow">§04 · Type scale</p>
+      <h2>Ten roles. No other sizes exist.</h2>
+      <p class="spec-note">Archivo carries every heading, Work Sans every paragraph, IBM Plex Mono every label. Emphasis inside a paragraph is weight (500/600) in ink — never color, never italics.</p>
+
+      <div class="type-row"><p class="sample t-hero">Fits your business.</p><p class="meta">1 · Hero display — home hero only · Archivo 900 · clamp(2.1rem, 8vw, 6rem) · LH 1.02 · LS −0.022em · min protects a marked phrase at 320px</p></div>
+      <div class="type-row"><p class="sample t-h1">AI Workflow Audit</p><p class="meta">2 · Page H1 — every interior page, no exceptions · Archivo 900 · clamp(2.6rem, 6vw, 4.5rem) · LH 1.02 · LS −0.022em</p></div>
+      <div class="type-row"><p class="sample t-band-h2">Where is work getting stuck?</p><p class="meta">3 · Band H2 — featured band, left-aligned close · Archivo 900 · clamp(2.1rem, 5vw, 3.6rem) · LH 1.05 &nbsp;|&nbsp; centered close variant: clamp(2.3rem, 6vw, 4.4rem) · LH 1.04</p></div>
+      <div class="type-row"><p class="sample t-h2">Start with your way of working.</p><p class="meta">4 · Section H2 — every cream section · Archivo 800 · clamp(1.9rem, 4.2vw, 3rem) · LH 1.06 · LS −0.015em</p></div>
+      <div class="type-row"><p class="sample t-h3">Understand the work</p><p class="meta">5 · H3 — row titles, pair titles · Archivo 800 · 1.25–1.5rem · LH 1.2</p></div>
+      <div class="type-row"><p class="sample t-bigline">Technology cannot fix a process that no one fully understands.</p><p class="meta">6 · Big-line — display pull-line, max 24em · Archivo 800 · clamp(1.55rem, 3.4vw, 2.4rem) · LH 1.16 · same size as the P10 quote</p></div>
+      <div class="type-row"><p class="sample t-interlude" style="margin-inline:0;">You need it in the right place.</p><p class="meta">7 · Interlude — centered, max 16em · Archivo 900 · clamp(2rem, 5.5vw, 4.2rem) · LH 1.05</p></div>
+      <div class="type-row"><p class="sample lead" style="color:var(--body); max-width:38em;">Kivov Digital helps growing businesses understand how their work actually happens.</p><p class="meta">8 · Lead — first paragraph under a hero/H1 · Work Sans 400 · 1.125rem · LH 1.6</p></div>
+      <div class="type-row"><p class="sample" style="color:var(--body); max-width:var(--measure); font-size:17px;">Most businesses are introduced to technology in the wrong order. <span style="color:var(--ink); font-weight:500;">We believe it should work the other way around.</span></p><p class="meta">9 · Body — Work Sans 400 · 17px · LH 1.6 · measure ≤ 62ch · strong = weight 500 ink, inline</p></div>
+      <div class="type-row"><p class="sample" style="font:500 12px/1.6 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--green);">Free Workflow Fit Check&nbsp;·&nbsp;Three minutes</p><p class="meta">10 · Mono label — eyebrows, support lines, meta · IBM Plex Mono 500 · 12px · LS 0.14em · uppercase · green on cream, leaf-tint on green, caption-grey for support</p></div>
+    </div>
+  </section>
+
+  <!-- ══════════════ §05 CHROME ══════════════ -->
+  <section class="section spec-head" id="chrome">
+    <div class="wrap">
+      <p class="eyebrow">§05 · Chrome</p>
+      <h2>Nav and footer. The live examples on this page are the spec.</h2>
+      <ul class="rules" style="counter-reset:rule;">
+        <li><span><span class="strong">Nav:</span> sticky, 64px, cream at 85% opacity with blur, hairline bottom. Left: the wordmark image (height 32px), links to home. Right: Services · AI Audit · About · Contact, then the green pill "Free Fit Check" (44px, → /fit-check). Link hover and active state: ink + 2px green underline, 6px offset. Below 760px the links collapse into a sheet menu behind a burger; the pill stays visible.</span></li>
+        <li><span><span class="strong">Footer:</span> hairline top. Left: wordmark image (20px, 80% opacity) + "© 2026 Kivov Digital · Toronto" in mono uppercase. Right: AI Audit · Fit Check · Showcase · Privacy Policy · Cookie Policy · Terms of Use, hover ink + green underline. One row, wrapping on mobile.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════ §06 PATTERNS ══════════════ -->
+  <section class="section--quiet spec-head" id="patterns">
+    <div class="wrap" style="padding-block:2.4rem 1rem;">
+      <p class="eyebrow">§06 · Section patterns</p>
+      <h2 style="font:900 clamp(1.6rem,3.4vw,2.4rem)/1.1 var(--display); letter-spacing:-0.015em; margin-top:.6rem;">Thirteen patterns. Compose pages from these only.</h2>
+      <p class="spec-note">Each pattern below is rendered live with real site copy. The grey bar names it and states what it is for.</p>
+    </div>
+  </section>
+
+  <!-- P1 -->
+  <div class="spec-bar" id="p1"><div class="wrap"><span class="spec-id">P1 · Hero band</span><span class="spec-use">Home only · marker on the key phrase · one primary pill + one leaf link · mono support line · ring right/bottom</span></div></div>
+  <section class="band on-green">
+    <div class="band-depth band-depth--hero" aria-hidden="true"></div>
+    <div class="wrap reveal" style="padding-block:clamp(4rem,9vw,7.5rem);">
+      <p class="eyebrow">Workflow-First AI for Small Business&nbsp;·&nbsp;Toronto</p>
+      <h1 class="t-hero" style="margin-top:1.4rem; max-width:11em;">Build the system that <span class="mark">fits your business<svg viewBox="0 0 240 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12.5 C 38 6.5, 74 14, 116 9.5 C 154 5.5, 198 14.5, 237 8.5" pathLength="1"/></svg></span>.</h1>
+      <p class="lead" style="margin-top:1.75rem; max-width:38em;">Kivov Digital helps growing businesses understand how their work actually happens, identify where time and information are being lost, and build practical AI systems around the way their people already work.</p>
+      <p class="lead strong" style="margin-top:1.1rem; max-width:38em; font-weight:500;">We use what fits. We connect what already works. We build what is missing.</p>
+      <div class="cta-row">
+        <a class="btn btn--cream" href="#p11">Free Fit Check</a>
+        <a class="link-leaf" href="#p2">Explore the full audit</a>
+      </div>
+      <span class="support" style="display:block; margin-top:1.9rem;">Understand your workflow first. Choose the technology second.</span>
+    </div>
+  </section>
+
+  <!-- P2 -->
+  <div class="spec-bar" id="p2"><div class="wrap"><span class="spec-id">P2 · Page header</span><span class="spec-use">Every interior page · eyebrow + Page H1 + lead + CTA row · optional side slot (price card / portrait)</span></div></div>
+  <section class="section">
+    <div class="wrap duo reveal">
+      <div>
+        <p class="eyebrow">Paid entry offer</p>
+        <h1 class="t-h1" style="margin-top:1.4rem;">AI Workflow Audit</h1>
+        <p class="lead strong" style="margin-top:1.5rem; color:var(--ink); font-weight:500;">Before you invest in technology, understand the work.</p>
+        <p class="lead" style="margin-top:1rem; max-width:34em;">A focused review of one important business process, and a practical plan for improving it.</p>
+        <div class="cta-row">
+          <a class="btn btn--green" href="#p12">Book the AI Workflow Audit</a>
+          <a class="link-green" href="#p5">See what the audit includes</a>
+        </div>
+        <span class="support" style="display:block; margin-top:1.9rem;">One priority workflow&nbsp;·&nbsp;Written report&nbsp;·&nbsp;Yours to keep</span>
+      </div>
+      <div>
+        <div class="price-card">
+          <p class="eyebrow">The audit</p>
+          <p style="margin-top:1.1rem;"><span class="amount">$750</span><span class="amount-unit">CAD</span></p>
+          <hr>
+          <p style="font-size:1rem;"><span style="color:var(--ink); font-weight:500;">Founding-client price CAD $495</span> for the first five audit clients.</p>
+          <hr>
+          <p style="font-size:.9375rem;">CAD $500 credited toward implementation within 30 days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- P3 -->
+  <div class="spec-bar" id="p3"><div class="wrap"><span class="spec-id">P3 · Prose section</span><span class="spec-use">Narrative · eyebrow + Section H2 + measured prose · duo variant splits prose against a list or quote</span></div></div>
+  <section class="section section--hairline">
+    <div class="wrap duo reveal">
+      <div>
+        <p class="eyebrow">Introduction</p>
+        <h2 class="t-h2" style="margin-top:1.1rem;">Start with your way of working.</h2>
+        <div class="prose" style="margin-top:1.4rem;">
+          <p>Most businesses are introduced to technology in the wrong order.</p>
+          <p>They are told to choose a platform, purchase another tool, or add AI before anyone takes the time to understand how their business actually operates.</p>
+          <p class="strong">We believe it should work the other way around.</p>
+        </div>
+      </div>
+      <div>
+        <span class="support" style="color:var(--ink);">We look at</span>
+        <ul class="mini-list">
+          <li>What starts the process</li>
+          <li>Who is involved</li>
+          <li>Where information is stored</li>
+          <li>What gets repeated</li>
+        </ul>
+        <p class="t-bigline" style="margin-top:1.5rem;">Because your system should fit you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- P4 -->
+  <div class="spec-bar" id="p4"><div class="wrap"><span class="spec-id">P4 · Mini list</span><span class="spec-use">Short facts, criteria, considerations · square green bullet + hairline rows · never icons</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal" style="max-width:calc(62ch + 2 * var(--pad));">
+      <span class="support" style="color:var(--ink);">Kivov helps clients think carefully about</span>
+      <ul class="mini-list">
+        <li>Who owns the information</li>
+        <li>What the technology can access</li>
+        <li>Where the data is stored</li>
+        <li>What should remain human</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- P5 -->
+  <div class="spec-bar" id="p5"><div class="wrap"><span class="spec-id">P5 · Check list</span><span class="spec-use">Symptoms, inclusions, outcomes · green check + ink text + hairline rows · 2-col ≥ 6 items, else 1-col · works on green</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal">
+      <p class="lead">Does any of this sound familiar?</p>
+      <ul class="checklist checklist--2col">
+        <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5L20 6.5"/></svg>You are copying the same information between multiple platforms.</li>
+        <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5L20 6.5"/></svg>Follow-ups get delayed when the business gets busy.</li>
+        <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5L20 6.5"/></svg>Important processes live inside one person’s head.</li>
+        <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5.2 5L20 6.5"/></svg>Reports have to be rebuilt manually.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- P6 -->
+  <div class="spec-bar" id="p6"><div class="wrap"><span class="spec-id">P6 · Statement pairs</span><span class="spec-use">Capability / term + explanation · H3 left, body right · full-width hairline rows</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal">
+      <p class="eyebrow">What Kivov helps you do</p>
+      <div class="pairs">
+        <div class="pair">
+          <h3>Understand the work</h3>
+          <p>We begin with how your business actually operates, including the informal steps, decisions, and workarounds that may not be documented.</p>
+        </div>
+        <div class="pair">
+          <h3>Use what already fits</h3>
+          <p>We review your existing tools before recommending something new. There is no point reinventing the wheel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- P7 -->
+  <div class="spec-bar" id="p7"><div class="wrap"><span class="spec-id">P7 · Numbered steps</span><span class="spec-use">Any real sequence · huge green numeral + H3 + body · the only numbered format on the site</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal">
+      <p class="eyebrow">How it works</p>
+      <ol class="steps4">
+        <li class="step4">
+          <span class="step4-num" aria-hidden="true">1</span>
+          <div><h3>Show us how the work happens</h3><p>You walk Kim through one process as it operates today. The real process is more useful than the perfect version.</p></div>
+        </li>
+        <li class="step4">
+          <span class="step4-num" aria-hidden="true">2</span>
+          <div><h3>We find the friction</h3><p>Repeated work&nbsp;·&nbsp;manual copying&nbsp;·&nbsp;delayed decisions&nbsp;·&nbsp;unclear ownership&nbsp;·&nbsp;too many handoffs.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- P8 -->
+  <div class="spec-bar" id="p8"><div class="wrap"><span class="spec-id">P8 · Ladder rows</span><span class="spec-use">Offers / services index · whole row is the link · mono meta right, arrow slides in · one featured green rung max · meta column optional (prices live on /audit only)</span></div></div>
+  <section class="section--quiet section--hairline" style="padding-bottom:0;">
+    <div class="wrap reveal" style="padding-bottom:2rem;">
+      <p class="eyebrow">Services&nbsp;·&nbsp;Two ways to work together</p>
+    </div>
+    <div class="ladder">
+      <a class="rung rung--featured on-green reveal" href="#p11" aria-label="Workflow Fit Check — free, three minutes.">
+        <div class="wrap rung-inner">
+          <span><span class="rung-name">Workflow Fit Check</span><span class="rung-desc" style="display:block;">Eight questions. A high-level diagnosis and one practical next step.</span></span>
+          <span class="rung-side">
+            <span class="rung-meta">Free&nbsp;·&nbsp;3 min</span>
+            <span class="rung-cta">Start the Fit Check&nbsp;<span class="arrow" aria-hidden="true">→</span></span>
+          </span>
+        </div>
+      </a>
+      <a class="rung reveal" href="#p2" aria-label="Build With You.">
+        <div class="wrap rung-inner">
+          <span><span class="rung-name">Build With You</span><span class="rung-desc" style="display:block;">For teams that want to remain actively involved in the work. This is not traditional coaching. We build things with you.</span></span>
+          <span class="rung-side">
+            <span class="rung-cta">Explore&nbsp;<span class="arrow" aria-hidden="true">→</span></span>
+          </span>
+        </div>
+      </a>
+      <a class="rung reveal" href="#p2" aria-label="Build For You.">
+        <div class="wrap rung-inner">
+          <span><span class="rung-name">Build For You</span><span class="rung-desc" style="display:block;">For businesses that want Kivov to design and implement the solution.</span></span>
+          <span class="rung-side">
+            <span class="rung-cta">Explore&nbsp;<span class="arrow" aria-hidden="true">→</span></span>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- P9 -->
+  <div class="spec-bar" id="p9"><div class="wrap"><span class="spec-id">P9 · Interlude</span><span class="spec-use">Brand statement between chapters · centered · optional green marker · quiet sections must follow</span></div></div>
+  <section class="interlude section--hairline" aria-label="Brand statement">
+    <div class="wrap reveal">
+      <p class="t-interlude">You do not need AI everywhere. You need it in the <span class="mark mark--green">right place<svg viewBox="0 0 240 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11.5 C 42 15, 82 6, 124 10.5 C 162 14.5, 202 6.5, 237 10" pathLength="1"/></svg></span>.</p>
+    </div>
+  </section>
+
+  <!-- P10 -->
+  <div class="spec-bar" id="p10"><div class="wrap"><span class="spec-id">P10 · Pull-line &amp; quote</span><span class="spec-use">Emphasis inside a section · big-line stands alone · quote-xl carries the green bar · same type size, never both adjacent</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal">
+      <p>Kim’s approach is straightforward:</p>
+      <blockquote class="quote-xl">
+        <p>“I have to figure out my way first before I use the system.”</p>
+      </blockquote>
+      <p class="t-bigline" style="margin-top:2.25rem;">Technology cannot fix a process that no one fully understands.</p>
+    </div>
+  </section>
+
+  <!-- P11 -->
+  <div class="spec-bar" id="p11"><div class="wrap"><span class="spec-id">P11 · Featured band</span><span class="spec-use">The one mid-page green moment · marker on the key word · cream pill CTA · ring right/top</span></div></div>
+  <section class="band on-green">
+    <div class="band-depth band-depth--mid" aria-hidden="true"></div>
+    <div class="wrap reveal" style="padding-block:clamp(4rem,9vw,7rem);">
+      <p class="eyebrow">Free Workflow Fit Check</p>
+      <h2 class="t-band-h2" style="margin-top:1.1rem; max-width:15em;">Where is work getting <span class="mark">stuck<svg viewBox="0 0 160 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 C 30 6.5, 62 13, 92 8.5 C 118 5, 142 12, 157 8.5" pathLength="1"/></svg></span>?</h2>
+      <div class="prose" style="margin-top:1.5rem; max-width:38em;">
+        <p>Take the free Workflow Fit Check to identify where repetitive work, disconnected tools, or unclear processes may be costing your business time.</p>
+        <p class="strong">You do not need to understand AI. You only need to tell us how the work happens today.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn--cream" href="#p1">Take the Free Workflow Fit Check</a>
+      </div>
+      <span class="support" style="display:block; margin-top:1.4rem;">Three minutes. No technical preparation. One practical place to begin.</span>
+    </div>
+  </section>
+
+  <!-- P12 -->
+  <div class="spec-bar" id="p12"><div class="wrap"><span class="spec-id">P12 · Closing band</span><span class="spec-use">Last section before the footer · centered on Home, left-aligned on interior pages · one pill + one leaf link + support · ring left/top</span></div></div>
+  <section class="band on-green">
+    <div class="band-depth band-depth--close" aria-hidden="true"></div>
+    <div class="wrap reveal" style="text-align:center; padding-block:clamp(4.5rem,10vw,7.5rem);">
+      <h2 class="t-close-h2" style="max-width:14em; margin-inline:auto;">Start with one thing.</h2>
+      <div class="prose" style="margin-inline:auto; margin-top:1.6rem; max-width:36em; text-align:center;">
+        <p class="lead">Start with one process that takes too much time, creates too much confusion, or depends too heavily on one person.</p>
+      </div>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn btn--cream" href="#p1">Take the Free Workflow Fit Check</a>
+        <a class="link-leaf" href="#p2">Book the AI Workflow Audit</a>
+      </div>
+      <span class="support" style="display:block; margin-top:1.6rem;">Understand the work. Use what fits. Build what is missing.</span>
+    </div>
+  </section>
+
+  <!-- P13 -->
+  <div class="spec-bar" id="p13"><div class="wrap"><span class="spec-id">P13 · Price slots</span><span class="spec-use">The paid tiers compared side by side · three equal-height vertical slots · entry offer ring-highlighted, hand-off slot green · CTA pinned to the bottom · the free tier lives in the P8 ladder, not here</span></div></div>
+  <section class="section--quiet section--hairline">
+    <div class="wrap reveal">
+      <p class="eyebrow">Packages&nbsp;·&nbsp;A real sequence, in order</p>
+      <div class="slots">
+        <div class="slot slot--featured">
+          <p class="eyebrow">Paid entry offer</p>
+          <h3 style="margin-top:.8rem;">Workflow-First AI Audit</h3>
+          <p class="price"><span class="amount">$750</span><span class="unit">CAD&nbsp;·&nbsp;Founding $495</span></p>
+          <p class="slot-desc">A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.</p>
+          <ul class="slot-list">
+            <li>Repetitive admin processes</li>
+            <li>Owner bottlenecks</li>
+            <li>Disconnected tools</li>
+          </ul>
+          <div class="slot-cta"><a class="btn btn--green" href="#p2">Explore the audit</a></div>
+        </div>
+        <div class="slot">
+          <p class="eyebrow" style="color:var(--caption);">Ongoing</p>
+          <h3 style="margin-top:.8rem;">Build With You</h3>
+          <p class="price"><span class="amount">$1,000</span><span class="unit">/ month</span></p>
+          <p class="slot-desc">Two 45-minute strategy calls a month — one every two weeks. Each call, hands-on:</p>
+          <ul class="slot-list">
+            <li>You screen-share your real workflows</li>
+            <li>We build custom Claude skills</li>
+            <li>We automate the repetitive parts</li>
+          </ul>
+          <div class="slot-cta"><a class="btn btn--green" href="#p2" style="background:transparent; color:var(--green); box-shadow:inset 0 0 0 1.5px var(--green);">Get in touch</a></div>
+        </div>
+        <div class="slot slot--green on-green">
+          <p class="eyebrow">Project work</p>
+          <h3 style="margin-top:.8rem;">Build For You</h3>
+          <p class="price"><span class="amount">Per project</span></p>
+          <p class="slot-desc">Every Build For You project begins with discovery or a completed audit. Two tracks come out of it:</p>
+          <ul class="slot-list">
+            <li>AI &amp; automation</li>
+            <li>Custom software development</li>
+          </ul>
+          <div class="slot-cta"><a class="btn btn--cream" href="#p2">Get in touch</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ §07 COMPONENTS ══════════════ -->
+  <section class="section spec-head" id="components">
+    <div class="wrap">
+      <p class="eyebrow">§07 · Components</p>
+      <h2>Buttons, links, inputs.</h2>
+
+      <div class="btn-panels">
+        <div class="btn-panel btn-panel--cream">
+          <span class="state-note">Green pill on cream&nbsp;·&nbsp;default / hover (forest) / focus&nbsp;·&nbsp;always fully rounded, 52px (44px small)</span>
+          <button type="button" class="btn btn--green">Free Fit Check</button>
+          <button type="button" class="btn btn--green demo-hover">Free Fit Check</button>
+          <button type="button" class="btn btn--green demo-focus">Free Fit Check</button>
+        </div>
+        <div class="btn-panel btn-panel--green">
+          <span class="state-note">Cream pill on green&nbsp;·&nbsp;default / hover (leaf + forest text) / focus (leaf ring)</span>
+          <button type="button" class="btn btn--cream">Take the Fit Check</button>
+          <button type="button" class="btn btn--cream demo-hover">Take the Fit Check</button>
+          <button type="button" class="btn btn--cream demo-focus">Take the Fit Check</button>
+        </div>
+      </div>
+
+      <div class="btn-panels">
+        <div class="btn-panel btn-panel--cream">
+          <span class="state-note">Text links on cream&nbsp;·&nbsp;secondary CTA (link-green)&nbsp;·&nbsp;inline body link</span>
+          <a class="link-green" href="#top">See what the audit includes</a>
+          <p style="font-size:1rem;">Take the <a class="link-inline" href="#top">free fit check</a> first.</p>
+        </div>
+        <div class="btn-panel btn-panel--green on-green">
+          <span class="state-note">Text link on green&nbsp;·&nbsp;secondary CTA (link-leaf)</span>
+          <a class="link-leaf" href="#top">Explore the full audit</a>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="spec-email">Work email</label>
+        <input id="spec-email" type="email" placeholder="you@yourbusiness.ca" autocomplete="off">
+      </div>
+      <p class="spec-note" style="margin-top:1.25rem;">Inputs: white, 52px min, 10px radius, #6F796F border, mono uppercase label. Focus everywhere: 3px solid outline, 3px offset — green on cream, leaf on green. Selection: green/cream, inverted on bands.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════ §08 MOTION ══════════════ -->
+  <section class="section spec-head" id="motion">
+    <div class="wrap">
+      <p class="eyebrow">§08 · Motion</p>
+      <h2>Four movements. Nothing else moves.</h2>
+      <ol class="rules">
+        <li><span><span class="strong">Reveal:</span> sections fade-rise 18px over 0.6s ease, once, at 12% visibility. Sibling rows may stagger 40ms.</span></li>
+        <li><span><span class="strong">Marker draw:</span> the underline draws left-to-right over 0.9s, starting 0.35s after its section reveals. Stroke sits behind the glyphs.</span></li>
+        <li><span><span class="strong">Hovers:</span> button background/color 0.18s; ladder arrow slides in 0.25s; row background cream→white 0.2s.</span></li>
+        <li><span><span class="strong">Reduced motion:</span> everything above becomes static and instant. Markers render drawn. No exceptions.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══════════════ §09 DO / DON'T ══════════════ -->
+  <section class="section spec-head" id="dodont">
+    <div class="wrap">
+      <p class="eyebrow">§09 · Do / Don’t</p>
+      <h2>The fast checklist.</h2>
+      <div class="dodont">
+        <div>
+          <span class="support" style="color:var(--green);">Do</span>
+          <ul>
+            <li class="yes">Compose every page from P1–P13 and the §05 chrome.</li>
+            <li class="yes">Put every 3+ item list in hairline rows.</li>
+            <li class="yes">End offer pages on one green band with the CTAs inside it.</li>
+            <li class="yes">Use mono uppercase for every label, price, and support line.</li>
+            <li class="yes">Keep one primary pill per section, same label site-wide.</li>
+            <li class="yes">Add a new pattern to this file first, then build it.</li>
+          </ul>
+        </div>
+        <div>
+          <span class="support" style="color:#B4543B;">Don’t</span>
+          <ul>
+            <li class="no">Invent a per-page H1 size, list style, or numbering format.</li>
+            <li class="no">Use icon tiles, content cards, gradients, or shadows (price card excepted).</li>
+            <li class="no">Put leaf/leaf-tint on cream, or grey text on green.</li>
+            <li class="no">Stack two green bands, or hairline against a band.</li>
+            <li class="no">Use more than one marker per heading or two interludes per page.</li>
+            <li class="no">Give one action two different button labels.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ CANONICAL FOOTER — identical on every page ═══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <p class="legal">
+      <img src="../../public/kivov-wordmark.png" alt="" onerror="this.remove()">
+      © 2026 Kivov Digital&nbsp;·&nbsp;Toronto
+    </p>
+    <ul class="footer-links">
+      <li><a href="#p2">AI Audit</a></li>
+      <li><a href="#p11">Fit Check</a></li>
+      <li><a href="#top">Showcase</a></li>
+      <li><a href="#top">Privacy Policy</a></li>
+      <li><a href="#top">Cookie Policy</a></li>
+      <li><a href="#top">Terms of Use</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var targets = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>

@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  Check,
-  Clock,
-  FileText,
-  MessageCircle,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import {
   Accordion,
@@ -14,15 +7,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Eyebrow } from "@/components/eyebrow";
-import { HandoffMeter } from "@/components/handoff-meter";
+import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { TrackedLink } from "@/components/tracked-link";
 
+/*
+ * Services — Kim's copy on the Green Ledger foundation: P2 header, P13 price
+ * slots (the paid tiers: audit | Build With You | Build For You, layout
+ * restored from PR #11), then the P8 four-rung ladder as the sequence view.
+ */
 export const metadata: Metadata = {
   title: "Services — Kivov Digital",
   description:
@@ -38,36 +32,62 @@ export const metadata: Metadata = {
   },
 };
 
-const badgeEyebrow = "font-mono text-[0.65rem] tracking-[0.15em] uppercase";
-const meterLabels =
-  "mb-2 flex justify-between font-mono text-[0.6rem] tracking-[0.2em] uppercase";
+const eyebrow =
+  "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
+const h2 =
+  "font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground";
+const linkGreen =
+  "inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary";
+const linkLeaf =
+  "inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-brand-mint decoration-2 underline-offset-[7px] transition-colors hover:text-caption";
+const priceUnit =
+  "font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase";
+const rungMeta =
+  "font-mono text-xs font-medium tracking-[0.14em] uppercase whitespace-nowrap";
+const rungArrow =
+  "ml-2 inline-block -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100";
 
-/* The four stops on the journey rail, in order of how much I take on. */
-const journey = [
-  { label: "Fit check", price: "Free", align: "text-left" },
-  { label: "Audit", price: "CAD $750", align: "text-center" },
-  { label: "With you", price: "$1,000/mo", align: "text-center" },
-  { label: "For you", price: "Per project", align: "text-right" },
-];
-
-const included = [
+/* The four rungs, in order of how much of the work I take on. */
+const rungs = [
   {
-    icon: MessageCircle,
-    title: "Always-on between sessions",
-    body: "Unlimited quick questions over text, so you're never stuck waiting for the next call.",
-    note: "Quick async text so nothing leaves you hanging mid-week.",
+    featured: true,
+    name: "Workflow Fit Check",
+    desc: "A three-minute questionnaire that identifies the type of workflow issue you may be facing, and one practical place to begin.",
+    meta: "Free · 3 min",
+    cta: "Take the free check",
+    href: "/fit-check",
+    event: "fit_check_cta_clicked",
+    eventProps: { source_page: "services", cta_location: "ladder" },
   },
   {
-    icon: Clock,
-    title: "12 business-hour response SLA",
-    body: "A guaranteed response window during business hours — you always know when you'll hear back.",
-    note: null,
+    featured: false,
+    name: "Workflow-First AI Audit",
+    desc: "A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.",
+    meta: "CAD $750 · Founding $495",
+    cta: "Explore the audit",
+    href: "/audit",
+    event: "audit_cta_clicked",
+    eventProps: { source_page: "services", cta_location: "ladder" },
   },
   {
-    icon: FileText,
-    title: "A documentation hub of every transcript & note",
-    body: "A quantified list of takeaways, action items, and decisions after every session.",
-    note: "Notion by default, but I'll set it up wherever works for you.",
+    featured: false,
+    name: "Build With You",
+    desc: "Two 45-minute strategy calls a month — one every two weeks, hands-on, with always-on text support in between.",
+    meta: "$1,000 / mo",
+    cta: "Get in touch",
+    href: "/contact?interest=build-with-you",
+    event: "service_inquiry_clicked",
+    eventProps: { service_tier: "do_it_with_you" },
+  },
+  {
+    featured: false,
+    name: "Build For You",
+    desc: "Every Build For You project begins with discovery or a completed audit. Scoped and priced per project.",
+    meta: "Per project",
+    cta: "Get in touch",
+    href: "/contact?interest=build-for-you",
+    event: "service_inquiry_clicked",
+    eventProps: { service_tier: "do_it_for_you" },
   },
 ];
 
@@ -135,552 +155,392 @@ const faqs = [
   },
 ];
 
+const included = [
+  {
+    title: "Always-on between sessions",
+    body: "Unlimited quick questions over text, so you're never stuck waiting for the next call.",
+    note: "Quick async text so nothing leaves you hanging mid-week.",
+  },
+  {
+    title: "12 business-hour response SLA",
+    body: "A guaranteed response window during business hours — you always know when you'll hear back.",
+    note: null,
+  },
+  {
+    title: "A documentation hub of every transcript & note",
+    body: "A quantified list of takeaways, action items, and decisions after every session.",
+    note: "Notion by default, but I'll set it up wherever works for you.",
+  },
+];
+
+function Bullet({ tone = "green" }: { tone?: "green" | "leaf" }) {
+  return (
+    <span
+      className={`mt-[0.55em] size-[7px] shrink-0 rounded-[2px] ${tone === "leaf" ? "bg-brand-mint" : "bg-primary"}`}
+      aria-hidden="true"
+    />
+  );
+}
+
 export default function ServicesPage() {
   return (
-    <div>
-      {/* ── Hero: thesis + journey rail with live pricing ─────────── */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24 md:pb-16">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="rise lg:col-span-6">
-            <Eyebrow className="mb-6 text-xs">Services</Eyebrow>
-            <h1 className="font-display text-[2.75rem] leading-[1.05] font-semibold tracking-tight text-foreground md:text-6xl md:leading-[1.02]">
-              Start with the{" "}
-              <em className="font-normal text-primary">workflow.</em>
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed">
-              Every business is different, but the starting point is the same.
-              Before I recommend or build anything, I learn how your business
-              currently operates. Then you choose how much of the work I take
-              on.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
-                size="xl"
-                render={
-                  <TrackedLink
-                    href="/fit-check"
-                    event="fit_check_cta_clicked"
-                    eventProps={{
-                      source_page: "services",
-                      cta_location: "hero",
-                    }}
-                  />
-                }
-              >
-                Take the free fit check
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                render={
-                  <TrackedLink
-                    href="/audit"
-                    event="audit_cta_clicked"
-                    eventProps={{
-                      source_page: "services",
-                      cta_location: "hero",
-                    }}
-                  />
-                }
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Explore the audit
-              </Button>
-            </div>
+    <>
+      {/* P2 — page header */}
+      <section className="px-6 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <p className={eyebrow}>Services</p>
+          <h1 className="mt-6 max-w-[11em] font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground">
+            Start with the <Marker>workflow</Marker>.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed">
+            Every business is different, but the starting point is the same.
+            Before I recommend or build anything, I learn how your business
+            currently operates. Then you choose how much of the work I take on.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Button
+              size="xl"
+              className="rounded-full"
+              render={
+                <TrackedLink
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
+                  eventProps={{ source_page: "services", cta_location: "hero" }}
+                />
+              }
+            >
+              Take the free fit check
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </Button>
+            <TrackedLink
+              href="/audit"
+              event="audit_cta_clicked"
+              eventProps={{ source_page: "services", cta_location: "hero" }}
+              className={linkGreen}
+            >
+              Explore the audit
+            </TrackedLink>
           </div>
+        </Reveal>
+      </section>
 
-          {/* Journey rail: the hand-off thesis doubles as a pricing preview */}
-          <div className="rise [--rise-delay:150ms] lg:col-span-6">
-            <Card className="ring-border shadow-[0_1px_0_rgba(16,20,26,.02),0_16px_40px_-24px_rgba(16,20,26,.22)] [--card-spacing:--spacing(7)]">
-              <CardContent>
-                <div className="mb-6 flex items-center justify-between">
-                  <span className={`${badgeEyebrow} text-[0.7rem] text-caption`}>
-                    Who holds the work
+      {/* P13 — the paid tiers, side by side */}
+      <section
+        id="packages"
+        className="scroll-mt-16 border-t border-border px-6 py-20 md:py-28"
+      >
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>Packages</p>
+            <h2 className={`${h2} mt-5 max-w-3xl`}>
+              Four ways to work together
+            </h2>
+            <p className="mt-5 max-w-3xl leading-relaxed">
+              Most people start with the free fit check or the audit, then move
+              into hands-on work once we both know where the real wins are.
+            </p>
+          </Reveal>
+
+          <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+            {/* 1. Workflow-First AI Audit — the highlighted paid entry */}
+            <Reveal className="h-full">
+              <div className="flex h-full flex-col rounded-2xl bg-card p-7 ring-2 ring-primary/40">
+                <p className={eyebrow}>Paid entry offer</p>
+                <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
+                  Workflow-First AI Audit
+                </h3>
+                <p className="mt-4 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-black text-foreground tabular-nums">
+                    $750
                   </span>
-                  <span className={`${badgeEyebrow} text-[0.7rem] text-primary`}>
-                    You&nbsp;→&nbsp;Me
-                  </span>
-                </div>
-
-                <HandoffMeter toUs={90} stops={[6, 34, 62, 90]} animateOnLoad />
-
-                <div className="mt-5 -mx-2 grid grid-cols-4 gap-1">
-                  {journey.map((stop, i) => (
-                    <a
-                      key={stop.label}
-                      href="#packages"
-                      className={`rounded-lg p-2 transition-colors duration-200 hover:bg-muted ${stop.align}`}
-                    >
-                      <p
-                        className={`font-mono text-[0.6rem] tracking-[0.12em] uppercase ${
-                          i === 0 ? "text-primary" : "text-caption"
-                        }`}
-                      >
-                        {stop.label}
-                      </p>
-                      <p className="mt-1 text-sm font-semibold text-foreground tabular-nums">
-                        {stop.price}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-
-                <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                  The further along you go, the more of the work moves to me.
-                  You decide how far, and you can move along it over time.
+                  <span className={priceUnit}>CAD · Founding $495</span>
                 </p>
-              </CardContent>
-            </Card>
+                <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
+                  A professional review of one priority workflow: map,
+                  bottlenecks, prioritized opportunities, recommendations, and
+                  a written 30-day action plan.
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {[
+                    "Repetitive admin processes",
+                    "Owner bottlenecks",
+                    "Disconnected tools",
+                    "Delayed follow-ups",
+                    "Manual reporting",
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 text-sm">
+                      <Bullet />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-6">
+                  <Button
+                    size="xl"
+                    className="w-full rounded-full"
+                    render={
+                      <TrackedLink
+                        href="/audit"
+                        event="audit_cta_clicked"
+                        eventProps={{
+                          source_page: "services",
+                          cta_location: "packages",
+                        }}
+                      />
+                    }
+                  >
+                    Explore the audit
+                    <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 2. Build With You */}
+            <Reveal delay={60} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl bg-card p-7 ring-1 ring-border">
+                <p className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+                  Ongoing
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
+                  Build With You
+                </h3>
+                <p className="mt-4 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-black text-foreground tabular-nums">
+                    $1,000
+                  </span>
+                  <span className={priceUnit}>/ month</span>
+                </p>
+                <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
+                  Two 45-minute strategy calls a month — one every two weeks.
+                  Each call, hands-on:
+                </p>
+                <ul className="mt-4 space-y-2">
+                  <li className="flex gap-3 text-sm">
+                    <Bullet />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        You screen-share your real workflows
+                      </span>{" "}
+                      — we watch how the work actually happens.
+                    </span>
+                  </li>
+                  <li className="flex gap-3 text-sm">
+                    <Bullet />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        We build custom Claude skills
+                      </span>{" "}
+                      around those workflows.
+                    </span>
+                  </li>
+                  <li className="flex gap-3 text-sm">
+                    <Bullet />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        We automate the repetitive parts
+                      </span>{" "}
+                      of your workflow.
+                    </span>
+                  </li>
+                </ul>
+                <p className="mt-4 text-sm leading-relaxed">
+                  <span className="font-medium text-foreground">
+                    100% money-back guarantee
+                  </span>{" "}
+                  — if you&apos;re not satisfied with the results, you get a
+                  full refund.
+                </p>
+                <p className="mt-3 text-xs text-caption">
+                  Billed every 4 weeks — two bi-weekly calls.
+                </p>
+                <div className="mt-auto pt-6">
+                  <Button
+                    variant="outline"
+                    size="xl"
+                    className="w-full rounded-full"
+                    render={
+                      <TrackedLink
+                        href="/contact?interest=build-with-you"
+                        event="service_inquiry_clicked"
+                        eventProps={{ service_tier: "do_it_with_you" }}
+                      />
+                    }
+                  >
+                    Get in touch
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 3. Build For You — the deep-green slot */}
+            <Reveal delay={120} className="h-full">
+              <div className="band-green flex h-full flex-col rounded-2xl bg-background p-7">
+                <p className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+                  Project work
+                </p>
+                <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
+                  Build For You
+                </h3>
+                <p className="mt-4 flex items-baseline gap-2">
+                  <span className="font-display text-4xl font-black text-foreground">
+                    Per project
+                  </span>
+                </p>
+                <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
+                  Every Build For You project begins with discovery or a
+                  completed audit. Two tracks come out of it:
+                </p>
+                <ul className="mt-4 space-y-2">
+                  <li className="flex gap-3 text-sm">
+                    <Bullet tone="leaf" />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        AI &amp; automation
+                      </span>
+                      , built around the workflow we mapped together.
+                    </span>
+                  </li>
+                  <li className="flex gap-3 text-sm">
+                    <Bullet tone="leaf" />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        Custom software development
+                      </span>
+                      , when off-the-shelf won&apos;t fit.
+                    </span>
+                  </li>
+                </ul>
+                <p className="mt-4 text-sm leading-relaxed">
+                  <span className="font-medium text-foreground">Best for:</span>{" "}
+                  teams that want the build handed over, not shared.
+                </p>
+                <p className="mt-3 text-xs text-caption">
+                  Scoped and priced per project after discovery.
+                </p>
+                <div className="mt-auto pt-6">
+                  <Button
+                    size="xl"
+                    className="w-full rounded-full hover:text-inkdeep"
+                    render={
+                      <TrackedLink
+                        href="/contact?interest=build-for-you"
+                        event="service_inquiry_clicked"
+                        eventProps={{ service_tier: "do_it_for_you" }}
+                      />
+                    }
+                  >
+                    Get in touch
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── Packages ──────────────────────────────────────────────── */}
-      <section id="packages" className="scroll-mt-20 border-t border-border bg-card/60">
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <Reveal>
-            <SectionHeading
-              index="01"
-              eyebrow="Packages"
-              title="Four ways to work together"
-              lead="Most people start with the free fit check or the audit, then move into hands-on work once we both know where the real wins are."
-            />
-          </Reveal>
-
-          {/* Row one: the two ways in */}
-          <div className="mt-12 grid items-stretch gap-5 lg:grid-cols-2">
-            {/* 1. Workflow Fit Check (free) — the self-serve entry point */}
-            <Reveal className="h-full">
-              <Card className="relative h-full ring-2 ring-primary/40 [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <div className="flex min-h-[8rem] flex-col items-start">
-                    <Badge className={badgeEyebrow}>Start here</Badge>
-                    <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                      Workflow Fit Check
+      {/* P8 — the four-rung ladder: the sequence view */}
+      <section className="border-t border-border">
+        <Reveal className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28">
+          <p className={eyebrow}>A real sequence, in order</p>
+          <p className="mt-5 max-w-3xl leading-relaxed">
+            The further along you go, the more of the work moves to me. You
+            decide how far, and you can move along it over time.
+          </p>
+        </Reveal>
+        <div className="border-t border-border">
+          {rungs.map((r) => (
+            <Reveal key={r.name}>
+              <TrackedLink
+                href={r.href}
+                event={r.event}
+                eventProps={r.eventProps}
+                className={
+                  r.featured
+                    ? "band-green group block bg-background transition-colors hover:bg-[#085c3c]"
+                    : "group block border-b border-border bg-background transition-colors hover:bg-card"
+                }
+              >
+                <div className="mx-auto grid max-w-6xl gap-x-10 px-6 py-8 md:grid-cols-[minmax(0,1fr)_auto] md:py-11">
+                  <div>
+                    <h3 className="font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+                      {r.name}
                     </h3>
-                    <div className="mt-auto flex items-baseline gap-2 pt-3">
-                      <span className="font-display text-4xl font-semibold text-primary">
-                        Free
-                      </span>
-                      <span className="text-sm text-caption">
-                        Three minutes
-                      </span>
-                    </div>
+                    <p className="mt-2 max-w-[46em] leading-relaxed">{r.desc}</p>
                   </div>
-
-                  <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                    A three-minute questionnaire that identifies the type of
-                    workflow issue you may be facing, and one practical place
-                    to begin.
-                  </p>
-
-                  <p className="mt-5 font-mono text-[0.65rem] tracking-[0.2em] uppercase text-caption">
-                    Best for
-                  </p>
-                  <ul className="mt-3 space-y-2.5">
-                    {[
-                      "Early exploration",
-                      "Owners who aren't sure where to start",
-                      "Teams that need an initial direction",
-                    ].map((item) => (
-                      <li key={item} className="flex gap-3 text-sm">
-                        <Check
-                          className="mt-0.5 size-4 shrink-0 text-primary"
-                          aria-hidden="true"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto pt-6">
-                    <div className="mb-5">
-                      <div className={`${meterLabels} text-caption`}>
-                        <span>You</span>
-                        <span>Me</span>
-                      </div>
-                      <HandoffMeter toUs={8} />
-                    </div>
-                    <Button
-                      size="xl"
-                      className="w-full"
-                      render={
-                        <TrackedLink
-                          href="/fit-check"
-                          event="fit_check_cta_clicked"
-                          eventProps={{
-                            source_page: "services",
-                            cta_location: "packages",
-                          }}
-                        />
-                      }
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 md:mt-1 md:flex-col md:items-end md:justify-start md:gap-y-4">
+                    <p className={`${rungMeta} text-foreground`}>{r.meta}</p>
+                    <p
+                      className={`${rungMeta} ${r.featured ? "text-caption" : "text-primary"}`}
                     >
-                      Take the free check
-                      <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-
-            {/* 2. Workflow-First AI Audit — the paid entry offer */}
-            <Reveal delay={60} className="h-full">
-              <Card className="h-full ring-border [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <div className="flex min-h-[8rem] flex-col items-start">
-                    <Badge variant="secondary" className={badgeEyebrow}>
-                      Entry offer
-                    </Badge>
-                    <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                      Workflow-First AI Audit
-                    </h3>
-                    <div className="mt-auto flex items-baseline gap-2 pt-3">
-                      <span className="font-display text-4xl font-semibold text-foreground tabular-nums">
-                        CAD $750
+                      {r.cta}
+                      <span className={rungArrow} aria-hidden="true">
+                        →
                       </span>
-                      <span className="text-sm text-caption">
-                        Founding clients $495
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                    A professional review of one priority workflow: map,
-                    bottlenecks, prioritized opportunities, recommendations, and
-                    a written 30-day action plan.
-                  </p>
-
-                  <p className="mt-5 font-mono text-[0.65rem] tracking-[0.2em] uppercase text-caption">
-                    Best for
-                  </p>
-                  <ul className="mt-3 space-y-2.5">
-                    {[
-                      "Repetitive admin processes",
-                      "Owner bottlenecks",
-                      "Disconnected tools",
-                      "Delayed follow-ups",
-                      "Manual reporting",
-                    ].map((item) => (
-                      <li key={item} className="flex gap-3 text-sm">
-                        <Check
-                          className="mt-0.5 size-4 shrink-0 text-primary"
-                          aria-hidden="true"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto pt-6">
-                    <div className="mb-5">
-                      <div className={`${meterLabels} text-caption`}>
-                        <span>You</span>
-                        <span>Me</span>
-                      </div>
-                      <HandoffMeter toUs={34} />
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="xl"
-                      className="w-full"
-                      render={
-                        <TrackedLink
-                          href="/audit"
-                          event="audit_cta_clicked"
-                          eventProps={{
-                            source_page: "services",
-                            cta_location: "packages",
-                          }}
-                        />
-                      }
-                    >
-                      Explore the audit
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </div>
-
-          {/* Row two: the two build packages */}
-          <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-2">
-            {/* 3. Build With You */}
-            <Reveal className="h-full">
-              <Card className="h-full ring-border [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <div className="flex min-h-[8rem] flex-col items-start">
-                    <Badge variant="secondary" className={badgeEyebrow}>
-                      Ongoing
-                    </Badge>
-                    <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                      Build With You
-                    </h3>
-                    <div className="mt-auto flex items-baseline gap-2 pt-3">
-                      <span className="font-display text-4xl font-semibold text-foreground tabular-nums">
-                        $1,000
-                      </span>
-                      <span className="text-sm text-caption">/ month</span>
-                    </div>
-                  </div>
-
-                  <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                    Two 45-minute strategy calls a month — one every two
-                    weeks. Each call, hands-on:
-                  </p>
-                  <ol className="mt-3 space-y-2.5">
-                    <li className="flex gap-3 text-sm">
-                      <span className="shrink-0 pt-0.5 font-mono text-xs text-primary">
-                        01
-                      </span>
-                      <span>
-                        <span className="font-medium text-foreground">
-                          You screen-share your real workflows
-                        </span>{" "}
-                        — we watch how the work actually happens.
-                      </span>
-                    </li>
-                    <li className="flex gap-3 text-sm">
-                      <span className="shrink-0 pt-0.5 font-mono text-xs text-primary">
-                        02
-                      </span>
-                      <span>
-                        <span className="font-medium text-foreground">
-                          We build custom Claude skills
-                        </span>{" "}
-                        around those workflows.
-                      </span>
-                    </li>
-                    <li className="flex gap-3 text-sm">
-                      <span className="shrink-0 pt-0.5 font-mono text-xs text-primary">
-                        03
-                      </span>
-                      <span>
-                        <span className="font-medium text-foreground">
-                          We automate the repetitive parts
-                        </span>{" "}
-                        of your workflow.
-                      </span>
-                    </li>
-                  </ol>
-
-                  <p className="mt-5 text-sm text-caption">
-                    <span className="font-medium text-foreground">
-                      Best for:
-                    </span>{" "}
-                    teams with internal capacity that want to learn while
-                    building.
-                  </p>
-
-                  <div className="mt-4 flex gap-3 rounded-xl bg-secondary p-3.5">
-                    <ShieldCheck
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <p className="text-xs leading-relaxed text-secondary-foreground">
-                      <span className="font-semibold">
-                        100% money-back guarantee
-                      </span>{" "}
-                      — if you&apos;re not satisfied with the results, you get
-                      a full refund.
                     </p>
                   </div>
-                  <p className="mt-3 text-xs text-caption">
-                    Billed every 4 weeks — two bi-weekly calls.
-                  </p>
-
-                  <div className="mt-auto pt-6">
-                    <div className="mb-5">
-                      <div className={`${meterLabels} text-caption`}>
-                        <span>You</span>
-                        <span>Me</span>
-                      </div>
-                      <HandoffMeter toUs={62} />
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="xl"
-                      className="w-full"
-                      render={
-                        <TrackedLink
-                          href="/contact?interest=build-with-you"
-                          event="service_inquiry_clicked"
-                          eventProps={{ service_tier: "do_it_with_you" }}
-                        />
-                      }
-                    >
-                      Get in touch
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </TrackedLink>
             </Reveal>
-
-            {/* 4. Build For You — dark scope re-themes shadcn tokens */}
-            <Reveal delay={60} className="h-full">
-              <Card className="dark h-full bg-inkdeep text-sm ring-inkdeep [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <div className="flex min-h-[8rem] flex-col items-start">
-                    <Badge
-                      variant="outline"
-                      className={`${badgeEyebrow} border-brand-mint/40 text-brand-mint`}
-                    >
-                      Project work
-                    </Badge>
-                    <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                      Build For You
-                    </h3>
-                    <div className="mt-auto flex items-baseline gap-2 pt-3">
-                      <span className="font-display text-4xl font-semibold text-foreground">
-                        Per project
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed text-muted-foreground">
-                    Every Build For You project begins with discovery or a
-                    completed audit. Two tracks come out of it:
-                  </p>
-                  <ul className="mt-3 space-y-2.5">
-                    <li className="flex gap-3 text-sm text-white/80">
-                      <Check
-                        className="mt-0.5 size-4 shrink-0 text-brand-mint"
-                        aria-hidden="true"
-                      />
-                      <span>
-                        <span className="font-medium text-foreground">
-                          AI &amp; automation
-                        </span>
-                        , built around the workflow we mapped together.
-                      </span>
-                    </li>
-                    <li className="flex gap-3 text-sm text-white/80">
-                      <Check
-                        className="mt-0.5 size-4 shrink-0 text-brand-mint"
-                        aria-hidden="true"
-                      />
-                      <span>
-                        <span className="font-medium text-foreground">
-                          Custom software development
-                        </span>
-                        , when off-the-shelf won&apos;t fit.
-                      </span>
-                    </li>
-                  </ul>
-
-                  <p className="mt-5 text-sm text-caption">
-                    <span className="font-medium text-foreground">
-                      Best for:
-                    </span>{" "}
-                    teams that want the build handed over, not shared.
-                  </p>
-
-                  <p className="mt-3 text-xs text-caption">
-                    Scoped and priced per project after discovery.
-                  </p>
-
-                  <div className="mt-auto pt-6">
-                    <div className="mb-5">
-                      <div className={`${meterLabels} text-caption`}>
-                        <span>You</span>
-                        <span>Me</span>
-                      </div>
-                      <HandoffMeter toUs={90} onDark />
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="xl"
-                      className="w-full border-white/25 bg-transparent text-white hover:border-white/50 hover:bg-transparent hover:text-white"
-                      render={
-                        <TrackedLink
-                          href="/contact?interest=build-for-you"
-                          event="service_inquiry_clicked"
-                          eventProps={{ service_tier: "do_it_for_you" }}
-                        />
-                      }
-                    >
-                      Get in touch
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </div>
-
-          {/* Shared benefits, attached to the two build packages */}
-          <Reveal className="mt-14">
-            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-              <div>
-                <h3 className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                  What&apos;s included, either way
-                </h3>
-                <p className="mt-2">
-                  Both build packages, Build With You{" "}
-                  <span className="text-caption">and</span> Build For You, come
-                  with all three.
-                </p>
-              </div>
-              <Badge
-                variant="secondary"
-                className={`${badgeEyebrow} h-auto self-start px-3 py-1.5 md:self-auto`}
-              >
-                Both build packages
-              </Badge>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              {included.map((item, i) => (
-                <Reveal key={item.title} delay={i * 50}>
-                  <Card className="h-full ring-border transition-all duration-200 [--card-spacing:--spacing(6)] hover:-translate-y-0.5 hover:shadow-lg">
-                    <CardContent>
-                      <div className="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-secondary">
-                        <item.icon
-                          className="size-5 text-primary"
-                          strokeWidth={1.8}
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <h4 className="mb-1.5 font-semibold text-foreground">
-                        {item.title}
-                      </h4>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {item.body}
-                      </p>
-                      {item.note ? (
-                        <p className="mt-2 text-xs text-caption">{item.note}</p>
-                      ) : null}
-                    </CardContent>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* ── FAQ: editorial split layout ───────────────────────────── */}
-      <section className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
-              <SectionHeading
-                index="02"
-                eyebrow="Questions"
-                title="A few honest answers"
-              />
-              <p className="mt-4 text-sm leading-relaxed">
-                Anything else on your mind? Send me a note and I&apos;ll answer
-                it straight.
-              </p>
-            </div>
+      {/* P6 — what's included, either way */}
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>Included</p>
+            <h2 className={`${h2} mt-5 max-w-3xl`}>
+              What&apos;s included, either way
+            </h2>
+            <p className="mt-5 max-w-3xl leading-relaxed">
+              Both build packages, Build With You{" "}
+              <span className="text-caption">and</span> Build For You, come
+              with all three.
+            </p>
           </Reveal>
-          <Reveal delay={80} className="lg:col-span-8">
-            <Accordion className="border-y border-border">
+          <div className="mt-8 border-b border-border">
+            {included.map((item, i) => (
+              <Reveal key={item.title} delay={i * 40}>
+                <div className="grid gap-3 border-t border-border py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] md:gap-12">
+                  <h3 className="font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl">
+                    {item.title}
+                  </h3>
+                  <div>
+                    <p className="max-w-[52ch] leading-relaxed">{item.body}</p>
+                    {item.note ? (
+                      <p className="mt-2 max-w-[52ch] text-sm text-caption">
+                        {item.note}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — hairline rows (accordion) */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>Questions</p>
+            <h2 className={`${h2} mt-5 max-w-3xl`}>A few honest answers</h2>
+            <p className="mt-5 max-w-3xl leading-relaxed">
+              Anything else on your mind? Send me a note and I&apos;ll answer
+              it straight.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <Accordion className="mt-8 max-w-3xl border-y border-border">
               {faqs.map((faq) => (
                 <AccordionItem key={faq.value} value={faq.value}>
                   <AccordionTrigger className="py-5 text-base font-medium text-foreground hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
+                  <AccordionContent className="pb-5 leading-relaxed text-muted-foreground">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -690,59 +550,50 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── Closing CTA ───────────────────────────────────────────── */}
-      <section className="px-6 pb-16 md:pb-24">
-        <Reveal>
-          <div className="dark relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-inkdeep px-8 py-14 text-center md:py-20">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(110,231,183,0.10),transparent)]"
-            />
-            <div className="relative">
-              <Eyebrow className="mb-5 text-xs text-brand-mint">
-                Start with the workflow
-              </Eyebrow>
-              <h2 className="font-display text-3xl leading-[1.05] font-semibold tracking-tight text-foreground md:text-5xl">
-                Find out where work is getting stuck.
-                <br />
-                <span className="font-normal italic text-white/70">
-                  Then decide what to fix.
-                </span>
-              </h2>
-              <Button
-                size="xl"
-                className="mt-8"
-                render={
-                  <TrackedLink
-                    href="/fit-check"
-                    event="fit_check_cta_clicked"
-                    eventProps={{
-                      source_page: "services",
-                      cta_location: "bottom_cta",
-                    }}
-                  />
-                }
-              >
-                Take the free fit check
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-              <p className="mt-6 text-sm">
+      {/* P12 — closing band */}
+      <section className="band-green relative overflow-hidden bg-background px-6 py-20 md:py-28">
+        <div className="band-depth top-[-58%] left-[-12%]" aria-hidden="true" />
+        <Reveal className="relative mx-auto max-w-6xl">
+          <p className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+            Start with the workflow
+          </p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
+            Find out where work is getting stuck.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed font-medium text-foreground">
+            Then decide what to fix.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Button
+              size="xl"
+              className="rounded-full hover:text-inkdeep"
+              render={
                 <TrackedLink
-                  href="/audit"
-                  event="audit_cta_clicked"
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
                   eventProps={{
                     source_page: "services",
                     cta_location: "bottom_cta",
                   }}
-                  className="rounded-sm font-medium text-brand-mint underline-offset-4 transition-colors hover:underline"
-                >
-                  Explore the AI audit →
-                </TrackedLink>
-              </p>
-            </div>
+                />
+              }
+            >
+              Take the free fit check
+            </Button>
+            <TrackedLink
+              href="/audit"
+              event="audit_cta_clicked"
+              eventProps={{
+                source_page: "services",
+                cta_location: "bottom_cta",
+              }}
+              className={linkLeaf}
+            >
+              Explore the AI audit
+            </TrackedLink>
           </div>
         </Reveal>
       </section>
-    </div>
+    </>
   );
 }

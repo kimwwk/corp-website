@@ -1,162 +1,560 @@
 import Image from "next/image";
-import {
-  ArrowRight,
-  Check,
-  ClipboardList,
-  FileSearch,
-  Waypoints,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Eyebrow } from "@/components/eyebrow";
+import { Interlude } from "@/components/interlude";
+import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
-import { SectionHeading } from "@/components/section-heading";
 import { TrackedLink } from "@/components/tracked-link";
 
-const badgeEyebrow = "font-mono text-[0.65rem] tracking-[0.15em] uppercase";
+/*
+ * Home — Green Ledger (Direction C). Conversion spine per the 002 split plan:
+ * identity lives on /about, service depth on /services, offer detail on
+ * /audit. Copy: Lindsay report 2026-07-26 with Kim's hero + CTA revisions.
+ */
 
-/* Slim credibility strip directly under the hero. */
-const credibility = [
-  "Founded by Kim Wong",
-  "Former Deloitte & EY consultant",
-  "Six years in software, systems & AI",
-  "Enterprise experience, small-business focus",
-];
+const eyebrow =
+  "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
+const eyebrowOnGreen =
+  "font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase";
+const support =
+  "font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase";
+/* Quiet secondary CTA: underlined text link (leaf on green, green on cream). */
+const linkLeaf =
+  "inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-brand-mint decoration-2 underline-offset-[7px] transition-colors hover:text-caption";
+const linkGreen =
+  "inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary";
+/* Display pull-line (.big-line in the Direction C sample). */
+const bigLine =
+  "max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground";
 
-/* The symptoms an owner recognises before they can name the cause. */
-const frictionSigns = [
-  "Leads aren't followed up consistently",
-  "Quotes and proposals take too long",
-  "The same information gets copied between tools",
-  "Reports are rebuilt by hand every week",
-  "Customers keep asking the same questions",
-  "Important steps live in one person's head",
-  "The owner has to approve or explain everything",
-  "Subscriptions keep growing, but the work isn't getting easier",
-];
-
-const understand = [
-  "What starts the work",
-  "Who touches it",
-  "Where information moves",
+const lookAt = [
+  "What starts the process",
+  "Who is involved",
+  "Where information is stored",
+  "What gets repeated",
   "What gets delayed",
-  "Which decisions need a person",
-  "What repeats often enough to automate",
-  "What should stay human",
+  "Where decisions are made",
+  "What depends too heavily on one person",
+  "What your current tools already do well",
 ];
 
-const decide = [
-  "Keep what you already have",
-  "Configure it differently",
-  "Connect existing systems",
-  "Replace a poor-fit tool",
-  "Add AI or automation",
-  "Build something custom",
+const painPoints = [
+  "You are copying the same information between multiple platforms.",
+  "Follow-ups get delayed when the business gets busy.",
+  "Important processes live inside one person’s head.",
+  "Your team repeatedly asks the same questions.",
+  "Reports have to be rebuilt manually.",
+  "Customers wait because information is difficult to find.",
+  "You are paying for software the team barely uses.",
+  "The owner has become the approval point for everything.",
+  "You know AI could help, but you do not know where it belongs.",
+  "Your current system does not reflect how your business actually works.",
+];
+
+const fitCheckOutcomes = [
+  "Clarifying the workflow",
+  "Connecting your existing tools",
+  "Automating repeated work",
+  "Reducing dependence on the owner",
+  "Building a more tailored system",
+  "Leaving the process alone for now",
+];
+
+const helps = [
+  {
+    title: "Understand the work",
+    body: "We begin with how your business actually operates, including the informal steps, decisions, and workarounds that may not be documented.",
+  },
+  {
+    title: "Find where time is being lost",
+    body: "We identify repetitive tasks, delays, unnecessary handoffs, disconnected information, and work that depends too heavily on one person.",
+  },
+  {
+    title: "Use what already fits",
+    body: "We review your existing tools before recommending something new. If a tool already works for your situation, we use it. There is no point reinventing the wheel.",
+  },
+  {
+    title: "Build what is missing",
+    body: "When the right solution does not exist, Kivov can design AI agents, automations, integrations, websites, portals, or custom software around your workflow.",
+  },
+  {
+    title: "Help your team do bigger things",
+    body: "The goal is not simply to complete tasks faster. The goal is to remove work that keeps people from focusing on customers, decisions, creativity, and growth.",
+  },
 ];
 
 const steps = [
   {
-    number: "01",
-    icon: FileSearch,
-    title: "Understand the work",
-    description:
-      "I review how the process runs today, including the steps nobody wrote down.",
+    title: "Show us how the work happens",
+    body: "You walk Kim through one process as it operates today. No polished presentation is required. The real process is more useful than the perfect version.",
   },
   {
-    number: "02",
-    icon: Waypoints,
-    title: "Find the friction",
-    description:
-      "Repeated work, delays, missing information, unclear ownership, unnecessary handoffs.",
+    title: "We find the friction",
+    body: "We look for: repeated work · manual copying · delayed decisions · missing information · unclear ownership · too many handoffs · poor-fit technology · tasks that depend on the same person.",
   },
   {
-    number: "03",
-    icon: ClipboardList,
-    title: "Choose what fits",
-    description:
-      "The smallest practical fix. That may be a tool you already own, an integration, an AI agent, or custom software.",
+    title: "We determine what fits",
+    body: "Kivov evaluates whether the best next step is to: keep the current process · clarify or document it · reconfigure an existing tool · connect two or more systems · add an automation · build an AI agent · create a custom application.",
   },
   {
-    number: "04",
-    icon: Wrench,
-    title: "Build and improve",
-    description:
-      "I build with your team or for them, with documentation and clear ownership throughout.",
+    title: "You receive a practical plan",
+    body: "You leave with clear priorities, not a list of random AI tools. You will understand: what to address first · what may save meaningful time · what could create new problems · what level of effort may be required · what Kivov can help implement · what your team can handle internally.",
   },
 ];
 
+const services = [
+  {
+    title: "Build With You",
+    lead: "For teams that want to remain actively involved in the work.",
+    note: "This is not traditional coaching. We build things with you.",
+  },
+  {
+    title: "Build For You",
+    lead: "For businesses that want Kivov to design and implement the solution.",
+    note: "Every project begins with understanding how the work happens. We do not build technology first and ask questions later.",
+  },
+];
+
+function Check({ tone = "green" }: { tone?: "green" | "leaf" }) {
+  return (
+    <svg
+      className={`mt-1 size-4 shrink-0 ${tone === "leaf" ? "text-brand-mint" : "text-primary"}`}
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M2.5 8.5 6 12l7.5-8"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   return (
-    <div>
-      {/* ── Hero: headline left, portrait right ───────────────────── */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 pb-16 md:pt-24 md:pb-20">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="rise lg:col-span-7">
-            <Eyebrow className="mb-6 text-xs">
-              Workflow-first AI · Toronto
-            </Eyebrow>
+    <>
+      {/* Hero — deep green band */}
+      <section className="band-green relative overflow-hidden bg-background px-6 py-20 md:py-28">
+        <div
+          className="band-depth right-[-14%] bottom-[-52%]"
+          aria-hidden="true"
+        />
+        <Reveal className="relative mx-auto max-w-6xl">
+          <p className={eyebrowOnGreen}>
+            Workflow-First AI for Small Business · Toronto
+          </p>
+          <h1 className="mt-6 max-w-[11em] font-display text-[clamp(2.1rem,8vw,6rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground">
+            Build the system that{" "}
+            <Marker tone="leaf">fits your business</Marker>.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed">
+            Kivov Digital helps growing businesses understand how their work
+            actually happens, identify where time and information are being
+            lost, and build practical AI systems around the way their people
+            already work.
+          </p>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed font-medium text-foreground">
+            We use what fits. We connect what already works. We build what is
+            missing.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Button
+              size="xl"
+              className="rounded-full hover:text-inkdeep"
+              render={
+                <TrackedLink
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
+                  eventProps={{ source_page: "home", cta_location: "hero" }}
+                />
+              }
+            >
+              Free Fit Check
+              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+            </Button>
+            <TrackedLink
+              href="/audit"
+              event="audit_cta_clicked"
+              eventProps={{ source_page: "home", cta_location: "hero" }}
+              className={linkLeaf}
+            >
+              Explore the full audit
+            </TrackedLink>
+          </div>
+          <p className={`${support} mt-8 block`}>
+            Understand your workflow first. Choose the technology second.
+          </p>
+        </Reveal>
+      </section>
 
-            <h1 className="font-display text-[2.75rem] leading-[1.06] font-semibold tracking-tight text-foreground md:text-6xl md:leading-[1.03]">
-              AI should{" "}
-              <em className="font-normal text-primary">fit your business</em>,
-              not force your business to fit the tool.
-            </h1>
-
-            <p className="mt-6 max-w-xl text-lg leading-relaxed">
-              I help small and mid-sized teams fix repetitive, disconnected
-              workflows with practical AI, automation, integrations, and custom
-              software. I start by understanding how the work actually happens,
-              find where time and information get lost, and recommend or build
-              the simplest system that solves the problem.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
-                size="xl"
-                render={
-                  <TrackedLink
-                    href="/fit-check"
-                    event="fit_check_cta_clicked"
-                    eventProps={{ source_page: "home", cta_location: "hero" }}
-                  />
-                }
-              >
-                Find where work is getting stuck
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                render={
-                  <TrackedLink
-                    href="/audit"
-                    event="audit_cta_clicked"
-                    eventProps={{ source_page: "home", cta_location: "hero" }}
-                  />
-                }
-                className="text-muted-foreground hover:text-foreground"
-              >
-                Explore the AI audit
-              </Button>
+      {/* Introduction */}
+      <section className="px-6 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <p className={eyebrow}>Introduction</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+            Start with your way of working.
+          </h2>
+          <div className="mt-8 grid gap-12 md:grid-cols-2">
+            <div className="space-y-4 leading-relaxed">
+              <p>Most businesses are introduced to technology in the wrong order.</p>
+              <p>
+                They are told to choose a platform, purchase another tool, or
+                add AI before anyone takes the time to understand how their
+                business actually operates.
+              </p>
+              <p>Then the business has to change its process to fit the technology.</p>
+              <p className="font-medium text-foreground">
+                We believe it should work the other way around.
+              </p>
+              <p>At Kivov Digital, we study how the work moves first.</p>
             </div>
+            <div>
+              <p className="font-mono text-xs font-medium tracking-[0.14em] text-foreground uppercase">
+                We look at
+              </p>
+              <ul className="mt-4 border-b border-border">
+                {lookAt.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-t border-border py-3"
+                  >
+                    <span
+                      className="mt-[0.55em] size-2 shrink-0 rounded-[2px] bg-primary"
+                      aria-hidden="true"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <p className="mt-10 max-w-3xl leading-relaxed">
+            Then we help you decide what to keep, connect, improve, automate, or
+            build.
+          </p>
+          <p className={`${bigLine} mt-5`}>
+            Because your system should fit you. You should not have to fit the
+            system.
+          </p>
+        </Reveal>
+      </section>
 
-            <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.7rem] tracking-[0.15em] uppercase text-caption">
-              <span>Three-minute check</span>
-              <span aria-hidden="true" className="text-primary">
-                ·
-              </span>
-              <span>No technical knowledge required</span>
-              <span aria-hidden="true" className="text-primary">
-                ·
-              </span>
-              <span>No call needed</span>
+      {/* Pain points */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <p className={eyebrow}>Pain points</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+            Your team may not need another tool. You may need a better flow.
+          </h2>
+          <p className="mt-5 text-lg">Does any of this sound familiar?</p>
+          <ul className="mt-8 grid gap-x-12 md:grid-cols-2">
+            {painPoints.map((item) => (
+              <li
+                key={item}
+                className="flex gap-3 border-t border-border py-4 leading-relaxed text-foreground"
+              >
+                <Check />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className={`${bigLine} mt-12`}>
+            Technology cannot fix a process that no one fully understands.
+          </p>
+          <p className="mt-4 max-w-3xl leading-relaxed">
+            Before we automate anything, we help you understand your way.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* Core philosophy */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <p className={eyebrow}>Core philosophy</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+            We do not force your business into a platform.
+          </h2>
+          <p className="mt-6">Kim’s approach is straightforward:</p>
+          <blockquote className="mt-6 max-w-[24em] border-l-[0.35rem] border-primary pl-6 font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
+            “I have to figure out my way first before I use the system.”
+          </blockquote>
+          <div className="mt-8 max-w-3xl space-y-4 leading-relaxed">
+            <p>
+              That means Kivov does not begin by recommending a particular
+              platform.
+            </p>
+            <p>
+              We first understand: your workflow · your people · your
+              priorities · your existing technology · your data · your decision
+              points · your exceptions · your goals.
+            </p>
+            <p>Then we identify the simplest practical solution.</p>
+            <p>
+              Sometimes an existing tool already fits. Sometimes your current
+              tools need to be connected. Sometimes the process needs to be
+              clarified before it is automated. Sometimes a custom system is
+              the right investment.
+            </p>
+            <p>
+              There is no point reinventing the wheel when the right solution
+              already exists.
+            </p>
+            <p className="font-medium text-foreground">
+              But there is also no reason to force your company into a system
+              that was not built for the way you work.
             </p>
           </div>
+        </Reveal>
+      </section>
 
-          <div className="rise [--rise-delay:140ms] lg:col-span-5">
+      {/* Interlude — Signature Language Bank */}
+      <Interlude className="border-t border-border">
+        “Show me how the work <Marker>actually</Marker> happens.”
+      </Interlude>
+
+      {/* Fit Check — featured green band */}
+      <section
+        id="fit-check"
+        className="band-green relative scroll-mt-16 overflow-hidden bg-background px-6 py-20 md:py-28"
+      >
+        <div className="band-depth top-[-58%] right-[-16%]" aria-hidden="true" />
+        <Reveal className="relative mx-auto max-w-6xl">
+          <p className={eyebrowOnGreen}>Free Workflow Fit Check</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
+            Where is work getting <Marker tone="leaf">stuck</Marker>?
+          </h2>
+          <div className="mt-8 grid gap-12 md:grid-cols-2">
+            <div className="space-y-4 leading-relaxed">
+              <p>
+                Take the free Workflow Fit Check to identify where repetitive
+                work, disconnected tools, or unclear processes may be costing
+                your business time.
+              </p>
+              <p>
+                In approximately three minutes, you will get a high-level
+                result showing whether your strongest opportunity may be:
+              </p>
+              <p className="font-medium text-foreground">
+                You do not need to understand AI. You only need to tell us how
+                the work happens today.
+              </p>
+            </div>
+            <ul className="content-start border-b border-border">
+              {fitCheckOutcomes.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 border-t border-border py-3"
+                >
+                  <Check tone="leaf" />
+                  <span className="text-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-10">
+            <Button
+              size="xl"
+              className="rounded-full hover:text-inkdeep"
+              render={
+                <TrackedLink
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
+                  eventProps={{
+                    source_page: "home",
+                    cta_location: "fit_check_band",
+                  }}
+                />
+              }
+            >
+              Take the Free Workflow Fit Check
+            </Button>
+            <p className={`${support} mt-6 block`}>
+              Three minutes. No technical preparation. One practical place to
+              begin.
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* What Kivov helps you do — hairline statement rows */}
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>What Kivov helps you do</p>
+          </Reveal>
+          <div className="mt-8 border-b border-border">
+            {helps.map((h, i) => (
+              <Reveal key={h.title} delay={i * 40}>
+                <div className="grid gap-3 border-t border-border py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] md:gap-12">
+                  <h3 className="font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl">
+                    {h.title}
+                  </h3>
+                  <p className="max-w-[52ch] leading-relaxed">{h.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Audit — condensed, links out */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <p className={eyebrow}>AI Workflow Audit</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+            Before you invest in technology, understand the work.
+          </h2>
+          <p className="mt-6 max-w-3xl leading-relaxed">
+            The AI Workflow Audit is a focused review of one important business
+            process. Kim studies how the work moves today, identifies where
+            time and information are being lost, and gives you a practical plan
+            for improving it.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Button
+              size="xl"
+              className="rounded-full"
+              render={
+                <TrackedLink
+                  href="/book"
+                  event="audit_cta_clicked"
+                  eventProps={{
+                    source_page: "home",
+                    cta_location: "audit_teaser",
+                  }}
+                />
+              }
+            >
+              Book the AI Workflow Audit
+            </Button>
+            <TrackedLink
+              href="/audit"
+              event="audit_cta_clicked"
+              eventProps={{
+                source_page: "home",
+                cta_location: "audit_teaser_secondary",
+              }}
+              className={linkGreen}
+            >
+              See what the audit includes
+            </TrackedLink>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* How it works — full-width hairline rows, huge numerals */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>How it works</p>
+          </Reveal>
+          <ol className="mt-8 border-t border-border">
+            {steps.map((s, i) => (
+              <li key={s.title} className="border-b border-border">
+                <Reveal
+                  delay={i * 40}
+                  className="grid grid-cols-[minmax(2.4rem,3rem)_minmax(0,1fr)] gap-x-6 py-8 md:grid-cols-[minmax(3.4rem,6rem)_minmax(0,1fr)] md:gap-x-12 md:py-11"
+                >
+                  <p
+                    className="font-display text-[clamp(2.4rem,6vw,4.2rem)] leading-none font-black text-primary"
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </p>
+                  <div>
+                    <h3 className="pt-1 font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 max-w-[60ch] leading-relaxed">{s.body}</p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Services teaser rows */}
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className={eyebrow}>Services</p>
+            <h2 className="mt-5 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+              Two ways to work together
+            </h2>
+          </Reveal>
+          <div className="mt-8 border-b border-border">
+            {services.map((s, i) => (
+              <Reveal key={s.title} delay={i * 40}>
+                <TrackedLink
+                  href="/services"
+                  event="services_teaser_clicked"
+                  eventProps={{ service: s.title }}
+                  className="group grid gap-4 border-t border-border py-10 transition-colors hover:bg-card md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-12 md:py-12"
+                >
+                  <h3 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+                    {s.title}
+                    <span
+                      className="ml-3 inline-block text-primary opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </h3>
+                  <div>
+                    <p className="max-w-[30ch] font-mono text-xs font-medium tracking-[0.12em] uppercase">
+                      {s.lead}
+                    </p>
+                    <p className="mt-4 max-w-[56ch] font-medium text-foreground">
+                      {s.note}
+                    </p>
+                  </div>
+                </TrackedLink>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Kim — short founder block with the original portrait */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+          <Reveal>
+            <p className={eyebrow}>About Kim</p>
+            <h2 className="mt-5 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+              Meet Kim Wong
+            </h2>
+            <p className="mt-4 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
+              AI Systems Architect. Software Engineer. Practical Builder.
+            </p>
+            <p className="mt-5 max-w-3xl leading-relaxed">
+              Kim Wong is the founder of Kivov Digital and a former Deloitte and
+              EY consultant with more than seven years of experience across
+              software development, enterprise integrations, cloud architecture,
+              AI, websites, portals, and custom systems.
+            </p>
+            <div className="mt-8">
+              <Button
+                size="xl"
+                className="rounded-full"
+                render={
+                  <TrackedLink
+                    href="/about"
+                    event="founder_block_clicked"
+                    eventProps={{ destination: "about" }}
+                  />
+                }
+              >
+                Learn More About Kim
+              </Button>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
             <div className="relative mx-auto w-full max-w-sm">
               <div
                 aria-hidden="true"
@@ -167,368 +565,72 @@ export default function HomePage() {
                 alt="Kim Wong, founder of Kivov Digital"
                 width={614}
                 height={1024}
-                priority
                 className="relative aspect-[4/5] w-full rounded-2xl object-cover object-[center_15%] ring-1 ring-border"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── Credibility strip ─────────────────────────────────────── */}
-      <section
-        aria-label="Background"
-        className="border-y border-border bg-card/60"
-      >
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-3 gap-y-2 px-6 py-5 text-center font-mono text-[0.7rem] tracking-[0.15em] uppercase text-caption">
-          {credibility.map((item, i) => (
-            <span key={item} className="flex items-center gap-3">
-              {i > 0 ? (
-                <span aria-hidden="true" className="text-primary">
-                  ·
-                </span>
-              ) : null}
-              {item}
-            </span>
-          ))}
-        </div>
-      </section>
+      {/* Interlude — Signature Language Bank */}
+      <Interlude className="border-t border-border">
+        “You do not need AI everywhere. You need it in the{" "}
+        <Marker>right place</Marker>.”
+      </Interlude>
 
-      {/* ── Where the time goes ───────────────────────────────────── */}
-      <section
-        aria-label="Where the time goes"
-        className="mx-auto max-w-6xl px-6 py-16 md:py-24"
-      >
-        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
-          <Reveal className="lg:col-span-5">
-            <SectionHeading
-              index="01"
-              eyebrow="Where the time goes"
-              title="Your team is working hard. The workflow may be working against them."
-            />
-            <p className="mt-5 max-w-xl leading-relaxed">
-              You may not need another platform. You may need to find out why:
+      {/* Final CTA — green band, centered */}
+      <section className="band-green relative overflow-hidden bg-background px-6 py-24 md:py-32">
+        <div className="band-depth top-[-58%] left-[-12%]" aria-hidden="true" />
+        <Reveal className="relative mx-auto max-w-6xl text-center">
+          <h2 className="mx-auto max-w-[14em] font-display text-[clamp(2.3rem,6vw,4.4rem)] leading-[1.04] font-black tracking-tight text-balance text-foreground">
+            Start with one thing.
+          </h2>
+          <div className="mx-auto mt-7 max-w-2xl space-y-4 text-lg leading-relaxed">
+            <p>
+              You do not have to change every system in your business. You do
+              not have to connect all of your data. You do not have to
+              understand every new AI tool.
             </p>
-          </Reveal>
-
-          <Reveal delay={100} className="lg:col-span-7">
-            <Card className="ring-border [--card-spacing:--spacing(7)]">
-              <CardContent>
-                <p className="font-mono text-[0.7rem] tracking-[0.2em] uppercase text-caption">
-                  Sound familiar?
-                </p>
-                <ul className="mt-5 grid gap-x-8 gap-y-3.5 sm:grid-cols-2">
-                  {frictionSigns.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-sm leading-relaxed text-foreground"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </Reveal>
-        </div>
-
-        <Reveal delay={60}>
-          <p className="mt-10 max-w-2xl leading-relaxed">
-            When work is unclear, disconnected, or dependent on one person,
-            adding AI makes the problem move faster without solving it. I start
-            with the workflow.
-          </p>
-        </Reveal>
-      </section>
-
-      {/* ── How I work: understand, then decide ───────────────────── */}
-      <section
-        aria-label="How I work"
-        className="border-y border-border bg-card/60"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <Reveal>
-            <SectionHeading
-              index="02"
-              eyebrow="How I work"
-              title="I don't begin by selling you a tool."
-            />
-          </Reveal>
-
-          <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-16">
-            <Reveal>
-              <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
-                First I understand:
-              </h3>
-              <ul className="mt-5 divide-y divide-border border-t border-border">
-                {understand.map((item) => (
-                  <li key={item} className="py-3 text-sm text-foreground">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            <Reveal delay={80}>
-              <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
-                Then we decide whether to:
-              </h3>
-              <ul className="mt-5 divide-y divide-border border-t border-border">
-                {decide.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 py-3 text-sm text-foreground"
-                  >
-                    <Check
-                      className="size-4 shrink-0 text-primary"
-                      strokeWidth={1.8}
-                      aria-hidden="true"
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+            <p>
+              Start with one process that takes too much time, creates too much
+              confusion, or depends too heavily on one person.
+            </p>
+            <p className="font-medium text-foreground">
+              We will help you understand the way it works today and determine
+              what fits next.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* ── The process: numbered editorial columns ────────────────── */}
-      <section
-        aria-label="The process"
-        className="mx-auto max-w-6xl px-6 py-16 md:py-24"
-      >
-        <Reveal>
-          <SectionHeading
-            index="03"
-            eyebrow="The process"
-            title="Understand, then fix. In that order."
-          />
-        </Reveal>
-
-        <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
-            <Reveal key={step.number} delay={i * 50}>
-              <div className="group border-t-2 border-border pt-5 transition-colors duration-200 hover:border-primary">
-                <div className="flex items-center justify-between">
-                  <span
-                    className="font-mono text-sm font-medium text-primary"
-                    aria-hidden="true"
-                  >
-                    {step.number}
-                  </span>
-                  <step.icon
-                    className="size-5 text-caption transition-colors duration-200 group-hover:text-primary"
-                    strokeWidth={1.6}
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3 className="mt-3 font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Where to start: free check vs paid audit ──────────────── */}
-      <section
-        aria-label="Where to start"
-        className="border-y border-border bg-card/60"
-      >
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <Reveal>
-            <SectionHeading
-              index="04"
-              eyebrow="Where to start"
-              title="Two ways in."
-              lead="One takes three minutes and costs nothing. The other is real consulting work on one priority workflow."
-            />
-          </Reveal>
-
-          <div className="mt-12 grid items-stretch gap-5 lg:grid-cols-2">
-            <Reveal className="h-full">
-              <Card className="h-full ring-2 ring-primary/40 [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <Badge className={`${badgeEyebrow} self-start`}>Free</Badge>
-                  <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                    Workflow Fit Check
-                  </h3>
-                  <p className="mt-5 border-t border-border pt-5 leading-relaxed">
-                    Not sure where AI would help? In about three minutes, the
-                    free check shows the type of workflow issue that may be
-                    costing your team time, and one practical place to begin.
-                  </p>
-                  <div className="mt-auto pt-8">
-                    <Button
-                      size="xl"
-                      className="w-full"
-                      render={
-                        <TrackedLink
-                          href="/fit-check"
-                          event="fit_check_cta_clicked"
-                          eventProps={{
-                            source_page: "home",
-                            cta_location: "offers",
-                          }}
-                        />
-                      }
-                    >
-                      Take the free check
-                      <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-
-            <Reveal delay={80} className="h-full">
-              <Card className="dark h-full bg-inkdeep ring-inkdeep [--card-spacing:--spacing(7)]">
-                <CardContent className="flex h-full flex-col">
-                  <Badge
-                    variant="outline"
-                    className={`${badgeEyebrow} self-start border-brand-mint/40 text-brand-mint`}
-                  >
-                    CAD $750 · Founding clients $495
-                  </Badge>
-                  <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-foreground">
-                    Workflow-First AI Audit
-                  </h3>
-                  <p className="mt-5 border-t border-border pt-5 leading-relaxed text-muted-foreground">
-                    Know something is off, but not sure what to fix? A
-                    professional review of one priority workflow: a
-                    current-state map, the bottlenecks, prioritized automation
-                    opportunities, recommendations, and a written 30-day action
-                    plan.
-                  </p>
-                  <div className="mt-auto pt-8">
-                    <Button
-                      size="xl"
-                      className="w-full"
-                      render={
-                        <TrackedLink
-                          href="/audit"
-                          event="audit_cta_clicked"
-                          eventProps={{
-                            source_page: "home",
-                            cta_location: "offers",
-                          }}
-                        />
-                      }
-                    >
-                      Explore the audit
-                      <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Founder: slim statement strip (portrait lives in hero) ── */}
-      <section
-        aria-label="Who you'll be talking to"
-        className="mx-auto max-w-6xl px-6 py-14 md:py-16"
-      >
-        <Reveal>
-          <SectionHeading
-            index="05"
-            eyebrow="Who you'll be talking to"
-            title="There's one person behind this. Me."
-          />
-          <p className="mt-5 max-w-2xl leading-relaxed">
-            Kim Wong. Six years in corporate IT consulting at Deloitte and EY.
-          </p>
-          <p className="mt-3 font-display text-xl text-foreground italic">
-            Understand the work first. Use what fits. Build only what&apos;s
-            missing.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4 text-sm">
-            <TrackedLink
-              href="/about"
-              event="founder_block_clicked"
-              eventProps={{ destination: "about" }}
-              className="rounded-sm font-medium text-primary underline-offset-4 transition-colors hover:underline"
-            >
-              More about me →
-            </TrackedLink>
-            <TrackedLink
-              href="/services"
-              event="founder_block_clicked"
-              eventProps={{ destination: "services" }}
-              className="rounded-sm font-medium text-primary underline-offset-4 transition-colors hover:underline"
-            >
-              How we work together →
-            </TrackedLink>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ── Closing CTA: dark band ────────────────────────────────── */}
-      <section className="px-6 pb-16 md:pb-24">
-        <Reveal>
-          <div className="dark relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-inkdeep px-8 py-14 text-center md:py-20">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_0%,rgba(110,231,183,0.10),transparent)]"
-            />
-            <div className="relative">
-              <Eyebrow className="mb-5 text-xs text-brand-mint">
-                Start with the workflow
-              </Eyebrow>
-              <h2 className="font-display text-3xl leading-[1.05] font-semibold tracking-tight text-foreground md:text-5xl">
-                Your business doesn&apos;t need more technology for
-                technology&apos;s sake.
-                <br />
-                <span className="font-normal italic text-white/70">
-                  It needs a system that makes the work easier, clearer, and
-                  more reliable.
-                </span>
-              </h2>
-              <Button
-                size="xl"
-                className="mt-8"
-                render={
-                  <TrackedLink
-                    href="/fit-check"
-                    event="fit_check_cta_clicked"
-                    eventProps={{
-                      source_page: "home",
-                      cta_location: "bottom_cta",
-                    }}
-                  />
-                }
-              >
-                Take the free fit check
-                <ArrowRight data-icon="inline-end" aria-hidden="true" />
-              </Button>
-              <p className="mt-6 text-sm">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+            <Button
+              size="xl"
+              className="rounded-full hover:text-inkdeep"
+              render={
                 <TrackedLink
-                  href="/audit"
-                  event="audit_cta_clicked"
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
                   eventProps={{
                     source_page: "home",
-                    cta_location: "bottom_cta",
+                    cta_location: "final_cta",
                   }}
-                  className="rounded-sm font-medium text-brand-mint underline-offset-4 transition-colors hover:underline"
-                >
-                  Explore the AI audit →
-                </TrackedLink>
-              </p>
-            </div>
+                />
+              }
+            >
+              Take the Free Workflow Fit Check
+            </Button>
+            <TrackedLink
+              href="/book"
+              event="audit_cta_clicked"
+              eventProps={{ source_page: "home", cta_location: "final_cta" }}
+              className={linkLeaf}
+            >
+              Book the AI Workflow Audit
+            </TrackedLink>
           </div>
+          <p className={`${support} mt-8 block`}>
+            Understand the work. Use what fits. Build what is missing.
+          </p>
         </Reveal>
       </section>
-    </div>
+    </>
   );
 }
