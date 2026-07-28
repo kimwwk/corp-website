@@ -1,24 +1,25 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Work_Sans } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics-provider";
 import "./globals.css";
 
-const fraunces = Fraunces({
+/* Green Ledger type system: Archivo (display), Work Sans (body), IBM Plex
+   Mono (labels). globals.css @theme maps roles by literal family name. */
+const archivo = Archivo({
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  variable: "--font-fraunces",
+  variable: "--font-archivo",
 });
 
-const inter = Inter({
+const workSans = Work_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-work-sans",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
 });
 
 const GA_ID = "G-9VVXS7BY20";
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kivov.work"),
   title: "Kivov Digital — Workflow-First AI for Small Business",
   description:
-    "AI should fit your business, not force your business to fit the tool. I help small and mid-sized teams fix repetitive, disconnected workflows with practical AI, automation, integrations, and custom software.",
+    "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
   verification: {
     google: "V86yYgZYa0b2uAqQxbhb9teevK2zoUKKHVYPdT3IZHo",
   },
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Kivov Digital — Workflow-First AI for Small Business",
     description:
-      "AI should fit your business, not force your business to fit the tool. I help small and mid-sized teams fix repetitive, disconnected workflows with practical AI, automation, integrations, and custom software.",
+      "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
     type: "website",
   },
   twitter: {
@@ -53,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${workSans.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         {children}

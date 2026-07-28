@@ -23,7 +23,9 @@ export function SiteFooter() {
               height={50}
               className="h-5 w-auto opacity-80"
             />
-            <p className="text-sm text-caption">© 2026 Kivov Digital</p>
+            <p className="font-mono text-xs tracking-[0.1em] text-caption uppercase">
+              © 2026 Kivov Digital · Toronto
+            </p>
           </div>
           <nav
             aria-label="Footer navigation"
@@ -33,7 +35,7 @@ export function SiteFooter() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="rounded-sm text-sm text-caption transition-colors hover:text-foreground"
+                className="rounded-sm py-2 text-sm text-caption underline-offset-[5px] transition-colors hover:text-foreground hover:underline hover:decoration-primary hover:decoration-2"
               >
                 {link.label}
               </Link>

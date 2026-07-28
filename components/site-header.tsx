@@ -65,9 +65,9 @@ export function SiteHeader() {
                       render={<Link href={link.href} />}
                       aria-current={pathname === link.href ? "page" : undefined}
                       className={cn(
-                        "px-3 py-2 font-medium",
+                        "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2",
                         pathname === link.href
-                          ? "text-foreground"
+                          ? "text-foreground underline decoration-primary decoration-2"
                           : "text-muted-foreground hover:text-foreground",
                       )}
                     >
@@ -79,11 +79,11 @@ export function SiteHeader() {
             </NavigationMenu>
             <Button
               size="lg"
-              className="rounded-xl px-5 font-semibold"
+              className="rounded-full px-5 font-semibold"
               render={<Link href="/fit-check" />}
               aria-current={pathname === "/fit-check" ? "page" : undefined}
             >
-              Free fit check
+              Free Fit Check
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
             </Button>
           </div>
@@ -132,12 +132,12 @@ export function SiteHeader() {
                 ))}
                 <Button
                   size="xl"
-                  className="mt-3 w-full"
+                  className="mt-3 w-full rounded-full"
                   render={<Link href="/fit-check" />}
                   aria-current={pathname === "/fit-check" ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Free fit check
+                  Free Fit Check
                   <ArrowRight data-icon="inline-end" aria-hidden="true" />
                 </Button>
               </nav>
