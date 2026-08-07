@@ -4,7 +4,8 @@ import { ArrowRight, Check as CheckIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
-import { TrackedLink } from "@/components/tracked-link";
+import { TrackedExternalLink, TrackedLink } from "@/components/tracked-link";
+import { AUDIT_PAYMENT_URL } from "@/lib/payments";
 
 /*
  * AI Workflow Audit — the paid entry offer (002 split, report 2026-07-26)
@@ -125,14 +126,18 @@ export default function AuditPage() {
                 size="xl"
                 className="rounded-full"
                 render={
-                  <TrackedLink
-                    href="/contact?interest=audit"
+                  <TrackedExternalLink
+                    href={AUDIT_PAYMENT_URL}
                     event="audit_booking_clicked"
-                    eventProps={{ source_page: "audit", cta_location: "hero" }}
+                    eventProps={{
+                      source_page: "audit",
+                      cta_location: "hero",
+                      destination: "stripe_payment_link",
+                    }}
                   />
                 }
               >
-                Book the AI Workflow Audit
+                Get your audit
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
               <TrackedLink
@@ -157,8 +162,11 @@ export default function AuditPage() {
             <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(16,20,26,.02),0_16px_40px_-24px_rgba(16,20,26,.22)] [--card-spacing:--spacing(7)]">
               <CardContent>
                 <p className={eyebrow}>The audit</p>
-                <div className="mt-5 flex items-baseline gap-2">
+                <div className="mt-5 flex items-baseline gap-3">
                   <span className="font-display text-5xl font-black text-foreground tabular-nums">
+                    $495
+                  </span>
+                  <span className="font-display text-2xl font-bold text-caption tabular-nums line-through decoration-2">
                     $750
                   </span>
                   <span className="font-mono text-xs tracking-[0.14em] text-caption uppercase">
@@ -167,7 +175,7 @@ export default function AuditPage() {
                 </div>
                 <p className="mt-4 border-t border-border pt-4 leading-relaxed">
                   <span className="font-medium text-foreground">
-                    Founding-client price CAD $495
+                    Founding-client price
                   </span>{" "}
                   for the first five audit clients.
                 </p>
@@ -349,17 +357,18 @@ export default function AuditPage() {
               size="xl"
               className="rounded-full hover:text-inkdeep"
               render={
-                <TrackedLink
-                  href="/contact?interest=audit"
+                <TrackedExternalLink
+                  href={AUDIT_PAYMENT_URL}
                   event="audit_booking_clicked"
                   eventProps={{
                     source_page: "audit",
                     cta_location: "bottom_cta",
+                    destination: "stripe_payment_link",
                   }}
                 />
               }
             >
-              Book the AI Workflow Audit
+              Get your audit — $495
             </Button>
             <TrackedLink
               href="/fit-check"
