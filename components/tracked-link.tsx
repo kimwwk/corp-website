@@ -29,3 +29,28 @@ export function TrackedLink({
     />
   );
 }
+
+/**
+ * Anchor variant for external destinations (e.g. the Stripe payment link).
+ * Same PostHog capture, but a plain <a> — next/link's prefetching only
+ * applies to internal routes.
+ */
+export function TrackedExternalLink({
+  event,
+  eventProps,
+  onClick,
+  ...props
+}: React.ComponentProps<"a"> & {
+  event: string;
+  eventProps?: Record<string, unknown>;
+}) {
+  return (
+    <a
+      {...props}
+      onClick={(e) => {
+        onClick?.(e);
+        capture(event, eventProps);
+      }}
+    />
+  );
+}

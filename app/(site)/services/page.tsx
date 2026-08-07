@@ -63,7 +63,7 @@ const rungs = [
     featured: false,
     name: "Workflow-First AI Audit",
     desc: "A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.",
-    meta: "CAD $750 · Founding $495",
+    meta: "Founding $495",
     cta: "Explore the audit",
     href: "/audit",
     event: "audit_cta_clicked",
@@ -84,8 +84,8 @@ const rungs = [
     name: "Build For You",
     desc: "Every Build For You project begins with discovery or a completed audit. Scoped and priced per project.",
     meta: "Per project",
-    cta: "Get in touch",
-    href: "/contact?interest=build-for-you",
+    cta: "Book a call",
+    href: "/book",
     event: "service_inquiry_clicked",
     eventProps: { service_tier: "do_it_for_you" },
   },
@@ -249,11 +249,14 @@ export default function ServicesPage() {
                 <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
                   Workflow-First AI Audit
                 </h3>
-                <p className="mt-4 flex items-baseline gap-2">
+                <p className="mt-4 flex items-baseline gap-2.5">
                   <span className="font-display text-4xl font-black text-foreground tabular-nums">
+                    $495
+                  </span>
+                  <span className="font-display text-xl font-bold text-caption tabular-nums line-through decoration-[1.5px]">
                     $750
                   </span>
-                  <span className={priceUnit}>CAD · Founding $495</span>
+                  <span className={priceUnit}>CAD</span>
                 </p>
                 <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
                   A professional review of one priority workflow: map,
@@ -424,13 +427,13 @@ export default function ServicesPage() {
                     className="w-full rounded-full hover:text-inkdeep"
                     render={
                       <TrackedLink
-                        href="/contact?interest=build-for-you"
+                        href="/book"
                         event="service_inquiry_clicked"
                         eventProps={{ service_tier: "do_it_for_you" }}
                       />
                     }
                   >
-                    Get in touch
+                    Book a call
                   </Button>
                 </div>
               </div>
