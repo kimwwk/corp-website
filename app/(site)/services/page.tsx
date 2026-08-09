@@ -20,7 +20,7 @@ import { TrackedLink } from "@/components/tracked-link";
 export const metadata: Metadata = {
   title: "Services — Kivov Digital",
   description:
-    "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You at $1,000/mo or Build For You priced per project.",
+    "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You at $1,250/mo or Build For You at $5,500 per project.",
   openGraph: {
     title: "Services — Kivov Digital",
     description:
@@ -73,7 +73,7 @@ const rungs = [
     featured: false,
     name: "Build With You",
     desc: "Two 45-minute strategy calls a month — one every two weeks, hands-on, with always-on text support in between.",
-    meta: "$1,000 / mo",
+    meta: "$1,250 / mo",
     cta: "Get in touch",
     href: "/contact?interest=build-with-you",
     event: "service_inquiry_clicked",
@@ -82,8 +82,8 @@ const rungs = [
   {
     featured: false,
     name: "Build For You",
-    desc: "Every Build For You project begins with discovery or a completed audit. Scoped and priced per project.",
-    meta: "Per project",
+    desc: "One workflow taken end-to-end — architecture, implementation, testing, team handoff, and a 30-day stabilization period. Begins with discovery or a completed audit.",
+    meta: "$5,500 / project",
     cta: "Book a call",
     href: "/book",
     event: "service_inquiry_clicked",
@@ -126,8 +126,43 @@ const faqs = [
         keeps you in the driver&apos;s seat: we coach, build Claude skills, and
         automate alongside your team on a monthly rhythm.{" "}
         <span className="font-medium text-foreground">Build For You</span> hands
-        the build to me, scoped per project. Every Build For You project starts
-        with discovery or a completed audit.
+        the build to me — one workflow taken end-to-end at a flat project
+        price. Every Build For You project starts with discovery or a
+        completed audit.
+      </p>
+    ),
+  },
+  {
+    value: "with-you-build",
+    question: "What do we actually build in Build With You?",
+    answer: (
+      <p>
+        Whatever the workflow needs. On our calls we build custom Claude
+        skills around the workflows you screen-share, automate the repetitive
+        parts, and bring in off-the-shelf tools when one already solves the
+        problem. There&apos;s no fixed menu — if your workflow calls for
+        something else, that&apos;s what we build.
+      </p>
+    ),
+  },
+  {
+    value: "for-you-scope",
+    question: "What does the Build For You package actually cover?",
+    answer: (
+      <p>
+        Every Build For You project begins with discovery or a completed
+        audit. Two tracks come out of it:{" "}
+        <span className="font-medium text-foreground">AI &amp; automation</span>
+        , built around the workflow we mapped together, and{" "}
+        <span className="font-medium text-foreground">
+          custom software development
+        </span>
+        , when off-the-shelf won&apos;t fit. The package covers the first
+        track: one end-to-end workflow with up to roughly two core system
+        integrations — AI and automation architecture, implementation,
+        testing, exception handling, team handoff, and a 30-day stabilization
+        period. Custom software builds, or anything bigger than one workflow,
+        are scoped and quoted separately after discovery.
       </p>
     ),
   },
@@ -136,7 +171,7 @@ const faqs = [
     question: "How does billing work on the monthly package?",
     answer: (
       <p>
-        Build With You is $1,000, billed every 4 weeks — that covers your two
+        Build With You is $1,250, billed every 4 weeks — that covers your two
         bi-weekly strategy calls plus always-on text support and your
         documentation hub in between.
       </p>
@@ -310,7 +345,7 @@ export default function ServicesPage() {
                 </h3>
                 <p className="mt-4 flex items-baseline gap-2">
                   <span className="font-display text-4xl font-black text-foreground tabular-nums">
-                    $1,000
+                    $1,250
                   </span>
                   <span className={priceUnit}>/ month</span>
                 </p>
@@ -332,22 +367,26 @@ export default function ServicesPage() {
                     <Bullet />
                     <span>
                       <span className="font-medium text-foreground">
-                        We build custom Claude skills
+                        You take away AI &amp; agent know-how
                       </span>{" "}
-                      around those workflows.
+                      that&apos;s relevant to your business.
                     </span>
                   </li>
                   <li className="flex gap-3 text-sm">
                     <Bullet />
                     <span>
                       <span className="font-medium text-foreground">
-                        We automate the repetitive parts
+                        You automate your repetitive workflow
                       </span>{" "}
-                      of your workflow.
+                      in a way you can replicate without me.
                     </span>
                   </li>
                 </ul>
                 <p className="mt-4 text-sm leading-relaxed">
+                  <span className="font-medium text-foreground">Best for:</span>{" "}
+                  teams that want to stay hands-on and learn as we build.
+                </p>
+                <p className="mt-3 text-sm leading-relaxed">
                   <span className="font-medium text-foreground">
                     100% money-back guarantee
                   </span>{" "}
@@ -386,31 +425,42 @@ export default function ServicesPage() {
                   Build For You
                 </h3>
                 <p className="mt-4 flex items-baseline gap-2">
-                  <span className="font-display text-4xl font-black text-foreground">
-                    Per project
+                  <span className="font-display text-4xl font-black text-foreground tabular-nums">
+                    $5,500
                   </span>
+                  <span className={priceUnit}>/ project</span>
                 </p>
                 <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
                   Every Build For You project begins with discovery or a
-                  completed audit. Two tracks come out of it:
+                  completed audit.
                 </p>
                 <ul className="mt-4 space-y-2">
                   <li className="flex gap-3 text-sm">
                     <Bullet tone="leaf" />
                     <span>
                       <span className="font-medium text-foreground">
-                        AI &amp; automation
+                        One end-to-end workflow
                       </span>
-                      , built around the workflow we mapped together.
+                      , with up to roughly two core system integrations.
                     </span>
                   </li>
                   <li className="flex gap-3 text-sm">
                     <Bullet tone="leaf" />
                     <span>
                       <span className="font-medium text-foreground">
-                        Custom software development
+                        AI &amp; automation architecture
+                      </span>{" "}
+                      — implementation, testing, and exception handling
+                      included.
+                    </span>
+                  </li>
+                  <li className="flex gap-3 text-sm">
+                    <Bullet tone="leaf" />
+                    <span>
+                      <span className="font-medium text-foreground">
+                        Team handoff &amp; 30-day stabilization
                       </span>
-                      , when off-the-shelf won&apos;t fit.
+                      , so it keeps running after I step back.
                     </span>
                   </li>
                 </ul>
@@ -419,7 +469,7 @@ export default function ServicesPage() {
                   teams that want the build handed over, not shared.
                 </p>
                 <p className="mt-3 text-xs text-caption">
-                  Scoped and priced per project after discovery.
+                  Larger scopes quoted separately after discovery.
                 </p>
                 <div className="mt-auto pt-6">
                   <Button
