@@ -32,6 +32,10 @@ const navLinks = [
 
 export function SiteHeader() {
   const pathname = usePathname();
+  // trailingSlash is on (static export), so the pathname is "/showcase/"
+  // while nav hrefs are "/showcase" — strip it before comparing.
+  const currentPath = pathname.replace(/\/+$/, "") || "/";
+  const isActive = (href: string) => currentPath === href;
   // Every link inside the sheet closes it via onClick, so no
   // route-change effect is needed.
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -64,10 +68,10 @@ export function SiteHeader() {
                   <NavigationMenuItem key={link.label}>
                     <NavigationMenuLink
                       render={<Link href={link.href} />}
-                      aria-current={pathname === link.href ? "page" : undefined}
+                      aria-current={isActive(link.href) ? "page" : undefined}
                       className={cn(
                         "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2",
-                        pathname === link.href
+                        isActive(link.href)
                           ? "text-foreground underline decoration-primary decoration-2"
                           : "text-muted-foreground hover:text-foreground",
                       )}
@@ -82,7 +86,7 @@ export function SiteHeader() {
               size="lg"
               className="rounded-full px-5 font-semibold"
               render={<Link href="/fit-check" />}
-              aria-current={pathname === "/fit-check" ? "page" : undefined}
+              aria-current={isActive("/fit-check") ? "page" : undefined}
             >
               Free Fit Check
               <ArrowRight data-icon="inline-end" aria-hidden="true" />
@@ -119,11 +123,11 @@ export function SiteHeader() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    aria-current={pathname === link.href ? "page" : undefined}
+                    aria-current={isActive(link.href) ? "page" : undefined}
                     onClick={() => setMobileOpen(false)}
                     className={cn(
                       "rounded-lg px-3 py-3 text-sm font-medium transition-colors",
-                      pathname === link.href
+                      isActive(link.href)
                         ? "bg-muted text-foreground"
                         : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
@@ -135,7 +139,7 @@ export function SiteHeader() {
                   size="xl"
                   className="mt-3 w-full rounded-full"
                   render={<Link href="/fit-check" />}
-                  aria-current={pathname === "/fit-check" ? "page" : undefined}
+                  aria-current={isActive("/fit-check") ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
                   Free Fit Check
