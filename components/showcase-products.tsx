@@ -8,18 +8,16 @@ import { capture } from "@/lib/analytics";
 const products = [
   {
     title: "sprinting.run",
-    tagline: "Periodization Software for Sprint Coaches",
     description:
-      "Plan periodized sprint training, prescribe sets against Training Max with live effort %, and run AI session planning — built for speed and power, not generic gym logging.",
+      "Periodization software for sprint coaches, with AI session planning built in.",
     status: "Live on Web",
     href: "https://sprinting.run",
     icon: "/sprinting-run-icon.png",
   },
   {
     title: "our-pot",
-    tagline: "AI-Assisted Expense Tracking",
     description:
-      "Your AI assistant for the household pot. Tell it what you spent, review the proposed entry, approve.",
+      "Household expense tracking. Say what you spent, review the entry, approve.",
     status: "Available on Android",
     href: "https://our-pot-site.kivov-digital.workers.dev/",
     icon: "/our-pot-icon.png",
@@ -63,9 +61,6 @@ export function ShowcaseProducts() {
                       {product.status}
                     </span>
                   </div>
-                  <p className="mb-1 text-sm font-medium text-foreground">
-                    {product.tagline}
-                  </p>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {product.description}
                   </p>

@@ -25,6 +25,7 @@ import {
 const navLinks = [
   { label: "Services", href: "/services" },
   { label: "AI Audit", href: "/audit" },
+  { label: "Showcase", href: "/showcase" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
