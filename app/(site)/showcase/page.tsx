@@ -194,11 +194,11 @@ export default function ShowcasePage() {
       {/* Closing CTA band */}
       <section className="band-green relative overflow-hidden bg-background px-6 py-20 md:py-28">
         <div className="band-depth top-[-58%] left-[-12%]" aria-hidden="true" />
-        <Reveal className="relative mx-auto max-w-6xl text-center">
-          <h2 className="mx-auto max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
+        <Reveal className="relative mx-auto max-w-6xl">
+          <h2 className="max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
             Want this for one of your processes?
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed">
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed">
             Start with one process that takes too much time or depends on one
             person. We will help you see what fits.
           </p>
