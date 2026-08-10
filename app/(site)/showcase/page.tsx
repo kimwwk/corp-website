@@ -81,7 +81,7 @@ const track = [
   },
   {
     title: "Conversational AI",
-    body: "Agents that talk with your customers naturally, by text or voice: qualify, answer, book. The category GoHighLevel just shipped as its AI Employee.",
+    body: "Agents that talk with your customers naturally, by text or voice: qualify, answer, book.",
   },
 ];
 
