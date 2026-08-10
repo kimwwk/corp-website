@@ -36,7 +36,7 @@ const rowHeading =
 
 const cases = [
   {
-    title: "The follow-up writes itself.",
+    title: "Executive-assistant work",
     lead: (
       <>
         After every call, AI drafts the follow-up email{" "}
@@ -55,7 +55,7 @@ const cases = [
     pullLine: "The follow-up email is just the first thing we taught it.",
   },
   {
-    title: "Nobody types.",
+    title: "File and document management",
     lead: (
       <>
         Built for a $10M+ revenue company. Vendor invoices arrive as PDFs,
