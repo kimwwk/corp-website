@@ -183,8 +183,7 @@ export default function ShowcasePage() {
             We ship products too.
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-            Both built end to end, and in use today. Have an idea or an
-            audience? We can build one together.
+            We build premium, high-ticket websites.
           </p>
           <div className="mt-8">
             <ShowcaseProducts />
