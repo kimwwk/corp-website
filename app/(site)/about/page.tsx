@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
 import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
-import { TrackedLink } from "@/components/tracked-link";
+import {
+  Band,
+  CtaRow,
+  LedgerList,
+  MonoLabel,
+  Section,
+} from "@/components/sections";
 
 /*
  * About Kim — the identity page of the 002 split (report 2026-07-26): bio,
@@ -27,13 +32,6 @@ export const metadata: Metadata = {
   },
 };
 
-const eyebrow =
-  "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
-const eyebrowOnGreen =
-  "font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase";
-const linkLeaf =
-  "inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-brand-mint decoration-2 underline-offset-[7px] transition-colors hover:text-caption";
-
 const thinkAbout = [
   "Who owns the information",
   "What the technology can access",
@@ -51,13 +49,13 @@ export default function AboutPage() {
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <Reveal>
-            <p className={eyebrow}>About Kim</p>
+            <MonoLabel>About Kim</MonoLabel>
             <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground">
               Meet <Marker>Kim Wong</Marker>
             </h1>
-            <p className="mt-6 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
+            <MonoLabel className="mt-6">
               AI Systems Architect. Software Engineer. Practical Builder.
-            </p>
+            </MonoLabel>
             <div className="mt-8 max-w-3xl space-y-4 leading-relaxed">
               <p>
                 Kim Wong is the founder of Kivov Digital and a former Deloitte
@@ -162,123 +160,94 @@ export default function AboutPage() {
       </section>
 
       {/* Kim's difference */}
-      <section className="border-t border-border px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+      <Section
+        staggered
+        eyebrow="Kim’s difference"
+        title="Practical systems. Greater ownership."
+      >
+        <div className="mt-8 grid gap-12 md:grid-cols-2">
           <Reveal>
-            <p className={eyebrow}>Kim’s difference</p>
-            <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
-              Practical systems. Greater ownership.
-            </h2>
+            <div className="space-y-4 leading-relaxed">
+              <p>Kim believes that the future is not only about using more AI.</p>
+              <p>
+                It is about businesses having systems that understand their
+                way of working, reflect their knowledge, and help them
+                operate with greater independence.
+              </p>
+              <p>
+                She has built her own AI agents, financial tools, home
+                automations, and technology environment around this belief.
+              </p>
+              <p>Her philosophy is:</p>
+            </div>
+            <blockquote className="mt-6 border-l-[0.35rem] border-primary pl-6 font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
+              <span className="block">My data is mine.</span>
+              <span className="block">My workflow is mine.</span>
+              <span className="block">The system should serve the work.</span>
+            </blockquote>
           </Reveal>
-          <div className="mt-8 grid gap-12 md:grid-cols-2">
-            <Reveal>
-              <div className="space-y-4 leading-relaxed">
-                <p>Kim believes that the future is not only about using more AI.</p>
-                <p>
-                  It is about businesses having systems that understand their
-                  way of working, reflect their knowledge, and help them
-                  operate with greater independence.
-                </p>
-                <p>
-                  She has built her own AI agents, financial tools, home
-                  automations, and technology environment around this belief.
-                </p>
-                <p>Her philosophy is:</p>
-              </div>
-              <blockquote className="mt-6 border-l-[0.35rem] border-primary pl-6 font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
-                <span className="block">My data is mine.</span>
-                <span className="block">My workflow is mine.</span>
-                <span className="block">The system should serve the work.</span>
-              </blockquote>
-            </Reveal>
-            <Reveal delay={80}>
-              <p className="font-mono text-xs font-medium tracking-[0.14em] text-foreground uppercase">
-                Kivov helps clients think carefully about
-              </p>
-              <ul className="mt-4 border-b border-border">
-                {thinkAbout.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 border-t border-border py-3"
-                  >
-                    <span
-                      className="mt-[0.55em] size-2 shrink-0 rounded-[2px] bg-primary"
-                      aria-hidden="true"
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-6 font-medium text-foreground">
-                You do not need to connect everything on the first day. You can
-                start with one process, see what fits, and build from there.
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={80}>
+            <MonoLabel tone="ink">
+              Kivov helps clients think carefully about
+            </MonoLabel>
+            <LedgerList items={thinkAbout} className="mt-4" />
+            <p className="mt-6 font-medium text-foreground">
+              You do not need to connect everything on the first day. You can
+              start with one process, see what fits, and build from there.
+            </p>
+          </Reveal>
         </div>
-      </section>
+      </Section>
 
       {/* Founder's point of view — green band */}
-      <section className="band-green relative overflow-hidden bg-background px-6 py-20 md:py-28">
-        <div className="band-depth top-[-58%] right-[-16%]" aria-hidden="true" />
-        <Reveal className="relative mx-auto max-w-6xl">
-          <p className={eyebrowOnGreen}>Founder’s point of view</p>
-          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
+      <Band
+        eyebrow="Founder’s point of view"
+        title={
+          <>
             Everyone will have their <Marker tone="leaf">own system</Marker>.
-          </h2>
-          <div className="mt-6 max-w-3xl space-y-4 leading-relaxed">
-            <p>
-              Kim believes the future of AI will become increasingly personal
-              and specific.
-            </p>
-            <p>
-              Businesses will not simply subscribe to generic tools. They will
-              build systems that understand: how they make decisions · how
-              they communicate · how their team works · what information
-              matters · what standards they follow · what they want to
-              protect · what ‘done’ means inside their organization.
-            </p>
-            <p>
-              That future does not have to begin with a large custom software
-              project.
-            </p>
-          </div>
-          <p className="mt-8 max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
-            It can begin with one workflow. One repeated task. One broken
-            handoff. One place where your team knows there has to be a better
-            way.
+          </>
+        }
+        depth="top-right"
+      >
+        <div className="mt-6 max-w-3xl space-y-4 leading-relaxed">
+          <p>
+            Kim believes the future of AI will become increasingly personal
+            and specific.
           </p>
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-            <Button
-              size="xl"
-              className="rounded-full hover:text-inkdeep"
-              render={
-                <TrackedLink
-                  href="/fit-check"
-                  event="fit_check_cta_clicked"
-                  eventProps={{
-                    source_page: "about",
-                    cta_location: "founder_band",
-                  }}
-                />
-              }
-            >
-              Take the Free Workflow Fit Check
-            </Button>
-            <TrackedLink
-              href="/audit"
-              event="audit_cta_clicked"
-              eventProps={{
-                source_page: "about",
-                cta_location: "founder_band",
-              }}
-              className={linkLeaf}
-            >
-              Explore the AI Workflow Audit
-            </TrackedLink>
-          </div>
-        </Reveal>
-      </section>
+          <p>
+            Businesses will not simply subscribe to generic tools. They will
+            build systems that understand: how they make decisions · how
+            they communicate · how their team works · what information
+            matters · what standards they follow · what they want to
+            protect · what ‘done’ means inside their organization.
+          </p>
+          <p>
+            That future does not have to begin with a large custom software
+            project.
+          </p>
+        </div>
+        <p className="mt-8 max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
+          It can begin with one workflow. One repeated task. One broken
+          handoff. One place where your team knows there has to be a better
+          way.
+        </p>
+        <CtaRow
+          tone="band"
+          className="mt-10"
+          primary={{
+            label: "Take the Free Workflow Fit Check",
+            href: "/fit-check",
+            event: "fit_check_cta_clicked",
+            eventProps: { source_page: "about", cta_location: "founder_band" },
+          }}
+          secondary={{
+            label: "Explore the AI Workflow Audit",
+            href: "/audit",
+            event: "audit_cta_clicked",
+            eventProps: { source_page: "about", cta_location: "founder_band" },
+          }}
+        />
+      </Band>
     </>
   );
 }

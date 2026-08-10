@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { BookingWidget } from "@/components/booking-widget";
+import { TrackedLink } from "@/components/tracked-link";
 
 export const metadata: Metadata = {
   title: "Book a Call — Kivov Digital",
@@ -33,12 +33,14 @@ export default function BookPage() {
         <p className="text-lg leading-relaxed">
           The fastest way to talk it through, live on Zoom. If you&apos;re
           exploring, start with the{" "}
-          <Link
+          <TrackedLink
             href="/fit-check"
+            event="fit_check_cta_clicked"
+            eventProps={{ source_page: "book", cta_location: "intro" }}
             className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
           >
             free fit check
-          </Link>{" "}
+          </TrackedLink>{" "}
           instead: you&apos;ll get further, faster.
         </p>
       </div>
@@ -48,12 +50,14 @@ export default function BookPage() {
       <div className="mt-12 max-w-3xl">
         <p className="text-sm text-caption">
           Prefer to write a few lines first instead?{" "}
-          <Link
+          <TrackedLink
             href="/contact"
+            event="contact_cta_clicked"
+            eventProps={{ source_page: "book", cta_location: "footer_note" }}
             className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
           >
             Send an inquiry
-          </Link>{" "}
+          </TrackedLink>{" "}
           and I&apos;ll reply within one business day.
         </p>
       </div>

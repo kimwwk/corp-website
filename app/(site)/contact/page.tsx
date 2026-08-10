@@ -1,10 +1,10 @@
 import * as React from "react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Mail } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/contact-form";
+import { TrackedLink } from "@/components/tracked-link";
 
 export const metadata: Metadata = {
   title: "Contact — Kivov Digital",
@@ -79,19 +79,23 @@ export default function ContactPage() {
           </p>
           <p className="mb-12 text-lg leading-relaxed">
             Not sure what to ask for yet? Take the{" "}
-            <Link
+            <TrackedLink
               href="/fit-check"
+              event="fit_check_cta_clicked"
+              eventProps={{ source_page: "contact", cta_location: "intro" }}
               className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
               free fit check
-            </Link>{" "}
+            </TrackedLink>{" "}
             first, or read how the{" "}
-            <Link
+            <TrackedLink
               href="/audit"
+              event="audit_cta_clicked"
+              eventProps={{ source_page: "contact", cta_location: "intro" }}
               className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
               Workflow-First AI Audit
-            </Link>{" "}
+            </TrackedLink>{" "}
             works.
           </p>
 
@@ -134,12 +138,14 @@ export default function ContactPage() {
             </h2>
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
               Would rather talk it through?{" "}
-              <Link
+              <TrackedLink
                 href="/book"
+                event="booking_cta_clicked"
+                eventProps={{ source_page: "contact", cta_location: "aside" }}
                 className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
               >
                 Book a call
-              </Link>{" "}
+              </TrackedLink>{" "}
               and pick a time directly.
             </p>
             <Card className="ring-border [--card-spacing:--spacing(5)]">
