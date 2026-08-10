@@ -23,7 +23,7 @@ export function SiteFooter() {
               height={50}
               className="h-5 w-auto opacity-80"
             />
-            <p className="font-mono text-xs tracking-[0.1em] text-caption uppercase">
+            <p className="font-mono text-xs tracking-[0.14em] text-caption uppercase">
               © 2026 Kivov Digital · Toronto
             </p>
           </div>

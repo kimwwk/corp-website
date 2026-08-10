@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Interlude } from "@/components/interlude";
 import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
+import {
+  Band,
+  CtaRow,
+  MonoLabel,
+  Section,
+  StatementRows,
+  Support,
+} from "@/components/sections";
 import { ShowcaseProducts } from "@/components/showcase-products";
-import { TrackedLink } from "@/components/tracked-link";
 import { cn } from "@/lib/utils";
 
 /*
@@ -28,8 +34,6 @@ export const metadata: Metadata = {
   },
 };
 
-const eyebrow =
-  "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
 /* Home steps-h3 recipe — the pull-line and ledger-row headings share it. */
 const rowHeading =
   "font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl";
@@ -91,7 +95,7 @@ export default function ShowcasePage() {
       {/* Hero */}
       <section className="border-b border-border px-6 py-16 md:py-24">
         <Reveal className="mx-auto max-w-6xl">
-          <p className={eyebrow}>Showcase</p>
+          <MonoLabel>Showcase</MonoLabel>
           <h1 className="mt-6 font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground">
             Systems we&apos;ve built, <Marker>in use today</Marker>.
           </h1>
@@ -103,52 +107,49 @@ export default function ShowcasePage() {
 
       {/* Cases */}
       {cases.map((c, i) => (
-        <section
+        <Section
           key={c.title}
-          className={cn("px-6 py-20 md:py-28", i > 0 && "border-t border-border")}
+          flush={i === 0}
+          eyebrow={`Case ${String(i + 1).padStart(2, "0")}`}
+          title={c.title}
         >
-          <Reveal className="mx-auto max-w-6xl">
-            <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
-              {c.title}
-            </h2>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed">{c.lead}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-5">
-              <span className="font-medium text-caption">{c.from}</span>
-              <ArrowRight
-                className="size-5 shrink-0 text-primary"
-                aria-hidden="true"
-              />
-              <span className="rounded-lg bg-secondary px-4 py-1.5 font-semibold text-foreground">
-                {c.to}
-              </span>
-            </div>
-            <div className="grid border-b border-border md:grid-cols-3">
-              {c.stats.map((s, j) => (
-                <div
-                  key={s.label + j}
-                  className={cn(
-                    "py-5",
-                    j > 0 &&
-                      "border-t border-border md:border-t-0 md:border-l md:pl-6",
-                  )}
-                >
-                  <p className="font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-black tracking-tight text-primary tabular-nums">
-                    {s.n}
-                  </p>
-                  <p className="mt-2 font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-4 font-mono text-xs font-medium text-caption">
-              {c.foot}
-            </p>
-            {c.pullLine ? (
-              <p className={`${rowHeading} mt-10 max-w-[30em]`}>{c.pullLine}</p>
-            ) : null}
-          </Reveal>
-        </section>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed">{c.lead}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-5">
+            <span className="font-medium text-caption">{c.from}</span>
+            <ArrowRight
+              className="size-5 shrink-0 text-primary"
+              aria-hidden="true"
+            />
+            <span className="rounded-lg bg-secondary px-4 py-1.5 font-semibold text-foreground">
+              {c.to}
+            </span>
+          </div>
+          <div className="grid border-b border-border md:grid-cols-3">
+            {c.stats.map((s, j) => (
+              <div
+                key={s.label + j}
+                className={cn(
+                  "py-5",
+                  j > 0 &&
+                    "border-t border-border md:border-t-0 md:border-l md:pl-6",
+                )}
+              >
+                <p className="font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-black tracking-tight text-primary tabular-nums">
+                  {s.n}
+                </p>
+                <p className="mt-2 font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 font-mono text-xs font-medium text-caption">
+            {c.foot}
+          </p>
+          {c.pullLine ? (
+            <p className={`${rowHeading} mt-10 max-w-[30em]`}>{c.pullLine}</p>
+          ) : null}
+        </Section>
       ))}
 
       {/* Interlude — Signature Language Bank */}
@@ -158,74 +159,42 @@ export default function ShowcasePage() {
       </Interlude>
 
       {/* Before Kivov */}
-      <section className="border-t border-border px-6 py-20 md:py-28">
-        <Reveal className="mx-auto max-w-6xl">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
-            Built before Kivov. Still running.
-          </h2>
-          <div className="mt-8 border-b border-border">
-            {track.map((t, i) => (
-              <Reveal key={t.title} delay={i * 40}>
-                <div className="grid gap-3 border-t border-border py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] md:gap-12">
-                  <h3 className={rowHeading}>{t.title}</h3>
-                  <p className="max-w-[52ch] leading-relaxed">{t.body}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </Reveal>
-      </section>
+      <Section
+        staggered
+        eyebrow="Track record"
+        title="Built before Kivov. Still running."
+      >
+        <StatementRows rows={track} />
+      </Section>
 
       {/* Product builds */}
-      <section className="border-t border-border px-6 py-20 md:py-28">
-        <Reveal className="mx-auto max-w-6xl">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
-            We ship products too.
-          </h2>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed">
-            We build premium, high-ticket websites.
-          </p>
-          <div className="mt-8">
-            <ShowcaseProducts />
-          </div>
-        </Reveal>
-      </section>
+      <Section eyebrow="Products" title="We ship products too.">
+        <p className="mt-5 max-w-3xl text-lg leading-relaxed">
+          We build premium, high-ticket websites.
+        </p>
+        <div className="mt-8">
+          <ShowcaseProducts />
+        </div>
+      </Section>
 
       {/* Closing CTA band */}
-      <section className="band-green relative overflow-hidden bg-background px-6 py-20 md:py-28">
-        <div className="band-depth top-[-58%] left-[-12%]" aria-hidden="true" />
-        <Reveal className="relative mx-auto max-w-6xl">
-          <h2 className="max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
-            Want this for one of your processes?
-          </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed">
-            Start with one process that takes too much time or depends on one
-            person. We will help you see what fits.
-          </p>
-          <div className="mt-9">
-            <Button
-              size="xl"
-              className="rounded-full hover:text-inkdeep"
-              render={
-                <TrackedLink
-                  href="/fit-check"
-                  event="fit_check_cta_clicked"
-                  eventProps={{
-                    source_page: "showcase",
-                    cta_location: "final_cta",
-                  }}
-                />
-              }
-            >
-              Take the Free Workflow Fit Check
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          </div>
-          <p className="mt-8 block font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
-            Three minutes. No technical preparation.
-          </p>
-        </Reveal>
-      </section>
+      <Band title="Want this for one of your processes?" depth="top-left">
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed">
+          Start with one process that takes too much time or depends on one
+          person. We will help you see what fits.
+        </p>
+        <CtaRow
+          tone="band"
+          primary={{
+            label: "Take the Free Workflow Fit Check",
+            arrow: true,
+            href: "/fit-check",
+            event: "fit_check_cta_clicked",
+            eventProps: { source_page: "showcase", cta_location: "final_cta" },
+          }}
+        />
+        <Support>Three minutes. No technical preparation.</Support>
+      </Band>
     </>
   );
 }

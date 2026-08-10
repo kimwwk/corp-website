@@ -21,6 +21,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { TrackedLink } from "@/components/tracked-link";
 
 const navLinks = [
   { label: "Services", href: "/services" },
@@ -85,7 +86,13 @@ export function SiteHeader() {
             <Button
               size="lg"
               className="rounded-full px-5 font-semibold"
-              render={<Link href="/fit-check" />}
+              render={
+                <TrackedLink
+                  href="/fit-check"
+                  event="fit_check_cta_clicked"
+                  eventProps={{ cta_location: "header" }}
+                />
+              }
               aria-current={isActive("/fit-check") ? "page" : undefined}
             >
               Free Fit Check
@@ -138,7 +145,13 @@ export function SiteHeader() {
                 <Button
                   size="xl"
                   className="mt-3 w-full rounded-full"
-                  render={<Link href="/fit-check" />}
+                  render={
+                    <TrackedLink
+                      href="/fit-check"
+                      event="fit_check_cta_clicked"
+                      eventProps={{ cta_location: "mobile_menu" }}
+                    />
+                  }
                   aria-current={isActive("/fit-check") ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
