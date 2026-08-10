@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 
 /*
- * Editorial section header: mono index + hairline rule + eyebrow, then a
- * Fraunces headline and optional lead. Keeps a consistent rhythm across
- * sections (editorial-magazine pattern from ui-ux-pro-max styles).
+ * Editorial section header: mono index + hairline rule + eyebrow, then an
+ * Archivo display headline and optional lead. Keeps a consistent rhythm
+ * across sections.
  */
 export function SectionHeading({
   index,

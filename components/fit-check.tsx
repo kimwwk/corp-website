@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -363,7 +362,7 @@ export function FitCheck() {
     return (
       <div className="rise">
         <Eyebrow className="mb-6 text-xs tracking-[0.14em]">Free · Three minutes</Eyebrow>
-        <h1 className="font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground md:text-5xl">
+        <h1 className="font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground">
           Where is work getting stuck?
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed">
@@ -374,7 +373,7 @@ export function FitCheck() {
         </p>
         <Button
           size="xl"
-          className="mt-8"
+          className="mt-8 rounded-full"
           onClick={() => {
             capture("fit_check_started");
             setPhase("questions");
@@ -383,7 +382,7 @@ export function FitCheck() {
           Start the check
           <ArrowRight data-icon="inline-end" aria-hidden="true" />
         </Button>
-        <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[0.7rem] tracking-[0.15em] uppercase text-caption">
+        <p className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs font-medium tracking-[0.14em] uppercase text-caption">
           <span>8 questions</span>
           <span aria-hidden="true" className="text-primary">
             ·
@@ -404,14 +403,14 @@ export function FitCheck() {
     return (
       <div className="rise">
         <Eyebrow className="mb-6 text-xs tracking-[0.14em]">Your result</Eyebrow>
-        <h1 className="font-display text-[clamp(2rem,4.6vw,3.2rem)] leading-[1.06] font-black tracking-tight text-foreground md:text-5xl">
+        <h1 className="font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-foreground">
           {copy.title}
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed">{copy.body}</p>
 
         <Card className="mt-10 ring-border [--card-spacing:--spacing(7)]">
           <CardContent>
-            <p className="font-mono text-[0.7rem] tracking-[0.14em] uppercase text-caption">
+            <p className="font-mono text-xs font-medium tracking-[0.14em] uppercase text-caption">
               Want the full picture?
             </p>
             <p className="mt-4 leading-relaxed">
@@ -421,6 +420,7 @@ export function FitCheck() {
             <div className="mt-6 flex flex-wrap items-center gap-5">
               <Button
                 size="xl"
+                className="rounded-full"
                 render={
                   <TrackedLink
                     href="/audit"
@@ -435,12 +435,14 @@ export function FitCheck() {
                 Explore the audit
                 <ArrowRight data-icon="inline-end" aria-hidden="true" />
               </Button>
-              <Link
+              <TrackedLink
                 href="/contact"
+                event="contact_cta_clicked"
+                eventProps={{ source_page: "fit_check", cta_location: "result" }}
                 className="rounded-sm text-sm font-medium text-primary underline-offset-4 transition-colors hover:underline"
               >
                 Or send me a note →
-              </Link>
+              </TrackedLink>
             </div>
           </CardContent>
         </Card>
@@ -546,7 +548,7 @@ export function FitCheck() {
               type="submit"
               size="xl"
               disabled={status === "sending"}
-              className={status === "sending" ? "cursor-wait" : undefined}
+              className={cn("rounded-full", status === "sending" && "cursor-wait")}
             >
               {status === "sending" ? (
                 "Sending…"
@@ -581,7 +583,7 @@ export function FitCheck() {
           {question.prompt}
         </h2>
         {question.hint ? (
-          <p className="mt-3 font-mono text-[0.7rem] tracking-[0.15em] uppercase text-caption">
+          <p className="mt-3 font-mono text-xs font-medium tracking-[0.14em] uppercase text-caption">
             {question.hint}
           </p>
         ) : null}
@@ -633,6 +635,7 @@ export function FitCheck() {
         {question.multi ? (
           <Button
             size="xl"
+            className="rounded-full"
             disabled={selected.length === 0}
             onClick={() => goForward(step)}
           >
@@ -666,7 +669,7 @@ function ProgressRail({ current, total }: { current: number; total: number }) {
   const pct = Math.round((current / total) * 100);
   return (
     <div>
-      <div className="mb-3 flex items-center justify-between font-mono text-[0.7rem] tracking-[0.14em] uppercase">
+      <div className="mb-3 flex items-center justify-between font-mono text-xs font-medium tracking-[0.14em] uppercase">
         <span className="text-primary">{label}</span>
         <span className="text-caption tabular-nums">{pct}%</span>
       </div>

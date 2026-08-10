@@ -495,7 +495,8 @@ export default function ServicesPage() {
       {/* P8 — the four-rung ladder: the sequence view */}
       <section className="border-t border-border">
         <Reveal className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28">
-          <p className={eyebrow}>A real sequence, in order</p>
+          <p className={eyebrow}>Sequence</p>
+          <h2 className={`${h2} mt-5 max-w-3xl`}>A real sequence, in order</h2>
           <p className="mt-5 max-w-3xl leading-relaxed">
             The further along you go, the more of the work moves to me. You
             decide how far, and you can move along it over time.
@@ -510,7 +511,7 @@ export default function ServicesPage() {
                 eventProps={r.eventProps}
                 className={
                   r.featured
-                    ? "band-green group block bg-background transition-colors hover:bg-[#085c3c]"
+                    ? "band-green group block bg-background transition-colors hover:bg-inkdeep"
                     : "group block border-b border-border bg-background transition-colors hover:bg-card"
                 }
               >

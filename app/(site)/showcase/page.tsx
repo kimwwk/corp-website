@@ -108,7 +108,8 @@ export default function ShowcasePage() {
           className={cn("px-6 py-20 md:py-28", i > 0 && "border-t border-border")}
         >
           <Reveal className="mx-auto max-w-6xl">
-            <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+            <p className={eyebrow}>Case {String(i + 1).padStart(2, "0")}</p>
+            <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
               {c.title}
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed">{c.lead}</p>
@@ -160,7 +161,8 @@ export default function ShowcasePage() {
       {/* Before Kivov */}
       <section className="border-t border-border px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+          <p className={eyebrow}>Track record</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
             Built before Kivov. Still running.
           </h2>
           <div className="mt-8 border-b border-border">
@@ -179,7 +181,8 @@ export default function ShowcasePage() {
       {/* Product builds */}
       <section className="border-t border-border px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">
-          <h2 className="max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
+          <p className={eyebrow}>Products</p>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
             We ship products too.
           </h2>
           <p className="mt-5 max-w-3xl text-lg leading-relaxed">

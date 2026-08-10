@@ -42,7 +42,7 @@ export function ShowcaseProducts() {
             })
           }
         >
-          <Card className="ring-border transition-all duration-200 [--card-spacing:--spacing(6)] group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-primary/40">
+          <Card className="ring-border transition-all duration-200 [--card-spacing:--spacing(6)] group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-primary/40 motion-reduce:transform-none">
             <CardContent>
               <div className="flex items-start gap-5">
                 <Image
@@ -57,7 +57,7 @@ export function ShowcaseProducts() {
                     <h2 className="text-xl font-semibold text-foreground transition-colors duration-200 group-hover:text-primary">
                       {product.title}
                     </h2>
-                    <span className="shrink-0 font-mono text-xs tracking-widest uppercase text-primary">
+                    <span className="shrink-0 font-mono text-xs font-medium tracking-[0.14em] uppercase text-primary">
                       {product.status}
                     </span>
                   </div>

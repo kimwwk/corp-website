@@ -480,11 +480,11 @@ export default function HomePage() {
       </section>
 
       {/* Services teaser rows */}
-      <section className="px-6 py-20 md:py-28">
+      <section className="border-t border-border px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className={eyebrow}>Services</p>
-            <h2 className="mt-5 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+            <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
               Two ways to work together
             </h2>
           </Reveal>
@@ -500,14 +500,14 @@ export default function HomePage() {
                   <h3 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
                     {s.title}
                     <span
-                      className="ml-3 inline-block text-primary opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                      className="ml-3 inline-block -translate-x-2 text-primary opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100"
                       aria-hidden="true"
                     >
                       →
                     </span>
                   </h3>
                   <div>
-                    <p className="max-w-[30ch] font-mono text-xs font-medium tracking-[0.12em] uppercase">
+                    <p className="max-w-[30ch] font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
                       {s.lead}
                     </p>
                     <p className="mt-4 max-w-[56ch] font-medium text-foreground">
@@ -526,7 +526,7 @@ export default function HomePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <Reveal>
             <p className={eyebrow}>About Kim</p>
-            <h2 className="mt-5 font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
+            <h2 className="mt-5 max-w-3xl font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground">
               Meet Kim Wong
             </h2>
             <p className="mt-4 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
@@ -582,7 +582,7 @@ export default function HomePage() {
       <section className="band-green relative overflow-hidden bg-background px-6 py-24 md:py-32">
         <div className="band-depth top-[-58%] left-[-12%]" aria-hidden="true" />
         <Reveal className="relative mx-auto max-w-6xl text-center">
-          <h2 className="mx-auto max-w-[14em] font-display text-[clamp(2.3rem,6vw,4.4rem)] leading-[1.04] font-black tracking-tight text-balance text-foreground">
+          <h2 className="mx-auto max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground">
             Start with one thing.
           </h2>
           <div className="mx-auto mt-7 max-w-2xl space-y-4 text-lg leading-relaxed">

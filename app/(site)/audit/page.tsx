@@ -159,7 +159,7 @@ export default function AuditPage() {
 
           {/* Price card — the numbers stated plainly */}
           <Reveal delay={120} className="lg:col-span-5">
-            <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(16,20,26,.02),0_16px_40px_-24px_rgba(16,20,26,.22)] [--card-spacing:--spacing(7)]">
+            <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(23,32,27,.02),0_16px_40px_-24px_rgba(23,32,27,.22)] [--card-spacing:--spacing(7)]">
               <CardContent>
                 <p className={eyebrow}>The audit</p>
                 <div className="mt-5 flex items-baseline gap-3">
@@ -213,7 +213,8 @@ export default function AuditPage() {
       {/* Who it is for */}
       <section className="border-t border-border px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">
-          <p className="max-w-3xl text-lg leading-relaxed font-medium text-foreground">
+          <p className={eyebrow}>Who it&apos;s for</p>
+          <p className="mt-6 max-w-3xl text-lg leading-relaxed font-medium text-foreground">
             This is designed for business owners who know something is slowing
             the company down but are not yet sure whether they need:
           </p>
@@ -335,7 +336,8 @@ export default function AuditPage() {
       {/* What should I do first? */}
       <section className="border-t border-border px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">
-          <h2 className={`${h2} max-w-3xl`}>What should I do first?</h2>
+          <p className={eyebrow}>Where to start</p>
+          <h2 className={`${h2} mt-5 max-w-3xl`}>What should I do first?</h2>
           <p className="mt-6 max-w-3xl leading-relaxed">
             Start with the free Workflow Fit Check when you are still
             identifying the problem. Choose the AI Workflow Audit when you
