@@ -191,7 +191,7 @@ their colors.
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
 - `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
-- `social-icons.tsx` — brand marks (LinkedIn, Instagram, Facebook, YouTube, X) as inline
+- `social-icons.tsx` — brand marks (LinkedIn, X, Facebook, YouTube; Instagram available unused) as inline
   24×24 Simple Icons paths on `currentColor`. **The one sanctioned exception to
   "Lucide only"** — Lucide ships no brand glyphs. Footer social row: `size-11`
   round hit-targets, `text-caption` → `hover:text-primary`, tracked via

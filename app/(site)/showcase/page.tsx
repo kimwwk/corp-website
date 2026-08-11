@@ -164,17 +164,6 @@ export default function ShowcasePage() {
           {c.pullLine ? (
             <p className={`${rowHeading} mt-10 max-w-[30em]`}>{c.pullLine}</p>
           ) : null}
-          <CtaRow
-            secondary={{
-              label: "See how this fits your business",
-              href: "/fit-check",
-              event: "fit_check_cta_clicked",
-              eventProps: {
-                source_page: "showcase",
-                cta_location: `case_0${i + 1}`,
-              },
-            }}
-          />
         </Section>
       ))}
 

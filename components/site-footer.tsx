@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import {
   FacebookIcon,
-  InstagramIcon,
   LinkedInIcon,
   XIcon,
   YouTubeIcon,
@@ -17,30 +16,24 @@ const footerLinks = [
   { label: "Terms of Use", href: "/terms" },
 ];
 
-// TODO(kim): handles below are unverified placeholders — swap in the real
-// profile URLs before merge.
+// URLs from Kim's Popl business card (popl.co/card/qd4lm671/1).
 const socialLinks = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/company/kivov-digital",
+    href: "https://www.linkedin.com/company/kivov",
     Icon: LinkedInIcon,
   },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/kivovdigital",
-    Icon: InstagramIcon,
-  },
+  { label: "X", href: "https://x.com/kimwong_wwk", Icon: XIcon },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/kivovdigital",
+    href: "https://www.facebook.com/profile.php?id=61591254942653",
     Icon: FacebookIcon,
   },
   {
     label: "YouTube",
-    href: "https://www.youtube.com/@kivovdigital",
+    href: "https://www.youtube.com/@kivov-digital",
     Icon: YouTubeIcon,
   },
-  { label: "X", href: "https://x.com/kivovdigital", Icon: XIcon },
 ];
 
 export function SiteFooter() {
