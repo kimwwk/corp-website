@@ -1,13 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+  FacebookIcon,
+  LinkedInIcon,
+  XIcon,
+  YouTubeIcon,
+} from "@/components/social-icons";
+import { TrackedExternalLink } from "@/components/tracked-link";
+
 const footerLinks = [
-  { label: "AI Audit", href: "/audit" },
-  { label: "Fit Check", href: "/fit-check" },
-  { label: "Showcase", href: "/showcase" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Cookie Policy", href: "/cookies" },
   { label: "Terms of Use", href: "/terms" },
+];
+
+// URLs from Kim's Popl business card (popl.co/card/qd4lm671/1).
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/kivov",
+    Icon: LinkedInIcon,
+  },
+  { label: "X", href: "https://x.com/kimwong_wwk", Icon: XIcon },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61591254942653",
+    Icon: FacebookIcon,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@kivov-digital",
+    Icon: YouTubeIcon,
+  },
 ];
 
 export function SiteFooter() {
@@ -27,21 +52,41 @@ export function SiteFooter() {
               © 2026 Kivov Digital · Toronto
             </p>
           </div>
-          <nav
-            aria-label="Footer navigation"
-            className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
-          >
-            {footerLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="rounded-sm py-2 text-sm text-caption underline-offset-[5px] transition-colors hover:text-foreground hover:underline hover:decoration-primary hover:decoration-2"
-              >
-                {link.label}
-              </Link>
+          <ul className="flex items-center gap-1">
+            {socialLinks.map(({ label, href, Icon }) => (
+              <li key={label}>
+                <TrackedExternalLink
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Kivov Digital on ${label}`}
+                  event="social_link_clicked"
+                  eventProps={{
+                    network: label.toLowerCase(),
+                    cta_location: "footer",
+                  }}
+                  className="flex size-11 items-center justify-center rounded-full text-caption transition-colors outline-none hover:bg-muted hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/50"
+                >
+                  <Icon className="size-5" aria-hidden="true" />
+                </TrackedExternalLink>
+              </li>
             ))}
-          </nav>
+          </ul>
         </div>
+        <nav
+          aria-label="Footer navigation"
+          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-border pt-4 sm:justify-start"
+        >
+          {footerLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className="rounded-sm py-2 text-sm text-caption underline-offset-[5px] transition-colors hover:text-foreground hover:underline hover:decoration-primary hover:decoration-2"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
     </footer>
   );
