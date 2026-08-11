@@ -10,7 +10,6 @@ import {
 import { TrackedExternalLink } from "@/components/tracked-link";
 
 const footerLinks = [
-  { label: "Showcase", href: "/showcase" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Cookie Policy", href: "/cookies" },
   { label: "Terms of Use", href: "/terms" },
