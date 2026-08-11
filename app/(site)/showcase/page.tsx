@@ -102,6 +102,21 @@ export default function ShowcasePage() {
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
             Client systems in production, and what they returned.
           </p>
+          <CtaRow
+            primary={{
+              label: "Free Fit Check",
+              arrow: true,
+              href: "/fit-check",
+              event: "fit_check_cta_clicked",
+              eventProps: { source_page: "showcase", cta_location: "hero" },
+            }}
+            secondary={{
+              label: "Explore the full audit",
+              href: "/audit",
+              event: "audit_cta_clicked",
+              eventProps: { source_page: "showcase", cta_location: "hero" },
+            }}
+          />
         </Reveal>
       </section>
 
@@ -149,8 +164,36 @@ export default function ShowcasePage() {
           {c.pullLine ? (
             <p className={`${rowHeading} mt-10 max-w-[30em]`}>{c.pullLine}</p>
           ) : null}
+          <CtaRow
+            secondary={{
+              label: "See how this fits your business",
+              href: "/fit-check",
+              event: "fit_check_cta_clicked",
+              eventProps: {
+                source_page: "showcase",
+                cta_location: `case_0${i + 1}`,
+              },
+            }}
+          />
         </Section>
       ))}
+
+      {/* Testimonial */}
+      <Section eyebrow="What clients say">
+        <figure className="mt-6">
+          <blockquote>
+            <p className="max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground">
+              “I love your work. You’re talented, easy to communicate with,
+              and very professional. Looking forward to many more projects
+              together.”
+            </p>
+          </blockquote>
+          <figcaption className="mt-7 flex max-w-3xl flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-border pt-5">
+            <span className="font-medium text-foreground">Yongling Zheng</span>
+            <MonoLabel tone="caption">Founder, Webie</MonoLabel>
+          </figcaption>
+        </figure>
+      </Section>
 
       {/* Interlude — Signature Language Bank */}
       <Interlude className="border-t border-border">
