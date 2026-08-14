@@ -191,6 +191,11 @@ their colors.
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
 - `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
+- `social-icons.tsx` — brand marks (LinkedIn, X, Facebook, YouTube; Instagram available unused) as inline
+  24×24 Simple Icons paths on `currentColor`. **The one sanctioned exception to
+  "Lucide only"** — Lucide ships no brand glyphs. Footer social row: `size-11`
+  round hit-targets, `text-caption` → `hover:text-primary`, tracked via
+  `TrackedExternalLink` (`social_link_clicked`).
 
 Rule of extraction: **any recipe used on 2+ pages belongs in `components/sections/` (or here) —
 never re-type it as a new per-page constant with different values.**
@@ -213,6 +218,11 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
    short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text link),
    `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
+7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
+   quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
+   (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
+   `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One quote per section;
+   first use: showcase.
 
 Canonical page rhythm (see home): hero band → cream sections alternating `border-t` →
 featured band mid-page → interlude → cream sections → closing CTA band.
@@ -276,6 +286,9 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-08-11** — Showcase: hero + per-case CTAs added; pull-quote (testimonial) section
+  registered (vocabulary #7) and first used. Footer: audit/fit-check links dropped; social
+  row added via new `components/social-icons.tsx` (brand-mark exception registered above).
 - **2026-08-10** — Production-page conformance audit (branch `design/system-conformance`):
   pages conformed to this file; `components/sections/` kit extracted and pages recomposed
   from it (renders verified byte-identical); home closing band left-aligned; dead
