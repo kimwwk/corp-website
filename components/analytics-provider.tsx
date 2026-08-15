@@ -2,12 +2,12 @@
 
 import * as React from "react";
 
-import { initPostHog } from "@/lib/analytics";
+import { initAnalytics } from "@/lib/analytics";
 
-/** Boots PostHog on the client (token-gated). Renders nothing. */
+/** Arms GA + PostHog once Termly reports analytics consent. Renders nothing. */
 export function AnalyticsProvider() {
   React.useEffect(() => {
-    initPostHog();
+    initAnalytics();
   }, []);
   return null;
 }

@@ -22,8 +22,6 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
 });
 
-const GA_ID = "G-9VVXS7BY20";
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://kivov.work"),
   title: "Kivov Digital — Workflow-First AI for Small Business",
@@ -59,25 +57,20 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         {children}
         <AnalyticsProvider />
-        {/* Termly consent banner + auto-blocker. `beforeInteractive` puts it in
-            the server-rendered HTML ahead of every other script, which is what
-            lets autoBlock hold gtag below until the visitor consents. */}
+        {/* Termly consent banner + auto-blocker.
+            `afterInteractive` is deliberate: with `beforeInteractive` Termly
+            injects its banner into <body> before React hydrates, React 19
+            treats that as a hydration mismatch and re-renders the whole body,
+            which deletes the banner (verified in a production build).
+            Loading it after hydration keeps the banner alive — and gtag.js is
+            no longer a <Script> here precisely because it can no longer rely
+            on autoBlock winning that race: lib/analytics.ts loads GA and
+            PostHog itself, only once Termly reports analytics consent. */}
         <Script
           id="termly-resource-blocker"
           src="https://app.termly.io/resource-blocker/bcb72aea-8085-4411-86c7-033c05bb3a33?autoBlock=on"
-          strategy="beforeInteractive"
-        />
-        {/* Google tag (gtag.js) — parity with nuxt.config.ts */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');`}
-        </Script>
       </body>
     </html>
   );
