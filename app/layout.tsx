@@ -59,6 +59,14 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         {children}
         <AnalyticsProvider />
+        {/* Termly consent banner + auto-blocker. `beforeInteractive` puts it in
+            the server-rendered HTML ahead of every other script, which is what
+            lets autoBlock hold gtag below until the visitor consents. */}
+        <Script
+          id="termly-resource-blocker"
+          src="https://app.termly.io/resource-blocker/bcb72aea-8085-4411-86c7-033c05bb3a33?autoBlock=on"
+          strategy="beforeInteractive"
+        />
         {/* Google tag (gtag.js) — parity with nuxt.config.ts */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

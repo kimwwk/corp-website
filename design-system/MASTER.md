@@ -286,6 +286,9 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-08-15** — Footer: "Consent Preferences" added to the legal link row (same recipe,
+  now shared as `footerLinkClass`); it stays a plain `<a class="termly-display-preferences">`
+  because Termly's consent modal binds to that class.
 - **2026-08-11** — Showcase: hero + per-case CTAs added; pull-quote (testimonial) section
   registered (vocabulary #7) and first used. Footer: audit/fit-check links dropped; social
   row added via new `components/social-icons.tsx` (brand-mark exception registered above).
