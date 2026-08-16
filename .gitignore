@@ -34,3 +34,7 @@ prototypes/
 
 # Raw Termly exports — the trimmed fragments in public/*.html are what ship
 termly-*.html
+
+# Dated raw Termly exports (e.g. 2026-08-16-raw-termly-policy.html). Same
+# reason as termly-*.html above: the cleaned fragment in public/ is what ships.
+*raw-termly-policy.html
