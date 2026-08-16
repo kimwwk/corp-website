@@ -191,11 +191,12 @@ their colors.
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
 - `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
-- `CookieConsent` — fixed bottom notice (`border-t border-border bg-card`, `.rise` entrance,
-  `max-w-6xl` inner row matching the footer). Chrome, not a section: it carries the site's
-  **only** `size="lg"` rounded-full CTA pair (Decline `variant="outline"` + Accept primary) and
-  the only sanctioned untracked CTAs — a consent click must not itself be an analytics event.
-  Re-opened from the footer via `ConsentPreferencesLink`; state lives in `lib/consent.ts`
+- `CookieConsent` — compact floating notice, bottom-left (`rounded-xl bg-card shadow-lg
+  ring-1 ring-foreground/10`, `sm:max-w-sm`, full-width inset on mobile, `.rise` entrance).
+  Chrome, not a section: it carries the site's **only** `size="lg"` rounded-full CTA pair
+  (Decline `variant="outline"` + Accept primary, `min-h-11` for touch) and the only sanctioned
+  untracked CTAs — a consent click must not itself be an analytics event. Re-opened from the
+  footer via `ConsentPreferencesLink`; state lives in `lib/consent.ts`
 - `social-icons.tsx` — brand marks (LinkedIn, X, Facebook, YouTube; Instagram available unused) as inline
   24×24 Simple Icons paths on `currentColor`. **The one sanctioned exception to
   "Lucide only"** — Lucide ships no brand glyphs. Footer social row: `size-11`

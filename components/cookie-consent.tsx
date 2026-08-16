@@ -14,7 +14,12 @@ import {
 } from "@/lib/consent";
 
 /**
- * Bottom cookie notice.
+ * Compact floating cookie notice, bottom-left.
+ *
+ * Copy is Termly's standard consent message, with two clauses changed to match
+ * how this site actually behaves: it is opt-out (non-essential cookies run
+ * until declined, so "with your consent, we may also use" would be untrue),
+ * and the preference control is the footer link, not a "Preferences" button.
  *
  * The visitor's choice lives in localStorage, which the server cannot know, so
  * both reads go through `useSyncExternalStore` with a server snapshot that
@@ -48,40 +53,43 @@ export function CookieConsent() {
     <div
       role="region"
       aria-label="Cookie notice"
-      className="rise fixed inset-x-0 bottom-0 z-50 border-t border-border bg-card px-6 py-5"
+      className="rise fixed inset-x-4 bottom-4 z-50 rounded-xl bg-card p-5 shadow-lg ring-1 ring-foreground/10 sm:inset-x-auto sm:bottom-6 sm:left-6 sm:max-w-sm"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-2xl text-sm text-muted-foreground">
-          {"We use cookies to see how the site is used, so we can make it better. Analytics is currently "}
-          <span className="font-medium text-foreground">
-            {allowed ? "on" : "off"}
-          </span>
-          {". You can change that any time — the details are in our "}
-          <Link
-            href="/cookies"
-            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-          >
-            Cookie Policy
-          </Link>
-          {"."}
+      <p className="text-sm text-muted-foreground">
+        {
+          "We use essential cookies to make our site work. We also use non-essential cookies to improve user experience and analyze website traffic. By continuing to use our site, you agree to our website's cookie use as described in our "
+        }
+        <Link
+          href="/cookies"
+          className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+        >
+          Cookie Policy
+        </Link>
+        {
+          ". You may change or withdraw your consent at any time by clicking the “Consent Preferences” link in the footer."
+        }
+      </p>
+      {chosen && (
+        <p className="mt-3 font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+          Analytics is currently {allowed ? "on" : "off"}
         </p>
-        <div className="flex shrink-0 items-center gap-3">
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full"
-            onClick={() => choose("denied")}
-          >
-            Decline
-          </Button>
-          <Button
-            size="lg"
-            className="rounded-full"
-            onClick={() => choose("granted")}
-          >
-            Accept
-          </Button>
-        </div>
+      )}
+      <div className="mt-4 flex gap-3">
+        <Button
+          size="lg"
+          variant="outline"
+          className="min-h-11 flex-1 rounded-full"
+          onClick={() => choose("denied")}
+        >
+          Decline
+        </Button>
+        <Button
+          size="lg"
+          className="min-h-11 flex-1 rounded-full"
+          onClick={() => choose("granted")}
+        >
+          Accept
+        </Button>
       </div>
     </div>
   );
