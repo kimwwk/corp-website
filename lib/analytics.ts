@@ -12,6 +12,18 @@ type GtagWindow = Window & {
 };
 
 const GA_ID = "G-9VVXS7BY20";
+/**
+ * PostHog project token. Public by design — write-only, and it ships in the
+ * client bundle either way, exactly like `GA_ID` above. Hardcoded because this
+ * is a static export: `NEXT_PUBLIC_*` is inlined at build time, so an unset
+ * variable disabled analytics silently for the life of the site. Overridable
+ * at build time, same shape as `WEBHOOK_URL` in lib/webhook.ts.
+ */
+const POSTHOG_TOKEN =
+  process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN ||
+  "phc_sgWaoA5Cz7bpWdBXKVspZ3Ped8MtpvuGXmniEzvxWGK2";
+const POSTHOG_HOST =
+  process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 /** GA4's session cookie is `_ga_` + the measurement ID without its `G-`. */
 const GA_COOKIES = ["_ga", `_ga_${GA_ID.slice(2)}`, "_gid"];
 
@@ -50,11 +62,12 @@ function startGoogleAnalytics(): void {
 }
 
 function startPostHog(): void {
-  const token = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
-  if (posthogReady || !token) return;
-  posthog.init(token, {
-    api_host:
-      process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+  if (posthogReady) {
+    posthog.opt_in_capturing(); // re-consented mid-session: resume capturing
+    return;
+  }
+  posthog.init(POSTHOG_TOKEN, {
+    api_host: POSTHOG_HOST,
     defaults: "2025-05-24", // history-change pageviews for SPA navigation
     capture_exceptions: true,
   });
