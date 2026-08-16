@@ -191,8 +191,9 @@ their colors.
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
 - `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
-- `CookieConsent` — compact floating notice, bottom-left (`rounded-xl bg-card shadow-lg
-  ring-1 ring-foreground/10`, `sm:max-w-sm`, full-width inset on mobile, `.rise` entrance).
+- `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
+  ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
+  buttons right on `sm+`, stacked on mobile, `.rise` entrance).
   Chrome, not a section: it carries the site's **only** `size="lg"` rounded-full CTA pair
   (Decline `variant="outline"` + Accept primary, `min-h-11` for touch) and the only sanctioned
   untracked CTAs — a consent click must not itself be an analytics event. Re-opened from the
