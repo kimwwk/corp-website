@@ -2,33 +2,9 @@
 
 import posthog from "posthog-js";
 
+import { analyticsAllowed, onConsentChange } from "@/lib/consent";
+
 type LeadMethod = "contact_form" | "book_call" | "fit_check";
-
-/** Shape of the consent state Termly's resource blocker exposes. */
-type TermlyConsentState = Partial<
-  Record<
-    | "advertising"
-    | "analytics"
-    | "essential"
-    | "performance"
-    | "social_networking"
-    | "unclassified",
-    boolean
-  >
->;
-
-type TermlyConsentEvent = {
-  categories?: string[];
-  consentState?: TermlyConsentState;
-};
-
-type Termly = {
-  getConsentState?: () => TermlyConsentState | undefined;
-  on?: (
-    event: "consent" | "initialized",
-    handler: (data?: TermlyConsentEvent) => void,
-  ) => void;
-};
 
 type GtagWindow = Window & {
   dataLayer?: unknown[];
@@ -36,55 +12,29 @@ type GtagWindow = Window & {
 };
 
 const GA_ID = "G-9VVXS7BY20";
-const TERMLY_POLL_MS = 200;
-const TERMLY_POLL_LIMIT = 50; // ~10s, then assume Termly is blocked
+/** GA4's session cookie is `_ga_` + the measurement ID without its `G-`. */
+const GA_COOKIES = ["_ga", `_ga_${GA_ID.slice(2)}`, "_gid"];
 
 let posthogReady = false;
 let gaReady = false;
 let consentWatchStarted = false;
 
-function getTermly(): Termly | undefined {
-  return (window as unknown as { Termly?: Termly }).Termly;
-}
-
 /**
- * True only when the visitor has accepted the analytics category. Reads the
- * live state first; the event payload is the fallback for the moment the
- * banner saves a choice.
- */
-function analyticsGranted(event?: TermlyConsentEvent): boolean {
-  if (getTermly()?.getConsentState?.()?.analytics === true) return true;
-  if (event?.consentState?.analytics === true) return true;
-  return event?.categories?.includes("analytics") === true;
-}
-
-/** Run `onReady` once Termly's API is on the page; give up if it never lands. */
-function whenTermlyReady(onReady: (termly: Termly) => void): void {
-  let tries = 0;
-  const poll = () => {
-    const termly = getTermly();
-    if (termly?.getConsentState && termly.on) {
-      onReady(termly);
-      return;
-    }
-    if (++tries > TERMLY_POLL_LIMIT) return;
-    window.setTimeout(poll, TERMLY_POLL_MS);
-  };
-  poll();
-}
-
-/**
- * Load gtag.js. Termly's auto-blocker cannot be trusted to win the race
- * against a `<Script>` tag now that it loads after hydration, so GA is not in
- * the layout at all — it starts here, after consent, or not at all.
+ * Load gtag.js. GA is deliberately not a `<Script>` in the layout: keeping the
+ * injection here is what makes "no analytics until consent allows it" a fact
+ * of control flow rather than a race between two script tags.
  */
 function startGoogleAnalytics(): void {
-  if (gaReady) return;
-  gaReady = true;
+  // Clears the kill switch `stopAnalytics()` sets — without this, a visitor who
+  // declines and then accepts again stays untracked for the rest of the session.
+  (window as unknown as Record<string, unknown>)[`ga-disable-${GA_ID}`] = false;
   const w = window as GtagWindow;
+  if (gaReady) {
+    w.gtag?.("config", GA_ID); // re-consented mid-session: resume with a page_view
+    return;
+  }
+  gaReady = true;
   w.dataLayer = w.dataLayer || [];
-  // Termly defines gtag itself for Google Consent Mode; either definition
-  // pushes the raw `arguments` object, so reuse whichever got there first.
   if (typeof w.gtag !== "function") {
     w.gtag = function gtag() {
       // eslint-disable-next-line prefer-rest-params
@@ -112,26 +62,42 @@ function startPostHog(): void {
 }
 
 /**
- * Arm GA and PostHog on the client — only once Termly reports that the visitor
- * accepted analytics cookies. Neither tracker can be left to Termly's
- * auto-blocker: posthog-js is a bundled import it never sees, and gtag.js
- * would otherwise race the blocker's own script. Fails closed — no Termly, no
- * analytics. Safe under static export: never runs at build time.
+ * Stop collecting after an opt-out: GA's documented kill switch, its cookies
+ * dropped, PostHog told to stand down. The gtag script itself stays loaded —
+ * `ga-disable-*` is what makes it inert.
+ */
+function stopAnalytics(): void {
+  (window as unknown as Record<string, unknown>)[`ga-disable-${GA_ID}`] = true;
+  const { hostname } = window.location;
+  const domains = ["", `; domain=${hostname}`, `; domain=.${hostname}`];
+  for (const name of GA_COOKIES) {
+    for (const domain of domains) {
+      document.cookie = `${name}=; Max-Age=0; path=/${domain}`;
+    }
+  }
+  if (posthogReady) posthog.opt_out_capturing();
+}
+
+/**
+ * Arm GA and PostHog on the client, and keep them in step with the visitor's
+ * choice for the rest of the session. Consent state lives in `lib/consent.ts`;
+ * this module only ever reacts to it. Safe under static export: never runs at
+ * build time.
  */
 export function initAnalytics(): void {
   if (typeof window === "undefined" || consentWatchStarted) return;
   consentWatchStarted = true;
 
-  whenTermlyReady((termly) => {
-    const sync = (event?: TermlyConsentEvent) => {
-      if (!analyticsGranted(event)) return;
+  const sync = () => {
+    if (analyticsAllowed()) {
       startGoogleAnalytics();
       startPostHog();
-    };
-    sync(); // returning visitor whose choice is already stored
-    termly.on?.("initialized", sync);
-    termly.on?.("consent", sync);
-  });
+    } else {
+      stopAnalytics();
+    }
+  };
+  sync();
+  onConsentChange(sync);
 }
 
 /** PostHog capture that no-ops when PostHog isn't configured. */

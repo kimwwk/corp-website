@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Archivo, IBM_Plex_Mono, Work_Sans } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics-provider";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 /* Green Ledger type system: Archivo (display), Work Sans (body), IBM Plex
@@ -56,21 +56,12 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         {children}
+        {/* Consent is ours: `components/cookie-consent.tsx` owns the notice,
+            `lib/consent.ts` the state, and `lib/analytics.ts` only loads gtag
+            once that state allows it. No third-party consent script — which
+            also means no DOM injected around React's tree at hydration. */}
+        <CookieConsent />
         <AnalyticsProvider />
-        {/* Termly consent banner + auto-blocker.
-            `afterInteractive` is deliberate: with `beforeInteractive` Termly
-            injects its banner into <body> before React hydrates, React 19
-            treats that as a hydration mismatch and re-renders the whole body,
-            which deletes the banner (verified in a production build).
-            Loading it after hydration keeps the banner alive — and gtag.js is
-            no longer a <Script> here precisely because it can no longer rely
-            on autoBlock winning that race: lib/analytics.ts loads GA and
-            PostHog itself, only once Termly reports analytics consent. */}
-        <Script
-          id="termly-resource-blocker"
-          src="https://app.termly.io/resource-blocker/bcb72aea-8085-4411-86c7-033c05bb3a33?autoBlock=on"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );

@@ -4,7 +4,7 @@ import * as React from "react";
 
 import { initAnalytics } from "@/lib/analytics";
 
-/** Arms GA + PostHog once Termly reports analytics consent. Renders nothing. */
+/** Arms GA + PostHog and keeps them on the consent state. Renders nothing. */
 export function AnalyticsProvider() {
   React.useEffect(() => {
     initAnalytics();

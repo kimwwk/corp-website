@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ConsentPreferencesLink } from "@/components/consent-preferences-link";
 import {
   FacebookIcon,
   LinkedInIcon,
@@ -85,11 +86,7 @@ export function SiteFooter() {
               {link.label}
             </Link>
           ))}
-          {/* Termly binds the consent modal to this class (delegated listener),
-              so it stays a plain anchor — no handler of ours to wire up. */}
-          <a href="#" className={`termly-display-preferences ${footerLinkClass}`}>
-            Consent Preferences
-          </a>
+          <ConsentPreferencesLink className={footerLinkClass} />
         </nav>
       </div>
     </footer>
