@@ -30,9 +30,10 @@ export const metadata: Metadata = {
   verification: {
     google: "V86yYgZYa0b2uAqQxbhb9teevK2zoUKKHVYPdT3IZHo",
   },
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-  },
+  /* No `icons` key on purpose. The app icons are file-based
+     (`app/favicon.ico`, `app/icon.png`, `app/icon1.png`, `app/apple-icon.png`)
+     so Next derives `type`/`sizes` and content-hashes the URLs. A `metadata.icons`
+     entry here would take precedence and silently suppress all four. */
   openGraph: {
     title: "Kivov Digital — Workflow-First AI for Small Business",
     description:

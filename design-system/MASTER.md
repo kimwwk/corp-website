@@ -24,6 +24,49 @@ bordered list rows, square bullets, marker underlines.
 
 ---
 
+## Brand marks
+
+Two marks, one job each. **Neither is ever recoloured** — no CSS filters, no `currentColor`,
+no tinted variants. They are Kim's artwork; a colour change is her decision, not a build detail.
+
+| Mark | Asset | Where it belongs |
+|---|---|---|
+| **Wordmark** ("KIVOV DIGITAL") | `public/kivov-wordmark.png` | Site chrome: header, mobile sheet header, footer. The only mark used in-page. |
+| Wordmark, light | `public/kivov-wordmark-light.png` | Reserved for a light-on-dark surface. **Currently unused** — no chrome sits on green. |
+| **Symbol** (the K) | `public/kivov-symbol.png` (1024) + `-512` / `-256` / `-64` | Icons, avatars, and square placements *outside* the page: favicon, app icon, social profile images. |
+| Symbol, padded | `public/kivov-icon-512.png` (+ `-192` / `-32` / `-16`) | Same glyph with app-icon safe-area padding, for platforms that want a ready-made square. |
+| Symbol source | `design-system/assets/logo-symbol-source.png` | 2000px original (black on white). Archive — never ship it. |
+
+Rules:
+
+- **Never lock the symbol up beside the wordmark.** The wordmark already opens with a K, so
+  a K + KIVOV lockup reads as a stutter — and the two Ks are different drawings (the wordmark's
+  K carries a triangular counter; the symbol's is solid). Header and footer take the wordmark alone.
+- **The symbol is black on light.** It has no green-band variant. Do not place it inside a
+  `.band-green` scope — a black glyph on `#0a6e48` fails contrast, and recolouring it is not
+  an option. If a dark placement is ever genuinely needed, that's a brand decision to take
+  to Kim first.
+- The symbol's own white artwork background (`#ffffff`, also `--card`) is the only backing
+  plate it may be given, and only for icons (see below). It is not a new colour.
+
+### App icons (App Router, file-based)
+
+Icons are **file-based only** — `app/favicon.ico`, `app/icon.png` (32), `app/icon1.png` (512),
+`app/apple-icon.png` (180). Next derives `type`/`sizes` and content-hashes the URLs, so a future
+logo change busts the cache on its own.
+
+**`app/layout.tsx` must not declare `metadata.icons`.** A `metadata.icons` entry takes precedence
+and silently suppresses every file-based icon — that's how the site shipped the scaffold's
+placeholder mark long after the Green Ledger palette landed.
+
+`icon.png` / `icon1.png` are the black K on a white plate rounded at 22.5% (app-icon convention);
+the plate is what keeps the mark legible on a dark browser tab strip without touching its colour.
+`apple-icon.png` is Kim's supplied 180px artwork verbatim — full-bleed, opaque, no rounding
+(iOS masks corners itself and ignores alpha). Regenerate them from `public/kivov-symbol.png`,
+never by hand-editing the PNGs.
+
+---
+
 ## Color
 
 All values are tokens from `app/globals.css`. **In TSX, use token utility classes only
@@ -293,6 +336,11 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-08-16** — Brand marks registered above (wordmark vs symbol, the no-recolour rule, the
+  no-K-lockup rule). App icons moved to the file-based App Router convention (`app/favicon.ico`,
+  `app/icon.png`, `app/icon1.png`, `app/apple-icon.png`) built from Kim's K symbol; the scaffold
+  placeholder mark (`app/icon.svg` / `public/favicon.svg` — mint squares on near-black, both
+  off-palette) and the `metadata.icons` entry that was suppressing the file convention are gone.
 - **2026-08-15** — Cookie notice: `CookieConsent` registered above (first sanctioned `size="lg"`
   pill CTA pair, and the one untracked CTA on the site). Footer: "Consent Preferences" added to
   the legal link row, sharing the row's recipe via `footerLinkClass`.
