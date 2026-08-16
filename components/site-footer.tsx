@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ConsentPreferencesLink } from "@/components/consent-preferences-link";
 import {
   FacebookIcon,
   LinkedInIcon,
@@ -14,6 +15,9 @@ const footerLinks = [
   { label: "Cookie Policy", href: "/cookies" },
   { label: "Terms of Use", href: "/terms" },
 ];
+
+const footerLinkClass =
+  "rounded-sm py-2 text-sm text-caption underline-offset-[5px] transition-colors hover:text-foreground hover:underline hover:decoration-primary hover:decoration-2";
 
 // URLs from Kim's Popl business card (popl.co/card/qd4lm671/1).
 const socialLinks = [
@@ -78,14 +82,11 @@ export function SiteFooter() {
           className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-border pt-4 sm:justify-start"
         >
           {footerLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="rounded-sm py-2 text-sm text-caption underline-offset-[5px] transition-colors hover:text-foreground hover:underline hover:decoration-primary hover:decoration-2"
-            >
+            <Link key={link.label} href={link.href} className={footerLinkClass}>
               {link.label}
             </Link>
           ))}
+          <ConsentPreferencesLink className={footerLinkClass} />
         </nav>
       </div>
     </footer>

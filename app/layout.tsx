@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Archivo, IBM_Plex_Mono, Work_Sans } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics-provider";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 /* Green Ledger type system: Archivo (display), Work Sans (body), IBM Plex
@@ -21,8 +21,6 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
   variable: "--font-plex-mono",
 });
-
-const GA_ID = "G-9VVXS7BY20";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kivov.work"),
@@ -58,18 +56,12 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col">
         {children}
+        {/* Consent is ours: `components/cookie-consent.tsx` owns the notice,
+            `lib/consent.ts` the state, and `lib/analytics.ts` only loads gtag
+            once that state allows it. No third-party consent script — which
+            also means no DOM injected around React's tree at hydration. */}
+        <CookieConsent />
         <AnalyticsProvider />
-        {/* Google tag (gtag.js) — parity with nuxt.config.ts */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');`}
-        </Script>
       </body>
     </html>
   );

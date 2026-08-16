@@ -191,6 +191,13 @@ their colors.
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
 - `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
+- `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
+  ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
+  buttons right on `sm+`, stacked on mobile, `.rise` entrance).
+  Chrome, not a section: it carries the site's **only** `size="lg"` rounded-full CTA pair
+  (Decline `variant="outline"` + Accept primary, `min-h-11` for touch) and the only sanctioned
+  untracked CTAs — a consent click must not itself be an analytics event. Re-opened from the
+  footer via `ConsentPreferencesLink`; state lives in `lib/consent.ts`
 - `social-icons.tsx` — brand marks (LinkedIn, X, Facebook, YouTube; Instagram available unused) as inline
   24×24 Simple Icons paths on `currentColor`. **The one sanctioned exception to
   "Lucide only"** — Lucide ships no brand glyphs. Footer social row: `size-11`
@@ -286,6 +293,9 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-08-15** — Cookie notice: `CookieConsent` registered above (first sanctioned `size="lg"`
+  pill CTA pair, and the one untracked CTA on the site). Footer: "Consent Preferences" added to
+  the legal link row, sharing the row's recipe via `footerLinkClass`.
 - **2026-08-11** — Showcase: hero + per-case CTAs added; pull-quote (testimonial) section
   registered (vocabulary #7) and first used. Footer: audit/fit-check links dropped; social
   row added via new `components/social-icons.tsx` (brand-mark exception registered above).
