@@ -53,10 +53,12 @@ export function CookieConsent() {
     <div
       role="region"
       aria-label="Cookie notice"
-      className="rise fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl rounded-xl bg-card p-5 shadow-lg ring-1 ring-foreground/10 sm:bottom-6"
+      className="rise fixed inset-x-4 bottom-4 z-50 mx-auto max-w-6xl rounded-xl bg-card p-5 shadow-lg ring-1 ring-foreground/10 sm:bottom-6"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <div>
+        {/* Bar spans the site container; the prose inside stays at max-w-3xl
+            so the line length never runs the full width. */}
+        <div className="max-w-3xl">
           <p className="text-sm text-muted-foreground">
             {
               "We use essential cookies to make our site work. We also use non-essential cookies to improve user experience and analyze website traffic. By continuing to use our site, you agree to our website's cookie use as described in our "
