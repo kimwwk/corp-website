@@ -17,7 +17,6 @@ import {
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
@@ -115,17 +114,12 @@ export function SiteHeader() {
               <Menu aria-hidden="true" />
             </SheetTrigger>
             <SheetContent side="right" className="bg-background">
-              <SheetHeader>
-                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-                <Image
-                  src="/kivov-wordmark.png"
-                  alt="Kivov Digital"
-                  width={120}
-                  height={50}
-                  className="h-6 w-auto"
-                />
-              </SheetHeader>
-              <nav aria-label="Mobile navigation" className="flex flex-col gap-1 px-4">
+              <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+              {/* pt-14 clears the absolutely-positioned close button (top-3, 28px). */}
+              <nav
+                aria-label="Mobile navigation"
+                className="flex flex-col gap-1 px-4 pt-14"
+              >
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}

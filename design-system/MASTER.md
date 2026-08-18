@@ -31,7 +31,7 @@ no tinted variants. They are Kim's artwork; a colour change is her decision, not
 
 | Mark | Asset | Where it belongs |
 |---|---|---|
-| **Wordmark** ("KIVOV DIGITAL") | `public/kivov-wordmark.png` | Site chrome: header, mobile sheet header, footer. The only mark used in-page. |
+| **Wordmark** ("KIVOV DIGITAL") | `public/kivov-wordmark.png` | Site chrome: header and footer. The only mark used in-page. Not in the mobile nav sheet — the header behind it already carries the mark. |
 | Wordmark, light | `public/kivov-wordmark-light.png` | Reserved for a light-on-dark surface. **Currently unused** — no chrome sits on green. |
 | **Symbol** (the K) | `public/kivov-symbol.png` (1024) + `-512` / `-256` / `-64` | Icons, avatars, and square placements *outside* the page: favicon, app icon, social profile images. |
 | Symbol, padded | `public/kivov-icon-512.png` (+ `-192` / `-32` / `-16`) | Same glyph with app-icon safe-area padding, for platforms that want a ready-made square. |
@@ -336,6 +336,11 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-08-18** — Mobile nav sheet: the wordmark is out of the sheet header (the site header
+  behind the sheet already shows it); the Brand marks table above no longer lists the sheet as a
+  wordmark placement. The empty `SheetHeader` went with it — the sheet's `sr-only` title is now a
+  direct child of `SheetContent`, and the nav carries an explicit `pt-14` so the top offset clears
+  the close button instead of relying on a spacer div.
 - **2026-08-16** — Brand marks registered above (wordmark vs symbol, the no-recolour rule, the
   no-K-lockup rule). App icons moved to the file-based App Router convention (`app/favicon.ico`,
   `app/icon.png`, `app/icon1.png`, `app/apple-icon.png`) built from Kim's K symbol; the scaffold
