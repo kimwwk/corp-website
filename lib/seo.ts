@@ -100,7 +100,7 @@ export const organization = {
   description:
     "Kivov Digital is a Toronto-based workflow-first AI consultancy for small and mid-sized businesses. It maps how work actually happens, finds where time is lost, and builds practical AI and automation systems around the way teams already work.",
   slogan: "Build the system that fits your business.",
-  email: "hello@kivov.work",
+  email: "hello@kivov.ca",
   founder: { "@id": PERSON_ID },
   address: {
     "@type": "PostalAddress",

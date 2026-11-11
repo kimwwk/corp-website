@@ -11,7 +11,7 @@ Key facts:
   - Workflow-First AI Audit: CAD $495 founding-client price for the first five clients (standard CAD $750). One priority workflow → map, bottlenecks, prioritized opportunities, written 30-day action plan, walkthrough. CAD $500 is credited if you hire Kivov for implementation within 30 days.
   - Build With You: CAD $1,250 billed every 4 weeks. Two 45-minute strategy calls a month, custom Claude skills and automations built alongside your team, always-on text support with a 12 business-hour response SLA, documentation hub. 100% money-back guarantee if you're not satisfied with the results.
   - Build For You: CAD $5,500 per project. One workflow taken end-to-end (up to ~two core system integrations): architecture, implementation, testing, exception handling, team handoff, 30-day stabilization. Starts with discovery or a completed audit.
-- Contact: hello@kivov.work · replies within one business day.
+- Contact: hello@kivov.ca · replies within one business day.
 
 ## Pages
 

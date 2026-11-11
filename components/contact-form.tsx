@@ -236,10 +236,10 @@ export function ContactForm() {
               Something went wrong sending your message. Please email me
               directly at{" "}
               <a
-                href="mailto:hello@kivov.work?subject=Workflow%20enquiry"
+                href="mailto:hello@kivov.ca?subject=Workflow%20enquiry"
                 className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
               >
-                hello@kivov.work
+                hello@kivov.ca
               </a>{" "}
               and I&apos;ll pick it up from there.
             </p>
