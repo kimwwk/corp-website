@@ -73,8 +73,13 @@ export const ORG_ID = `${SITE_URL}/#organization`;
 export const PERSON_ID = `${SITE_URL}/#kim-wong`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
+// Google Business Profile ("Kivov" on Maps). The CID form is the stable,
+// canonical Maps URL for the listing; share links (maps.app.goo.gl) redirect.
+export const GBP_URL = "https://maps.google.com/?cid=8474651575971037476";
+
 // Profiles that confirm the entity (same URLs as the footer / Popl card).
 const ORG_SAME_AS = [
+  GBP_URL,
   "https://www.linkedin.com/company/kivov",
   "https://www.facebook.com/profile.php?id=61591254942653",
   "https://www.youtube.com/@kivov-digital",
@@ -116,6 +121,7 @@ export const organization = {
     "Systems integration",
     "Custom software development",
   ],
+  hasMap: GBP_URL,
   sameAs: ORG_SAME_AS,
 };
 
