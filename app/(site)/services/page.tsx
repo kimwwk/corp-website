@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
+import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, faqPage, pageMetadata, service } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 
@@ -231,7 +232,8 @@ function Bullet({ tone = "green" }: { tone?: "green" | "leaf" }) {
 }
 
 /* Structured data: the service ladder as priced Offers, plus the FAQ. Rung
-   names/descriptions come from `rungs`; prices are the standard rates. */
+   names/descriptions come from `rungs`; the audit uses the founding price checkout
+   actually charges (AUDIT_PRICE.current). */
 const servicesJsonLd = [
   breadcrumbs("/services", "Services"),
   service({
@@ -244,7 +246,7 @@ const servicesJsonLd = [
     name: "Workflow-First AI Audit",
     description: rungs[1].desc,
     path: "/audit",
-    price: 750,
+    price: AUDIT_PRICE.current,
   }),
   service({
     name: "Build With You",

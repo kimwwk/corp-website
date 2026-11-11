@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
+import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, pageMetadata, service } from "@/lib/seo";
 import { Check as CheckIcon } from "lucide-react";
 
@@ -84,7 +85,7 @@ const auditJsonLd = [
       description:
         "A focused review of one priority business process, with a practical, prioritized written plan for improving it with AI and automation.",
       path: "/audit",
-      price: 750,
+      price: AUDIT_PRICE.current,
     }),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
