@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbs, faqPage, pageMetadata, service } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 
 import {
@@ -24,20 +26,14 @@ import { TrackedLink } from "@/components/tracked-link";
  * slots (the paid tiers: audit | Build With You | Build For You, layout
  * restored from PR #11), then the P8 four-rung ladder as the sequence view.
  */
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services — Kivov Digital",
   description:
     "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You at $1,250/mo or Build For You at $5,500 per project.",
-  openGraph: {
-    title: "Services — Kivov Digital",
-    description:
-      "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You or Build For You. Practical AI and automation for small & mid-sized businesses.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  path: "/services",
+  socialDescription:
+    "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You or Build For You. Practical AI and automation for small & mid-sized businesses.",
+});
 
 const eyebrow =
   "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
@@ -97,6 +93,8 @@ const rungs = [
 const faqs = [
   {
     value: "fit-check",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "A high-level result: the type of workflow issue you likely have and one practical recommendation. It doesn't include a call, custom research, or a written report. That's what the audit is for.",
     question: "What does the free fit check include?",
     answer: (
       <p>
@@ -108,6 +106,8 @@ const faqs = [
   },
   {
     value: "why-paid",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Because it's real consulting work: a mapping session, analysis, a written report, and a walkthrough. Charging for it means you get my full attention on one workflow, and a deliverable you keep whether or not we work together afterwards. And if you hire Kivov for implementation within 30 days, CAD $500 of the standard fee is credited toward the project.",
     question: "Why is the audit paid?",
     answer: (
       <p>
@@ -122,6 +122,8 @@ const faqs = [
   },
   {
     value: "with-vs-for",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Build With You keeps you in the driver's seat: we coach, build Claude skills, and automate alongside your team on a monthly rhythm. Build For You hands the build to me — one workflow taken end-to-end at a flat project price. Every Build For You project starts with discovery or a completed audit.",
     question: "What's the difference between “with you” and “for you”?",
     answer: (
       <p>
@@ -137,6 +139,8 @@ const faqs = [
   },
   {
     value: "with-you-build",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Whatever the workflow needs. On our calls we build custom Claude skills around the workflows you screen-share, automate the repetitive parts, and bring in off-the-shelf tools when one already solves the problem. There's no fixed menu — if your workflow calls for something else, that's what we build.",
     question: "What do we actually build in Build With You?",
     answer: (
       <p>
@@ -150,6 +154,8 @@ const faqs = [
   },
   {
     value: "for-you-scope",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Every Build For You project begins with discovery or a completed audit. Two tracks come out of it: AI & automation, built around the workflow we mapped together, and custom software development, when off-the-shelf won't fit. The package covers the first track: one end-to-end workflow with up to roughly two core system integrations — AI and automation architecture, implementation, testing, exception handling, team handoff, and a 30-day stabilization period. Custom software builds, or anything bigger than one workflow, are scoped and quoted separately after discovery.",
     question: "What does the Build For You package actually cover?",
     answer: (
       <p>
@@ -171,6 +177,8 @@ const faqs = [
   },
   {
     value: "billing",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Build With You is $1,250, billed every 4 weeks — that covers your two bi-weekly strategy calls plus always-on text support and your documentation hub in between.",
     question: "How does billing work on the monthly package?",
     answer: (
       <p>
@@ -182,6 +190,8 @@ const faqs = [
   },
   {
     value: "always-on",
+    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
+    text: "Between calls you can text me quick questions and get unstuck fast, within a 12 business-hour SLA, so a small blocker never sits for two weeks waiting for the next session.",
     question: "What does “always-on between sessions” actually mean?",
     answer: (
       <p>
@@ -220,9 +230,43 @@ function Bullet({ tone = "green" }: { tone?: "green" | "leaf" }) {
   );
 }
 
+/* Structured data: the service ladder as priced Offers, plus the FAQ. Rung
+   names/descriptions come from `rungs`; prices are the standard rates. */
+const servicesJsonLd = [
+  breadcrumbs("/services", "Services"),
+  service({
+    name: "Workflow Fit Check",
+    description: rungs[0].desc,
+    path: "/fit-check",
+    price: 0,
+  }),
+  service({
+    name: "Workflow-First AI Audit",
+    description: rungs[1].desc,
+    path: "/audit",
+    price: 750,
+  }),
+  service({
+    name: "Build With You",
+    description: rungs[2].desc,
+    path: "/services",
+    price: 1250,
+    unitText: "4 weeks",
+  }),
+  service({
+    name: "Build For You",
+    description: rungs[3].desc,
+    path: "/services",
+    price: 5500,
+    unitText: "project",
+  }),
+  faqPage("/services", faqs),
+];
+
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd graph={servicesJsonLd} />
       {/* P2 — page header */}
       <section className="px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">

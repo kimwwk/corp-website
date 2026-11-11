@@ -1,25 +1,18 @@
 import * as React from "react";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Mail } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/contact-form";
 import { TrackedLink } from "@/components/tracked-link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact — Kivov Digital",
   description:
     "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
-  openGraph: {
-    title: "Contact — Kivov Digital",
-    description:
-      "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  path: "/contact",
+});
 
 const afterYouSend = [
   {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ArrowRight } from "lucide-react";
 
 import { Interlude } from "@/components/interlude";
@@ -21,18 +22,12 @@ import { cn } from "@/lib/utils";
  * numbers; products close as a co-build invitation.
  */
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Showcase — Kivov Digital",
-  description: "Client systems in production, and what they returned.",
-  openGraph: {
-    title: "Showcase — Kivov Digital",
-    description: "Client systems in production, and what they returned.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  description:
+    "AI and automation systems Kivov Digital has built for small businesses, including an AI follow-up assistant for a Toronto mortgage team, and what they returned.",
+  path: "/showcase",
+});
 
 /* Home steps-h3 recipe — the pull-line and ledger-row headings share it. */
 const rowHeading =

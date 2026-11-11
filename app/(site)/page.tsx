@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import {
   Support,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
+import { pageMetadata } from "@/lib/seo";
 
 /*
  * Home — Green Ledger (Direction C). Conversion spine per the 002 split plan:
@@ -22,6 +24,13 @@ import { TrackedLink } from "@/components/tracked-link";
  * /audit. Copy: Lindsay report 2026-07-26 with Kim's hero + CTA revisions.
  * Composed from the section kit (components/sections/).
  */
+
+export const metadata: Metadata = pageMetadata({
+  title: "Kivov Digital — Workflow-First AI for Small Business",
+  description:
+    "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
+  path: "/",
+});
 
 /* Display pull-line (.big-line in the Direction C sample). */
 const bigLine =

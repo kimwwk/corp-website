@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbs, pageMetadata, service } from "@/lib/seo";
 import { Check as CheckIcon } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,20 +21,12 @@ import { AUDIT_PAYMENT_URL } from "@/lib/payments";
  * merged with the original page's pricing: the price card, founding-client
  * price, and the $500 implementation credit stay.
  */
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "AI Workflow Audit — Kivov Digital",
   description:
     "Before you invest in technology, understand the work. A focused review of one priority business process, with a practical plan for improving it: CAD $750, founding clients $495.",
-  openGraph: {
-    title: "AI Workflow Audit — Kivov Digital",
-    description:
-      "Before you invest in technology, understand the work. A focused review of one priority business process, with a practical plan for improving it: CAD $750, founding clients $495.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  path: "/audit",
+});
 
 const h2 =
   "font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground";
@@ -81,9 +75,32 @@ const steps = [
   },
 ];
 
+/* Structured data: the audit as a priced Service with what it includes. */
+const auditJsonLd = [
+  breadcrumbs("/audit", "AI Workflow Audit"),
+  {
+    ...service({
+      name: "Workflow-First AI Audit",
+      description:
+        "A focused review of one priority business process, with a practical, prioritized written plan for improving it with AI and automation.",
+      path: "/audit",
+      price: 750,
+    }),
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "What the audit includes",
+      itemListElement: includes.map((name) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name },
+      })),
+    },
+  },
+];
+
 export default function AuditPage() {
   return (
     <>
+      <JsonLd graph={auditJsonLd} />
       {/* Hero — cream, price card right */}
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-12 lg:gap-10">

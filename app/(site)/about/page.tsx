@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/json-ld";
+import {
+  PERSON_ID,
+  absoluteUrl,
+  breadcrumbs,
+  pageMetadata,
+} from "@/lib/seo";
 import Image from "next/image";
 
 import { Marker } from "@/components/marker";
@@ -17,20 +24,12 @@ import {
  * reserved for the founder's vision. Portrait and social links kept from the
  * original page.
  */
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Kim — Kivov Digital",
   description:
     "Kim Wong is the founder of Kivov Digital and a former Deloitte and EY consultant with more than seven years of experience across software development, enterprise integrations, cloud architecture, AI, websites, portals, and custom systems.",
-  openGraph: {
-    title: "About Kim — Kivov Digital",
-    description:
-      "Kim Wong is the founder of Kivov Digital and a former Deloitte and EY consultant with more than seven years of experience across software development, enterprise integrations, cloud architecture, AI, websites, portals, and custom systems.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  path: "/about",
+});
 
 const thinkAbout = [
   "Who owns the information",
@@ -42,9 +41,23 @@ const thinkAbout = [
   "What should never be automated",
 ];
 
+/* Structured data: this page is Kim's profile (the Person entity itself is
+   in the site-wide graph from app/(site)/layout.tsx). */
+const aboutJsonLd = [
+  breadcrumbs("/about", "About"),
+  {
+    "@type": "ProfilePage",
+    "@id": `${absoluteUrl("/about")}#profile`,
+    url: absoluteUrl("/about"),
+    name: "About Kim — Kivov Digital",
+    mainEntity: { "@id": PERSON_ID },
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
+      <JsonLd graph={aboutJsonLd} />
       {/* Page header + bio, portrait on the right */}
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">

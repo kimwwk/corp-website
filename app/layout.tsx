@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono, Work_Sans } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { OG_IMAGE, SITE_NAME } from "@/lib/seo";
 import "./globals.css";
 
 /* Green Ledger type system: Archivo (display), Work Sans (body), IBM Plex
@@ -34,14 +35,21 @@ export const metadata: Metadata = {
      (`app/favicon.ico`, `app/icon.png`, `app/icon1.png`, `app/apple-icon.png`)
      so Next derives `type`/`sizes` and content-hashes the URLs. A `metadata.icons`
      entry here would take precedence and silently suppress all four. */
+  /* Defaults for routes that don't call `pageMetadata()` (legal pages,
+     /thanks). No canonical here on purpose — it would be inherited by every
+     route and point them all at the home page. */
   openGraph: {
     title: "Kivov Digital — Workflow-First AI for Small Business",
     description:
       "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
+    siteName: SITE_NAME,
+    locale: "en_CA",
     type: "website",
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
+    images: [OG_IMAGE.url],
   },
 };
 
