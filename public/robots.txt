@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kivov.work/sitemap.xml
+Sitemap: https://kivov.ca/sitemap.xml

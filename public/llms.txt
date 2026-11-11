@@ -15,14 +15,14 @@ Key facts:
 
 ## Pages
 
-- [Home](https://kivov.work/): What Kivov does and who it is for.
-- [Services](https://kivov.work/services/): The full service ladder, pricing and FAQ.
-- [AI Workflow Audit](https://kivov.work/audit/): What the audit covers, what it won't do, and how it runs.
-- [Free Workflow Fit Check](https://kivov.work/fit-check/): The free three-minute self-assessment.
-- [Showcase](https://kivov.work/showcase/): Systems built and in use, e.g. an AI follow-up email assistant for a Toronto mortgage team.
-- [About Kim Wong](https://kivov.work/about/): Founder background and why Kivov exists.
-- [Book a call](https://kivov.work/book/): Schedule a Zoom call.
-- [Contact](https://kivov.work/contact/): Send a message.
+- [Home](https://kivov.ca/): What Kivov does and who it is for.
+- [Services](https://kivov.ca/services/): The full service ladder, pricing and FAQ.
+- [AI Workflow Audit](https://kivov.ca/audit/): What the audit covers, what it won't do, and how it runs.
+- [Free Workflow Fit Check](https://kivov.ca/fit-check/): The free three-minute self-assessment.
+- [Showcase](https://kivov.ca/showcase/): Systems built and in use, e.g. an AI follow-up email assistant for a Toronto mortgage team.
+- [About Kim Wong](https://kivov.ca/about/): Founder background and why Kivov exists.
+- [Book a call](https://kivov.ca/book/): Schedule a Zoom call.
+- [Contact](https://kivov.ca/contact/): Send a message.
 
 ## Optional
 

@@ -7,7 +7,7 @@ import type { Metadata } from "next";
    - The schema.org entities below feed the JSON-LD graph that search
      engines and AI answer engines use to understand who Kivov is. */
 
-export const SITE_URL = "https://kivov.work";
+export const SITE_URL = "https://kivov.ca";
 export const SITE_NAME = "Kivov Digital";
 export const OG_IMAGE = {
   url: "/og-default.png",
