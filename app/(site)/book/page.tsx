@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 
 import { BookingWidget } from "@/components/booking-widget";
 import { TrackedLink } from "@/components/tracked-link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Book a Call — Kivov Digital",
   description:
     "Pick a time and we'll talk it through live on Zoom. If you're still exploring, start with the free Workflow Fit Check instead.",
-  openGraph: {
-    title: "Book a Call — Kivov Digital",
-    description:
-      "Pick a time and we'll talk it through live on Zoom. If you're still exploring, start with the free Workflow Fit Check instead.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+  path: "/book",
+});
 
 export default function BookPage() {
   /* Wider than the standard content column so the Calendly iframe clears

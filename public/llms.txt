@@ -1,0 +1,32 @@
+# Kivov Digital
+
+> Kivov Digital is a Toronto-based, workflow-first AI consultancy for small and mid-sized businesses. It maps how work actually happens, finds where time is being lost, and builds practical AI and automation systems around the way a team already works, instead of forcing the business into a new platform. Founded by Kim Wong, a former Deloitte and EY consultant with 7+ years in software development, enterprise integrations, cloud architecture and AI.
+
+Key facts:
+
+- Location: Toronto, Ontario, Canada. Calls run live on Zoom.
+- Approach: start with the workflow, not the tool. Every engagement begins by understanding one real process; the audit also names what should *not* be automated.
+- Prices are public and in CAD:
+  - Workflow Fit Check: free, about 3 minutes, eight questions, high-level result.
+  - Workflow-First AI Audit: CAD $495 founding-client price for the first five clients (standard CAD $750). One priority workflow → map, bottlenecks, prioritized opportunities, written 30-day action plan, walkthrough. CAD $500 is credited if you hire Kivov for implementation within 30 days.
+  - Build With You: CAD $1,250 billed every 4 weeks. Two 45-minute strategy calls a month, custom Claude skills and automations built alongside your team, always-on text support with a 12 business-hour response SLA, documentation hub. 100% money-back guarantee if you're not satisfied with the results.
+  - Build For You: CAD $5,500 per project. One workflow taken end-to-end (up to ~two core system integrations): architecture, implementation, testing, exception handling, team handoff, 30-day stabilization. Starts with discovery or a completed audit.
+- Contact: hello@kivov.work · replies within one business day.
+
+## Pages
+
+- [Home](https://kivov.work/): What Kivov does and who it is for.
+- [Services](https://kivov.work/services/): The full service ladder, pricing and FAQ.
+- [AI Workflow Audit](https://kivov.work/audit/): What the audit covers, what it won't do, and how it runs.
+- [Free Workflow Fit Check](https://kivov.work/fit-check/): The free three-minute self-assessment.
+- [Showcase](https://kivov.work/showcase/): Systems built and in use, e.g. an AI follow-up email assistant for a Toronto mortgage team.
+- [About Kim Wong](https://kivov.work/about/): Founder background and why Kivov exists.
+- [Book a call](https://kivov.work/book/): Schedule a Zoom call.
+- [Contact](https://kivov.work/contact/): Send a message.
+
+## Optional
+
+- [LinkedIn (company)](https://www.linkedin.com/company/kivov)
+- [Kim Wong on LinkedIn](https://www.linkedin.com/in/kim-wong-wwk/)
+- [Kim Wong on X](https://x.com/kimwong_wwk)
+- [YouTube](https://www.youtube.com/@kivov-digital)
