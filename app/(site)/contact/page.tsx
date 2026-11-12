@@ -155,11 +155,11 @@ export default function ContactPage() {
                       Email
                     </p>
                     <a
-                      href="mailto:hello@kivov.work"
+                      href="mailto:hello@kivov.ca"
                       className="rounded-sm font-medium text-foreground transition-colors hover:text-primary"
-                      aria-label="Send email to hello@kivov.work"
+                      aria-label="Send email to hello@kivov.ca"
                     >
-                      hello@kivov.work
+                      hello@kivov.ca
                     </a>
                   </div>
                 </div>

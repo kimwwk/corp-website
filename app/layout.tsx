@@ -24,7 +24,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kivov.work"),
+  metadataBase: new URL("https://kivov.ca"),
   title: "Kivov Digital — Workflow-First AI for Small Business",
   description:
     "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",

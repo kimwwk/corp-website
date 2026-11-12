@@ -13,7 +13,7 @@ const CALENDLY_URL = "https://calendly.com/kimwong-wwk/let-s-meet";
 // `embed_domain` is required for Calendly to post booking events
 // (calendly.event_scheduled) back to the parent window — that's what we
 // listen for below to fire the GA4 `generate_lead` conversion.
-const EMBED_SRC = `${CALENDLY_URL}?hide_gdpr_banner=1&embed_type=Inline&embed_domain=kivov.work`;
+const EMBED_SRC = `${CALENDLY_URL}?hide_gdpr_banner=1&embed_type=Inline&embed_domain=kivov.ca`;
 
 export function BookingWidget() {
   React.useEffect(() => {

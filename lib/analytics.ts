@@ -82,7 +82,7 @@ function startPostHog(): void {
 function stopAnalytics(): void {
   (window as unknown as Record<string, unknown>)[`ga-disable-${GA_ID}`] = true;
   // Deleting a cookie needs an exact domain match, and GA writes to the highest
-  // registrable domain — `.kivov.work` even when served from a subdomain. So
+  // registrable domain — `.kivov.ca` even when served from a subdomain. So
   // clear every scope from the current host upwards; the ones the browser
   // rejects (public suffixes) are no-ops.
   const labels = window.location.hostname.split(".");
