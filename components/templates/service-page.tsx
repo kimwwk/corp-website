@@ -16,6 +16,7 @@ import {
   aiPackagesCta,
   contactCta,
   leadCtas,
+  packageLinkCta,
   startsWithCall,
 } from "@/components/templates/ctas";
 import { proofItems } from "@/content/proof";
@@ -31,6 +32,10 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * What's included · How it works · Use cases · Proof · Testimonial(s) · How
  * to start · Questions · closing band. Sections with no content (no use
  * cases, proof or testimonials for this service) are left out.
+ *
+ * How to start: a package line with an `href` links its package name to
+ * that page (fit check, audit, AI packages); the "See AI packages" button
+ * stays under the rows.
  *
  * Hero and closing band: quote services (Website Management, App Development)
  * lead with "Book a free call" and offer the fit check as a text link; package
@@ -133,7 +138,11 @@ export function ServicePage({ service }: { service: Service }) {
         {start.kind === "packages" ? (
           <>
             <StatementRows
-              rows={start.lines.map((l) => ({ title: l.package, body: l.line }))}
+              rows={start.lines.map((l) => ({
+                title: l.package,
+                body: l.line,
+                link: l.href ? packageLinkCta(l.href, src, "how_to_start") : undefined,
+              }))}
             />
             <Reveal>
               <CtaRow primary={aiPackagesCta(src, "how_to_start")} />

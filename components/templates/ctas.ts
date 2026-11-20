@@ -1,5 +1,5 @@
 import type { Cta } from "@/components/sections";
-import type { Service } from "@/content/types";
+import type { PackageHref, Service } from "@/content/types";
 
 /*
  * The CTAs the page templates repeat. `source_page` is the page slug (resource
@@ -80,6 +80,28 @@ export function bookCallCta(sourcePage: string, ctaLocation: string, arrow = fal
     arrow,
     href: "/book",
     event: "booking_cta_clicked",
+    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
+  };
+}
+
+/*
+ * A "How to start" package name linked to its page. Same event as every
+ * other link to that page: fit check, audit, or AI packages.
+ */
+const PACKAGE_LINK_EVENTS: Record<PackageHref, string> = {
+  "/fit-check": "fit_check_cta_clicked",
+  "/audit": "audit_cta_clicked",
+  "/ai-packages": "ai_packages_cta_clicked",
+};
+
+export function packageLinkCta(
+  href: PackageHref,
+  sourcePage: string,
+  ctaLocation: string,
+): Omit<Cta, "label"> {
+  return {
+    href,
+    event: PACKAGE_LINK_EVENTS[href],
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },
   };
 }

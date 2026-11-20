@@ -78,14 +78,17 @@ export const services: Service[] = [
       lines: [
         {
           package: "Workflow Fit Check",
+          href: "/fit-check",
           line: "Free, 3 minutes. Start here while you are still identifying the problem.",
         },
         {
           package: "AI Workflow Audit",
+          href: "/audit",
           line: "For when you already know which process needs attention and want a professional recommendation.",
         },
         {
           package: "Build With You",
+          href: "/ai-packages",
           line: "Two strategy calls a month while your team builds, with text support in between.",
         },
       ],
@@ -275,14 +278,17 @@ export const services: Service[] = [
       lines: [
         {
           package: "Workflow Fit Check",
+          href: "/fit-check",
           line: "Free, 3 minutes. Start here while you are still finding which workflow to automate.",
         },
         {
           package: "AI Workflow Audit",
+          href: "/audit",
           line: "For when you know which process needs attention and want a professional recommendation before the build.",
         },
         {
           package: "Build For You",
+          href: "/ai-packages",
           line: "One workflow built for you at a flat project price, starting with discovery or a completed audit.",
         },
       ],

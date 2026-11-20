@@ -9,6 +9,6 @@ export { PageHeader } from "@/components/sections/page-header";
 export { PostBody } from "@/components/sections/post-body";
 export { ProofSections } from "@/components/sections/proof-sections";
 export { Section } from "@/components/sections/section";
-export { StatementRows } from "@/components/sections/statement-rows";
+export { StatementRows, type StatementRow } from "@/components/sections/statement-rows";
 export { StepRows } from "@/components/sections/step-rows";
 export { TestimonialGrid, type Quote } from "@/components/sections/testimonial-grid";

@@ -178,6 +178,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | `linkGreen` (on cream) | `inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (`<CtaRow>` secondary) |
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
+| Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type) — service "How to start" package names |
 
 ---
 
@@ -217,7 +218,8 @@ New sections are **composed from these**, never re-typed from the recipes above:
   new tab)
 - **`MonoLabel`** — the 0.14em mono label (green / caption / ink); `as="h2"` for a heading
 - **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
-- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger
+- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; a row's
+  optional `link` turns its title into a tracked row-heading link
 - **`StepRows`** — the huge-numeral "How it works" ladder
 - **`CardGrid`** — vocabulary #5 as a component: link cards (`rounded-2xl bg-card p-7 ring-1
   ring-border`, hover `ring-primary/40`, row-heading title, one line, hover arrow), 1–4 columns.
@@ -402,7 +404,9 @@ One system, defined in `app/globals.css`:
   links are client-only, since Base UI portals don't render on the server). `MonoLabel` takes
   `as="h2"` and `Section` takes `eyebrowAs="h2"`: eyebrow-only sections on the service,
   use-case, resource-post and overview templates now head their section with an h2 in the
-  same mono-label look.
+  same mono-label look. `StatementRows` rows take an optional `link` (row-heading link
+  recipe above); service "How to start" package lines carry an `href` (fit check, audit, AI
+  packages) and link their package names with the event each page already uses.
 - **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
   can carry two text links beside its one primary (Website Management use cases: "Book a
   free call" and the parent-service link). Still one primary per section. Use-case pages
