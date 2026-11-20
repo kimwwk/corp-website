@@ -3,8 +3,9 @@ import type { Service, ServiceSlug } from "@/content/types";
 /*
  * The four service pages (/services/<slug>/). Keywords from the approved site
  * structure (adhoc_jobs/kivov_keyword_research/SITE-STRUCTURE-DECISION.md).
- * Only AI Packages shows prices: Website Management and App Development are
- * quoted after a free call.
+ * Prices: AI Starters shows the Fit Check, the audit and Build With You; the
+ * AI Automation page shows Build For You (Kim, 2026-11-20). Website Management
+ * and App Development are quoted after a free call.
  *
  * Copy sources: adhoc_jobs/kivov_site_rebuild/facts/<slug>.md. Every claim
  * here traces to live site copy, a case study or a job record listed there.
@@ -88,7 +89,7 @@ export const services: Service[] = [
         },
         {
           package: "Build With You",
-          href: "/ai-packages",
+          href: "/ai-starters",
           line: "2 strategy calls a month while your team builds, with text support in between.",
         },
       ],
@@ -102,7 +103,7 @@ export const services: Service[] = [
       {
         question: "How much does an AI consultant cost?",
         answer:
-          "Our AI consulting services and their prices are on the AI Packages page. The Workflow Fit Check is free.",
+          "Our AI consulting services and their prices are on the AI Starters page. The Workflow Fit Check is free.",
       },
       {
         question: "What does AI consulting mean?",
@@ -181,7 +182,7 @@ export const services: Service[] = [
         body: "Ongoing changes every month, so the site stays current.",
       },
     ],
-    useCases: ["wordpress-support", "local-seo", "law-firm-seo"],
+    useCases: ["wordpress-support", "law-firm-seo"],
     proof: [],
     howToStart: {
       kind: "quote",
@@ -223,7 +224,7 @@ export const services: Service[] = [
       "AI automation for Toronto small businesses, built inside the tools you already use. You decide what waits for your approval and what runs on its own.",
     cardLine: "Hand the repetitive work to AI, inside the tools your team already uses.",
     h1: "An AI automation agency for the way your team already works.",
-    lead: "We take one workflow, like follow-up emails or vendor invoices, and automate it inside the tools you already use. You decide what waits for your approval and what can run on its own, like a text back to a missed call.",
+    lead: "We take one workflow, like follow-up emails or vendor invoices, and automate it inside the tools you already use. You decide what waits for your approval and what can run on its own, like an AI receptionist booking a caller into your calendar.",
     problems: [
       "You are copying the same information between platforms.",
       "Follow-ups get delayed when the business gets busy.",
@@ -241,7 +242,7 @@ export const services: Service[] = [
       },
       {
         title: "Your rules, your approval",
-        body: "Emails and invoices wait as drafts for your review. Anything that runs on its own, like a missed-call text, follows rules you approve first.",
+        body: "Emails and invoices wait as drafts for your review. Anything that runs on its own, like an AI receptionist's bookings, follows rules you approve first.",
       },
       {
         title: "30 days of stabilization",
@@ -268,7 +269,6 @@ export const services: Service[] = [
     ],
     useCases: [
       "invoice-automation",
-      "missed-call-text-back",
       "ai-receptionist",
       "ai-follow-up-emails",
     ],
@@ -285,11 +285,6 @@ export const services: Service[] = [
           package: "AI Workflow Audit",
           href: "/audit",
           line: "For when you know which process needs attention and want a professional recommendation before the build.",
-        },
-        {
-          package: "Build For You",
-          href: "/ai-packages",
-          line: "One workflow built for you at a flat project price, starting with discovery or a completed audit.",
         },
       ],
     },
@@ -313,6 +308,11 @@ export const services: Service[] = [
         question: "What is the best workflow automation platform?",
         answer:
           "Often the one you already pay for. We check what your current tools can do before adding anything new.",
+      },
+      {
+        question: "What does the Build For You package actually cover?",
+        answer:
+          "Every Build For You project begins with discovery or a completed audit. Two tracks come out of it: AI & automation, built around the workflow we mapped together, and custom software development, when off-the-shelf won't fit. The package covers the first track: one end-to-end workflow with up to roughly two core system integrations, including AI and automation architecture, implementation, testing, exception handling, team handoff, and a 30-day stabilization period. Custom software builds, or anything bigger than one workflow, are scoped and quoted separately after discovery.",
       },
     ],
     closing: {

@@ -22,10 +22,8 @@ export type ServiceSlug =
 
 export type UseCaseSlug =
   | "wordpress-support"
-  | "local-seo"
   | "law-firm-seo"
   | "invoice-automation"
-  | "missed-call-text-back"
   | "ai-receptionist"
   | "ai-follow-up-emails";
 
@@ -86,9 +84,10 @@ export type PackageHref = "/fit-check" | "/audit" | "/ai-packages";
 export type Testimonial = {
   id: TestimonialId;
   name: string;
-  /** Caption shown under the name. */
-  role: string;
-  /** The quote, verbatim from its source, one string per paragraph. */
+  /** Caption shown under the name: where it was published ("From LinkedIn"),
+      or company and role when there is no public review source. */
+  caption: string;
+  /** A short verbatim excerpt that fits the pages it appears on, one string per paragraph. */
   quote: string[];
   /** Where the quote was published. Public sources only. */
   source: { channel: string; url?: string; date?: string };

@@ -1,14 +1,14 @@
 import type { UseCase, UseCaseSlug } from "@/content/types";
 
 /*
- * The seven use-case pages (/use-cases/<slug>/), each linking back to its
+ * The five use-case pages (/use-cases/<slug>/), each linking back to its
  * parent service. Keywords and proof placement from the approved site
  * structure (SITE-STRUCTURE-DECISION.md). AI Chatbot for Website is paused:
- * not built, not linked.
+ * not built, not linked. Local SEO & GEO and Missed Call Text Back were removed
+ * by Kim on 2026-11-20.
  *
  * `toolOrDone` is present only on the pages whose searchers are mostly
- * shopping for software (Missed Call Text Back, Invoice Automation, AI
- * Receptionist). Whether the section ships at all is still Kim's call.
+ * shopping for software (Invoice Automation, AI Receptionist). Whether the section ships at all is still Kim's call.
  *
  * Copy sources: adhoc_jobs/kivov_site_rebuild/facts/<slug>.md. Client work is
  * described without naming any client.
@@ -102,85 +102,6 @@ export const useCases: UseCase[] = [
     closing: {
       title: "Let's look at your WordPress site.",
       lead: "Book a free call and we will tell you what to fix first.",
-    },
-  },
-  {
-    slug: "local-seo",
-    name: "Local SEO & GEO",
-    parent: "website-management",
-    keyword: "local seo toronto",
-    secondaryKeywords: [
-      "seo toronto",
-      "ai seo",
-      "ai seo agency",
-      "ai seo services",
-      "geo agency",
-      "geo services",
-    ],
-    title: "Local SEO Toronto and GEO for AI Search — Kivov Digital",
-    description:
-      "Local SEO in Toronto, plus GEO (also called AI SEO): helping Google and AI assistants like ChatGPT understand and recommend your business.",
-    cardLine: "Help Google and AI assistants like ChatGPT understand what you do and who you serve.",
-    h1: "Local SEO in Toronto, built for AI search too.",
-    problemLine: "Some customers now ask ChatGPT who to call. The answer depends on what AI can read about you.",
-    problem: [
-      "When someone asks an AI assistant for a recommendation, it searches the web by category: a place, a type of provider, an industry, sometimes a tool. Then it names the businesses whose sites answer that question clearly.",
-      "In our own research into how AI assistants answer, the site they cited most often had one clear page per problem. That is GEO, generative engine optimization, also called AI SEO: making your business easy for AI to understand and recommend.",
-      "Local SEO is the foundation underneath: your Google Business Profile, your reviews, and a site Google can index. Our GEO services build on it.",
-    ],
-    setup: [
-      {
-        title: "Google Business Profile",
-        body: "Your profile description written around what you do and who you serve, and your reviews shown on your site.",
-      },
-      {
-        title: "A site search engines can read",
-        body: "Search Console and Bing Webmaster Tools set up, your sitemap submitted, and your business details added as structured data.",
-      },
-      {
-        title: "One page per question",
-        body: "Pages and Q&A sections that answer what your customers ask, in the words they use.",
-      },
-      {
-        title: "Checking what AI says",
-        body: "We ask AI assistants the questions your customers ask, and see whether your business comes up.",
-      },
-    ],
-    proof: [],
-    worksWith: [
-      "Google Business Profile",
-      "Google Search Console",
-      "Bing Webmaster Tools",
-      "Google Analytics",
-      "ChatGPT",
-      "Google AI Overviews",
-      "WordPress",
-    ],
-    faqs: [
-      {
-        question: "Does local SEO still work?",
-        answer:
-          "Yes. Your Google Business Profile, your reviews and a site Google can index still decide who shows up nearby. The same groundwork is what AI assistants read when they recommend a business.",
-      },
-      {
-        question: "What is AI SEO known as?",
-        answer:
-          "GEO, generative engine optimization, and sometimes AEO, answer engine optimization. They all mean helping AI assistants find, understand and recommend your business.",
-      },
-      {
-        question: "What is an AI SEO agency?",
-        answer:
-          "A team that helps your business show up in AI answers as well as on Google. With us, that starts with your Google Business Profile, a site AI can read, and pages that answer your customers' questions.",
-      },
-      {
-        question: "How much does local SEO cost?",
-        answer:
-          "We quote after a free call, once we have seen your site and your Google Business Profile.",
-      },
-    ],
-    closing: {
-      title: "Find out what AI says about you.",
-      lead: "Book a free call and we will walk through your site and your Google listing.",
     },
   },
   {
@@ -336,79 +257,6 @@ export const useCases: UseCase[] = [
     closing: {
       title: "Start with your invoice workflow.",
       lead: "The free fit check takes 3 minutes and shows you where to start.",
-    },
-  },
-  {
-    slug: "missed-call-text-back",
-    name: "Missed Call Text Back",
-    parent: "ai-automation",
-    keyword: "missed call text back",
-    secondaryKeywords: ["speed to lead"],
-    title: "Missed Call Text Back on Your Business Number — Kivov Digital",
-    description:
-      "Missed call text back that works with the phone number you already have: callers get a text within seconds and can book a time.",
-    cardLine: "Callers you miss get a text within seconds, and keep calling the number they know.",
-    h1: "Missed call text back that works with the number you already have.",
-    problemLine: "When you cannot pick up, the caller moves on to the next business on the list.",
-    problem: [
-      "Speed to lead is how fast a new enquiry hears back. For a call you miss, the fastest reply is a text within seconds: sorry we missed you, reply here or book a time.",
-      "One missed call a week is 50 a year. When one job is worth thousands of dollars, each of those calls matters.",
-    ],
-    setup: [
-      {
-        title: "Keep your number",
-        body: "Customers keep calling the number they know. Calls you cannot answer are forwarded with a setting from your phone carrier, from a mobile or a landline.",
-      },
-      {
-        title: "Where the text comes from",
-        body: "On a landline or toll-free line, the text can come from that same number. Business texting systems cannot send from a mobile number, so on a mobile it comes from a second business number we set up for you. You choose where replies land: your phone, your CRM's inbox, or an AI that answers and books.",
-      },
-      {
-        title: "The text goes out",
-        body: "Within seconds, the caller gets a text from your business with a way to reply and a link to book.",
-      },
-      {
-        title: "Rules that feel human",
-        body: "A short delay, business-hours rules, and one text even when someone redials 3 times.",
-      },
-      {
-        title: "Texting registration",
-        body: "We handle the registration Canadian carriers require for business texting. It takes 1 to 2 weeks.",
-      },
-    ],
-    toolOrDone: {
-      tool: "If you already use a business phone app or a CRM, missed call text back is often a setting you can switch on. A simple text template is enough for many businesses.",
-      doneForYou:
-        "When you want the reply to continue as a conversation, follow your hours and book into your calendar, it is worth having it set up. It works with the number you have, and you own every rule.",
-    },
-    proof: [],
-    worksWith: [
-      "Your business number, mobile or landline",
-      "Twilio",
-      "n8n",
-      "GoHighLevel",
-      "Your CRM",
-    ],
-    faqs: [
-      {
-        question: "What to text back after a missed call?",
-        answer:
-          "Keep it short and give one next step. For example: \"Sorry we missed you. Reply here or book a time.\"",
-      },
-      {
-        question: "How much does missed call text back cost?",
-        answer:
-          "Many business phone apps and CRMs include it in their plans, and a custom setup costs little to run each month. Setting it up with us is a much smaller job than a full workflow build, and we quote it on a free call.",
-      },
-      {
-        question: "What if I want calls answered, not just texted back?",
-        answer:
-          "That is an AI receptionist: an AI voice agent that answers the call, follows your booking rules and books into your calendar.",
-      },
-    ],
-    closing: {
-      title: "Text back the calls you cannot take.",
-      lead: "The free fit check takes 3 minutes, and lead follow-up is one of the areas it covers.",
     },
   },
   {

@@ -78,7 +78,7 @@ export const resources: ResourcePost[] = [
         text: "GEO builds on SEO. AI assistants read the same web Google indexes, so a site Google can read is still the foundation.",
       },
     ],
-    related: { kind: "use-case", slug: "local-seo" },
+    related: { kind: "service", slug: "website-management" },
     closing: {
       title: "Make your business easy to recommend.",
       lead: "Book a free call and we will check what AI says about your business.",

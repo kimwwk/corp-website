@@ -13,7 +13,7 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
   },
   useCases: {
     title: "Use Cases: AI Automation and Website Work — Kivov Digital",
-    description: "Specific problems we solve: WordPress support, local SEO and GEO, invoice automation, missed call text back, AI receptionists and follow-up emails.",
+    description: "Specific problems we solve: WordPress support, SEO and GEO for law firms, invoice automation, AI receptionists and follow-up emails.",
     eyebrow: "Use Cases",
     h1: "Specific problems we solve.",
     lead: "Each one belongs to a service, and each is set up around the tools you already have.",

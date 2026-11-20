@@ -137,7 +137,7 @@ export const organization = {
     "Systems integration",
     "Custom software development",
     "Website management and maintenance",
-    "Local SEO and generative engine optimization (GEO)",
+    "SEO and generative engine optimization (GEO)",
   ],
   hasMap: GBP_URL,
   sameAs: ORG_SAME_AS,

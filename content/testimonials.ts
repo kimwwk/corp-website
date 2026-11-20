@@ -1,10 +1,16 @@
 import type { ServiceSlug, Testimonial } from "@/content/types";
 
 /*
- * Public testimonials only, quoted verbatim (spelling and punctuation as
- * published). Sources: context-infrastructure/contexts/kivov/testimonials/*.md
- * (LinkedIn recommendations scraped 2026-11-20) and, for Yongling Zheng, the
- * quote as it ran on the former /showcase page.
+ * Public testimonials only. Each `quote` is a short excerpt, a few whole
+ * sentences that fit the pages it appears on, copied verbatim (spelling and
+ * punctuation as published). The full texts are in
+ * context-infrastructure/contexts/kivov/testimonials/*.md (LinkedIn
+ * recommendations scraped 2026-11-20) and, for Yongling Zheng, the quote as it
+ * ran on the former /showcase page.
+ *
+ * `caption` names where the quote was published ("From LinkedIn", "From Google
+ * reviews"). A quote with no public review source keeps the person's company
+ * and role (Yongling Zheng). Kim's rule, 2026-11-20.
  *
  * Never add: private messages (files marked `site_use: never`: Lindsay Watson,
  * Chris Molder) or Xinyuan Qiao (a dog-sitting recommendation).
@@ -15,9 +21,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "yongling-zheng",
     name: "Yongling Zheng",
-    role: "Founder, Webie",
+    caption: "Founder, Webie",
     quote: [
-      "I love your work. You’re talented, easy to communicate with, and very professional. Looking forward to many more projects together.",
+      "I love your work. You’re talented, easy to communicate with, and very professional.",
     ],
     source: { channel: "Kivov Digital /showcase page (as published)" },
     relationship: "Founder, Webie",
@@ -26,11 +32,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "alan-kong",
     name: "Alan Kong",
-    role: "Client",
+    caption: "From LinkedIn",
     quote: [
-      "I’ve really enjoyed working with Kim. She’s technically strong, reliable, and just very easy to work with.",
-      "One thing I really appreciate is how quickly she gets things done. If she commits to a deadline, you can count on her to deliver, and she does it without compromising on quality. She’s thoughtful, detail-oriented, and very practical when it comes to solving problems.",
-      "I’d be very happy to work with Kim again and would have no hesitation recommending her to anyone looking for a dependable and capable developer.",
+      "One thing I really appreciate is how quickly she gets things done. If she commits to a deadline, you can count on her to deliver, and she does it without compromising on quality.",
     ],
     source: {
       channel: "LinkedIn recommendation",
@@ -43,7 +47,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "michaelangelo-agbodike",
     name: "Michaelangelo Agbodike",
-    role: "Client",
+    caption: "From LinkedIn",
     quote: [
       "Kim really help me gain clarity on how to automate my workflow for my content creation and gave me brilliant insight on how to make it easier and more efficient which saves me a lot of time now than it did originally.",
     ],
@@ -58,11 +62,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "joyce-yan",
     name: "Joyce Yan",
-    role: "Former tech lead",
+    caption: "From LinkedIn",
     quote: [
-      "I had the pleasure of working with Kim as her tech lead. What sets her apart is how fluidly she moves between business and technical worlds — she understands the “why” behind requirements as well as the “how” of implementation, which makes her a trusted translator between stakeholders and the dev team.",
       "She’s also been a driving force behind AI adoption on our team, leading GitHub Copilot enablement across the group and contributing to shared agents and tooling that others now rely on daily. She actively pushes the team to work smarter with it, while still holding the line on solid engineering practices.",
-      "On top of all that, she’s a generous mentor to junior engineers and delivers reliably end-to-end. Kim is exactly the kind of engineer who makes a team better just by being on it.",
     ],
     source: {
       channel: "LinkedIn recommendation",
@@ -75,9 +77,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "matthew-obrian",
     name: "Matthew O'Brian",
-    role: "Former senior colleague",
+    caption: "From LinkedIn",
     quote: [
-      "I had the pleasure of working with Kim on several projects, where she acted as a developer responsible for code development in our cloud environments. Her technical knowledge is exceptional. Just as importantly, Kim is someone who I and the teams truly enjoy working with. She's collaborative and always willing to help others succeed. She consistently made our team stronger, and I'd happily work with her again.",
+      "Her technical knowledge is exceptional. Just as importantly, Kim is someone who I and the teams truly enjoy working with.",
     ],
     source: {
       channel: "LinkedIn recommendation",
@@ -90,11 +92,9 @@ export const testimonials: Testimonial[] = [
   {
     id: "abdou-rakib-abente",
     name: "Abdou Rakib Abente",
-    role: "Mentee, School of Mentors",
+    caption: "From LinkedIn",
     quote: [
-      "I connected with Kim through School of Mentors, and from the very first conversation, I could tell she genuinely cares about helping people grow. Since then, she has been someone I can always count on. Whenever I'm building something new or working through a challenge, she's there to listen, ask the right questions, and give me honest, thoughtful feedback.",
-      "What stands out most about Kim is how available and supportive she is, not just once or twice, but consistently. She makes time to connect whenever I need it, and she always brings real insight, not just encouragement. On top of all that, she's building her own company, Kivov, and even hosted her first live event, so she truly understands what it takes to build something from the ground up.",
-      "I'm grateful to know her and to have her in my corner. Anyone lucky enough to work with or learn from Kim will benefit from her generosity, her honesty, and her genuine desire to see others succeed.",
+      "Whenever I'm building something new or working through a challenge, she's there to listen, ask the right questions, and give me honest, thoughtful feedback.",
     ],
     source: {
       channel: "LinkedIn recommendation",
