@@ -115,7 +115,7 @@ export const useCases: UseCase[] = [
     title: "Local SEO Toronto and GEO for AI Search — Kivov Digital",
     description:
       "Local SEO in Toronto, plus GEO (also called AI SEO): helping Google and AI assistants like ChatGPT understand and recommend your business.",
-    cardLine: "Get found on Google, and mentioned by ChatGPT and other AI assistants.",
+    cardLine: "Help Google and AI assistants like ChatGPT understand what you do and who you serve.",
     h1: "Local SEO in Toronto, built for AI search too.",
     problemLine: "More customers now ask ChatGPT who to call. The answer depends on what AI can read about you.",
     problem: [
@@ -191,7 +191,7 @@ export const useCases: UseCase[] = [
     h1: "Law firm SEO for Google and AI search.",
     problemLine: "Clients look for a lawyer on Google, and more of them now ask ChatGPT.",
     problem: [
-      "On a law firm client's site, the expertise was already there, in years of posts and a full team page. What it needed was the part Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
+      "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
       "AI assistants are more willing to cite content that answers a question directly and links to official sources. Legal content suits this well, with the lawyer's wording kept exactly as written.",
     ],
     setup: [
@@ -254,7 +254,7 @@ export const useCases: UseCase[] = [
     ],
     title: "Invoice Automation for Vendor PDFs — Kivov Digital",
     description:
-      "AI invoice automation: vendor PDFs read, checked and entered into QuickBooks or your ERP as drafts, with a person approving every invoice.",
+      "AI invoice automation: vendor PDFs read, checked and prepared as drafts for QuickBooks or your ERP, with a person approving every invoice.",
     cardLine: "Vendor invoice PDFs read by AI and entered as drafts for you to approve.",
     h1: "Invoice automation that reads every vendor's PDF.",
     problemLine: "Vendor invoices arrive as PDFs, every layout different, and someone types them in by hand.",
@@ -283,7 +283,7 @@ export const useCases: UseCase[] = [
     toolOrDone: {
       tool: "If your invoices come from a few suppliers with the same layouts, the bill capture in your accounting software or an off-the-shelf accounts payable tool may be enough.",
       doneForYou:
-        "When you have many suppliers, multi-line invoices and a system that is hard to connect, a reader built around your suppliers and your chart of accounts pays off. It runs inside the system you already use.",
+        "When you have many suppliers, multi-line invoices and a system that is hard to connect, a reader built around your suppliers and your chart of accounts is worth building. It runs inside the system you already use.",
     },
     proof: ["file-and-document-management"],
     worksWith: [
@@ -374,7 +374,7 @@ export const useCases: UseCase[] = [
       },
     ],
     closing: {
-      title: "Answer every caller, even on your busiest day.",
+      title: "Text back the calls you cannot take.",
       lead: "The free fit check shows you where your leads are waiting.",
     },
   },
@@ -442,7 +442,7 @@ export const useCases: UseCase[] = [
       },
     ],
     closing: {
-      title: "Let every call get answered.",
+      title: "Take bookings while you are busy.",
       lead: "The free fit check shows you where your calls and bookings get stuck.",
     },
   },
@@ -461,7 +461,7 @@ export const useCases: UseCase[] = [
     problemLine: "A good follow-up takes 15 to 30 minutes, and it is the first thing to slip on a busy day.",
     problem: [
       "After a client call, someone has to write the recap, list the documents the client needs to send, and file everything in the right folder.",
-      "Generic AI drafts do not help much. They have no idea who you are, what you sell or how you sound.",
+      "A generic AI draft has no idea who you are, what you sell or how you sound.",
     ],
     setup: [
       {
@@ -500,7 +500,7 @@ export const useCases: UseCase[] = [
       },
     ],
     closing: {
-      title: "Send every follow-up the same day.",
+      title: "Let AI draft the follow-up after every call.",
       lead: "The free fit check shows you where your follow-ups get stuck.",
     },
   },

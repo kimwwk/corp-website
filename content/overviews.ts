@@ -16,7 +16,7 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
     eyebrow: "Use Cases",
     h1: "Specific problems we solve.",
     lead: "Each one belongs to a service, and each is set up around the tools you already have.",
-    closing: { title: "Do not see your problem here?", lead: "Take the free fit check. It covers lead follow-up, scheduling, data entry, invoices, reporting and more." },
+    closing: { title: "Have a different problem in mind?", lead: "Take the free fit check. It covers lead follow-up, scheduling, data entry, invoices, reporting and more." },
   },
   resources: {
     title: "Resources: Answers for Small Business Owners — Kivov Digital",

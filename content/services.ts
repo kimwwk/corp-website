@@ -27,10 +27,9 @@ export const services: Service[] = [
     lead: "Before we recommend any tool, we learn how your business actually runs. Then we show you where AI fits and what to do first.",
     problems: [
       "You know AI could help, but you are not sure where it belongs.",
-      "The team tried ChatGPT, and the work still happens the same way.",
       "The owner has become the approval point for everything.",
       "You are paying for software the team barely uses.",
-      "Every vendor has a different AI tool to sell you.",
+      "Follow-ups get delayed when the business gets busy.",
     ],
     included: [
       {
@@ -121,7 +120,7 @@ export const services: Service[] = [
     title: "Website Management and Maintenance in Toronto — Kivov Digital",
     description:
       "We manage and maintain your website on WordPress, Wix, Squarespace, Shopify, GoDaddy or Webflow, plus your domain, hosting and Google Business Profile.",
-    cardLine: "Your website, domain and Google listing, kept current and working for you.",
+    cardLine: "Your website, domain and Google listing, kept current, with forms and tracking that work.",
     h1: "Website management for Toronto businesses.",
     lead: "We look after your website, your domain and your Google Business Profile, so your business stays current, easy to find and easy to contact.",
     problems: [
