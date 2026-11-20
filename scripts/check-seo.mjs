@@ -51,7 +51,7 @@ const PAGES = [
   ["/resources/generative-engine-optimization/", "generative engine optimization"],
   ["/resources/ai-automation/", "ai automation"],
   ["/resources/wordpress-seo/", "wordpress seo"],
-  ["/ai-packages/", null],
+  ["/ai-starters/", null],
   ["/about/", null],
   ["/contact/", null],
   ["/fit-check/", null],

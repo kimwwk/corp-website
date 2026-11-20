@@ -6,7 +6,7 @@ import { servicePath, services } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 
 /* Services overview: the four service pages as cards. The price cards that
-   used to live here are on /ai-packages. */
+   used to live here are on /ai-starters. */
 export const metadata: Metadata = pageMetadata({
   title: overviews.services.title,
   description: overviews.services.description,

@@ -32,7 +32,7 @@ import {
 } from "@/content/navigation";
 
 /*
- * Header: Services ▾ · Use Cases ▾ · AI Packages · Resources · About ·
+ * Header: Services ▾ · Use Cases ▾ · AI Starters · Resources · About ·
  * [Contact us]. The two dropdowns and the mobile sheet are built from
  * content/navigation.ts. Contact us is the one highlighted button.
  *

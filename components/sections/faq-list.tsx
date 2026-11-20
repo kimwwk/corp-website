@@ -8,7 +8,7 @@ import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 
 /*
- * FAQ — hairline accordion rows (the /ai-packages recipe): question in ink,
+ * FAQ — hairline accordion rows (the /ai-starters recipe): question in ink,
  * answer in body copy, capped at the prose measure. Plain-text answers, so
  * the same strings feed the FAQPage JSON-LD. Use inside a `staggered`
  * Section ("Questions").

@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...useCases.map((u) => pathForUseCase(u.slug)),
     "/resources",
     ...resources.map((r) => resourcePath(r.slug)),
-    "/ai-packages",
+    "/ai-starters",
     "/fit-check",
     "/audit",
     "/about",

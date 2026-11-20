@@ -30,7 +30,7 @@ import { pageMetadata } from "@/lib/seo";
 /*
  * Home — Green Ledger (Direction C). Conversion spine per the 002 split plan:
  * identity lives on /about, service depth on /services/*, prices on
- * /ai-packages, offer detail on /audit. Copy: Lindsay report 2026-07-26 with
+ * /ai-starters, offer detail on /audit. Copy: Lindsay report 2026-07-26 with
  * Kim's hero + CTA revisions. The Services cards, Use Cases strip and
  * Testimonials render from content/. Composed from the section kit
  * (components/sections/).
@@ -392,7 +392,7 @@ export default function HomePage() {
         <StepRows steps={steps} />
       </Section>
 
-      {/* Services teaser rows — each row is one link to /ai-packages; its
+      {/* Services teaser rows — each row is one link to /ai-starters; its
           heading carries the link cue at rest (underline + arrow scaled to
           the heading), since touch has no hover */}
       <Section staggered eyebrow="AI Packages" title="Two ways to work together">
@@ -400,7 +400,7 @@ export default function HomePage() {
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 40}>
               <TrackedLink
-                href="/ai-packages"
+                href="/ai-starters"
                 event="services_teaser_clicked"
                 eventProps={{ service: s.title }}
                 className="group grid gap-4 border-t border-border py-10 transition-colors hover:bg-card md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-12 md:py-12"

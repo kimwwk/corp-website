@@ -136,11 +136,11 @@ recipes for you.
 | Role | Recipe | Used |
 |---|---|---|
 | Home hero `h1` | `max-w-[11em] font-display text-[clamp(2.1rem,8vw,6rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` (`<Band hero>`) | home only |
-| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | ai-packages, about, audit, contact, book, thanks, fit-check; service + use-case heroes (`<Band hero="page">`); overview pages + resource posts (`<PageHeader>`) |
+| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | ai-starters, about, audit, contact, book, thanks, fit-check; service + use-case heroes (`<Band hero="page">`); overview pages + resource posts (`<PageHeader>`) |
 | Feature `h2` (green bands) | `max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground` (`<Band>`) | featured + closing bands |
 | Section `h2` | `font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground` (usually `mt-5 max-w-3xl` after an eyebrow; `<Section>`) | standard cream sections |
 | Card `h3` (large) | `font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | home offer cards |
-| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | ai-packages rungs, proof stat numerals (`<ProofSections>`) |
+| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | ai-starters rungs, proof stat numerals (`<ProofSections>`) |
 | Step numeral | `font-display text-[clamp(2.4rem,6vw,4.2rem)] leading-none font-black text-primary` (`<StepRows>`) | "How it works" ladders (home, audit) |
 | Interlude statement | `<Interlude>` component — `clamp(2rem,5.5vw,4.2rem)`, black, centered, `max-w-[16em]` | between sections |
 | Big line (pull-line) | `max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground` | closing statement inside a section |
@@ -182,7 +182,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | Link cue (`linkCueLabel` + `<LinkCueArrow>`, `components/sections/link-cue.tsx`) | how a link that isn't running text shows it is a link: its label in linkGreen's look (`underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary` right after it that nudges `group-hover:translate-x-1`. **Visible at rest** on every screen — touch has no hover. Never re-type it; three uses: `<CardGrid>` card foot ("Learn more"; not a link of its own, the whole card is the link), every `<LinkList>` row (the label is the row's name), Home's "Two ways to work together" rows (the label is the card-h3 heading; the arrow scales with it, `size-[0.75em] align-baseline`) |
 
 **Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
-least 24px tall: `inline-flex min-h-6 items-center` (the /ai-packages card back-links), or
+least 24px tall: `inline-flex min-h-6 items-center` (the /ai-starters card back-links), or
 `inline-block` at heading line height (row-heading links). The footer wordmark link is
 `min-h-11`, like the `size-11` social row beside it. Links inside running prose are exempt.
 
@@ -241,11 +241,11 @@ New sections are **composed from these**, never re-typed from the recipes above:
   to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
 - **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
-  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron (/ai-packages
+  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron (/ai-starters
   matches).
   The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
   them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
-  outside the kit (/ai-packages) sets it too
+  outside the kit (/ai-starters) sets it too
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
@@ -276,18 +276,18 @@ their colors.
   stay clean; `tone="green"` on cream, `tone="leaf"` on bands
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
-- `SiteHeader` — `Services ▾ · Use Cases ▾ · AI Packages · Resources · About · [Contact us]`,
+- `SiteHeader` — `Services ▾ · Use Cases ▾ · AI Starters · Resources · About · [Contact us]`,
   built from `content/navigation.ts`. Dropdowns are `NavigationMenuTrigger` + `NavigationMenuContent`
   (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
   ink (AI Consulting → Fit Check, AI Workflow Audit), then the "All …" overview link after a
   hairline. Triggers share the top-level link recipe. Every top-level item (both triggers, AI
-  Packages, Resources, About) shows the active underline anywhere in its section: its own page
+  Starters, Resources, About) shows the active underline anywhere in its section: its own page
   and every page under it (Resources on a post). `aria-current="page"` stays on the exact page
   only. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
   the server HTML (rendered `hidden` until a trigger opens them). **Contact us** is the
   header's one `size="lg"` rounded-full primary (the slot Free Fit Check had until 2026-11).
   Mobile sheet: the **Contact us** pill first (`size="xl"`, full width), then the five
-  top-level rows (Services, Use Cases, AI Packages, Resources, About; ≥44px, `sheetRow`). The
+  top-level rows (Services, Use Cases, AI Starters, Resources, About; ≥44px, `sheetRow`). The
   current page's row takes the `bg-muted` wash; a top-level row in the current section takes ink
   text and the desktop's active underline on its label (`sheetSectionMark`). The menu button
   and the sheet's Close are `size="icon-touch"` (44×44 around the 16px icon); the menu button's
@@ -429,7 +429,7 @@ One system, defined in `app/globals.css`:
 
 ## Known drift — do NOT copy these (fix when the file is next open for edits)
 
-- `/ai-packages` (moved from /services on 2026-11-20 with its content unchanged) still
+- `/ai-starters` (moved from /services on 2026-11-20 with its content unchanged) still
   re-types the P2 header that `<PageHeader>` now renders, and the FAQ accordion that
   `<FaqList>` renders (its answers carry inline emphasis, so they are JSX rather than the plain
   strings `FaqList` takes). Recompose it from the kit when the page is next edited.
@@ -440,7 +440,7 @@ One system, defined in `app/globals.css`:
   (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,
   `LinkList` and Home's "Two ways to work together" rows; `LinkList` rows and the "Two ways"
   headings now show the underline and arrow at rest (they hid the arrow until hover, which touch
-  never sees). Header: AI Packages, Resources and About are active anywhere in their section, like
+  never sees). Header: AI Starters, Resources and About are active anywhere in their section, like
   the dropdown triggers; in the mobile sheet a top-level row in the current section takes the
   active underline. `Button` gains `size="icon-touch"` (44px); the menu button and the sheet's
   Close use it (were 32px and 28px).
@@ -452,11 +452,11 @@ One system, defined in `app/globals.css`:
   arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`). Mobile sheet: Contact
   us first, Services and Use Cases collapse (closed by default), the scroll area starts below
   the close button. `TestimonialGrid` cells align to the top, names follow their quotes.
-  `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-packages)
-  trigger `gap-4`. Touch targets: row-heading links `inline-block`, /ai-packages card back-links
+  `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-starters)
+  trigger `gap-4`. Touch targets: row-heading links `inline-block`, /ai-starters card back-links
   `min-h-6`, footer wordmark `min-h-11`; the touch-target rule and a checklist line added.
   Overview pages' single card section takes an eyebrow from `Overview.cardsLabel`.
-- **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
+- **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-starters) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's
   links are client-only, since Base UI portals don't render on the server). `MonoLabel` takes
@@ -479,7 +479,7 @@ One system, defined in `app/globals.css`:
   `ui/navigation-menu` primitive's popup motion moved onto the system curve and 300ms (it
   shipped with `cubic-bezier(0.22,1,0.36,1)` at 350ms). /showcase is gone; its items are
   proof on the use-case and service pages. Header: Services and Use Cases dropdowns, AI
-  Packages / Resources / About links, Contact us replaces Free Fit Check as the highlighted
+  Starters / Resources / About links, Contact us replaces Free Fit Check as the highlighted
   button; mobile sheet grouped by section and used below `lg` (was `md`). Footer: site-map
   columns above the legal row.
 - **2026-08-18** — Mobile nav sheet: the wordmark is out of the sheet header (the site header

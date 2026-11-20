@@ -3,7 +3,7 @@ import { TrackedLink } from "@/components/tracked-link";
 
 /*
  * Statement rows — the title-left / body-right hairline rows ("What Kivov
- * helps you do", ai-packages "Included", service "What's included"). Rows reveal
+ * helps you do", ai-starters "Included", service "What's included"). Rows reveal
  * with a 40ms stagger; use inside a `staggered` Section.
  *
  * A row with a `link` renders its title as a tracked link (service "How to

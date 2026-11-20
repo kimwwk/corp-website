@@ -51,11 +51,11 @@ export function fitCheckLinkCta(sourcePage: string, ctaLocation: string): Cta {
   };
 }
 
-export function aiPackagesCta(sourcePage: string, ctaLocation: string): Cta {
+export function aiStartersCta(sourcePage: string, ctaLocation: string): Cta {
   return {
-    label: "See AI packages",
-    href: "/ai-packages",
-    event: "ai_packages_cta_clicked",
+    label: "See AI Starters",
+    href: "/ai-starters",
+    event: "ai_starters_cta_clicked",
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },
   };
 }
@@ -86,12 +86,12 @@ export function bookCallCta(sourcePage: string, ctaLocation: string, arrow = fal
 
 /*
  * A "How to start" package name linked to its page. Same event as every
- * other link to that page: fit check, audit, or AI packages.
+ * other link to that page: fit check, audit, or AI Starters.
  */
 const PACKAGE_LINK_EVENTS: Record<PackageHref, string> = {
   "/fit-check": "fit_check_cta_clicked",
   "/audit": "audit_cta_clicked",
-  "/ai-packages": "ai_packages_cta_clicked",
+  "/ai-starters": "ai_starters_cta_clicked",
 };
 
 export function packageLinkCta(

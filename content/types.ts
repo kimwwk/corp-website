@@ -79,7 +79,7 @@ export type Faq = { question: string; answer: string };
 
 /** Pages a "How to start" package line can link to. Each has its own click
     event (see `packageLinkCta` in components/templates/ctas.ts). */
-export type PackageHref = "/fit-check" | "/audit" | "/ai-packages";
+export type PackageHref = "/fit-check" | "/audit" | "/ai-starters";
 
 export type Testimonial = {
   id: TestimonialId;
@@ -117,7 +117,7 @@ export type Service = {
   steps: { title: string; body: string }[];
   useCases: UseCaseSlug[];
   proof: ProofId[];
-  /** "How to start": packages (one line each, links to /ai-packages) or a quote after a free call.
+  /** "How to start": packages (one line each, links to /ai-starters) or a quote after a free call.
       A line's optional `href` links its package name to that package's page. */
   howToStart:
     | { kind: "packages"; lines: { package: string; line: string; href?: PackageHref }[] }

@@ -5,7 +5,7 @@ import { pathForUseCase, useCases } from "@/content/use-cases";
 /*
  * Site navigation, built from content/ so a new page shows up in the header
  * dropdowns, the mobile sheet and the footer at once.
- * Header: Services ▾ · Use Cases ▾ · AI Packages · Resources · About · [Contact us].
+ * Header: Services ▾ · Use Cases ▾ · AI Starters · Resources · About · [Contact us].
  */
 export type NavLink = { label: string; href: string };
 export type NavItem = NavLink & { children?: NavLink[] };
@@ -46,7 +46,7 @@ export const useCasesNav: NavGroup = {
 export const menuGroups = [servicesNav, useCasesNav];
 
 export const primaryLinks: NavLink[] = [
-  { label: "AI Packages", href: "/ai-packages" },
+  { label: "AI Starters", href: "/ai-starters" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
 ];
@@ -80,7 +80,7 @@ export const footerGroups: { label: string; links: FooterLink[] }[] = [
   {
     label: "Company",
     links: [
-      { label: "AI Packages", href: "/ai-packages" },
+      { label: "AI Starters", href: "/ai-starters" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
       { label: "Book a call", href: "/book" },

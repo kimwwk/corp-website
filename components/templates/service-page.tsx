@@ -13,7 +13,7 @@ import {
   TestimonialGrid,
 } from "@/components/sections";
 import {
-  aiPackagesCta,
+  aiStartersCta,
   contactCta,
   leadCtas,
   packageLinkCta,
@@ -37,12 +37,12 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * service.
  *
  * How to start: a package line with an `href` links its package name to
- * that page (fit check, audit, AI packages); the "See AI packages" button
+ * that page (fit check, audit, AI Starters); the "See AI Starters" button
  * stays under the rows.
  *
  * Hero and closing band: quote services (Website Management, App Development)
  * lead with "Book a free call" and offer the fit check as a text link; package
- * services lead with Free Fit Check, plus "See AI packages" in the hero.
+ * services lead with Free Fit Check, plus "See AI Starters" in the hero.
  */
 export function ServicePage({ service }: { service: Service }) {
   const src = service.slug;
@@ -86,7 +86,7 @@ export function ServicePage({ service }: { service: Service }) {
           primary={hero.primary}
           secondary={[
             ...hero.secondary,
-            ...(start.kind === "packages" ? [aiPackagesCta(src, "hero")] : []),
+            ...(start.kind === "packages" ? [aiStartersCta(src, "hero")] : []),
           ]}
         />
       </Band>
@@ -148,7 +148,7 @@ export function ServicePage({ service }: { service: Service }) {
               }))}
             />
             <Reveal>
-              <CtaRow primary={aiPackagesCta(src, "how_to_start")} />
+              <CtaRow primary={aiStartersCta(src, "how_to_start")} />
             </Reveal>
           </>
         ) : (
