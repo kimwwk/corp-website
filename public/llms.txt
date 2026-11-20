@@ -1,10 +1,10 @@
 # Kivov Digital
 
-> Kivov Digital is a Toronto-based, workflow-first AI consultancy for small and mid-sized businesses. It maps how work actually happens, finds where time is being lost, and builds practical AI and automation systems around the way a team already works, instead of forcing the business into a new platform. Founded by Kim Wong, a former Deloitte and EY consultant with 7+ years in software development, enterprise integrations, cloud architecture and AI.
+> Kivov Digital is a Toronto-based, workflow-first AI consultancy for small and mid-sized businesses. It maps how work actually happens, finds where time is being lost, and builds practical AI and automation systems around the way a team already works, instead of forcing the business into a new platform. Founded by Kim Wong, a former Deloitte and EY consultant with 7+ years in software development, enterprise integrations, cloud architecture and AI. Its 4 services are AI consulting, website management (including WordPress support and local SEO & GEO), AI automation and app development.
 
 Key facts:
 
-- Location: Toronto, Ontario, Canada. Calls run live on Zoom.
+- Location: Toronto, Ontario, Canada. Calls are free 30-minute video calls.
 - Approach: start with the workflow, not the tool. Every engagement begins by understanding one real process; the audit also names what should *not* be automated.
 - Prices are public and in CAD:
   - Workflow Fit Check: free, about 3 minutes, eight questions, high-level result.

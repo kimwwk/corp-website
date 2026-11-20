@@ -421,7 +421,7 @@ export const useCases: UseCase[] = [
     description:
       "An AI receptionist that answers your calls, follows your booking rules and books into your calendar, set up on the phone number you already have.",
     cardLine: "An AI voice agent that answers calls and books by your rules.",
-    h1: "An AI receptionist for small business that follows your rules.",
+    h1: "An AI receptionist for small business, on the number you already have.",
     problemLine: "Answering the phone is the easy part. Booking the way your front desk does is what matters.",
     problem: [
       "Every business has booking rules that live in the front desk's head: lunch breaks, who does which job, how long each appointment takes, which gaps to avoid.",

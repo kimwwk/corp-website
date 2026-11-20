@@ -201,7 +201,7 @@ export const services: Service[] = [
       {
         question: "Can AI redesign my existing website?",
         answer:
-          "AI can speed up a redesign. The decisions that matter, what the site says and who it is for, stay with you, and we build around them.",
+          "AI can speed up a website redesign. The decisions that matter, what the site says and who it is for, stay with you, and we build around them.",
       },
     ],
     closing: {
