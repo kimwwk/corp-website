@@ -191,5 +191,7 @@ export type Overview = {
   eyebrow: string;
   h1: string;
   lead: string;
+  /** Eyebrow (h2) over a single, ungrouped card section (/services, /resources). */
+  cardsLabel?: string;
   closing: { title: string; lead?: string };
 };

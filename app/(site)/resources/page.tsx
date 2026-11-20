@@ -20,6 +20,7 @@ export default function ResourcesOverviewPage() {
       sourcePage="resources"
       groups={[
         {
+          label: overviews.resources.cardsLabel,
           cards: resources.map((r) => ({
             title: r.name,
             body: r.cardLine,

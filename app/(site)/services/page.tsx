@@ -21,6 +21,7 @@ export default function ServicesOverviewPage() {
       sourcePage="services"
       groups={[
         {
+          label: overviews.services.cardsLabel,
           cards: services.map((s) => ({
             title: s.name,
             body: s.cardLine,

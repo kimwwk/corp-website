@@ -350,7 +350,9 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    in `text-primary`), mono footnote, row-heading pull-line. "Our product" items group into one
    Section of `ShowcaseProducts` cards.
 10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
-    posts), `<LinkList>` for a bare strip of names.
+    posts), `<LinkList>` for a bare strip of names. Every card section has a heading: the
+    overview pages' single card section takes a mono eyebrow (`Overview.cardsLabel`, an h2:
+    "Our services", "Posts"); /use-cases labels each group with its service.
 
 Page templates (`components/templates/`) fix the section order for service, use-case,
 resource-post and overview pages; copy comes from `content/`.
@@ -429,6 +431,7 @@ One system, defined in `app/globals.css`:
   `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-packages)
   trigger `gap-4`. Touch targets: row-heading links `inline-block`, /ai-packages card back-links
   `min-h-6`, footer wordmark `min-h-11`; the touch-target rule and a checklist line added.
+  Overview pages' single card section takes an eyebrow from `Overview.cardsLabel`.
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's

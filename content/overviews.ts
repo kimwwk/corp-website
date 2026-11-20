@@ -8,6 +8,7 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
     eyebrow: "Services",
     h1: "What we do.",
     lead: "4 services, each starting with how your business works today.",
+    cardsLabel: "Our services",
     closing: { title: "Not sure where to start?", lead: "The free fit check takes 3 minutes and gives you one practical place to begin." },
   },
   useCases: {
@@ -24,6 +25,7 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
     eyebrow: "Resources",
     h1: "Answers to the questions owners ask.",
     lead: "Each post answers one question, with what we found in real work.",
+    cardsLabel: "Posts",
     closing: { title: "Have a question about your own business?", lead: "The free fit check takes 3 minutes and gives you one practical place to begin." },
   },
 };
