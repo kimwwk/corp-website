@@ -1,5 +1,4 @@
-import { ArrowRight } from "lucide-react";
-
+import { LinkCueArrow, linkCueLabel } from "@/components/sections/link-cue";
 import { MonoLabel } from "@/components/sections/mono-label";
 import { Reveal } from "@/components/reveal";
 import { TrackedLink } from "@/components/tracked-link";
@@ -7,9 +6,10 @@ import { cn } from "@/lib/utils";
 
 /*
  * Card grid (vocabulary #5) — link cards: optional mono kicker, row-heading
- * title, one line, and a link cue at the foot: "Learn more" in the linkGreen
- * look plus a primary arrow, visible at rest on every screen (touch has no
- * hover). On hover the label turns green and the arrow nudges right. The
+ * title, one line, and the link cue at the foot (link-cue.tsx): "Learn more"
+ * in the linkGreen look plus a primary arrow, visible at rest on every screen
+ * (touch has no hover). On hover the label turns green and the arrow nudges
+ * right. The
  * whole card is the one tracked CTA (card-grid exception: one CTA per card,
  * none of them filled-primary). Used for the Home services cards, overview
  * pages, a service's use cases, a post's related page and the "Related
@@ -77,13 +77,10 @@ export function CardGrid({
                 data-card-cue
                 className="mt-auto flex items-center gap-2 pt-6 font-semibold text-foreground"
               >
-                <span className="underline decoration-primary decoration-2 underline-offset-[7px] transition-colors duration-200 group-hover:text-primary">
+                <span className={linkCueLabel}>
                   {card.cta ?? "Learn more"}
                 </span>
-                <ArrowRight
-                  className="size-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
-                  aria-hidden="true"
-                />
+                <LinkCueArrow />
               </span>
             </TrackedLink>
           </Reveal>

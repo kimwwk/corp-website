@@ -10,6 +10,8 @@ import {
   CardGrid,
   CtaRow,
   LedgerList,
+  LinkCueArrow,
+  linkCueLabel,
   LinkList,
   MonoLabel,
   Section,
@@ -390,7 +392,9 @@ export default function HomePage() {
         <StepRows steps={steps} />
       </Section>
 
-      {/* Services teaser rows */}
+      {/* Services teaser rows — each row is one link to /ai-packages; its
+          heading carries the link cue at rest (underline + arrow scaled to
+          the heading), since touch has no hover */}
       <Section staggered eyebrow="AI Packages" title="Two ways to work together">
         <div className="mt-8 border-b border-border">
           {services.map((s, i) => (
@@ -402,13 +406,8 @@ export default function HomePage() {
                 className="group grid gap-4 border-t border-border py-10 transition-colors hover:bg-card md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-12 md:py-12"
               >
                 <h3 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
-                  {s.title}
-                  <span
-                    className="ml-3 inline-block -translate-x-2 text-primary opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
+                  <span className={linkCueLabel}>{s.title}</span>
+                  <LinkCueArrow className="ml-3 inline-block size-[0.75em] align-baseline" />
                 </h3>
                 <div>
                   <p className="max-w-[30ch] font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">

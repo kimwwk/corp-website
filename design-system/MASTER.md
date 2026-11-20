@@ -179,7 +179,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
 | Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `inline-block rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type; `inline-block` makes the box the heading's line height, 28px / 32px from `md`) — service "How to start" package names |
-| Card link cue (`<CardGrid>`) | at the card's foot: "Learn more" in linkGreen's look (`font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary`. **Visible at rest** on every screen — touch has no hover. Not a link of its own: the whole card is the link |
+| Link cue (`linkCueLabel` + `<LinkCueArrow>`, `components/sections/link-cue.tsx`) | how a link that isn't running text shows it is a link: its label in linkGreen's look (`underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary` right after it that nudges `group-hover:translate-x-1`. **Visible at rest** on every screen — touch has no hover. Never re-type it; three uses: `<CardGrid>` card foot ("Learn more"; not a link of its own, the whole card is the link), every `<LinkList>` row (the label is the row's name), Home's "Two ways to work together" rows (the label is the card-h3 heading; the arrow scales with it, `size-[0.75em] align-baseline`) |
 
 **Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
 least 24px tall: `inline-flex min-h-6 items-center` (the /ai-packages card back-links), or
@@ -234,8 +234,9 @@ New sections are **composed from these**, never re-typed from the recipes above:
   keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related", a page's one
   "Related reading" post) lines up with the text above it instead of reading as half of a
   two-column grid. The whole card is its one tracked CTA; no filled-primary inside
-- **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links with a hover
-  arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
+- **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links, each name in
+  the link cue (underline + arrow, visible at rest), 1–3 columns, ≥44px rows (Home "Use Cases"
+  strip)
 - **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote; cells align
   to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
@@ -375,10 +376,10 @@ One system, defined in `app/globals.css`:
   Stagger siblings with `delay` in 30–50ms steps.
 - **Hero load-in:** `.rise` (0.6s), staggered via `--rise-delay`.
 - **Signature animations:** marker draw-on-reveal.
-- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms; hover arrows
-  (`<LinkList>`) slide in via `-translate-x-2 opacity-0 → group-hover` and must carry
-  `motion-reduce:translate-x-0 motion-reduce:opacity-100`. A link card's arrow is always
-  visible and only nudges `group-hover:translate-x-1` (`motion-reduce:` no nudge).
+- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms. Link-cue arrows
+  (`<LinkCueArrow>`) are always visible and only nudge `group-hover:translate-x-1`
+  (`motion-reduce:` no nudge). Nothing a reader needs is revealed on hover only — touch never
+  sees it.
 - **Reduced motion:** `.reveal` is forced visible in CSS; every custom micro-interaction
   needs its `motion-reduce:` fallback.
 - Transform/opacity only — **no layout-shifting hovers** (no scale that reflows; `translate-y-px`
@@ -427,6 +428,11 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — Visual QA round-2 fixes. The link cue is one kit recipe
+  (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,
+  `LinkList` and Home's "Two ways to work together" rows; `LinkList` rows and the "Two ways"
+  headings now show the underline and arrow at rest (they hid the arrow until hover, which touch
+  never sees).
 - **2026-11-20** — SEO round-2: service and use-case pages add a "Related reading" section
   before "Questions" (a standard section with a `<CardGrid>` of the resource posts whose
   `related` is that page, tracked as `resource_card_clicked`). No new shape: vocabulary #10.

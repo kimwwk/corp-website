@@ -3,6 +3,7 @@ export { CardGrid, type LinkCard } from "@/components/sections/card-grid";
 export { CtaRow, Support, type Cta } from "@/components/sections/cta-row";
 export { FaqList } from "@/components/sections/faq-list";
 export { LedgerList } from "@/components/sections/ledger-list";
+export { LinkCueArrow, linkCueLabel } from "@/components/sections/link-cue";
 export { LinkList, type ListLink } from "@/components/sections/link-list";
 export { MonoLabel } from "@/components/sections/mono-label";
 export { PageHeader } from "@/components/sections/page-header";
