@@ -270,8 +270,12 @@ export const services: Service[] = [
       kind: "packages",
       lines: [
         {
+          package: "Workflow Fit Check",
+          line: "Free, 3 minutes. Start here while you are still finding which workflow to automate.",
+        },
+        {
           package: "AI Workflow Audit",
-          line: "Not sure which workflow to automate first? Start here.",
+          line: "For when you know which process needs attention and want a professional recommendation before the build.",
         },
         {
           package: "Build For You",

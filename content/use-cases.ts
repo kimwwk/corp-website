@@ -296,7 +296,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "A draft for review",
-        body: "A draft bill with the PDF attached, flagged green, yellow or red by confidence. Nothing posts without your click.",
+        body: "A draft bill with the PDF attached waits in the system you already use, flagged green, yellow or red by confidence. Nothing posts until someone on your team approves it.",
       },
     ],
     toolOrDone: {
@@ -329,7 +329,7 @@ export const useCases: UseCase[] = [
       },
     ],
     closing: {
-      title: "See where your invoice time goes.",
+      title: "Start with your invoice workflow.",
       lead: "The free fit check takes 3 minutes and shows you where to start.",
     },
   },
