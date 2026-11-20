@@ -125,7 +125,7 @@ export const useCases: UseCase[] = [
     problemLine: "More customers now ask ChatGPT who to call. The answer depends on what AI can read about you.",
     problem: [
       "When someone asks an AI assistant for a recommendation, it searches the web by category: a place, a type of provider, an industry, sometimes a tool. Then it names the businesses whose sites answer that question clearly.",
-      "In our own research into how AI assistants answer, the sites they cited most often had one clear page per problem. That is GEO, generative engine optimization, also called AI SEO: making your business easy for AI to understand and recommend.",
+      "In our own research into how AI assistants answer, the site they cited most often had one clear page per problem. That is GEO, generative engine optimization, also called AI SEO: making your business easy for AI to understand and recommend.",
       "Local SEO is the foundation underneath: your Google Business Profile, your reviews, and a site Google can index. GEO builds on it.",
     ],
     setup: [
@@ -197,7 +197,7 @@ export const useCases: UseCase[] = [
     problemLine: "Clients look for a lawyer on Google, and more of them now ask ChatGPT.",
     problem: [
       "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
-      "AI assistants are more willing to cite content that answers a question directly and links to official sources. Legal content suits this well, with the lawyer's wording kept exactly as written.",
+      "We write for that: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
     ],
     setup: [
       {
@@ -215,6 +215,10 @@ export const useCases: UseCase[] = [
       {
         title: "Reviews",
         body: "Your Google reviews shown on your site, and suspicious reviews appealed with evidence.",
+      },
+      {
+        title: "Checking what AI says",
+        body: "We ask AI assistants the questions your clients ask, and see whether your firm comes up.",
       },
       {
         title: "Monthly tracking",
@@ -239,7 +243,17 @@ export const useCases: UseCase[] = [
       {
         question: "Who writes the legal content?",
         answer:
-          "You do. Your wording stays exactly as written, and any legal question goes back to the lawyer. We handle the titles, descriptions, links and publishing.",
+          "You provide it, for example a newsletter or your notes, and your wording stays exactly as written. Any legal question goes back to the lawyer. We handle the titles, descriptions, links and publishing.",
+      },
+      {
+        question: "Who approves what goes live?",
+        answer:
+          "You do. Every title, description, post and Google Business Profile change goes live after you approve it, so it fits your firm and your professional conduct rules.",
+      },
+      {
+        question: "Do the accounts stay in our name?",
+        answer:
+          "Yes. Your domain, hosting, Google Business Profile and Search Console stay in your firm's name.",
       },
     ],
     closing: {

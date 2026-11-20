@@ -64,7 +64,7 @@ export const resources: ResourcePost[] = [
           "A Google Business Profile with a full description: what you do, who you serve and where.",
           "One page per service or problem, named in the words your customers use.",
           "Short Q&A sections that answer the questions customers actually ask.",
-          "Links to official sources where they apply. AI assistants are more willing to cite content that has them.",
+          "Links to official sources where they apply, so the answer can be checked.",
           "Your business details added to your site as structured data, so search engines read them the same way everywhere.",
         ],
       },
