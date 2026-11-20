@@ -7,22 +7,31 @@ import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
+  CardGrid,
   CtaRow,
   LedgerList,
+  LinkList,
   MonoLabel,
   Section,
   StatementRows,
   StepRows,
   Support,
+  TestimonialGrid,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
+import { homeSections } from "@/content/home";
+import { servicePath, services as servicePages } from "@/content/services";
+import { testimonials } from "@/content/testimonials";
+import { pathForUseCase, useCases } from "@/content/use-cases";
 import { pageMetadata } from "@/lib/seo";
 
 /*
  * Home — Green Ledger (Direction C). Conversion spine per the 002 split plan:
- * identity lives on /about, service depth on /services, offer detail on
- * /audit. Copy: Lindsay report 2026-07-26 with Kim's hero + CTA revisions.
- * Composed from the section kit (components/sections/).
+ * identity lives on /about, service depth on /services/*, prices on
+ * /ai-packages, offer detail on /audit. Copy: Lindsay report 2026-07-26 with
+ * Kim's hero + CTA revisions. The Services cards, Use Cases strip and
+ * Testimonials render from content/. Composed from the section kit
+ * (components/sections/).
  */
 
 export const metadata: Metadata = pageMetadata({
@@ -312,6 +321,40 @@ export default function HomePage() {
         <StatementRows rows={helps} />
       </Section>
 
+      {/* Services — the four service pages as cards (content/services.ts) */}
+      <Section
+        staggered
+        eyebrow={homeSections.services.eyebrow}
+        title={homeSections.services.title}
+        lead={homeSections.services.lead}
+      >
+        <CardGrid
+          columns={4}
+          cards={servicePages.map((s) => ({
+            title: s.name,
+            body: s.cardLine,
+            href: servicePath(s.slug),
+            event: "service_card_clicked",
+            eventProps: { source_page: "home", service: s.slug },
+          }))}
+        />
+      </Section>
+
+      {/* Use Cases strip — every use-case page (content/use-cases.ts) */}
+      <Section
+        eyebrow={homeSections.useCases.eyebrow}
+        title={homeSections.useCases.title}
+      >
+        <LinkList
+          links={useCases.map((u) => ({
+            label: u.name,
+            href: pathForUseCase(u.slug),
+            event: "use_case_link_clicked",
+            eventProps: { source_page: "home", use_case: u.slug },
+          }))}
+        />
+      </Section>
+
       {/* Audit — condensed, links out */}
       <Section
         eyebrow="AI Workflow Audit"
@@ -353,7 +396,7 @@ export default function HomePage() {
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 40}>
               <TrackedLink
-                href="/services"
+                href="/ai-packages"
                 event="services_teaser_clicked"
                 eventProps={{ service: s.title }}
                 className="group grid gap-4 border-t border-border py-10 transition-colors hover:bg-card md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-12 md:py-12"
@@ -379,6 +422,15 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+      </Section>
+
+      {/* Testimonials — every public testimonial (content/testimonials.ts) */}
+      <Section
+        staggered
+        eyebrow={homeSections.testimonials.eyebrow}
+        title={homeSections.testimonials.title}
+      >
+        <TestimonialGrid quotes={testimonials} />
       </Section>
 
       {/* About Kim — short founder block with the original portrait */}
