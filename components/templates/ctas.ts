@@ -44,7 +44,7 @@ export function fitCheckCta(sourcePage: string, ctaLocation: string, arrow = fal
 /* The fit check as a secondary text link, on pages that lead with the call. */
 export function fitCheckLinkCta(sourcePage: string, ctaLocation: string): Cta {
   return {
-    label: "Take the free fit check",
+    label: "Or see where AI fits your work",
     href: "/fit-check",
     event: "fit_check_cta_clicked",
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },

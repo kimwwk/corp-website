@@ -7,7 +7,7 @@ import { TrackedLink } from "@/components/tracked-link";
 export const metadata: Metadata = pageMetadata({
   title: "Book a Call — Kivov Digital",
   description:
-    "Pick a time and we'll talk it through live on Zoom. If you're still exploring, start with the free Workflow Fit Check instead.",
+    "Pick a time and we'll talk it through on a 30-minute video call. If you're still exploring, start with the free Workflow Fit Check instead.",
   path: "/book",
 });
 
@@ -24,7 +24,7 @@ export default function BookPage() {
           Book a call.
         </h1>
         <p className="text-lg leading-relaxed">
-          The fastest way to talk it through, live on Zoom. If you&apos;re
+          The fastest way to talk it through: a 30-minute video call. If you&apos;re
           exploring where AI fits your work, start with the{" "}
           <TrackedLink
             href="/fit-check"
