@@ -14,6 +14,7 @@ import {
   Support,
 } from "@/components/sections";
 import { ShowcaseProducts } from "@/components/showcase-products";
+import { proofItems } from "@/content/proof";
 import { cn } from "@/lib/utils";
 
 /*
@@ -200,7 +201,7 @@ export default function ShowcasePage() {
           We build premium, high-ticket websites.
         </p>
         <div className="mt-8">
-          <ShowcaseProducts />
+          <ShowcaseProducts products={proofItems(["sprinting-run", "our-pot"])} />
         </div>
       </Section>
 

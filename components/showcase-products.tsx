@@ -3,28 +3,14 @@
 import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/card";
+import type { Proof } from "@/content/types";
 import { capture } from "@/lib/analytics";
 
-const products = [
-  {
-    title: "sprinting.run",
-    description:
-      "Periodization software for sprint coaches, with AI session planning built in.",
-    status: "Live on Web",
-    href: "https://sprinting.run",
-    icon: "/sprinting-run-icon.png",
-  },
-  {
-    title: "our-pot",
-    description:
-      "Household expense tracking. Say what you spent, review the entry, approve.",
-    status: "Available on Android",
-    href: "https://our-pot-site.kivov-digital.workers.dev/",
-    icon: "/our-pot-icon.png",
-  },
-];
-
-export function ShowcaseProducts() {
+/*
+ * Product cards for the "Our product" proof items (content/proof.ts), shown
+ * on App Development. Each card opens the product in a new tab.
+ */
+export function ShowcaseProducts({ products }: { products: Proof[] }) {
   return (
     <div className="grid max-w-3xl gap-6">
       {products.map((product) => (
@@ -45,13 +31,15 @@ export function ShowcaseProducts() {
           <Card className="ring-border transition-all duration-200 [--card-spacing:--spacing(6)] group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-primary/40 motion-reduce:transform-none">
             <CardContent>
               <div className="flex items-start gap-5">
-                <Image
-                  src={product.icon}
-                  alt={`${product.title} icon`}
-                  width={64}
-                  height={64}
-                  className="size-16 shrink-0 rounded-xl"
-                />
+                {product.icon ? (
+                  <Image
+                    src={product.icon}
+                    alt={`${product.title} icon`}
+                    width={64}
+                    height={64}
+                    className="size-16 shrink-0 rounded-xl"
+                  />
+                ) : null}
                 <div className="min-w-0 flex-1">
                   <div className="mb-2 flex items-baseline justify-between gap-4">
                     <h2 className="text-xl font-semibold text-foreground transition-colors duration-200 group-hover:text-primary">
@@ -62,7 +50,7 @@ export function ShowcaseProducts() {
                     </span>
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    {product.description}
+                    {product.body}
                   </p>
                 </div>
               </div>

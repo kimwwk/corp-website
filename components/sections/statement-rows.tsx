@@ -2,7 +2,7 @@ import { Reveal } from "@/components/reveal";
 
 /*
  * Statement rows — the title-left / body-right hairline rows ("What Kivov
- * helps you do", services "Included", showcase "Track record"). Rows reveal
+ * helps you do", ai-packages "Included", service "What's included"). Rows reveal
  * with a 40ms stagger; use inside a `staggered` Section.
  */
 export function StatementRows({

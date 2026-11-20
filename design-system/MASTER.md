@@ -136,14 +136,15 @@ recipes for you.
 | Role | Recipe | Used |
 |---|---|---|
 | Home hero `h1` | `max-w-[11em] font-display text-[clamp(2.1rem,8vw,6rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` (`<Band hero>`) | home only |
-| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | services, about, audit, contact, book, thanks, showcase, fit-check |
+| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | ai-packages, about, audit, contact, book, thanks, fit-check; service + use-case heroes (`<Band hero="page">`); overview pages + resource posts (`<PageHeader>`) |
 | Feature `h2` (green bands) | `max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground` (`<Band>`) | featured + closing bands |
 | Section `h2` | `font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground` (usually `mt-5 max-w-3xl` after an eyebrow; `<Section>`) | standard cream sections |
 | Card `h3` (large) | `font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | home offer cards |
-| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | services rungs, showcase stat numerals |
+| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | ai-packages rungs, proof stat numerals (`<ProofSections>`) |
 | Step numeral | `font-display text-[clamp(2.4rem,6vw,4.2rem)] leading-none font-black text-primary` (`<StepRows>`) | "How it works" ladders (home, audit) |
 | Interlude statement | `<Interlude>` component — `clamp(2rem,5.5vw,4.2rem)`, black, centered, `max-w-[16em]` | between sections |
 | Big line (pull-line) | `max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground` | closing statement inside a section |
+| Row heading | `font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl` | StatementRows / StepRows titles, `<CardGrid>` card titles, proof pull-lines, resource-post subheads (`<PostBody>`, as `h2`) |
 
 ### Mono label system
 
@@ -177,7 +178,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 ## Layout & spacing
 
 - **Section shell:** `px-6 py-20 md:py-28`. Hero/closing bands on home breathe more: `py-24 md:py-32`
-  (`<Band breathe>`). Utility pages (contact, book) and the showcase hero use the compact shell
+  (`<Band breathe>`). Utility pages (contact, book) use the compact shell
   `py-16 md:py-24`; contact narrows its container to `max-w-5xl`.
 - **Container:** `mx-auto max-w-6xl` (inside a `<Reveal>` in nearly every section).
 - **Separators:** a cream section following another cream section takes `border-t border-border`.
@@ -197,15 +198,28 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 
 New sections are **composed from these**, never re-typed from the recipes above:
 
-- **`Band`** — S1 hero (`hero`), S3 featured, S6 closing (`breathe`); forest ring via `depth`
+- **`Band`** — S1 hero (`hero` = home h1; `hero="page"` = inner-page h1, for service and
+  use-case heroes), S3 featured, S6 closing (`breathe`); forest ring via `depth`
+- **`PageHeader`** — P2 cream page header (eyebrow → page h1 → lead → children) for inner pages
+  that open without a band: overview pages, resource posts
 - **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
   children carry their own `<Reveal delay>` rows
 - **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link;
-  `tone="band"` on green) and its mono support line
+  `tone="band"` on green) and its mono support line. `external` on either action renders a
+  `TrackedExternalLink` (an external secondary opens in a new tab)
 - **`MonoLabel`** — the 0.14em mono label (green / caption / ink)
 - **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
 - **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger
 - **`StepRows`** — the huge-numeral "How it works" ladder
+- **`CardGrid`** — vocabulary #5 as a component: link cards (`rounded-2xl bg-card p-7 ring-1
+  ring-border`, hover `ring-primary/40`, row-heading title, one line, hover arrow), 1–4 columns.
+  The whole card is its one tracked CTA; no filled-primary inside
+- **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links with a hover
+  arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
+- **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote
+- **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
+- **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD
+- **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
 the same commit. One-off compositions (page heroes with portraits/price cards, the services
@@ -271,8 +285,24 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
    (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
-   `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One quote per section;
-   first use: showcase.
+   `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One short quote per
+   section. Longer or several quotes use #8.
+8. **Testimonial grid** — `<Section staggered eyebrow=…>` → `<TestimonialGrid>`: each quote a
+   `<figure>` on a hairline (`border-t border-border pt-7`), paragraphs verbatim in body type
+   (`leading-relaxed text-foreground`, curly quotes added around the whole quote), then name +
+   caption-mono role. Two columns for 2+ quotes; one quote keeps `max-w-3xl`. The same
+   component on Home (every testimonial) and service pages (their own). Public quotes only,
+   verbatim from `content/testimonials.ts`; never on About.
+9. **Proof item** — `<ProofSections>`: one cream `<Section>` per item, eyebrow = its label
+   (Client build · Track record · Our product · Demo · Capability; never "Case Study"),
+   h2 = title, lead, then optional before → after delta row, 3-up stat row (card-h3 numerals
+   in `text-primary`), mono footnote, row-heading pull-line. "Our product" items group into one
+   Section of `ShowcaseProducts` cards.
+10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
+    posts), `<LinkList>` for a bare strip of names.
+
+Page templates (`components/templates/`) fix the section order for service, use-case,
+resource-post and overview pages; copy comes from `content/`.
 
 Canonical page rhythm (see home): hero band → cream sections alternating `border-t` →
 featured band mid-page → interlude → cream sections → closing CTA band.
@@ -336,6 +366,14 @@ entries here as they're discovered)*
 
 ## Changelog
 
+- **2026-11-20** — Site restructure (branch `site/restructure-2026-11`): section kit extended
+  with `PageHeader`, `CardGrid`, `LinkList`, `TestimonialGrid`, `ProofSections`, `FaqList`,
+  `PostBody`, `Band hero="page"` and external secondary links on `CtaRow`; vocabulary #8–#10
+  (testimonial grid, proof item, link cards / link list) and the row-heading type row
+  registered. `ShowcaseProducts` now takes its products from `content/proof.ts`. The
+  `ui/navigation-menu` primitive's popup motion moved onto the system curve and 300ms (it
+  shipped with `cubic-bezier(0.22,1,0.36,1)` at 350ms). /showcase is gone; its items are
+  proof on the use-case and service pages.
 - **2026-08-18** — Mobile nav sheet: the wordmark is out of the sheet header (the site header
   behind the sheet already shows it); the Brand marks table above no longer lists the sheet as a
   wordmark placement. The empty `SheetHeader` went with it — the sheet's `sr-only` title is now a

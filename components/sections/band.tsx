@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 /*
  * S1 / S3 / S6 — the deep-green band: `band-green` shell, optional forest
  * ring (`depth`), Reveal, container. `hero` sets the home-hero h1 scale;
+ * `hero="page"` sets the inner-page h1 scale (service and use-case heroes);
  * everything else gets the feature h2. `breathe` is the roomier closing-band
  * padding (home). Bands never take border-t — the color change separates.
  */
@@ -27,7 +28,7 @@ export function Band({
   id?: string;
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
-  hero?: boolean;
+  hero?: boolean | "page";
   breathe?: boolean;
   depth?: keyof typeof depths;
   className?: string;
@@ -49,7 +50,16 @@ export function Band({
       <Reveal className="relative mx-auto max-w-6xl">
         {eyebrow ? <MonoLabel tone="caption">{eyebrow}</MonoLabel> : null}
         {title ? (
-          hero ? (
+          hero === "page" ? (
+            <h1
+              className={cn(
+                eyebrow && "mt-6",
+                "font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground",
+              )}
+            >
+              {title}
+            </h1>
+          ) : hero ? (
             <h1
               className={cn(
                 eyebrow && "mt-6",

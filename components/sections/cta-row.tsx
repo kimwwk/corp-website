@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
  * The CTA row: one primary pill + optional secondary text link, wrapping with
  * the standard gaps. `tone="band"` switches to the on-green idiom (cream pill
  * darkens to inkdeep, leaf underline on the text link). One primary per
- * section — the second action is always the text link.
+ * section — the second action is always the text link. An `external`
+ * secondary opens in a new tab (e.g. a LinkedIn original).
  */
 export type Cta = {
   label: React.ReactNode;
@@ -67,14 +68,27 @@ export function CtaRow({
         </Button>
       ) : null}
       {secondary ? (
-        <TrackedLink
-          href={secondary.href}
-          event={secondary.event}
-          eventProps={secondary.eventProps}
-          className={links[tone]}
-        >
-          {secondary.label}
-        </TrackedLink>
+        secondary.external ? (
+          <TrackedExternalLink
+            href={secondary.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            event={secondary.event}
+            eventProps={secondary.eventProps}
+            className={links[tone]}
+          >
+            {secondary.label}
+          </TrackedExternalLink>
+        ) : (
+          <TrackedLink
+            href={secondary.href}
+            event={secondary.event}
+            eventProps={secondary.eventProps}
+            className={links[tone]}
+          >
+            {secondary.label}
+          </TrackedLink>
+        )
       ) : null}
     </div>
   );

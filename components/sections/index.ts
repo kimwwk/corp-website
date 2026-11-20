@@ -1,7 +1,14 @@
 export { Band } from "@/components/sections/band";
+export { CardGrid, type LinkCard } from "@/components/sections/card-grid";
 export { CtaRow, Support, type Cta } from "@/components/sections/cta-row";
+export { FaqList } from "@/components/sections/faq-list";
 export { LedgerList } from "@/components/sections/ledger-list";
+export { LinkList, type ListLink } from "@/components/sections/link-list";
 export { MonoLabel } from "@/components/sections/mono-label";
+export { PageHeader } from "@/components/sections/page-header";
+export { PostBody } from "@/components/sections/post-body";
+export { ProofSections } from "@/components/sections/proof-sections";
 export { Section } from "@/components/sections/section";
 export { StatementRows } from "@/components/sections/statement-rows";
 export { StepRows } from "@/components/sections/step-rows";
+export { TestimonialGrid, type Quote } from "@/components/sections/testimonial-grid";
