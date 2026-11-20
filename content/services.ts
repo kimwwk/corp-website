@@ -89,7 +89,7 @@ export const services: Service[] = [
         {
           package: "Build With You",
           href: "/ai-packages",
-          line: "Two strategy calls a month while your team builds, with text support in between.",
+          line: "2 strategy calls a month while your team builds, with text support in between.",
         },
       ],
     },
@@ -259,7 +259,7 @@ export const services: Service[] = [
       },
       {
         title: "We decide what fits",
-        body: "Reconfigure a tool you have, connect two systems, add an automation or build an AI agent.",
+        body: "Reconfigure a tool you have, connect 2 systems, add an automation or build an AI agent.",
       },
       {
         title: "We build and hand it over",

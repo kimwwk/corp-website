@@ -347,8 +347,8 @@ export const useCases: UseCase[] = [
     title: "Missed Call Text Back on Your Business Number — Kivov Digital",
     description:
       "Missed call text back that works with the phone number you already have: callers get a text within seconds and can book a time.",
-    cardLine: "Callers you miss get a text within seconds, on the number you already have.",
-    h1: "Missed call text back, on the number you already have.",
+    cardLine: "Callers you miss get a text within seconds, and keep calling the number they know.",
+    h1: "Missed call text back that works with the number you already have.",
     problemLine: "When you cannot pick up, the caller moves on to the next business on the list.",
     problem: [
       "Speed to lead is how fast a new enquiry hears back. For a call you miss, the fastest reply is a text within seconds: sorry we missed you, reply here or book a time.",

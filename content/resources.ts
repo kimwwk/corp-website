@@ -188,7 +188,7 @@ export const resources: ResourcePost[] = [
           "A coming-soon or demo page from the theme, still published and still in the sitemap.",
           "A sitemap full of URLs you never meant to publish. One client's sitemap had 537 URLs, and 71 after cleanup.",
           "Lines in robots.txt that block images Google needs, like your logo.",
-          "Your address in two forms, with and without www, in different places.",
+          "Your address in 2 forms, with and without www, in different places.",
         ],
       },
       { type: "h2", text: "Then fix the basics" },
