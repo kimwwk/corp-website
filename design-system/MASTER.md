@@ -219,7 +219,10 @@ New sections are **composed from these**, never re-typed from the recipes above:
   arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
 - **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
-- **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD
+- **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
+  The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
+  them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
+  outside the kit (/ai-packages) sets it too
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
@@ -385,6 +388,8 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
+  `hiddenUntilFound`: every answer is in the server HTML, panels still look closed.
 - **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
   can carry two text links beside its one primary (Website Management use cases: "Book a
   free call" and the parent-service link). Still one primary per section. Use-case pages

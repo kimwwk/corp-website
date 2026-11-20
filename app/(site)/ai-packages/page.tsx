@@ -628,7 +628,8 @@ export default function AiPackagesPage() {
         }
       >
         <Reveal delay={80}>
-          <Accordion className="mt-8 max-w-3xl border-y border-border">
+          {/* hiddenUntilFound: closed answers stay in the HTML (see FaqList). */}
+          <Accordion hiddenUntilFound className="mt-8 max-w-3xl border-y border-border">
             {faqs.map((faq) => (
               <AccordionItem key={faq.value} value={faq.value}>
                 <AccordionTrigger className="py-5 text-base font-medium text-foreground hover:no-underline">

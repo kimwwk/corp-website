@@ -12,6 +12,11 @@ import { cn } from "@/lib/utils";
  * answer in body copy, capped at the prose measure. Plain-text answers, so
  * the same strings feed the FAQPage JSON-LD. Use inside a `staggered`
  * Section ("Questions").
+ *
+ * `hiddenUntilFound` keeps closed answers in the DOM (server HTML ships them
+ * `hidden`; after hydration they become `hidden="until-found"`), so crawlers
+ * read every answer and find-in-page opens the matching one. They still look
+ * closed: the hidden panel takes no space.
  */
 export function FaqList({
   faqs,
@@ -22,7 +27,10 @@ export function FaqList({
 }) {
   return (
     <Reveal delay={80}>
-      <Accordion className={cn("mt-8 max-w-3xl border-y border-border", className)}>
+      <Accordion
+        hiddenUntilFound
+        className={cn("mt-8 max-w-3xl border-y border-border", className)}
+      >
         {faqs.map((faq, i) => (
           <AccordionItem key={i} value={`faq-${i}`}>
             <AccordionTrigger className="py-5 text-base font-medium text-foreground hover:no-underline">
