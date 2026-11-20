@@ -21,17 +21,21 @@ import {
   StatementRows,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
+import { serviceBySlug, servicePath } from "@/content/services";
+import type { ServiceSlug } from "@/content/types";
 
 /*
- * Services — Kim's copy on the Green Ledger foundation: P2 header, P13 price
- * slots (the paid tiers: audit | Build With You | Build For You, layout
- * restored from PR #11), then the P8 four-rung ladder as the sequence view.
+ * AI Packages (moved from /services on 2026-11-20, content unchanged) — Kim's
+ * copy on the Green Ledger foundation: P2 header, P13 price slots (the paid
+ * tiers: audit | Build With You | Build For You, layout restored from PR #11),
+ * then the P8 four-rung ladder as the sequence view. Each paid card links
+ * back to its service page.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "Services — Kivov Digital",
+  title: "AI Packages — Kivov Digital",
   description:
     "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You at $1,250/mo or Build For You at $5,500 per project.",
-  path: "/services",
+  path: "/ai-packages",
   socialDescription:
     "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You or Build For You. Practical AI and automation for small & mid-sized businesses.",
 });
@@ -57,7 +61,7 @@ const rungs = [
     cta: "Take the free check",
     href: "/fit-check",
     event: "fit_check_cta_clicked",
-    eventProps: { source_page: "services", cta_location: "ladder" },
+    eventProps: { source_page: "ai-packages", cta_location: "ladder" },
   },
   {
     featured: false,
@@ -67,7 +71,7 @@ const rungs = [
     cta: "Explore the audit",
     href: "/audit",
     event: "audit_cta_clicked",
-    eventProps: { source_page: "services", cta_location: "ladder" },
+    eventProps: { source_page: "ai-packages", cta_location: "ladder" },
   },
   {
     featured: false,
@@ -231,11 +235,32 @@ function Bullet({ tone = "green" }: { tone?: "green" | "leaf" }) {
   );
 }
 
+/* The small text link on each paid card back to its service page. */
+function ServiceLink({ slug }: { slug: ServiceSlug }) {
+  const target = serviceBySlug(slug);
+  return (
+    <p className="mt-4 text-sm">
+      <TrackedLink
+        href={servicePath(slug)}
+        event="service_link_clicked"
+        eventProps={{
+          source_page: "ai-packages",
+          cta_location: "packages",
+          service: slug,
+        }}
+        className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+      >
+        {target.name} →
+      </TrackedLink>
+    </p>
+  );
+}
+
 /* Structured data: the service ladder as priced Offers, plus the FAQ. Rung
    names/descriptions come from `rungs`; the audit uses the founding price checkout
    actually charges (AUDIT_PRICE.current). */
 const servicesJsonLd = [
-  breadcrumbs("/services", "Services"),
+  breadcrumbs("/ai-packages", "AI Packages"),
   service({
     name: "Workflow Fit Check",
     description: rungs[0].desc,
@@ -251,21 +276,21 @@ const servicesJsonLd = [
   service({
     name: "Build With You",
     description: rungs[2].desc,
-    path: "/services",
+    path: "/ai-packages",
     price: 1250,
     unitText: "4 weeks",
   }),
   service({
     name: "Build For You",
     description: rungs[3].desc,
-    path: "/services",
+    path: "/ai-packages",
     price: 5500,
     unitText: "project",
   }),
-  faqPage("/services", faqs),
+  faqPage("/ai-packages", faqs),
 ];
 
-export default function ServicesPage() {
+export default function AiPackagesPage() {
   return (
     <>
       <JsonLd graph={servicesJsonLd} />
@@ -287,13 +312,13 @@ export default function ServicesPage() {
               arrow: true,
               href: "/fit-check",
               event: "fit_check_cta_clicked",
-              eventProps: { source_page: "services", cta_location: "hero" },
+              eventProps: { source_page: "ai-packages", cta_location: "hero" },
             }}
             secondary={{
               label: "Explore the audit",
               href: "/audit",
               event: "audit_cta_clicked",
-              eventProps: { source_page: "services", cta_location: "hero" },
+              eventProps: { source_page: "ai-packages", cta_location: "hero" },
             }}
           />
         </Reveal>
@@ -343,6 +368,7 @@ export default function ServicesPage() {
                   </li>
                 ))}
               </ul>
+              <ServiceLink slug="ai-consulting" />
               <div className="mt-auto pt-6">
                 <Button
                   size="xl"
@@ -352,7 +378,7 @@ export default function ServicesPage() {
                       href="/audit"
                       event="audit_cta_clicked"
                       eventProps={{
-                        source_page: "services",
+                        source_page: "ai-packages",
                         cta_location: "packages",
                       }}
                     />
@@ -427,6 +453,7 @@ export default function ServicesPage() {
               <p className="mt-3 text-xs text-caption">
                 Billed every 4 weeks — two bi-weekly calls.
               </p>
+              <ServiceLink slug="ai-consulting" />
               <div className="mt-auto pt-6">
                 <Button
                   variant="outline"
@@ -502,6 +529,7 @@ export default function ServicesPage() {
               <p className="mt-3 text-xs text-caption">
                 Larger scopes quoted separately after discovery.
               </p>
+              <ServiceLink slug="ai-automation" />
               <div className="mt-auto pt-6">
                 <Button
                   size="xl"
@@ -632,7 +660,7 @@ export default function ServicesPage() {
             href: "/fit-check",
             event: "fit_check_cta_clicked",
             eventProps: {
-              source_page: "services",
+              source_page: "ai-packages",
               cta_location: "bottom_cta",
             },
           }}
@@ -641,7 +669,7 @@ export default function ServicesPage() {
             href: "/audit",
             event: "audit_cta_clicked",
             eventProps: {
-              source_page: "services",
+              source_page: "ai-packages",
               cta_location: "bottom_cta",
             },
           }}
