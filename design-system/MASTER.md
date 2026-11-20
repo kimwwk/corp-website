@@ -179,6 +179,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
 | Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type) — service "How to start" package names |
+| Card link cue (`<CardGrid>`) | at the card's foot: "Learn more" in linkGreen's look (`font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary`. **Visible at rest** on every screen — touch has no hover. Not a link of its own: the whole card is the link |
 
 ---
 
@@ -223,8 +224,11 @@ New sections are **composed from these**, never re-typed from the recipes above:
   optional `link` turns its title into a tracked row-heading link
 - **`StepRows`** — the huge-numeral "How it works" ladder
 - **`CardGrid`** — vocabulary #5 as a component: link cards (`rounded-2xl bg-card p-7 ring-1
-  ring-border`, hover `ring-primary/40`, row-heading title, one line, hover arrow), 1–4 columns.
-  The whole card is its one tracked CTA; no filled-primary inside
+  ring-border`, hover `ring-primary/40`, row-heading title, one line, then the card link cue —
+  "Learn more" + arrow, always visible; a card's `cta` can relabel it), 1–4 columns. One column
+  keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related") lines up with the
+  text above it instead of reading as half of a two-column grid. The whole card is its one
+  tracked CTA; no filled-primary inside
 - **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links with a hover
   arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
 - **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote
@@ -350,8 +354,9 @@ One system, defined in `app/globals.css`:
 - **Hero load-in:** `.rise` (0.6s), staggered via `--rise-delay`.
 - **Signature animations:** marker draw-on-reveal.
 - **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms; hover arrows
-  slide in via `-translate-x-2 opacity-0 → group-hover` and must carry
-  `motion-reduce:translate-x-0 motion-reduce:opacity-100`.
+  (`<LinkList>`) slide in via `-translate-x-2 opacity-0 → group-hover` and must carry
+  `motion-reduce:translate-x-0 motion-reduce:opacity-100`. A link card's arrow is always
+  visible and only nudges `group-hover:translate-x-1` (`motion-reduce:` no nudge).
 - **Reduced motion:** `.reveal` is forced visible in CSS; every custom micro-interaction
   needs its `motion-reduce:` fallback.
 - Transform/opacity only — **no layout-shifting hovers** (no scale that reflows; `translate-y-px`
@@ -384,6 +389,7 @@ One system, defined in `app/globals.css`:
 - [ ] Content wrapped in `<Reveal>`; stagger 30–50ms; `motion-reduce` fallbacks present
 - [ ] One primary CTA per section; CTAs via `TrackedLink` with event props
 - [ ] Focus states visible (ring tokens); contrast ≥ 4.5:1 both on cream and on green
+- [ ] Every link shows it is a link without hover (touch)
 - [ ] Responsive at 375 / 768 / 1024 / 1440; no horizontal scroll on mobile
 - [ ] No content hidden behind the fixed header (`scroll-mt-16` on anchor targets — the kit
       adds it whenever a `Band`/`Section` gets an `id`)
@@ -399,6 +405,9 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — Visual QA round-1 fixes. `CardGrid` cards show a link cue at rest ("Learn
+  more" in linkGreen's look + a primary arrow that nudges on hover; it replaces the hover-only
+  arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`).
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's

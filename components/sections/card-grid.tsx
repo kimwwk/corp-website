@@ -1,3 +1,5 @@
+import { ArrowRight } from "lucide-react";
+
 import { MonoLabel } from "@/components/sections/mono-label";
 import { Reveal } from "@/components/reveal";
 import { TrackedLink } from "@/components/tracked-link";
@@ -5,11 +7,14 @@ import { cn } from "@/lib/utils";
 
 /*
  * Card grid (vocabulary #5) — link cards: optional mono kicker, row-heading
- * title, one line, and a hover arrow. The whole card is the one tracked CTA
- * (card-grid exception: one CTA per card, none of them filled-primary).
- * Used for the Home services cards, overview pages, a service's use cases
- * and a post's related page. Cards reveal with a 40ms stagger; use inside a
- * `staggered` Section.
+ * title, one line, and a link cue at the foot: "Learn more" in the linkGreen
+ * look plus a primary arrow, visible at rest on every screen (touch has no
+ * hover). On hover the label turns green and the arrow nudges right. The
+ * whole card is the one tracked CTA (card-grid exception: one CTA per card,
+ * none of them filled-primary). Used for the Home services cards, overview
+ * pages, a service's use cases and a post's related page. One column keeps
+ * the prose measure (max-w-3xl), so a lone card lines up with the text above
+ * it. Cards reveal with a 40ms stagger; use inside a `staggered` Section.
  */
 export type LinkCard = {
   title: React.ReactNode;
@@ -18,12 +23,12 @@ export type LinkCard = {
   event: string;
   eventProps?: Record<string, unknown>;
   kicker?: React.ReactNode;
-  /** Optional mono line beside the arrow; the arrow shows alone without it. */
+  /** The cue's label; "Learn more" when omitted. */
   cta?: React.ReactNode;
 };
 
 const columnClasses = {
-  1: "max-w-xl",
+  1: "max-w-3xl",
   2: "md:grid-cols-2",
   3: "md:grid-cols-2 lg:grid-cols-3",
   4: "md:grid-cols-2 lg:grid-cols-4",
@@ -67,18 +72,18 @@ export function CardGrid({
                 {card.title}
               </h3>
               <p className="mt-3 leading-relaxed">{card.body}</p>
-              <p className="mt-auto pt-6 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
-                {card.cta}
-                <span
-                  className={cn(
-                    "inline-block -translate-x-2 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100",
-                    card.cta && "ml-2",
-                  )}
-                  aria-hidden="true"
-                >
-                  →
+              <span
+                data-card-cue
+                className="mt-auto flex items-center gap-2 pt-6 font-semibold text-foreground"
+              >
+                <span className="underline decoration-primary decoration-2 underline-offset-[7px] transition-colors duration-200 group-hover:text-primary">
+                  {card.cta ?? "Learn more"}
                 </span>
-              </p>
+                <ArrowRight
+                  className="size-4 shrink-0 text-primary transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
+                  aria-hidden="true"
+                />
+              </span>
             </TrackedLink>
           </Reveal>
         </li>
