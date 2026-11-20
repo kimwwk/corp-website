@@ -197,7 +197,7 @@ export const useCases: UseCase[] = [
     problemLine: "Clients look for a lawyer on Google, and some now ask ChatGPT.",
     problem: [
       "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part of law firm marketing that Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
-      "We write for that: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
+      "Getting cited by AI assistants is called GEO, generative engine optimization. We write for it: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
     ],
     setup: [
       {
@@ -214,7 +214,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Reviews",
-        body: "Your Google reviews shown on your site, and suspicious reviews appealed with evidence.",
+        body: "Your Google reviews shown on your site, and suspicious reviews appealed to Google with evidence.",
       },
       {
         title: "Checking what AI says",
@@ -243,7 +243,7 @@ export const useCases: UseCase[] = [
       {
         question: "Who writes the legal content?",
         answer:
-          "You provide it, for example a newsletter or your notes, and your wording stays exactly as written. Any legal question goes back to the lawyer. We handle the titles, descriptions, links and publishing.",
+          "You provide it, for example a newsletter or an article you have written, and your wording stays exactly as written. Any legal question goes back to the lawyer. We handle the titles, descriptions, links and publishing.",
       },
       {
         question: "Who approves what goes live?",
