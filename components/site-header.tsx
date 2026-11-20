@@ -46,16 +46,23 @@ import {
  */
 
 /* Desktop nav from lg: six items plus the button don't fit a 768px header,
-   so tablets get the sheet. Top-level link and trigger share one recipe. */
+   so tablets get the sheet. Top-level link and trigger share one recipe, and
+   every top-level item is active anywhere in its section (Resources on a
+   post, Services on a service page). */
 const topItem =
   "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2";
 const topItemIdle = "text-muted-foreground hover:text-foreground";
 const topItemActive = "text-foreground underline decoration-primary decoration-2";
 
-/* Mobile sheet row: ≥44px tall for touch. */
+/* Mobile sheet row: ≥44px tall for touch. The current page's row takes the
+   muted wash. A top-level row (group trigger or link) in the current section
+   takes ink text and the desktop's active underline on its label. */
 const sheetRow = "rounded-lg px-3 py-3 text-sm font-medium transition-colors";
 const sheetRowIdle = "text-muted-foreground hover:bg-muted hover:text-foreground";
 const sheetRowActive = "bg-muted text-foreground";
+const sheetRowSection = "text-foreground hover:bg-muted";
+const sheetSectionMark =
+  "underline decoration-primary decoration-2 underline-offset-[6px]";
 
 /* A sheet group (Services, Use Cases): a disclosure row that opens the
    group's pages, indented beneath it, with the "All …" link last. Base UI's
@@ -77,10 +84,10 @@ function SheetGroup({
         className={cn(
           sheetRow,
           "group flex w-full items-center justify-between gap-4 text-left",
-          active ? "text-foreground hover:bg-muted" : sheetRowIdle,
+          active ? sheetRowSection : sheetRowIdle,
         )}
       >
-        {group.label}
+        <span className={cn(active && sheetSectionMark)}>{group.label}</span>
         <ChevronDown
           className="size-4 shrink-0 transition-transform duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-data-panel-open:rotate-180 motion-reduce:transition-none"
           aria-hidden="true"
@@ -151,28 +158,38 @@ export function SiteHeader() {
   // while nav hrefs are "/services" — strip it before comparing.
   const currentPath = pathname.replace(/\/+$/, "") || "/";
   const isActive = (href: string) => currentPath === href;
-  const inGroup = (group: NavGroup) =>
-    currentPath === group.href || currentPath.startsWith(`${group.href}/`);
+  // A top-level item's section: its own page and every page under it.
+  const inSection = (href: string) =>
+    currentPath === href || currentPath.startsWith(`${href}/`);
   // Every link inside the sheet closes it via onClick, so no
   // route-change effect is needed.
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const sheetLink = (href: string, label: string, indent?: 1 | 2) => (
-    <Link
-      key={href}
-      href={href}
-      aria-current={isActive(href) ? "page" : undefined}
-      onClick={() => setMobileOpen(false)}
-      className={cn(
-        sheetRow,
-        indent === 1 && "pl-7",
-        indent === 2 && "pl-11",
-        isActive(href) ? sheetRowActive : sheetRowIdle,
-      )}
-    >
-      {label}
-    </Link>
-  );
+  // Rows inside a group are indented; a top-level row (no indent) also
+  // marks its section.
+  const sheetLink = (href: string, label: string, indent?: 1 | 2) => {
+    const section = !indent && inSection(href);
+    return (
+      <Link
+        key={href}
+        href={href}
+        aria-current={isActive(href) ? "page" : undefined}
+        onClick={() => setMobileOpen(false)}
+        className={cn(
+          sheetRow,
+          indent === 1 && "pl-7",
+          indent === 2 && "pl-11",
+          isActive(href)
+            ? sheetRowActive
+            : section
+              ? sheetRowSection
+              : sheetRowIdle,
+        )}
+      >
+        {section ? <span className={sheetSectionMark}>{label}</span> : label}
+      </Link>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-sm">
@@ -204,7 +221,7 @@ export function SiteHeader() {
                       className={cn(
                         topItem,
                         "h-auto",
-                        inGroup(group) ? topItemActive : topItemIdle,
+                        inSection(group.href) ? topItemActive : topItemIdle,
                       )}
                     >
                       {group.label}
@@ -223,7 +240,7 @@ export function SiteHeader() {
                       aria-current={isActive(link.href) ? "page" : undefined}
                       className={cn(
                         topItem,
-                        isActive(link.href) ? topItemActive : topItemIdle,
+                        inSection(link.href) ? topItemActive : topItemIdle,
                       )}
                     >
                       {link.label}
@@ -291,7 +308,7 @@ export function SiteHeader() {
                     <SheetGroup
                       key={group.label}
                       group={group}
-                      active={inGroup(group)}
+                      active={inSection(group.href)}
                       link={sheetLink}
                     />
                   ))}

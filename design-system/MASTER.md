@@ -278,12 +278,16 @@ their colors.
   built from `content/navigation.ts`. Dropdowns are `NavigationMenuTrigger` + `NavigationMenuContent`
   (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
   ink (AI Consulting → Fit Check, AI Workflow Audit), then the "All …" overview link after a
-  hairline. Triggers share the top-level link recipe and show the active underline anywhere in
-  their section. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
+  hairline. Triggers share the top-level link recipe. Every top-level item (both triggers, AI
+  Packages, Resources, About) shows the active underline anywhere in its section: its own page
+  and every page under it (Resources on a post). `aria-current="page"` stays on the exact page
+  only. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
   the server HTML (rendered `hidden` until a trigger opens them). **Contact us** is the
   header's one `size="lg"` rounded-full primary (the slot Free Fit Check had until 2026-11).
   Mobile sheet: the **Contact us** pill first (`size="xl"`, full width), then the five
-  top-level rows (Services, Use Cases, AI Packages, Resources, About; ≥44px, `sheetRow`).
+  top-level rows (Services, Use Cases, AI Packages, Resources, About; ≥44px, `sheetRow`). The
+  current page's row takes the `bg-muted` wash; a top-level row in the current section takes ink
+  text and the desktop's active underline on its label (`sheetSectionMark`).
   Services and Use Cases are Base UI `Collapsible` groups, closed each time the sheet opens:
   the trigger is a row with a `ChevronDown` that turns 180° when open (`aria-expanded` /
   `aria-controls` from the primitive), and the panel eases its height (200ms, system curve,
@@ -432,7 +436,9 @@ One system, defined in `app/globals.css`:
   (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,
   `LinkList` and Home's "Two ways to work together" rows; `LinkList` rows and the "Two ways"
   headings now show the underline and arrow at rest (they hid the arrow until hover, which touch
-  never sees).
+  never sees). Header: AI Packages, Resources and About are active anywhere in their section, like
+  the dropdown triggers; in the mobile sheet a top-level row in the current section takes the
+  active underline.
 - **2026-11-20** — SEO round-2: service and use-case pages add a "Related reading" section
   before "Questions" (a standard section with a `<CardGrid>` of the resource posts whose
   `related` is that page, tracked as `resource_card_clicked`). No new shape: vocabulary #10.
