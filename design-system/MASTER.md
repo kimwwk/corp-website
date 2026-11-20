@@ -376,8 +376,10 @@ One system, defined in `app/globals.css`:
 
 ## Known drift — do NOT copy these (fix when the file is next open for edits)
 
-*(empty — everything found in the 2026-08-10 audit was fixed in the same change; add new
-entries here as they're discovered)*
+- `/ai-packages` (moved from /services on 2026-11-20 with its content unchanged) still
+  re-types the P2 header that `<PageHeader>` now renders, and the FAQ accordion that
+  `<FaqList>` renders (its answers carry inline emphasis, so they are JSX rather than the plain
+  strings `FaqList` takes). Recompose it from the kit when the page is next edited.
 
 ## Changelog
 
