@@ -200,7 +200,7 @@ export const services: Service[] = [
     ],
     closing: {
       title: "Let's look at your site together.",
-      lead: "Book a free call and we will walk through what to fix first.",
+      lead: "Start with the free fit check, or book a free call and we will walk through your site.",
     },
   },
   {
@@ -393,7 +393,7 @@ export const services: Service[] = [
     ],
     closing: {
       title: "Have an idea for an app?",
-      lead: "Book a free call and tell us about it.",
+      lead: "Start with the free fit check, or book a free call and tell us about your idea.",
     },
   },
 ];

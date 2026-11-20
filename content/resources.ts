@@ -210,7 +210,7 @@ export const resources: ResourcePost[] = [
     related: { kind: "use-case", slug: "wordpress-support" },
     closing: {
       title: "Want a second pair of eyes on your site?",
-      lead: "See how WordPress Support works, or book a free call.",
+      lead: "Start with the free fit check, or book a free call and we will look at your site together.",
     },
   },
 ];

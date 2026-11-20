@@ -96,7 +96,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Let's look at your WordPress site.",
-      lead: "Book a free call and we will tell you what to fix first.",
+      lead: "Start with the free fit check, or book a free call and we will tell you what to fix first.",
     },
   },
   {
@@ -175,7 +175,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Find out what AI says about you.",
-      lead: "Book a free call and we will walk through your site and your Google listing.",
+      lead: "Start with the free fit check, or book a free call and we will walk through your site and your Google listing.",
     },
   },
   {
@@ -239,7 +239,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Help clients find your firm.",
-      lead: "Book a free call and we will walk through your site and your Google listing.",
+      lead: "Start with the free fit check, or book a free call and we will walk through your site and your Google listing.",
     },
   },
   {
