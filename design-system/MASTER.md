@@ -297,7 +297,7 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs).
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
    short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
-   e.g. "Book a free call" and the link back to the parent service on Website Management
+   e.g. "Take the free fit check" and the link back to the parent service on Website Management
    use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
 7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
