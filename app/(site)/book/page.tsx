@@ -24,7 +24,7 @@ export default function BookPage() {
           Book a call.
         </h1>
         <p className="text-lg leading-relaxed">
-          The fastest way to talk it through: a 30-minute video call. If you&apos;re
+          The fastest way to talk it through: a free 30-minute video call. If you&apos;re
           exploring where AI fits your work, start with the{" "}
           <TrackedLink
             href="/fit-check"

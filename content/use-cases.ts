@@ -357,11 +357,11 @@ export const useCases: UseCase[] = [
     setup: [
       {
         title: "Keep your number",
-        body: "Customers keep calling the number they know. Calls you cannot answer are forwarded with a carrier code, from a mobile or a landline.",
+        body: "Customers keep calling the number they know. Calls you cannot answer are forwarded with a setting from your phone carrier, from a mobile or a landline.",
       },
       {
         title: "Where the text comes from",
-        body: "On a landline or toll-free line, the text can come from that same number. On a mobile number, it comes from a second business texting number we set up for you.",
+        body: "On a landline or toll-free line, the text can come from that same number. Business texting systems cannot send from a mobile number, so on a mobile it comes from a second business number we set up for you. You choose where replies land: your phone, your CRM's inbox, or an AI that answers and books.",
       },
       {
         title: "The text goes out",
@@ -398,7 +398,7 @@ export const useCases: UseCase[] = [
       {
         question: "How much does missed call text back cost?",
         answer:
-          "Many business phone apps and CRMs include it in their plans, and a custom setup costs little to run each month. On a free call, we can tell you which one fits.",
+          "Many business phone apps and CRMs include it in their plans, and a custom setup costs little to run each month. Setting it up with us is a much smaller job than a full workflow build, and we quote it on a free call.",
       },
       {
         question: "What if I want calls answered, not just texted back?",
