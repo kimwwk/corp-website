@@ -126,7 +126,7 @@ export const useCases: UseCase[] = [
     problem: [
       "When someone asks an AI assistant for a recommendation, it searches the web by category: a place, a type of provider, an industry, sometimes a tool. Then it names the businesses whose sites answer that question clearly.",
       "In our own research into how AI assistants answer, the site they cited most often had one clear page per problem. That is GEO, generative engine optimization, also called AI SEO: making your business easy for AI to understand and recommend.",
-      "Local SEO is the foundation underneath: your Google Business Profile, your reviews, and a site Google can index. GEO builds on it.",
+      "Local SEO is the foundation underneath: your Google Business Profile, your reviews, and a site Google can index. Our GEO services build on it.",
     ],
     setup: [
       {
@@ -192,11 +192,11 @@ export const useCases: UseCase[] = [
     title: "Law Firm SEO and GEO for AI Search — Kivov Digital",
     description:
       "Law firm SEO and GEO: a website, Google listing and content that help clients find your firm on Google and in AI assistants like ChatGPT.",
-    cardLine: "Help clients find your firm on Google and in AI answers.",
+    cardLine: "SEO for lawyers: help clients find your firm on Google and in AI answers.",
     h1: "Law firm SEO for Google and AI search.",
     problemLine: "Clients look for a lawyer on Google, and more of them now ask ChatGPT.",
     problem: [
-      "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
+      "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part of law firm marketing that Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
       "We write for that: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
     ],
     setup: [
@@ -278,7 +278,7 @@ export const useCases: UseCase[] = [
     h1: "Invoice automation that reads every vendor's PDF.",
     problemLine: "Vendor invoices arrive as PDFs, every layout different, and someone types them in by hand.",
     problem: [
-      "Every supplier sends a different layout. A template for each one means maintaining hundreds of templates, so the work falls back to typing.",
+      "Accounts payable automation usually trips on the same thing: every supplier sends a different layout. A template for each one means maintaining hundreds of templates, so the work falls back to typing.",
       "The one thing that has to be right is the supplier. A wrong supplier is a payment to the wrong company.",
     ],
     setup: [

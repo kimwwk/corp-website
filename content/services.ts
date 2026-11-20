@@ -99,12 +99,12 @@ export const services: Service[] = [
       {
         question: "How much does an AI consultant cost?",
         answer:
-          "Our consulting packages and their prices are on the AI Packages page. The Workflow Fit Check is free.",
+          "Our AI consulting services and their prices are on the AI Packages page. The Workflow Fit Check is free.",
       },
       {
         question: "What does AI consulting mean?",
         answer:
-          "Getting help to decide where AI fits your business, and then putting it in place. We understand your workflow first and choose the technology second.",
+          "Getting help to decide where AI fits your business, and then putting it in place. As an AI consultancy, we understand your workflow first and choose the technology second.",
       },
     ],
     closing: {
@@ -122,7 +122,7 @@ export const services: Service[] = [
       "We manage and maintain your website on WordPress, Wix, Squarespace, Shopify, GoDaddy or Webflow, plus your domain, hosting and Google Business Profile.",
     cardLine: "Your website, domain and Google listing, kept current, with forms and tracking that work.",
     h1: "Website management for Toronto businesses.",
-    lead: "We look after your website, your domain and your Google Business Profile, so your business stays current, easy to find and easy to contact.",
+    lead: "We look after your website, your domain and your Google Business Profile: maintenance, updates and, when it is time, a redesign. Your business stays current, easy to find and easy to contact.",
     problems: [
       "Messages from the contact form stop arriving, and no one notices.",
       "Spam comes in through the contact form.",
@@ -131,6 +131,10 @@ export const services: Service[] = [
       "The person who built the site has moved on.",
     ],
     included: [
+      {
+        title: "Any platform",
+        body: "WordPress, Wix, Squarespace, Shopify, GoDaddy and Webflow sites, plus the domain and hosting accounts behind them.",
+      },
       {
         title: "Updates and fixes",
         body: "Page edits, new pages, team and service updates, and fixes when something breaks.",
@@ -189,7 +193,7 @@ export const services: Service[] = [
       {
         question: "How much does website maintenance cost?",
         answer:
-          "It depends on the platform and how much changes each month. We quote after a free call, once we have seen the site.",
+          "Website maintenance services depend on the platform and how much changes each month. We quote after a free call, once we have seen the site.",
       },
       {
         question: "Can AI redesign my existing website?",
@@ -328,7 +332,7 @@ export const services: Service[] = [
       "Web and mobile app development in Toronto. We build fast with AI, and every project starts with a discovery session so the first version is the right one.",
     cardLine: "Web and mobile apps built fast with AI, always starting with discovery.",
     h1: "App development in Toronto, fast with AI.",
-    lead: "We use AI to build quickly, and every project starts with a discovery session, so the first thing we build is what your business needs.",
+    lead: "As app developers in Toronto, we use AI to build quickly, and every project starts with a discovery session, so the first thing we build is what your business needs.",
     problems: [
       "You have an idea for an app and no tech person.",
       "Off-the-shelf software almost fits, but not quite.",
@@ -342,7 +346,7 @@ export const services: Service[] = [
       },
       {
         title: "Web and mobile",
-        body: "Web apps, and Android apps released on Google Play.",
+        body: "Web apps, and mobile app development for Android, released on Google Play.",
       },
       {
         title: "A version you can sell with",
@@ -368,7 +372,7 @@ export const services: Service[] = [
       },
       {
         title: "We build",
-        body: "Fast with AI, with a working version early so you can try it.",
+        body: "Rapid app development with AI, with a working version early so you can try it.",
       },
     ],
     useCases: [],
@@ -391,7 +395,7 @@ export const services: Service[] = [
       {
         question: "What is a custom software developer?",
         answer:
-          "Someone who builds software for your business specifically. We check what already exists first, use what fits, and build what is missing.",
+          "Someone who builds software for your business specifically. Our custom software development starts with what already exists: we use what fits, and build what is missing.",
       },
     ],
     closing: {

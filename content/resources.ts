@@ -33,7 +33,7 @@ export const resources: ResourcePost[] = [
       { type: "h2", text: "What GEO is" },
       {
         type: "p",
-        text: "Generative engine optimization, or GEO, is getting your business cited and recommended by AI assistants like ChatGPT, Gemini and Google's AI Overviews. It is also called AEO, answer engine optimization, or AI SEO. SEO gets you ranked. GEO gets you mentioned in the answer.",
+        text: "Generative engine optimization, or GEO, is getting your business cited and recommended by AI assistants like ChatGPT, Gemini and Google's AI Overviews. It is also called AEO, answer engine optimization, or AI SEO, and people search for it as GEO SEO or ChatGPT SEO. SEO gets you ranked. GEO gets you mentioned in the answer.",
       },
       { type: "h2", text: "What ChatGPT does before it answers" },
       {

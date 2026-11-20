@@ -19,7 +19,7 @@ Key facts:
 - [Services](https://kivov.ca/services/): Kivov's 4 services: AI consulting, website management, AI automation and app development.
 - [AI Consulting](https://kivov.ca/services/ai-consulting/): Workflow-first AI consulting in Toronto: map one workflow, find where time is lost, recommend what fits. Starts with the free Workflow Fit Check or the AI Workflow Audit.
 - [Website Management](https://kivov.ca/services/website-management/): Website management and maintenance in Toronto for WordPress, Wix, Squarespace, Shopify, GoDaddy and Webflow sites, plus domain, hosting accounts and Google Business Profile. Quoted after a free call.
-- [AI Automation](https://kivov.ca/services/ai-automation/): AI automation for small businesses, built inside the tools they already use, with a person approving before anything is sent or posted.
+- [AI Automation](https://kivov.ca/services/ai-automation/): AI automation for small businesses, built inside the tools they already use. Emails and invoices wait as drafts for approval; anything that runs on its own, like a missed-call text, follows rules the owner approves.
 - [App Development](https://kivov.ca/services/app-development/): Web and Android app development in Toronto, built fast with AI, always starting with a discovery session. Quoted after discovery.
 - [Use Cases](https://kivov.ca/use-cases/): Specific problems Kivov solves, grouped by service.
 - [WordPress Support](https://kivov.ca/use-cases/wordpress-support/): WordPress support in Toronto: fixes, updates, contact forms, tracking and Google listings, plus WordPress website design.
