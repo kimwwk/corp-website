@@ -50,7 +50,7 @@ export const services: Service[] = [
       },
       {
         title: "Coaching while you build",
-        body: "When your team wants to build it themselves, we build Claude skills and automations alongside them, every two weeks.",
+        body: "When your team wants to build it themselves, we build AI assistants and automations alongside them, every two weeks.",
       },
     ],
     steps: [
@@ -213,10 +213,10 @@ export const services: Service[] = [
     ],
     title: "AI Automation Agency in Toronto — Kivov Digital",
     description:
-      "AI automation for Toronto small businesses, built inside the tools you already use. Your team approves before anything goes out.",
+      "AI automation for Toronto small businesses, built inside the tools you already use. You decide what waits for your approval and what runs on its own.",
     cardLine: "Hand the repetitive work to AI, inside the tools your team already uses.",
     h1: "An AI automation agency for the way your team already works.",
-    lead: "We take one workflow, like follow-up emails or vendor invoices, and automate it inside the tools you already use. A person reviews and approves before anything is sent or posted.",
+    lead: "We take one workflow, like follow-up emails or vendor invoices, and automate it inside the tools you already use. You decide what waits for your approval and what can run on its own, like a text back to a missed call.",
     problems: [
       "You are copying the same information between platforms.",
       "Follow-ups get delayed when the business gets busy.",
@@ -233,8 +233,8 @@ export const services: Service[] = [
         body: "We connect the systems you already use before suggesting anything new.",
       },
       {
-        title: "A person approves",
-        body: "Drafts wait for review. Nothing posts or sends without a click.",
+        title: "Your rules, your approval",
+        body: "Emails and invoices wait as drafts for your review. Anything that runs on its own, like a missed-call text, follows rules you approve first.",
       },
       {
         title: "30 days of stabilization",
@@ -283,7 +283,7 @@ export const services: Service[] = [
       {
         question: "What is an AI automation company?",
         answer:
-          "A company that sets up AI to handle repetitive work in your business, like drafting emails, reading documents or answering calls. We build inside the tools you already use, and a person approves the output.",
+          "A company that sets up AI to handle repetitive work in your business, like drafting emails, reading documents or answering calls. We build inside the tools you already use, and you decide which steps need your approval.",
       },
       {
         question: "What are some processes that can be automated?",
