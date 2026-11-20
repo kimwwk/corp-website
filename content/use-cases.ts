@@ -196,12 +196,12 @@ export function getUseCase(slug: string): UseCase | undefined {
   return useCases.find((u) => u.slug === slug);
 }
 
-export function useCaseBySlug(slug: UseCaseSlug): UseCase {
+export function getUseCaseBySlug(slug: UseCaseSlug): UseCase {
   const found = getUseCase(slug);
   if (!found) throw new Error(`Unknown use-case slug: ${slug}`);
   return found;
 }
 
-export function useCasePath(slug: UseCaseSlug) {
+export function pathForUseCase(slug: UseCaseSlug) {
   return `/use-cases/${slug}`;
 }

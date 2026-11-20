@@ -1,6 +1,6 @@
 import { resourcePath, resources } from "@/content/resources";
 import { servicePath, services } from "@/content/services";
-import { useCasePath, useCases } from "@/content/use-cases";
+import { pathForUseCase, useCases } from "@/content/use-cases";
 
 /*
  * Site navigation, built from content/ so a new page shows up in the header
@@ -40,7 +40,7 @@ export const useCasesNav: NavGroup = {
   label: "Use Cases",
   href: "/use-cases",
   all: { label: "All use cases", href: "/use-cases" },
-  items: useCases.map((u) => ({ label: u.name, href: useCasePath(u.slug) })),
+  items: useCases.map((u) => ({ label: u.name, href: pathForUseCase(u.slug) })),
 };
 
 export const menuGroups = [servicesNav, useCasesNav];
