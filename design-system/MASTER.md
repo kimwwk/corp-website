@@ -208,7 +208,8 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`Band`** — S1 hero (`hero` = home h1; `hero="page"` = inner-page h1, for service and
   use-case heroes), S3 featured, S6 closing (`breathe`); forest ring via `depth`
 - **`PageHeader`** — P2 cream page header (eyebrow → page h1 → lead → children) for inner pages
-  that open without a band: overview pages, resource posts
+  that open without a band: overview pages, resource posts (child: the byline and date,
+  "By Kim Wong · November 20, 2026", in one `<MonoLabel tone="caption">`)
 - **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
   children carry their own `<Reveal delay>` rows; `eyebrowAs="h2"` when the eyebrow is the
   section's only heading
@@ -406,7 +407,8 @@ One system, defined in `app/globals.css`:
   use-case, resource-post and overview templates now head their section with an h2 in the
   same mono-label look. `StatementRows` rows take an optional `link` (row-heading link
   recipe above); service "How to start" package lines carry an `href` (fit check, audit, AI
-  packages) and link their package names with the event each page already uses.
+  packages) and link their package names with the event each page already uses. Resource
+  posts show "By Kim Wong" before the date in the header's caption mono label.
 - **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
   can carry two text links beside its one primary (Website Management use cases: "Book a
   free call" and the parent-service link). Still one primary per section. Use-case pages

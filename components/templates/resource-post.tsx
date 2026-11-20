@@ -14,13 +14,13 @@ import { resourcePath } from "@/content/resources";
 import { serviceBySlug, servicePath } from "@/content/services";
 import type { ResourcePost, ServiceSlug } from "@/content/types";
 import { getUseCaseBySlug, pathForUseCase } from "@/content/use-cases";
-import { article, breadcrumbs } from "@/lib/seo";
+import { article, breadcrumbs, person } from "@/lib/seo";
 
 /*
  * Resource post template (/resources/<slug>/). Section order is fixed by the
- * site-structure decision's "Page layouts": header (eyebrow, H1, date) ·
- * Short answer · Full post · Related service card · LinkedIn link (only when
- * the post has one) · closing band.
+ * site-structure decision's "Page layouts": header (eyebrow, H1, byline and
+ * date) · Short answer · Full post · Related service card · LinkedIn link
+ * (only when the post has one) · closing band.
  *
  * Analytics: `source_page` is `resource_<slug>`, because a post can share its
  * slug with a service (`ai-automation`). Posts whose related page is, or
@@ -100,7 +100,9 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
 
       {/* 1 — Header */}
       <PageHeader eyebrow="Resources" title={post.h1}>
+        {/* Byline: the same person entity the Article JSON-LD names as author. */}
         <MonoLabel tone="caption" className="mt-6">
+          By {person.name} ·{" "}
           {ISO_DATE.test(post.date) ? (
             <time dateTime={post.date}>{formatDate(post.date)}</time>
           ) : (
