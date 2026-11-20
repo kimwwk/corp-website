@@ -37,7 +37,8 @@ import {
  * content/navigation.ts. Contact us is the one highlighted button.
  */
 
-/* Desktop top-level item: link and trigger share one recipe. */
+/* Desktop nav from lg: six items plus the button don't fit a 768px header,
+   so tablets get the sheet. Top-level link and trigger share one recipe. */
 const topItem =
   "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2";
 const topItemIdle = "text-muted-foreground hover:text-foreground";
@@ -141,7 +142,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             <NavigationMenu aria-label="Main navigation">
               <NavigationMenuList className="gap-1">
                 {menuGroups.map((group) => (
@@ -199,7 +200,7 @@ export function SiteHeader() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden"
+                  className="lg:hidden"
                   aria-label="Toggle navigation menu"
                 />
               }
