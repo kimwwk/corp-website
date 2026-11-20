@@ -297,7 +297,7 @@ export default function AiPackagesPage() {
       {/* P2 — page header */}
       <section className="px-6 py-20 md:py-28">
         <Reveal className="mx-auto max-w-6xl">
-          <MonoLabel>Services</MonoLabel>
+          <MonoLabel>AI Packages</MonoLabel>
           <h1 className="mt-6 max-w-[11em] font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground">
             Start with the <Marker>workflow</Marker>.
           </h1>
