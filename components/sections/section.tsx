@@ -7,10 +7,14 @@ import { cn } from "@/lib/utils";
  * max-w-6xl container, then eyebrow → h2 → lead. `flush` drops the border-t
  * (first section after a band or interlude). `staggered` reveals only the
  * header here so children can carry their own <Reveal delay={…}> rows.
+ * `eyebrowAs="h2"` renders the eyebrow as the section's h2 (same mono-label
+ * look) when it is the section's only heading; with a `title`, the title is
+ * the h2 and the eyebrow stays a <p>.
  */
 export function Section({
   id,
   eyebrow,
+  eyebrowAs = "p",
   title,
   lead,
   flush = false,
@@ -20,6 +24,7 @@ export function Section({
 }: {
   id?: string;
   eyebrow?: React.ReactNode;
+  eyebrowAs?: "p" | "h2";
   title?: React.ReactNode;
   lead?: React.ReactNode;
   flush?: boolean;
@@ -29,7 +34,7 @@ export function Section({
 }) {
   const header = (
     <>
-      {eyebrow ? <MonoLabel>{eyebrow}</MonoLabel> : null}
+      {eyebrow ? <MonoLabel as={title ? "p" : eyebrowAs}>{eyebrow}</MonoLabel> : null}
       {title ? (
         <h2
           className={cn(

@@ -110,7 +110,7 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
       </PageHeader>
 
       {/* 2 — Short answer */}
-      <Section eyebrow="Short answer">
+      <Section eyebrowAs="h2" eyebrow="Short answer">
         <p className="mt-6 max-w-3xl text-lg leading-relaxed font-medium text-foreground">
           {post.shortAnswer}
         </p>
@@ -124,13 +124,13 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
       </Section>
 
       {/* 4 — Related service */}
-      <Section staggered eyebrow="Related">
+      <Section staggered eyebrowAs="h2" eyebrow="Related">
         <CardGrid columns={1} cards={[relatedCard(post, src)]} />
       </Section>
 
       {/* 5 — LinkedIn (only when the post has one) */}
       {post.linkedinUrl ? (
-        <Section eyebrow="LinkedIn">
+        <Section eyebrowAs="h2" eyebrow="LinkedIn">
           <CtaRow
             className="mt-6"
             secondary={{

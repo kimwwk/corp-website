@@ -4,6 +4,9 @@ import { cn } from "@/lib/utils";
  * The mono label — eyebrows, kickers, support lines, price units. One recipe,
  * three inks: green on cream (eyebrow), caption (support / on green bands),
  * ink (list kickers). Tracking is always 0.14em at this size.
+ *
+ * `as="h2"` makes the label a section heading with the identical look, for
+ * sections whose only heading is the eyebrow ("Sound familiar?", "Questions").
  */
 const tones = {
   green: "text-primary",
@@ -13,15 +16,17 @@ const tones = {
 
 export function MonoLabel({
   tone = "green",
+  as: Tag = "p",
   className,
   children,
 }: {
   tone?: keyof typeof tones;
+  as?: "p" | "h2";
   className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <p
+    <Tag
       className={cn(
         "font-mono text-xs font-medium tracking-[0.14em] uppercase",
         tones[tone],
@@ -29,6 +34,6 @@ export function MonoLabel({
       )}
     >
       {children}
-    </p>
+    </Tag>
   );
 }

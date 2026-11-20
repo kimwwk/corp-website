@@ -84,23 +84,23 @@ export function ServicePage({ service }: { service: Service }) {
       </Band>
 
       {/* 2 — Sound familiar? */}
-      <Section flush eyebrow="Sound familiar?">
+      <Section flush eyebrowAs="h2" eyebrow="Sound familiar?">
         <LedgerList items={service.problems} marker="check" columns={2} className="mt-8" />
       </Section>
 
       {/* 3 — What's included */}
-      <Section staggered eyebrow="What’s included">
+      <Section staggered eyebrowAs="h2" eyebrow="What’s included">
         <StatementRows rows={service.included} />
       </Section>
 
       {/* 4 — How it works */}
-      <Section staggered eyebrow="How it works">
+      <Section staggered eyebrowAs="h2" eyebrow="How it works">
         <StepRows steps={service.steps} />
       </Section>
 
       {/* 5 — Use cases */}
       {cases.length ? (
-        <Section staggered eyebrow="Use cases">
+        <Section staggered eyebrowAs="h2" eyebrow="Use cases">
           <CardGrid
             columns={cases.length >= 4 ? 4 : cases.length === 3 ? 3 : 2}
             cards={cases.map((u) => ({
@@ -119,13 +119,17 @@ export function ServicePage({ service }: { service: Service }) {
 
       {/* 7 — Testimonial(s) */}
       {quotes.length ? (
-        <Section staggered eyebrow={quotes.length > 1 ? "Testimonials" : "Testimonial"}>
+        <Section
+          staggered
+          eyebrowAs="h2"
+          eyebrow={quotes.length > 1 ? "Testimonials" : "Testimonial"}
+        >
           <TestimonialGrid quotes={quotes} />
         </Section>
       ) : null}
 
       {/* 8 — How to start */}
-      <Section staggered eyebrow="How to start">
+      <Section staggered eyebrowAs="h2" eyebrow="How to start">
         {start.kind === "packages" ? (
           <>
             <StatementRows
@@ -145,7 +149,7 @@ export function ServicePage({ service }: { service: Service }) {
 
       {/* 9 — Questions */}
       {service.faqs.length ? (
-        <Section staggered eyebrow="Questions">
+        <Section staggered eyebrowAs="h2" eyebrow="Questions">
           <FaqList faqs={service.faqs} />
         </Section>
       ) : null}

@@ -66,7 +66,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       </Band>
 
       {/* 2 — The problem */}
-      <Section flush eyebrow="The problem">
+      <Section flush eyebrowAs="h2" eyebrow="The problem">
         <div className="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed">
           {useCase.problem.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
@@ -75,7 +75,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       </Section>
 
       {/* 3 — How we set it up */}
-      <Section staggered eyebrow="How we set it up">
+      <Section staggered eyebrowAs="h2" eyebrow="How we set it up">
         <StepRows steps={useCase.setup} />
       </Section>
 
@@ -92,7 +92,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 4 — Tool or done for you? (research pages only) */}
       {useCase.toolOrDone ? (
-        <Section staggered eyebrow="Tool or done for you?">
+        <Section staggered eyebrowAs="h2" eyebrow="Tool or done for you?">
           <StatementRows
             rows={[
               { title: "Tool", body: useCase.toolOrDone.tool },
@@ -107,14 +107,14 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 6 — Works with */}
       {useCase.worksWith.length ? (
-        <Section eyebrow="Works with">
+        <Section eyebrowAs="h2" eyebrow="Works with">
           <LedgerList items={useCase.worksWith} columns={2} className="mt-8" />
         </Section>
       ) : null}
 
       {/* 7 — Questions */}
       {useCase.faqs.length ? (
-        <Section staggered eyebrow="Questions">
+        <Section staggered eyebrowAs="h2" eyebrow="Questions">
           <FaqList faqs={useCase.faqs} />
         </Section>
       ) : null}

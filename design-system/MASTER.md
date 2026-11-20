@@ -159,6 +159,12 @@ Render with **`<MonoLabel>`** (`components/sections/mono-label.tsx`) — one rec
 
 Tracking is `0.14em` (page labels) or `0.2em` (component eyebrows) — no other values.
 
+`<MonoLabel as="h2">` renders the same label as an `h2` (identical look; preflight resets heading
+size and weight). Use it, via `<Section eyebrowAs="h2">`, when the eyebrow is a section's only
+heading, so the page outline runs H1 → H2 → H3. A section with a `title` keeps the eyebrow a `<p>`
+(its title is the h2); `Section` ignores `eyebrowAs` then. The service, use-case, resource-post
+and overview templates set it on every eyebrow-only section.
+
 ### Body copy
 
 Default body = Work Sans 17px `text-muted-foreground`. Leads: `text-lg leading-relaxed`,
@@ -203,12 +209,13 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`PageHeader`** — P2 cream page header (eyebrow → page h1 → lead → children) for inner pages
   that open without a band: overview pages, resource posts
 - **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
-  children carry their own `<Reveal delay>` rows
+  children carry their own `<Reveal delay>` rows; `eyebrowAs="h2"` when the eyebrow is the
+  section's only heading
 - **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link,
   or a list of them rendered in order; `tone="band"` on green) and its mono support line.
   `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
   new tab)
-- **`MonoLabel`** — the 0.14em mono label (green / caption / ink)
+- **`MonoLabel`** — the 0.14em mono label (green / caption / ink); `as="h2"` for a heading
 - **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
 - **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger
 - **`StepRows`** — the huge-numeral "How it works" ladder
@@ -392,7 +399,10 @@ One system, defined in `app/globals.css`:
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's
-  links are client-only, since Base UI portals don't render on the server).
+  links are client-only, since Base UI portals don't render on the server). `MonoLabel` takes
+  `as="h2"` and `Section` takes `eyebrowAs="h2"`: eyebrow-only sections on the service,
+  use-case, resource-post and overview templates now head their section with an h2 in the
+  same mono-label look.
 - **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
   can carry two text links beside its one primary (Website Management use cases: "Book a
   free call" and the parent-service link). Still one primary per section. Use-case pages

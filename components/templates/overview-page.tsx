@@ -39,7 +39,12 @@ export function OverviewPage({
 
       {/* 2 — Cards */}
       {groups.map((group, i) => (
-        <Section key={group.label ?? i} staggered eyebrow={group.label}>
+        <Section
+          key={group.label ?? i}
+          staggered
+          eyebrowAs="h2"
+          eyebrow={group.label}
+        >
           <CardGrid
             columns={group.cards.length >= 4 ? 4 : group.cards.length === 3 ? 3 : 2}
             cards={group.cards}
