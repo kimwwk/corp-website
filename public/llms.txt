@@ -16,23 +16,23 @@ Key facts:
 ## Pages
 
 - [Home](https://kivov.ca/): What Kivov does and who it is for.
-- [Services](https://kivov.ca/services/): TODO(copy)
-- [AI Consulting](https://kivov.ca/services/ai-consulting/): TODO(copy)
-- [Website Management](https://kivov.ca/services/website-management/): TODO(copy)
-- [AI Automation](https://kivov.ca/services/ai-automation/): TODO(copy)
-- [App Development](https://kivov.ca/services/app-development/): TODO(copy)
-- [Use Cases](https://kivov.ca/use-cases/): TODO(copy)
-- [WordPress Support](https://kivov.ca/use-cases/wordpress-support/): TODO(copy)
-- [Local SEO & GEO](https://kivov.ca/use-cases/local-seo/): TODO(copy)
-- [Law Firm SEO & GEO](https://kivov.ca/use-cases/law-firm-seo/): TODO(copy)
-- [Invoice Automation](https://kivov.ca/use-cases/invoice-automation/): TODO(copy)
-- [Missed Call Text Back](https://kivov.ca/use-cases/missed-call-text-back/): TODO(copy)
-- [AI Receptionist](https://kivov.ca/use-cases/ai-receptionist/): TODO(copy)
-- [AI Follow-Up Emails](https://kivov.ca/use-cases/ai-follow-up-emails/): TODO(copy)
-- [Resources](https://kivov.ca/resources/): TODO(copy)
-- [Generative engine optimization: how do I get ChatGPT to recommend my business?](https://kivov.ca/resources/generative-engine-optimization/): TODO(copy)
-- [AI automation for small business: what should I automate first?](https://kivov.ca/resources/ai-automation/): TODO(copy)
-- [WordPress SEO: why isn't my WordPress site showing up on Google?](https://kivov.ca/resources/wordpress-seo/): TODO(copy)
+- [Services](https://kivov.ca/services/): Kivov's 4 services: AI consulting, website management, AI automation and app development.
+- [AI Consulting](https://kivov.ca/services/ai-consulting/): Workflow-first AI consulting in Toronto: map one workflow, find where time is lost, recommend what fits. Starts with the free Workflow Fit Check or the AI Workflow Audit.
+- [Website Management](https://kivov.ca/services/website-management/): Website management and maintenance in Toronto for WordPress, Wix, Squarespace, Shopify, GoDaddy and Webflow sites, plus domain, hosting accounts and Google Business Profile. Quoted after a free call.
+- [AI Automation](https://kivov.ca/services/ai-automation/): AI automation for small businesses, built inside the tools they already use, with a person approving before anything is sent or posted.
+- [App Development](https://kivov.ca/services/app-development/): Web and Android app development in Toronto, built fast with AI, always starting with a discovery session. Quoted after discovery.
+- [Use Cases](https://kivov.ca/use-cases/): Specific problems Kivov solves, grouped by service.
+- [WordPress Support](https://kivov.ca/use-cases/wordpress-support/): WordPress support in Toronto: fixes, updates, contact forms, tracking and Google listings, plus WordPress website design.
+- [Local SEO & GEO](https://kivov.ca/use-cases/local-seo/): Local SEO in Toronto plus GEO (AI SEO): helping Google and AI assistants like ChatGPT understand and recommend a business.
+- [Law Firm SEO & GEO](https://kivov.ca/use-cases/law-firm-seo/): SEO and GEO for law firms: website fixes, Google Business Profile, posts and Q&A pages, with the lawyer's wording kept as written.
+- [Invoice Automation](https://kivov.ca/use-cases/invoice-automation/): AI reads vendor invoice PDFs of any layout and enters them into QuickBooks or an ERP as drafts for a person to approve.
+- [Missed Call Text Back](https://kivov.ca/use-cases/missed-call-text-back/): Missed call text back set up on the business's existing phone number: callers get a text within seconds and can book a time.
+- [AI Receptionist](https://kivov.ca/use-cases/ai-receptionist/): An AI voice agent that answers calls, follows the business's booking rules and books into its calendar.
+- [AI Follow-Up Emails](https://kivov.ca/use-cases/ai-follow-up-emails/): After every client call, AI drafts the follow-up email in the owner's voice for them to review and send. It never sends on its own.
+- [Resources](https://kivov.ca/resources/): Answers to questions small business owners ask about AI automation, GEO and WordPress SEO.
+- [Generative engine optimization: how do I get ChatGPT to recommend my business?](https://kivov.ca/resources/generative-engine-optimization/): How ChatGPT picks who to recommend, and what a small business can put on its site so it gets cited.
+- [AI automation for small business: what should I automate first?](https://kivov.ca/resources/ai-automation/): Count how often a task happens and what it costs each time; automate the biggest number first.
+- [WordPress SEO: why isn't my WordPress site showing up on Google?](https://kivov.ca/resources/wordpress-seo/): Check what Google actually indexed in Search Console; WordPress leftovers like attachment pages often crowd out real pages.
 - [AI Packages](https://kivov.ca/ai-packages/): The full service ladder, pricing and FAQ.
 - [AI Workflow Audit](https://kivov.ca/audit/): What the audit covers, what it won't do, and how it runs.
 - [Free Workflow Fit Check](https://kivov.ca/fit-check/): The free three-minute self-assessment.

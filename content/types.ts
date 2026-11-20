@@ -142,6 +142,8 @@ export type UseCase = {
   setup: { title: string; body: string }[];
   /** "Tool or done for you?": research pages only. */
   toolOrDone?: { tool: string; doneForYou: string };
+  /** One extra section after "How we set it up", e.g. WordPress website design. */
+  extraSection?: { eyebrow: string; title: string; body: string[] };
   proof: ProofId[];
   /** "Works with": the tools it connects to. */
   worksWith: string[];

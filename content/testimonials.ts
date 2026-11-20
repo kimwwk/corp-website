@@ -26,7 +26,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "alan-kong",
     name: "Alan Kong",
-    role: "TODO(copy)",
+    role: "Client",
     quote: [
       "I’ve really enjoyed working with Kim. She’s technically strong, reliable, and just very easy to work with.",
       "One thing I really appreciate is how quickly she gets things done. If she commits to a deadline, you can count on her to deliver, and she does it without compromising on quality. She’s thoughtful, detail-oriented, and very practical when it comes to solving problems.",
@@ -43,7 +43,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "michaelangelo-agbodike",
     name: "Michaelangelo Agbodike",
-    role: "TODO(copy)",
+    role: "Client",
     quote: [
       "Kim really help me gain clarity on how to automate my workflow for my content creation and gave me brilliant insight on how to make it easier and more efficient which saves me a lot of time now than it did originally.",
     ],
@@ -58,7 +58,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "joyce-yan",
     name: "Joyce Yan",
-    role: "TODO(copy)",
+    role: "Former tech lead",
     quote: [
       "I had the pleasure of working with Kim as her tech lead. What sets her apart is how fluidly she moves between business and technical worlds — she understands the “why” behind requirements as well as the “how” of implementation, which makes her a trusted translator between stakeholders and the dev team.",
       "She’s also been a driving force behind AI adoption on our team, leading GitHub Copilot enablement across the group and contributing to shared agents and tooling that others now rely on daily. She actively pushes the team to work smarter with it, while still holding the line on solid engineering practices.",
@@ -75,7 +75,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "matthew-obrian",
     name: "Matthew O'Brian",
-    role: "TODO(copy)",
+    role: "Former senior colleague",
     quote: [
       "I had the pleasure of working with Kim on several projects, where she acted as a developer responsible for code development in our cloud environments. Her technical knowledge is exceptional. Just as importantly, Kim is someone who I and the teams truly enjoy working with. She's collaborative and always willing to help others succeed. She consistently made our team stronger, and I'd happily work with her again.",
     ],
@@ -90,7 +90,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "abdou-rakib-abente",
     name: "Abdou Rakib Abente",
-    role: "TODO(copy)",
+    role: "Mentee, School of Mentors",
     quote: [
       "I connected with Kim through School of Mentors, and from the very first conversation, I could tell she genuinely cares about helping people grow. Since then, she has been someone I can always count on. Whenever I'm building something new or working through a challenge, she's there to listen, ask the right questions, and give me honest, thoughtful feedback.",
       "What stands out most about Kim is how available and supportive she is, not just once or twice, but consistently. She makes time to connect whenever I need it, and she always brings real insight, not just encouragement. On top of all that, she's building her own company, Kivov, and even hosted her first live event, so she truly understands what it takes to build something from the ground up.",

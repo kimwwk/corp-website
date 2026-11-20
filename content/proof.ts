@@ -40,8 +40,8 @@ export const proof: Proof[] = [
   {
     id: "law-firm-work",
     label: "Client build",
-    title: "TODO(copy)",
-    body: "TODO(copy)",
+    title: "Law firm work: website, SEO and AI search",
+    body: "For a law firm client, we fixed the contact forms and their emails, made every phone number tappable and tracked, set up Search Console and Bing, rewrote the Google Business Profile description, put the firm's Google reviews on its homepage, and publish its posts with the lawyer's wording unchanged.",
   },
   {
     id: "conversational-ai",
