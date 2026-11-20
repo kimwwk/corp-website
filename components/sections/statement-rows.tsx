@@ -17,8 +17,10 @@ export type StatementRow = {
   link?: { href: string; event: string; eventProps?: Record<string, unknown> };
 };
 
+/* inline-block: the link box takes the heading's line height (28px, 32px
+   from md), so it is a ≥24px touch target. */
 const titleLink =
-  "rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary";
+  "inline-block rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary";
 
 export function StatementRows({ rows }: { rows: StatementRow[] }) {
   return (

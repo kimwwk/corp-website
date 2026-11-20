@@ -178,8 +178,13 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | `linkGreen` (on cream) | `inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (`<CtaRow>` secondary) |
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
-| Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type) — service "How to start" package names |
+| Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `inline-block rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type; `inline-block` makes the box the heading's line height, 28px / 32px from `md`) — service "How to start" package names |
 | Card link cue (`<CardGrid>`) | at the card's foot: "Learn more" in linkGreen's look (`font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary`. **Visible at rest** on every screen — touch has no hover. Not a link of its own: the whole card is the link |
+
+**Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
+least 24px tall: `inline-flex min-h-6 items-center` (the /ai-packages card back-links), or
+`inline-block` at heading line height (row-heading links). The footer wordmark link is
+`min-h-11`, like the `size-11` social row beside it. Links inside running prose are exempt.
 
 ---
 
@@ -286,7 +291,7 @@ their colors.
   375×667. The nav scrolls (`overflow-y-auto`) and starts below the close button (`mt-12`), so
   rows never scroll under it. The desktop nav shows from `lg`; below that (tablets included)
   the sheet takes over.
-- `SiteFooter` — wordmark (links home) + social row; then the site map: four link columns
+- `SiteFooter` — wordmark (links home, `min-h-11` hit area) + social row; then the site map: four link columns
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
   Terms, Consent Preferences). Every page in the tree is listed here.
@@ -400,7 +405,7 @@ One system, defined in `app/globals.css`:
 - [ ] Content wrapped in `<Reveal>`; stagger 30–50ms; `motion-reduce` fallbacks present
 - [ ] One primary CTA per section; CTAs via `TrackedLink` with event props
 - [ ] Focus states visible (ring tokens); contrast ≥ 4.5:1 both on cream and on green
-- [ ] Every link shows it is a link without hover (touch)
+- [ ] Every link shows it is a link without hover (touch); touch targets ≥24px, CTAs ≥44px
 - [ ] Responsive at 375 / 768 / 1024 / 1440; no horizontal scroll on mobile
 - [ ] No content hidden behind the fixed header (`scroll-mt-16` on anchor targets — the kit
       adds it whenever a `Band`/`Section` gets an `id`)
@@ -422,7 +427,8 @@ One system, defined in `app/globals.css`:
   us first, Services and Use Cases collapse (closed by default), the scroll area starts below
   the close button. `TestimonialGrid` cells align to the top, names follow their quotes.
   `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-packages)
-  trigger `gap-4`.
+  trigger `gap-4`. Touch targets: row-heading links `inline-block`, /ai-packages card back-links
+  `min-h-6`, footer wordmark `min-h-11`; the touch-target rule and a checklist line added.
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's

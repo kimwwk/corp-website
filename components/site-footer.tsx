@@ -54,7 +54,11 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex items-center gap-4">
-            <Link href="/" className="rounded-sm" aria-label="Kivov Digital — Home">
+            <Link
+              href="/"
+              className="flex min-h-11 items-center rounded-sm"
+              aria-label="Kivov Digital — Home"
+            >
               <Image
                 src="/kivov-wordmark.png"
                 alt="Kivov Digital"

@@ -248,7 +248,7 @@ function ServiceLink({ slug }: { slug: ServiceSlug }) {
           cta_location: "packages",
           service: slug,
         }}
-        className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+        className="inline-flex min-h-6 items-center rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
       >
         {target.name} →
       </TrackedLink>
