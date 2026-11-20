@@ -231,9 +231,12 @@ New sections are **composed from these**, never re-typed from the recipes above:
   tracked CTA; no filled-primary inside
 - **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links with a hover
   arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
-- **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote
+- **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote; cells align
+  to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
 - **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
+  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron (/ai-packages
+  matches).
   The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
   them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
   outside the kit (/ai-packages) sets it too
@@ -331,12 +334,14 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 8. **Testimonial grid** — `<Section staggered eyebrow=…>` → `<TestimonialGrid>`: each quote a
    `<figure>` on a hairline (`border-t border-border pt-7`), paragraphs verbatim in body type
    (`leading-relaxed text-foreground`, curly quotes added around the whole quote), then name +
-   caption-mono role. Two columns for 2+ quotes; one quote keeps `max-w-3xl`. The same
+   caption-mono role, right under its own quote (cells align to the top; no name pinned to the
+   foot of a row). Two columns for 2+ quotes; one quote keeps `max-w-3xl`. The same
    component on Home (every testimonial) and service pages (their own). Public quotes only,
    verbatim from `content/testimonials.ts`; never on About.
 9. **Proof item** — `<ProofSections>`: one cream `<Section>` per item, eyebrow = its label
    (Client build · Track record · Our product · Demo · Capability; never "Case Study"),
-   h2 = title, lead, then optional before → after delta row, 3-up stat row (card-h3 numerals
+   h2 = title, lead, then optional before → after delta row (the arrow wraps with the "after"
+   pill, never alone at a line end), 3-up stat row (card-h3 numerals
    in `text-primary`), mono footnote, row-heading pull-line. "Our product" items group into one
    Section of `ShowcaseProducts` cards.
 10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
@@ -415,7 +420,9 @@ One system, defined in `app/globals.css`:
   more" in linkGreen's look + a primary arrow that nudges on hover; it replaces the hover-only
   arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`). Mobile sheet: Contact
   us first, Services and Use Cases collapse (closed by default), the scroll area starts below
-  the close button.
+  the close button. `TestimonialGrid` cells align to the top, names follow their quotes.
+  `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-packages)
+  trigger `gap-4`.
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's

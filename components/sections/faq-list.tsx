@@ -33,7 +33,7 @@ export function FaqList({
       >
         {faqs.map((faq, i) => (
           <AccordionItem key={i} value={`faq-${i}`}>
-            <AccordionTrigger className="py-5 text-base font-medium text-foreground hover:no-underline">
+            <AccordionTrigger className="gap-4 py-5 text-base font-medium text-foreground hover:no-underline">
               {faq.question}
             </AccordionTrigger>
             <AccordionContent className="pb-5 leading-relaxed text-muted-foreground">

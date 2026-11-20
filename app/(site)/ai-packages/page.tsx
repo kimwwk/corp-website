@@ -632,7 +632,7 @@ export default function AiPackagesPage() {
           <Accordion hiddenUntilFound className="mt-8 max-w-3xl border-y border-border">
             {faqs.map((faq) => (
               <AccordionItem key={faq.value} value={faq.value}>
-                <AccordionTrigger className="py-5 text-base font-medium text-foreground hover:no-underline">
+                <AccordionTrigger className="gap-4 py-5 text-base font-medium text-foreground hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="pb-5 leading-relaxed text-muted-foreground">

@@ -33,9 +33,13 @@ function ProofSection({
       {hasDelta ? (
         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-5">
           <span className="font-medium text-caption">{item.from}</span>
-          <ArrowRight className="size-5 shrink-0 text-primary" aria-hidden="true" />
-          <span className="rounded-lg bg-secondary px-4 py-1.5 font-semibold text-foreground">
-            {item.to}
+          {/* The arrow travels with the "after" pill, so a narrow screen wraps
+              the pair together instead of leaving the arrow pointing at space. */}
+          <span className="flex items-center gap-x-5">
+            <ArrowRight className="size-5 shrink-0 text-primary" aria-hidden="true" />
+            <span className="rounded-lg bg-secondary px-4 py-1.5 font-semibold text-foreground">
+              {item.to}
+            </span>
           </span>
         </div>
       ) : null}
