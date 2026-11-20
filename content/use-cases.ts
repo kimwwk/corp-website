@@ -341,7 +341,7 @@ export const useCases: UseCase[] = [
     secondaryKeywords: ["speed to lead"],
     title: "Missed Call Text Back on Your Business Number — Kivov Digital",
     description:
-      "Missed call text back set up on the phone number you already have: callers get a text within seconds and can book a time.",
+      "Missed call text back that works with the phone number you already have: callers get a text within seconds and can book a time.",
     cardLine: "Callers you miss get a text within seconds, on the number you already have.",
     h1: "Missed call text back, on the number you already have.",
     problemLine: "When you cannot pick up, the caller moves on to the next business on the list.",
@@ -352,7 +352,11 @@ export const useCases: UseCase[] = [
     setup: [
       {
         title: "Keep your number",
-        body: "Calls you cannot answer are forwarded from your existing number. Your customers call the same number as always.",
+        body: "Customers keep calling the number they know. Calls you cannot answer are forwarded with a carrier code, from a mobile or a landline.",
+      },
+      {
+        title: "Where the text comes from",
+        body: "On a landline or toll-free line, the text can come from that same number. On a mobile number, it comes from a second business texting number we set up for you.",
       },
       {
         title: "The text goes out",
@@ -370,11 +374,11 @@ export const useCases: UseCase[] = [
     toolOrDone: {
       tool: "If you already use a business phone app or a CRM, missed call text back is often a setting you can switch on. A simple text template is enough for many businesses.",
       doneForYou:
-        "When you want the reply to continue as a conversation, follow your hours and book into your calendar, it is worth having it set up. It runs on your number, and you own every rule.",
+        "When you want the reply to continue as a conversation, follow your hours and book into your calendar, it is worth having it set up. It works with the number you have, and you own every rule.",
     },
     proof: [],
     worksWith: [
-      "Your existing business number",
+      "Your business number, mobile or landline",
       "Twilio",
       "n8n",
       "GoHighLevel",
@@ -389,12 +393,17 @@ export const useCases: UseCase[] = [
       {
         question: "How much does missed call text back cost?",
         answer:
-          "Many business phone apps and CRMs include it in their plans, and a custom setup costs little to run each month. For what a build with us costs, see AI Packages.",
+          "Many business phone apps and CRMs include it in their plans, and a custom setup costs little to run each month. On a free call, we can tell you which one fits.",
+      },
+      {
+        question: "What if I want calls answered, not just texted back?",
+        answer:
+          "That is an AI receptionist: an AI voice agent that answers the call, follows your booking rules and books into your calendar.",
       },
     ],
     closing: {
       title: "Text back the calls you cannot take.",
-      lead: "The free fit check shows you where your leads are waiting.",
+      lead: "The free fit check takes 3 minutes, and lead follow-up is one of the areas it covers.",
     },
   },
   {
@@ -438,7 +447,7 @@ export const useCases: UseCase[] = [
     },
     proof: ["conversational-ai"],
     worksWith: [
-      "Your existing business number",
+      "Your business number, mobile or landline",
       "Twilio",
       "VAPI",
       "GoHighLevel calendars",
@@ -457,12 +466,12 @@ export const useCases: UseCase[] = [
       {
         question: "How much does an AI receptionist cost?",
         answer:
-          "Ready-made tools charge a monthly fee. For what a build with us costs, see AI Packages.",
+          "Ready-made tools charge a monthly fee. On a free call, we can tell you whether one fits or what a setup would involve.",
       },
     ],
     closing: {
       title: "Take bookings while you are busy.",
-      lead: "The free fit check shows you where your calls and bookings get stuck.",
+      lead: "The free fit check takes 3 minutes, and scheduling and customer questions are among the areas it covers.",
     },
   },
   {
