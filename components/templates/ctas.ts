@@ -2,8 +2,8 @@ import type { Cta } from "@/components/sections";
 
 /*
  * The CTAs the page templates repeat. Free Fit Check stays the main button on
- * every page; `source_page` is the page slug so analytics can tell the new
- * pages apart.
+ * every page; `source_page` is the page slug (resource posts prefix theirs
+ * with `resource_`) so analytics can tell the new pages apart.
  */
 export function fitCheckCta(sourcePage: string, ctaLocation: string, arrow = false): Cta {
   return {

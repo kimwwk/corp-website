@@ -22,8 +22,10 @@ import { article, breadcrumbs } from "@/lib/seo";
  * Short answer · Full post · Related service card · LinkedIn link (only when
  * the post has one) · closing band.
  *
- * Posts whose related page is, or belongs to, Website Management also offer
- * "Book a free call" in the closing band.
+ * Analytics: `source_page` is `resource_<slug>`, because a post can share its
+ * slug with a service (`ai-automation`). Posts whose related page is, or
+ * belongs to, Website Management also offer "Book a free call" in the closing
+ * band.
  */
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -45,9 +47,9 @@ function relatedService(post: ResourcePost): ServiceSlug {
     : getUseCaseBySlug(post.related.slug).parent;
 }
 
-function relatedCard(post: ResourcePost): LinkCard {
+function relatedCard(post: ResourcePost, sourcePage: string): LinkCard {
   const eventProps = {
-    source_page: post.slug,
+    source_page: sourcePage,
     cta_location: "related",
     related: post.related.slug,
   };
@@ -74,7 +76,7 @@ function relatedCard(post: ResourcePost): LinkCard {
 }
 
 export function ResourcePostPage({ post }: { post: ResourcePost }) {
-  const src = post.slug;
+  const src = `resource_${post.slug}`;
   const path = resourcePath(post.slug);
   const bookCall = relatedService(post) === "website-management";
   const jsonLd = [
@@ -118,7 +120,7 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
 
       {/* 4 — Related service */}
       <Section staggered eyebrow="Related">
-        <CardGrid columns={1} cards={[relatedCard(post)]} />
+        <CardGrid columns={1} cards={[relatedCard(post, src)]} />
       </Section>
 
       {/* 5 — LinkedIn (only when the post has one) */}
