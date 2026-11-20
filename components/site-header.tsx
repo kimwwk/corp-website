@@ -4,15 +4,17 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -20,25 +22,103 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { MonoLabel } from "@/components/sections/mono-label";
 import { TrackedLink } from "@/components/tracked-link";
+import {
+  contactLink,
+  menuGroups,
+  primaryLinks,
+  type NavGroup,
+} from "@/content/navigation";
 
-const navLinks = [
-  { label: "Services", href: "/services" },
-  { label: "AI Audit", href: "/audit" },
-  { label: "Showcase", href: "/showcase" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+/*
+ * Header: Services ▾ · Use Cases ▾ · AI Packages · Resources · About ·
+ * [Contact us]. The two dropdowns and the mobile sheet are built from
+ * content/navigation.ts. Contact us is the one highlighted button.
+ */
+
+/* Desktop top-level item: link and trigger share one recipe. */
+const topItem =
+  "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2";
+const topItemIdle = "text-muted-foreground hover:text-foreground";
+const topItemActive = "text-foreground underline decoration-primary decoration-2";
+
+/* Mobile sheet row: ≥44px tall for touch. */
+const sheetRow = "rounded-lg px-3 py-3 text-sm font-medium transition-colors";
+const sheetRowIdle = "text-muted-foreground hover:bg-muted hover:text-foreground";
+const sheetRowActive = "bg-muted text-foreground";
+
+function DropdownPanel({
+  group,
+  isActive,
+}: {
+  group: NavGroup;
+  isActive: (href: string) => boolean;
+}) {
+  const link = (href: string, label: string, child = false) => (
+    <NavigationMenuLink
+      closeOnClick
+      render={<Link href={href} />}
+      aria-current={isActive(href) ? "page" : undefined}
+      className={cn(
+        "rounded-md px-3 py-2",
+        child
+          ? "pl-6 text-muted-foreground hover:text-foreground"
+          : "font-medium text-foreground",
+        isActive(href) && "bg-muted",
+      )}
+    >
+      {label}
+    </NavigationMenuLink>
+  );
+  return (
+    <ul className="flex flex-col">
+      {group.items.map((item) => (
+        <li key={item.href}>
+          {link(item.href, item.label)}
+          {item.children?.length ? (
+            <ul className="flex flex-col">
+              {item.children.map((c) => (
+                <li key={c.href}>{link(c.href, c.label, true)}</li>
+              ))}
+            </ul>
+          ) : null}
+        </li>
+      ))}
+      <li className="mt-1 border-t border-border pt-1">
+        {link(group.all.href, group.all.label)}
+      </li>
+    </ul>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
-  // trailingSlash is on (static export), so the pathname is "/showcase/"
-  // while nav hrefs are "/showcase" — strip it before comparing.
+  // trailingSlash is on (static export), so the pathname is "/services/"
+  // while nav hrefs are "/services" — strip it before comparing.
   const currentPath = pathname.replace(/\/+$/, "") || "/";
   const isActive = (href: string) => currentPath === href;
+  const inGroup = (group: NavGroup) =>
+    currentPath === group.href || currentPath.startsWith(`${group.href}/`);
   // Every link inside the sheet closes it via onClick, so no
   // route-change effect is needed.
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const sheetLink = (href: string, label: string, child = false) => (
+    <Link
+      key={href}
+      href={href}
+      aria-current={isActive(href) ? "page" : undefined}
+      onClick={() => setMobileOpen(false)}
+      className={cn(
+        sheetRow,
+        child && "pl-7",
+        isActive(href) ? sheetRowActive : sheetRowIdle,
+      )}
+    >
+      {label}
+    </Link>
+  );
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-sm">
@@ -64,16 +144,30 @@ export function SiteHeader() {
           <div className="hidden items-center gap-4 md:flex">
             <NavigationMenu aria-label="Main navigation">
               <NavigationMenuList className="gap-1">
-                {navLinks.map((link) => (
+                {menuGroups.map((group) => (
+                  <NavigationMenuItem key={group.label} value={group.href}>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        topItem,
+                        "h-auto",
+                        inGroup(group) ? topItemActive : topItemIdle,
+                      )}
+                    >
+                      {group.label}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="w-72 p-2">
+                      <DropdownPanel group={group} isActive={isActive} />
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+                {primaryLinks.map((link) => (
                   <NavigationMenuItem key={link.label}>
                     <NavigationMenuLink
                       render={<Link href={link.href} />}
                       aria-current={isActive(link.href) ? "page" : undefined}
                       className={cn(
-                        "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2",
-                        isActive(link.href)
-                          ? "text-foreground underline decoration-primary decoration-2"
-                          : "text-muted-foreground hover:text-foreground",
+                        topItem,
+                        isActive(link.href) ? topItemActive : topItemIdle,
                       )}
                     >
                       {link.label}
@@ -87,15 +181,14 @@ export function SiteHeader() {
               className="rounded-full px-5 font-semibold"
               render={
                 <TrackedLink
-                  href="/fit-check"
-                  event="fit_check_cta_clicked"
+                  href={contactLink.href}
+                  event="contact_cta_clicked"
                   eventProps={{ cta_location: "header" }}
                 />
               }
-              aria-current={isActive("/fit-check") ? "page" : undefined}
+              aria-current={isActive(contactLink.href) ? "page" : undefined}
             >
-              Free Fit Check
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              {contactLink.label}
             </Button>
           </div>
 
@@ -118,39 +211,39 @@ export function SiteHeader() {
               {/* pt-14 clears the absolutely-positioned close button (top-3, 28px). */}
               <nav
                 aria-label="Mobile navigation"
-                className="flex flex-col gap-1 px-4 pt-14"
+                className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-14 pb-8"
               >
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "rounded-lg px-3 py-3 text-sm font-medium transition-colors",
-                      isActive(link.href)
-                        ? "bg-muted text-foreground"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
+                {menuGroups.map((group) => (
+                  <div key={group.label} className="mb-4 flex flex-col">
+                    <MonoLabel tone="caption" className="px-3 pb-1">
+                      {group.label}
+                    </MonoLabel>
+                    {group.items.map((item) => (
+                      <React.Fragment key={item.href}>
+                        {sheetLink(item.href, item.label)}
+                        {item.children?.map((c) => sheetLink(c.href, c.label, true))}
+                      </React.Fragment>
+                    ))}
+                    {sheetLink(group.all.href, group.all.label)}
+                  </div>
                 ))}
+                <div className="flex flex-col border-t border-border pt-4">
+                  {primaryLinks.map((link) => sheetLink(link.href, link.label))}
+                </div>
                 <Button
                   size="xl"
-                  className="mt-3 w-full rounded-full"
+                  className="mt-4 w-full shrink-0 rounded-full"
                   render={
                     <TrackedLink
-                      href="/fit-check"
-                      event="fit_check_cta_clicked"
+                      href={contactLink.href}
+                      event="contact_cta_clicked"
                       eventProps={{ cta_location: "mobile_menu" }}
                     />
                   }
-                  aria-current={isActive("/fit-check") ? "page" : undefined}
+                  aria-current={isActive(contactLink.href) ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Free Fit Check
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                  {contactLink.label}
                 </Button>
               </nav>
             </SheetContent>

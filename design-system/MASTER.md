@@ -247,7 +247,21 @@ their colors.
   stay clean; `tone="green"` on cream, `tone="leaf"` on bands
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
-- `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
+- `SiteHeader` — `Services ▾ · Use Cases ▾ · AI Packages · Resources · About · [Contact us]`,
+  built from `content/navigation.ts`. Dropdowns are `NavigationMenuTrigger` + `NavigationMenuContent`
+  (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
+  ink (AI Consulting → Fit Check, AI Workflow Audit), then the "All …" overview link after a
+  hairline. Triggers share the top-level link recipe and show the active underline anywhere in
+  their section. **Contact us** is the header's one `size="lg"` rounded-full primary (the slot
+  Free Fit Check had until 2026-11). Mobile sheet: the same links grouped under caption
+  `MonoLabel` headings (Services, Use Cases), then AI Packages / Resources / About after a
+  hairline, Contact us pill last; the sheet's nav scrolls (`overflow-y-auto`).
+- `SiteFooter` — wordmark (links home) + social row; then the site map: four link columns
+  (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
+  `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
+  Terms, Consent Preferences). Every page in the tree is listed here, so header dropdowns
+  need no SSR fallback for crawlers.
+- `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
   ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
   buttons right on `sm+`, stacked on mobile, `.rise` entrance).
@@ -373,7 +387,9 @@ entries here as they're discovered)*
   registered. `ShowcaseProducts` now takes its products from `content/proof.ts`. The
   `ui/navigation-menu` primitive's popup motion moved onto the system curve and 300ms (it
   shipped with `cubic-bezier(0.22,1,0.36,1)` at 350ms). /showcase is gone; its items are
-  proof on the use-case and service pages.
+  proof on the use-case and service pages. Header: Services and Use Cases dropdowns, AI
+  Packages / Resources / About links, Contact us replaces Free Fit Check as the highlighted
+  button; mobile sheet grouped by section. Footer: site-map columns above the legal row.
 - **2026-08-18** — Mobile nav sheet: the wordmark is out of the sheet header (the site header
   behind the sheet already shows it); the Brand marks table above no longer lists the sheet as a
   wordmark placement. The empty `SheetHeader` went with it — the sheet's `sr-only` title is now a
