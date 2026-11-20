@@ -23,6 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.description,
     path: resourcePath(post.slug),
+    type: "article",
+    publishedTime: post.date,
   });
 }
 

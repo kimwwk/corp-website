@@ -19,6 +19,7 @@ import {
   packageLinkCta,
   startsWithCall,
 } from "@/components/templates/ctas";
+import { RelatedReading } from "@/components/templates/related-reading";
 import { proofItems } from "@/content/proof";
 import { servicePath } from "@/content/services";
 import { testimonialsFor } from "@/content/testimonials";
@@ -30,8 +31,10 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * Service page template (/services/<slug>/). Section order is fixed by the
  * site-structure decision's "Page layouts": hero band · Sound familiar? ·
  * What's included · How it works · Use cases · Proof · Testimonial(s) · How
- * to start · Questions · closing band. Sections with no content (no use
- * cases, proof or testimonials for this service) are left out.
+ * to start · Related reading · Questions · closing band. Sections with no
+ * content (no use cases, proof, testimonials or posts for this service) are
+ * left out. Related reading lists the resource posts whose `related` is this
+ * service.
  *
  * How to start: a package line with an `href` links its package name to
  * that page (fit check, audit, AI packages); the "See AI packages" button
@@ -155,6 +158,9 @@ export function ServicePage({ service }: { service: Service }) {
           </Reveal>
         )}
       </Section>
+
+      {/* 8b — Related reading (posts that point at this service) */}
+      <RelatedReading page={{ kind: "service", slug: service.slug }} sourcePage={src} />
 
       {/* 9 — Questions */}
       {service.faqs.length ? (

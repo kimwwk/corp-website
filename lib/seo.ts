@@ -32,6 +32,11 @@ type PageMetaInput = {
   /** Optional og/twitter description when it should differ from the meta one. */
   socialDescription?: string;
   robots?: Metadata["robots"];
+  /** Open Graph type: "website" (default) or "article" (resource posts). */
+  type?: "website" | "article";
+  /** `article:published_time` for an article, ISO date (YYYY-MM-DD). Only
+      emitted when `type` is "article" and the value is an ISO date. */
+  publishedTime?: string;
 };
 
 export function pageMetadata({
@@ -40,22 +45,33 @@ export function pageMetadata({
   path,
   socialDescription,
   robots,
+  type = "website",
+  publishedTime,
 }: PageMetaInput): Metadata {
   const url = absoluteUrl(path);
   const social = socialDescription ?? description;
+  const og = {
+    title,
+    description: social,
+    url,
+    siteName: SITE_NAME,
+    locale: "en_CA",
+    images: [OG_IMAGE],
+  };
   return {
     title,
     description,
     alternates: { canonical: url },
-    openGraph: {
-      title,
-      description: social,
-      url,
-      siteName: SITE_NAME,
-      locale: "en_CA",
-      type: "website",
-      images: [OG_IMAGE],
-    },
+    openGraph:
+      type === "article"
+        ? {
+            ...og,
+            type: "article",
+            ...(publishedTime && /^\d{4}-\d{2}-\d{2}/.test(publishedTime)
+              ? { publishedTime }
+              : {}),
+          }
+        : { ...og, type: "website" },
     twitter: {
       card: "summary_large_image",
       title,

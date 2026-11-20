@@ -222,3 +222,11 @@ export function getResource(slug: string): ResourcePost | undefined {
 export function resourcePath(slug: ResourceSlug) {
   return `/resources/${slug}`;
 }
+
+/** The posts whose `related` page is this service or use case, for that
+    page's "Related reading" cards. */
+export function resourcesRelatedTo(page: ResourcePost["related"]): ResourcePost[] {
+  return resources.filter(
+    (r) => r.related.kind === page.kind && r.related.slug === page.slug,
+  );
+}

@@ -231,9 +231,9 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`CardGrid`** — vocabulary #5 as a component: link cards (`rounded-2xl bg-card p-7 ring-1
   ring-border`, hover `ring-primary/40`, row-heading title, one line, then the card link cue —
   "Learn more" + arrow, always visible; a card's `cta` can relabel it), 1–4 columns. One column
-  keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related") lines up with the
-  text above it instead of reading as half of a two-column grid. The whole card is its one
-  tracked CTA; no filled-primary inside
+  keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related", a page's one
+  "Related reading" post) lines up with the text above it instead of reading as half of a
+  two-column grid. The whole card is its one tracked CTA; no filled-primary inside
 - **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links with a hover
   arrow, 1–3 columns, ≥44px rows (Home "Use Cases" strip)
 - **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote; cells align
@@ -352,7 +352,11 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
     posts), `<LinkList>` for a bare strip of names. Every card section has a heading: the
     overview pages' single card section takes a mono eyebrow (`Overview.cardsLabel`, an h2:
-    "Our services", "Posts"); /use-cases labels each group with its service.
+    "Our services", "Posts"); /use-cases labels each group with its service. Service and
+    use-case pages carry a "Related reading" section (`RelatedReading` in
+    `components/templates/`: standard section, eyebrow h2, `<CardGrid>` of post name +
+    cardLine) just before "Questions", listing the posts whose `related` is that page; no post,
+    no section.
 
 Page templates (`components/templates/`) fix the section order for service, use-case,
 resource-post and overview pages; copy comes from `content/`.
@@ -423,6 +427,9 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — SEO round-2: service and use-case pages add a "Related reading" section
+  before "Questions" (a standard section with a `<CardGrid>` of the resource posts whose
+  `related` is that page, tracked as `resource_card_clicked`). No new shape: vocabulary #10.
 - **2026-11-20** — Visual QA round-1 fixes. `CardGrid` cards show a link cue at rest ("Learn
   more" in linkGreen's look + a primary arrow that nudges on hover; it replaces the hover-only
   arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`). Mobile sheet: Contact

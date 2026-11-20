@@ -12,9 +12,10 @@ import { cn } from "@/lib/utils";
  * hover). On hover the label turns green and the arrow nudges right. The
  * whole card is the one tracked CTA (card-grid exception: one CTA per card,
  * none of them filled-primary). Used for the Home services cards, overview
- * pages, a service's use cases and a post's related page. One column keeps
- * the prose measure (max-w-3xl), so a lone card lines up with the text above
- * it. Cards reveal with a 40ms stagger; use inside a `staggered` Section.
+ * pages, a service's use cases, a post's related page and the "Related
+ * reading" posts on service and use-case pages. One column keeps the prose
+ * measure (max-w-3xl), so a lone card lines up with the text above it. Cards
+ * reveal with a 40ms stagger; use inside a `staggered` Section.
  */
 export type LinkCard = {
   title: React.ReactNode;

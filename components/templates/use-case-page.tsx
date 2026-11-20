@@ -10,6 +10,7 @@ import {
   StepRows,
 } from "@/components/sections";
 import { leadCtas, startsWithCall } from "@/components/templates/ctas";
+import { RelatedReading } from "@/components/templates/related-reading";
 import { proofItems } from "@/content/proof";
 import { serviceBySlug, servicePath } from "@/content/services";
 import { isTodo, type UseCase } from "@/content/types";
@@ -21,7 +22,8 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
  * site-structure decision's "Page layouts": hero band · The problem · How we
  * set it up · extra section (only when the page has one, e.g. WordPress
  * website design) · Tool or done for you? (research pages only) · Proof (if
- * any) · Works with · Questions · closing band (the lead CTA, plus the link
+ * any) · Works with · Related reading (only when a resource post's `related`
+ * is this use case) · Questions · closing band (the lead CTA, plus the link
  * back to the parent service).
  *
  * Use cases whose parent service starts with a call and a quote (Website
@@ -111,6 +113,9 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
           <LedgerList items={useCase.worksWith} columns={2} className="mt-8" />
         </Section>
       ) : null}
+
+      {/* 6b — Related reading (posts that point at this use case) */}
+      <RelatedReading page={{ kind: "use-case", slug: useCase.slug }} sourcePage={src} />
 
       {/* 7 — Questions */}
       {useCase.faqs.length ? (
