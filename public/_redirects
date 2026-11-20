@@ -1,4 +1,8 @@
 # Cloudflare Pages redirects
-# Products page was renamed to Showcase — permanent redirect for SEO.
-/products   /showcase   301
-/products/  /showcase   301
+# /showcase was removed in the 2026-11 restructure; its proof items now live
+# on the use-case and service pages.
+/showcase   /use-cases/   301
+/showcase/  /use-cases/   301
+# Products was renamed to Showcase, which is now gone — straight to /use-cases.
+/products   /use-cases/   301
+/products/  /use-cases/   301
