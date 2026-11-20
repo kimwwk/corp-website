@@ -37,8 +37,8 @@ export const useCases: UseCase[] = [
     h1: "WordPress support for Toronto businesses.",
     problemLine: "Your WordPress site runs, but no one is watching the parts that bring in clients.",
     problem: [
-      "On one client's WordPress site, we found that the contact forms had no spam protection, calls from the website were not being counted, and every blog post showed up on Google as a cut-off sentence, because its description was empty.",
-      "None of these break the site. The owner just cannot see them. Looking after those parts is what WordPress support is for.",
+      "On one client's WordPress site, the contact-form emails ran through the previous developer's login and kept failing. The forms had no spam protection, calls from the website were not being counted, and every blog post showed up on Google as a cut-off sentence, because its description was empty.",
+      "The site looked fine. The owner just could not see these parts. Looking after them is what WordPress support is for.",
     ],
     setup: [
       {
@@ -79,6 +79,11 @@ export const useCases: UseCase[] = [
     ],
     faqs: [
       {
+        question: "What if the old developer still has the logins?",
+        answer:
+          "We help you get access back, and move the hosting, domain and WordPress accounts into your company's name, so the site stays yours.",
+      },
+      {
         question: "Is WordPress still worth it in 2026?",
         answer:
           "For most small business sites, yes. It is easy to edit, it runs a large share of the web, and you own the site and its content. What matters more is that someone looks after it.",
@@ -96,7 +101,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Let's look at your WordPress site.",
-      lead: "Start with the free fit check, or book a free call and we will tell you what to fix first.",
+      lead: "Book a free call and we will tell you what to fix first.",
     },
   },
   {
@@ -175,7 +180,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Find out what AI says about you.",
-      lead: "Start with the free fit check, or book a free call and we will walk through your site and your Google listing.",
+      lead: "Book a free call and we will walk through your site and your Google listing.",
     },
   },
   {
@@ -239,7 +244,7 @@ export const useCases: UseCase[] = [
     ],
     closing: {
       title: "Help clients find your firm.",
-      lead: "Start with the free fit check, or book a free call and we will walk through your site and your Google listing.",
+      lead: "Book a free call and we will walk through your site and your Google listing.",
     },
   },
   {

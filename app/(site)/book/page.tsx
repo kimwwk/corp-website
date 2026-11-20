@@ -25,7 +25,7 @@ export default function BookPage() {
         </h1>
         <p className="text-lg leading-relaxed">
           The fastest way to talk it through, live on Zoom. If you&apos;re
-          exploring, start with the{" "}
+          exploring where AI fits your work, start with the{" "}
           <TrackedLink
             href="/fit-check"
             event="fit_check_cta_clicked"

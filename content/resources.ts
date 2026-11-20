@@ -81,7 +81,7 @@ export const resources: ResourcePost[] = [
     related: { kind: "use-case", slug: "local-seo" },
     closing: {
       title: "Make your business easy to recommend.",
-      lead: "Start with the free fit check, or book a free call and we will check what AI says about your business.",
+      lead: "Book a free call and we will check what AI says about your business.",
     },
   },
   {
@@ -210,7 +210,7 @@ export const resources: ResourcePost[] = [
     related: { kind: "use-case", slug: "wordpress-support" },
     closing: {
       title: "Want a second pair of eyes on your site?",
-      lead: "Start with the free fit check, or book a free call and we will look at your site together.",
+      lead: "Book a free call and we will look at your site together.",
     },
   },
 ];
