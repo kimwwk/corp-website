@@ -204,9 +204,10 @@ New sections are **composed from these**, never re-typed from the recipes above:
   that open without a band: overview pages, resource posts
 - **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
   children carry their own `<Reveal delay>` rows
-- **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link;
-  `tone="band"` on green) and its mono support line. `external` on either action renders a
-  `TrackedExternalLink` (an external secondary opens in a new tab)
+- **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link,
+  or a list of them rendered in order; `tone="band"` on green) and its mono support line.
+  `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
+  new tab)
 - **`MonoLabel`** — the 0.14em mono label (green / caption / ink)
 - **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
 - **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger
@@ -295,8 +296,9 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 4. **Interlude** — `<Interlude>` between section groups; quiet section follows.
 5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs).
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
-   short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text link),
-   `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
+   short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
+   e.g. "Book a free call" and the link back to the parent service on Website Management
+   use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
 7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
    (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
@@ -383,6 +385,11 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
+  can carry two text links beside its one primary (Website Management use cases: "Book a
+  free call" and the parent-service link). Still one primary per section. Use-case pages
+  render an optional extra standard section (eyebrow, section h2, paragraphs) after "How we
+  set it up" — no new shape.
 - **2026-11-20** — Site restructure (branch `site/restructure-2026-11`): section kit extended
   with `PageHeader`, `CardGrid`, `LinkList`, `TestimonialGrid`, `ProofSections`, `FaqList`,
   `PostBody`, `Band hero="page"` and external secondary links on `CtaRow`; vocabulary #8–#10
