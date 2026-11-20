@@ -4,7 +4,8 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Collapsible } from "@base-ui/react/collapsible";
+import { ChevronDown, Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { MonoLabel } from "@/components/sections/mono-label";
 import { TrackedLink } from "@/components/tracked-link";
 import {
   contactLink,
@@ -39,6 +39,10 @@ import {
  * The dropdown contents are kept mounted, so their links are in the static
  * HTML. The mobile sheet's links are not: Base UI portals render only on the
  * client. The desktop dropdowns (in the HTML at every width) cover them.
+ *
+ * Mobile sheet: Contact us first, then the five top-level rows. Services and
+ * Use Cases are collapsible groups, closed each time the sheet opens, so the
+ * button and every top-level link fit the first screen of a small phone.
  */
 
 /* Desktop nav from lg: six items plus the button don't fit a 768px header,
@@ -52,6 +56,50 @@ const topItemActive = "text-foreground underline decoration-primary decoration-2
 const sheetRow = "rounded-lg px-3 py-3 text-sm font-medium transition-colors";
 const sheetRowIdle = "text-muted-foreground hover:bg-muted hover:text-foreground";
 const sheetRowActive = "bg-muted text-foreground";
+
+/* A sheet group (Services, Use Cases): a disclosure row that opens the
+   group's pages, indented beneath it, with the "All …" link last. Base UI's
+   Collapsible gives the trigger aria-expanded / aria-controls; the panel
+   eases its height on the system curve. px-1/-mx-1 keeps focus rings clear
+   of the panel's overflow clip. */
+function SheetGroup({
+  group,
+  active,
+  link,
+}: {
+  group: NavGroup;
+  active: boolean;
+  link: (href: string, label: string, indent?: 1 | 2) => React.ReactNode;
+}) {
+  return (
+    <Collapsible.Root>
+      <Collapsible.Trigger
+        className={cn(
+          sheetRow,
+          "group flex w-full items-center justify-between gap-4 text-left",
+          active ? "text-foreground hover:bg-muted" : sheetRowIdle,
+        )}
+      >
+        {group.label}
+        <ChevronDown
+          className="size-4 shrink-0 transition-transform duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-data-panel-open:rotate-180 motion-reduce:transition-none"
+          aria-hidden="true"
+        />
+      </Collapsible.Trigger>
+      <Collapsible.Panel className="-mx-1 h-(--collapsible-panel-height) overflow-hidden px-1 transition-[height] duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)] data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none">
+        <div className="flex flex-col pb-2">
+          {group.items.map((item) => (
+            <React.Fragment key={item.href}>
+              {link(item.href, item.label, 1)}
+              {item.children?.map((c) => link(c.href, c.label, 2))}
+            </React.Fragment>
+          ))}
+          {link(group.all.href, group.all.label, 1)}
+        </div>
+      </Collapsible.Panel>
+    </Collapsible.Root>
+  );
+}
 
 function DropdownPanel({
   group,
@@ -109,7 +157,7 @@ export function SiteHeader() {
   // route-change effect is needed.
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const sheetLink = (href: string, label: string, child = false) => (
+  const sheetLink = (href: string, label: string, indent?: 1 | 2) => (
     <Link
       key={href}
       href={href}
@@ -117,7 +165,8 @@ export function SiteHeader() {
       onClick={() => setMobileOpen(false)}
       className={cn(
         sheetRow,
-        child && "pl-7",
+        indent === 1 && "pl-7",
+        indent === 2 && "pl-11",
         isActive(href) ? sheetRowActive : sheetRowIdle,
       )}
     >
@@ -215,31 +264,16 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-background">
               <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-              {/* pt-14 clears the absolutely-positioned close button (top-3, 28px). */}
+              {/* mt-12 starts the scroll area below the absolutely-positioned close
+                  button (top-3, 28px), so rows never scroll under it; pt-2 leaves
+                  room for the pill's focus ring. */}
               <nav
                 aria-label="Mobile navigation"
-                className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-14 pb-8"
+                className="mt-12 flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-2 pb-8"
               >
-                {menuGroups.map((group) => (
-                  <div key={group.label} className="mb-4 flex flex-col">
-                    <MonoLabel tone="caption" className="px-3 pb-1">
-                      {group.label}
-                    </MonoLabel>
-                    {group.items.map((item) => (
-                      <React.Fragment key={item.href}>
-                        {sheetLink(item.href, item.label)}
-                        {item.children?.map((c) => sheetLink(c.href, c.label, true))}
-                      </React.Fragment>
-                    ))}
-                    {sheetLink(group.all.href, group.all.label)}
-                  </div>
-                ))}
-                <div className="flex flex-col border-t border-border pt-4">
-                  {primaryLinks.map((link) => sheetLink(link.href, link.label))}
-                </div>
                 <Button
                   size="xl"
-                  className="mt-4 w-full shrink-0 rounded-full"
+                  className="w-full shrink-0 rounded-full"
                   render={
                     <TrackedLink
                       href={contactLink.href}
@@ -252,6 +286,17 @@ export function SiteHeader() {
                 >
                   {contactLink.label}
                 </Button>
+                <div className="mt-6 flex flex-col">
+                  {menuGroups.map((group) => (
+                    <SheetGroup
+                      key={group.label}
+                      group={group}
+                      active={inGroup(group)}
+                      link={sheetLink}
+                    />
+                  ))}
+                  {primaryLinks.map((link) => sheetLink(link.href, link.label))}
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

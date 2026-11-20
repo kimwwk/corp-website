@@ -273,10 +273,16 @@ their colors.
   their section. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
   the server HTML (rendered `hidden` until a trigger opens them). **Contact us** is the
   header's one `size="lg"` rounded-full primary (the slot Free Fit Check had until 2026-11).
-  Mobile sheet: the same links grouped under caption
-  `MonoLabel` headings (Services, Use Cases), then AI Packages / Resources / About after a
-  hairline, Contact us pill last; the sheet's nav scrolls (`overflow-y-auto`). The desktop
-  nav shows from `lg`; below that (tablets included) the sheet takes over.
+  Mobile sheet: the **Contact us** pill first (`size="xl"`, full width), then the five
+  top-level rows (Services, Use Cases, AI Packages, Resources, About; ≥44px, `sheetRow`).
+  Services and Use Cases are Base UI `Collapsible` groups, closed each time the sheet opens:
+  the trigger is a row with a `ChevronDown` that turns 180° when open (`aria-expanded` /
+  `aria-controls` from the primitive), and the panel eases its height (200ms, system curve,
+  `motion-reduce:transition-none`) to the group's pages indented `pl-7` (AI Consulting's
+  sub-links `pl-11`) with the "All …" link last. Closed, everything fits the first screen at
+  375×667. The nav scrolls (`overflow-y-auto`) and starts below the close button (`mt-12`), so
+  rows never scroll under it. The desktop nav shows from `lg`; below that (tablets included)
+  the sheet takes over.
 - `SiteFooter` — wordmark (links home) + social row; then the site map: four link columns
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
@@ -407,7 +413,9 @@ One system, defined in `app/globals.css`:
 
 - **2026-11-20** — Visual QA round-1 fixes. `CardGrid` cards show a link cue at rest ("Learn
   more" in linkGreen's look + a primary arrow that nudges on hover; it replaces the hover-only
-  arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`).
+  arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`). Mobile sheet: Contact
+  us first, Services and Use Cases collapse (closed by default), the scroll area starts below
+  the close button.
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
   `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
   dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's
