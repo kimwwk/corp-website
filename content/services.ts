@@ -179,7 +179,7 @@ export const services: Service[] = [
     proof: [],
     howToStart: {
       kind: "quote",
-      line: "Every website starts with a free call. You get a quote once we have seen the site.",
+      line: "Every website starts with a free call. Get in touch, and you get a quote once we have seen the site.",
     },
     faqs: [
       {
@@ -372,7 +372,7 @@ export const services: Service[] = [
     proof: ["sprinting-run", "our-pot"],
     howToStart: {
       kind: "quote",
-      line: "Every app starts with a free call. You get a quote after the discovery session.",
+      line: "Every app starts with a free call. Get in touch, and you get a quote after the discovery session.",
     },
     faqs: [
       {

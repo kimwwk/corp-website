@@ -12,7 +12,7 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
   },
   useCases: {
     title: "Use Cases: AI Automation and Website Work — Kivov Digital",
-    description: "Specific problems we solve for small businesses: WordPress support, local SEO and GEO, invoice automation, missed call text back, AI receptionists and follow-up emails.",
+    description: "Specific problems we solve: WordPress support, local SEO and GEO, invoice automation, missed call text back, AI receptionists and follow-up emails.",
     eyebrow: "Use Cases",
     h1: "Specific problems we solve.",
     lead: "Each one belongs to a service, and each is set up around the tools you already have.",
@@ -24,6 +24,6 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
     eyebrow: "Resources",
     h1: "Answers to the questions owners ask.",
     lead: "Each post answers one question, with what we found in real work.",
-    closing: { title: "Have a question about your own business?", lead: "Start with the free fit check, or book a free call." },
+    closing: { title: "Have a question about your own business?", lead: "The free fit check takes 3 minutes and gives you one practical place to begin." },
   },
 };

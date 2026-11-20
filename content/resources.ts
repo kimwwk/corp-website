@@ -81,7 +81,7 @@ export const resources: ResourcePost[] = [
     related: { kind: "use-case", slug: "local-seo" },
     closing: {
       title: "Make your business easy to recommend.",
-      lead: "See how we handle Local SEO & GEO, or start with the free fit check.",
+      lead: "Start with the free fit check, or book a free call and we will check what AI says about your business.",
     },
   },
   {
