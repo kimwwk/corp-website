@@ -32,3 +32,17 @@ export function contactCta(sourcePage: string, ctaLocation: string): Cta {
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },
   };
 }
+
+/*
+ * "Book a free call": the secondary text link on pages where work starts with
+ * a call and a quote (service pages with a quote, and the Website Management
+ * use cases and posts). Same event as every other /book link on the site.
+ */
+export function bookCallCta(sourcePage: string, ctaLocation: string): Cta {
+  return {
+    label: "Book a free call",
+    href: "/book",
+    event: "booking_cta_clicked",
+    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
+  };
+}

@@ -9,7 +9,7 @@ import {
   StatementRows,
   StepRows,
 } from "@/components/sections";
-import { fitCheckCta } from "@/components/templates/ctas";
+import { bookCallCta, fitCheckCta } from "@/components/templates/ctas";
 import { proofItems } from "@/content/proof";
 import { serviceBySlug, servicePath } from "@/content/services";
 import { isTodo, type UseCase } from "@/content/types";
@@ -23,12 +23,16 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
  * website design) · Tool or done for you? (research pages only) · Proof (if
  * any) · Works with · Questions · closing band (back to the parent service,
  * plus Free Fit Check).
+ *
+ * Use cases under Website Management start with a call and a quote, so their
+ * hero and closing band also offer "Book a free call" as a text link.
  */
 export function UseCasePage({ useCase }: { useCase: UseCase }) {
   const src = useCase.slug;
   const path = pathForUseCase(useCase.slug);
   const parent = serviceBySlug(useCase.parent);
   const proof = proofItems(useCase.proof);
+  const bookCall = useCase.parent === "website-management";
   const extra = useCase.extraSection;
   const faqsForLd = useCase.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
@@ -51,7 +55,11 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
         depth="bottom-right"
       >
         <p className="mt-6 max-w-2xl text-lg leading-relaxed">{useCase.problemLine}</p>
-        <CtaRow tone="band" primary={fitCheckCta(src, "hero", true)} />
+        <CtaRow
+          tone="band"
+          primary={fitCheckCta(src, "hero", true)}
+          secondary={bookCall ? bookCallCta(src, "hero") : undefined}
+        />
       </Band>
 
       {/* 2 — The problem */}
@@ -119,16 +127,19 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
           tone="band"
           className="mt-10"
           primary={fitCheckCta(src, "bottom_cta")}
-          secondary={{
-            label: parent.name,
-            href: servicePath(parent.slug),
-            event: "service_link_clicked",
-            eventProps: {
-              source_page: src,
-              cta_location: "bottom_cta",
-              service: parent.slug,
+          secondary={[
+            ...(bookCall ? [bookCallCta(src, "bottom_cta")] : []),
+            {
+              label: parent.name,
+              href: servicePath(parent.slug),
+              event: "service_link_clicked",
+              eventProps: {
+                source_page: src,
+                cta_location: "bottom_cta",
+                service: parent.slug,
+              },
             },
-          }}
+          ]}
         />
       </Band>
     </>

@@ -9,10 +9,10 @@ import {
   Section,
   type LinkCard,
 } from "@/components/sections";
-import { fitCheckCta } from "@/components/templates/ctas";
+import { bookCallCta, fitCheckCta } from "@/components/templates/ctas";
 import { resourcePath } from "@/content/resources";
 import { serviceBySlug, servicePath } from "@/content/services";
-import type { ResourcePost } from "@/content/types";
+import type { ResourcePost, ServiceSlug } from "@/content/types";
 import { getUseCaseBySlug, pathForUseCase } from "@/content/use-cases";
 import { article, breadcrumbs } from "@/lib/seo";
 
@@ -21,6 +21,9 @@ import { article, breadcrumbs } from "@/lib/seo";
  * site-structure decision's "Page layouts": header (eyebrow, H1, date) ·
  * Short answer · Full post · Related service card · LinkedIn link (only when
  * the post has one) · closing band.
+ *
+ * Posts whose related page is, or belongs to, Website Management also offer
+ * "Book a free call" in the closing band.
  */
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -33,6 +36,13 @@ function formatDate(date: string) {
     day: "numeric",
     timeZone: "UTC",
   });
+}
+
+/** The service a post's related page is, or belongs to. */
+function relatedService(post: ResourcePost): ServiceSlug {
+  return post.related.kind === "service"
+    ? post.related.slug
+    : getUseCaseBySlug(post.related.slug).parent;
 }
 
 function relatedCard(post: ResourcePost): LinkCard {
@@ -66,6 +76,7 @@ function relatedCard(post: ResourcePost): LinkCard {
 export function ResourcePostPage({ post }: { post: ResourcePost }) {
   const src = post.slug;
   const path = resourcePath(post.slug);
+  const bookCall = relatedService(post) === "website-management";
   const jsonLd = [
     breadcrumbs(path, post.name, [{ path: "/resources", name: "Resources" }]),
     article({
@@ -131,7 +142,12 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
         {post.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">{post.closing.lead}</p>
         ) : null}
-        <CtaRow tone="band" className="mt-10" primary={fitCheckCta(src, "bottom_cta")} />
+        <CtaRow
+          tone="band"
+          className="mt-10"
+          primary={fitCheckCta(src, "bottom_cta")}
+          secondary={bookCall ? bookCallCta(src, "bottom_cta") : undefined}
+        />
       </Band>
     </>
   );

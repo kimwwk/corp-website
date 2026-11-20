@@ -12,7 +12,12 @@ import {
   StepRows,
   TestimonialGrid,
 } from "@/components/sections";
-import { aiPackagesCta, contactCta, fitCheckCta } from "@/components/templates/ctas";
+import {
+  aiPackagesCta,
+  bookCallCta,
+  contactCta,
+  fitCheckCta,
+} from "@/components/templates/ctas";
 import { proofItems } from "@/content/proof";
 import { servicePath } from "@/content/services";
 import { testimonialsFor } from "@/content/testimonials";
@@ -26,6 +31,10 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * What's included · How it works · Use cases · Proof · Testimonial(s) · How
  * to start · Questions · closing band. Sections with no content (no use
  * cases, proof or testimonials for this service) are left out.
+ *
+ * Free Fit Check is the primary button in the hero and the closing band. The
+ * secondary text link: "See AI packages" in the hero of package services;
+ * "Book a free call" in the hero and closing band of quote services.
  */
 export function ServicePage({ service }: { service: Service }) {
   const src = service.slug;
@@ -64,7 +73,9 @@ export function ServicePage({ service }: { service: Service }) {
         <CtaRow
           tone="band"
           primary={fitCheckCta(src, "hero", true)}
-          secondary={start.kind === "packages" ? aiPackagesCta(src, "hero") : undefined}
+          secondary={
+            start.kind === "packages" ? aiPackagesCta(src, "hero") : bookCallCta(src, "hero")
+          }
         />
       </Band>
 
@@ -142,7 +153,12 @@ export function ServicePage({ service }: { service: Service }) {
             {service.closing.lead}
           </p>
         ) : null}
-        <CtaRow tone="band" className="mt-10" primary={fitCheckCta(src, "bottom_cta")} />
+        <CtaRow
+          tone="band"
+          className="mt-10"
+          primary={fitCheckCta(src, "bottom_cta")}
+          secondary={start.kind === "quote" ? bookCallCta(src, "bottom_cta") : undefined}
+        />
       </Band>
     </>
   );
