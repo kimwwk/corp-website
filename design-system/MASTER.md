@@ -256,16 +256,17 @@ their colors.
   (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
   ink (AI Consulting → Fit Check, AI Workflow Audit), then the "All …" overview link after a
   hairline. Triggers share the top-level link recipe and show the active underline anywhere in
-  their section. **Contact us** is the header's one `size="lg"` rounded-full primary (the slot
-  Free Fit Check had until 2026-11). Mobile sheet: the same links grouped under caption
+  their section. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
+  the server HTML (rendered `hidden` until a trigger opens them). **Contact us** is the
+  header's one `size="lg"` rounded-full primary (the slot Free Fit Check had until 2026-11).
+  Mobile sheet: the same links grouped under caption
   `MonoLabel` headings (Services, Use Cases), then AI Packages / Resources / About after a
   hairline, Contact us pill last; the sheet's nav scrolls (`overflow-y-auto`). The desktop
   nav shows from `lg`; below that (tablets included) the sheet takes over.
 - `SiteFooter` — wordmark (links home) + social row; then the site map: four link columns
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
-  Terms, Consent Preferences). Every page in the tree is listed here, so header dropdowns
-  need no SSR fallback for crawlers.
+  Terms, Consent Preferences). Every page in the tree is listed here.
 - `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
   ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
@@ -389,7 +390,9 @@ One system, defined in `app/globals.css`:
 ## Changelog
 
 - **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-packages) set
-  `hiddenUntilFound`: every answer is in the server HTML, panels still look closed.
+  `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
+  dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's
+  links are client-only, since Base UI portals don't render on the server).
 - **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
   can carry two text links beside its one primary (Website Management use cases: "Book a
   free call" and the parent-service link). Still one primary per section. Use-case pages

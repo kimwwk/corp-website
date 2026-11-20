@@ -35,6 +35,10 @@ import {
  * Header: Services ▾ · Use Cases ▾ · AI Packages · Resources · About ·
  * [Contact us]. The two dropdowns and the mobile sheet are built from
  * content/navigation.ts. Contact us is the one highlighted button.
+ *
+ * The dropdown contents are kept mounted, so their links are in the static
+ * HTML. The mobile sheet's links are not: Base UI portals render only on the
+ * client. The desktop dropdowns (in the HTML at every width) cover them.
  */
 
 /* Desktop nav from lg: six items plus the button don't fit a 768px header,
@@ -156,7 +160,9 @@ export function SiteHeader() {
                     >
                       {group.label}
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent className="w-72 p-2">
+                    {/* keepMounted: the dropdown links ship in the server HTML
+                        (hidden until opened), so crawlers see the header's links. */}
+                    <NavigationMenuContent keepMounted className="w-72 p-2">
                       <DropdownPanel group={group} isActive={isActive} />
                     </NavigationMenuContent>
                   </NavigationMenuItem>
