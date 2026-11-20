@@ -391,7 +391,7 @@ export default function HomePage() {
       </Section>
 
       {/* Services teaser rows */}
-      <Section staggered eyebrow="Services" title="Two ways to work together">
+      <Section staggered eyebrow="AI Packages" title="Two ways to work together">
         <div className="mt-8 border-b border-border">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 40}>

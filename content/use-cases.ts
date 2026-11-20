@@ -38,7 +38,7 @@ export const useCases: UseCase[] = [
     problemLine: "Your WordPress site runs, but no one is watching the parts that bring in clients.",
     problem: [
       "On one client's WordPress site, the contact-form emails ran through the previous developer's login and kept failing. The forms had no spam protection, calls from the website were not being counted, and every blog post showed up on Google as a cut-off sentence, because its description was empty.",
-      "The site looked fine. The owner just could not see these parts. Looking after them is what WordPress support is for.",
+      "The site looked fine. These parts are easy to miss when no one is watching them, and looking after them is what WordPress support is for.",
     ],
     setup: [
       {
@@ -122,7 +122,7 @@ export const useCases: UseCase[] = [
       "Local SEO in Toronto, plus GEO (also called AI SEO): helping Google and AI assistants like ChatGPT understand and recommend your business.",
     cardLine: "Help Google and AI assistants like ChatGPT understand what you do and who you serve.",
     h1: "Local SEO in Toronto, built for AI search too.",
-    problemLine: "More customers now ask ChatGPT who to call. The answer depends on what AI can read about you.",
+    problemLine: "Some customers now ask ChatGPT who to call. The answer depends on what AI can read about you.",
     problem: [
       "When someone asks an AI assistant for a recommendation, it searches the web by category: a place, a type of provider, an industry, sometimes a tool. Then it names the businesses whose sites answer that question clearly.",
       "In our own research into how AI assistants answer, the site they cited most often had one clear page per problem. That is GEO, generative engine optimization, also called AI SEO: making your business easy for AI to understand and recommend.",
@@ -194,7 +194,7 @@ export const useCases: UseCase[] = [
       "Law firm SEO and GEO: a website, Google listing and content that help clients find your firm on Google and in AI assistants like ChatGPT.",
     cardLine: "SEO for lawyers: help clients find your firm on Google and in AI answers.",
     h1: "Law firm SEO for Google and AI search.",
-    problemLine: "Clients look for a lawyer on Google, and more of them now ask ChatGPT.",
+    problemLine: "Clients look for a lawyer on Google, and some now ask ChatGPT.",
     problem: [
       "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part of law firm marketing that Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
       "We write for that: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
@@ -275,7 +275,7 @@ export const useCases: UseCase[] = [
     description:
       "AI invoice automation: vendor PDFs read, checked and prepared as drafts for QuickBooks or your ERP, with a person approving every invoice.",
     cardLine: "Vendor invoice PDFs read by AI and entered as drafts for you to approve.",
-    h1: "Invoice automation that reads every vendor's PDF.",
+    h1: "Invoice automation for vendor PDFs, in any layout.",
     problemLine: "Vendor invoices arrive as PDFs, every layout different, and someone types them in by hand.",
     problem: [
       "Accounts payable automation usually trips on the same thing: every supplier sends a different layout. A template for each one means maintaining hundreds of templates, so the work falls back to typing.",

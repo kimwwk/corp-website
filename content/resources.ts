@@ -99,7 +99,7 @@ export const resources: ResourcePost[] = [
     shortAnswer:
       "Automate the task with the biggest number when you multiply how many times it happens by what it costs each time. That is usually work that repeats every day, follows the same steps, and sits close to the money, like the follow-up after a client call.",
     body: [
-      { type: "h2", text: "Two numbers decide" },
+      { type: "h2", text: "2 numbers decide" },
       {
         type: "p",
         text: "Before you automate something, count how many times you will do it. 2 numbers decide if it is worth building: how many times it happens over the life of the business, and how much it costs each time. Multiply them.",

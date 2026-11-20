@@ -49,8 +49,8 @@ export const services: Service[] = [
         body: "A prioritized action plan, yours whether or not we work together afterwards.",
       },
       {
-        title: "Coaching while you build",
-        body: "When your team wants to build it themselves, we build AI assistants and automations alongside them, every two weeks.",
+        title: "Building alongside your team",
+        body: "When your team wants to build it themselves, we build AI assistants and automations alongside them, every 2 weeks.",
       },
     ],
     steps: [
