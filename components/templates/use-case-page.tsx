@@ -19,15 +19,17 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
 /*
  * Use-case page template (/use-cases/<slug>/). Section order is fixed by the
  * site-structure decision's "Page layouts": hero band · The problem · How we
- * set it up · Tool or done for you? (research pages only) · Proof (if any) ·
- * Works with · Questions · closing band (back to the parent service, plus
- * Free Fit Check).
+ * set it up · extra section (only when the page has one, e.g. WordPress
+ * website design) · Tool or done for you? (research pages only) · Proof (if
+ * any) · Works with · Questions · closing band (back to the parent service,
+ * plus Free Fit Check).
  */
 export function UseCasePage({ useCase }: { useCase: UseCase }) {
   const src = useCase.slug;
   const path = pathForUseCase(useCase.slug);
   const parent = serviceBySlug(useCase.parent);
   const proof = proofItems(useCase.proof);
+  const extra = useCase.extraSection;
   const faqsForLd = useCase.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
     .map((f) => ({ question: f.question, text: f.answer }));
@@ -65,6 +67,17 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       <Section staggered eyebrow="How we set it up">
         <StepRows steps={useCase.setup} />
       </Section>
+
+      {/* 3b — Extra section (only when the page has one) */}
+      {extra ? (
+        <Section eyebrow={extra.eyebrow} title={extra.title}>
+          <div className="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed">
+            {extra.body.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </Section>
+      ) : null}
 
       {/* 4 — Tool or done for you? (research pages only) */}
       {useCase.toolOrDone ? (
