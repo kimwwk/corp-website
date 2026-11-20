@@ -292,7 +292,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Coded and matched",
-        body: "Each line is coded to its expense account, and the invoice is matched to the right supplier.",
+        body: "Each line is coded to the right account, and the invoice is matched to the right supplier.",
       },
       {
         title: "A draft for review",
@@ -321,6 +321,11 @@ export const useCases: UseCase[] = [
         question: "Does QuickBooks have API integration?",
         answer:
           "Yes. QuickBooks Online has an API, which is how an automation reads and writes bills and transactions in your company file.",
+      },
+      {
+        question: "Where do the invoices and data go?",
+        answer:
+          "It runs inside your own accounting system and mailbox, so the invoices and their data stay in your accounts.",
       },
       {
         question: "Can QuickBooks automate invoicing?",
