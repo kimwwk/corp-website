@@ -9,7 +9,7 @@ import {
   StatementRows,
   StepRows,
 } from "@/components/sections";
-import { bookCallCta, fitCheckCta } from "@/components/templates/ctas";
+import { leadCtas, startsWithCall } from "@/components/templates/ctas";
 import { proofItems } from "@/content/proof";
 import { serviceBySlug, servicePath } from "@/content/services";
 import { isTodo, type UseCase } from "@/content/types";
@@ -21,18 +21,21 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
  * site-structure decision's "Page layouts": hero band · The problem · How we
  * set it up · extra section (only when the page has one, e.g. WordPress
  * website design) · Tool or done for you? (research pages only) · Proof (if
- * any) · Works with · Questions · closing band (back to the parent service,
- * plus Free Fit Check).
+ * any) · Works with · Questions · closing band (the lead CTA, plus the link
+ * back to the parent service).
  *
- * Use cases under Website Management start with a call and a quote, so their
- * hero and closing band also offer "Book a free call" as a text link.
+ * Use cases whose parent service starts with a call and a quote (Website
+ * Management) lead their hero and closing band with "Book a free call" and
+ * offer the fit check as a text link; the rest lead with Free Fit Check.
  */
 export function UseCasePage({ useCase }: { useCase: UseCase }) {
   const src = useCase.slug;
   const path = pathForUseCase(useCase.slug);
   const parent = serviceBySlug(useCase.parent);
   const proof = proofItems(useCase.proof);
-  const bookCall = useCase.parent === "website-management";
+  const bookFirst = startsWithCall(parent);
+  const hero = leadCtas(bookFirst, src, "hero", true);
+  const closing = leadCtas(bookFirst, src, "bottom_cta");
   const extra = useCase.extraSection;
   const faqsForLd = useCase.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
@@ -57,8 +60,8 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
         <p className="mt-6 max-w-2xl text-lg leading-relaxed">{useCase.problemLine}</p>
         <CtaRow
           tone="band"
-          primary={fitCheckCta(src, "hero", true)}
-          secondary={bookCall ? bookCallCta(src, "hero") : undefined}
+          primary={hero.primary}
+          secondary={hero.secondary}
         />
       </Band>
 
@@ -116,7 +119,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
         </Section>
       ) : null}
 
-      {/* 8 — Closing band: back to the parent service, plus Free Fit Check */}
+      {/* 8 — Closing band: the lead CTA, plus the link back to the parent service */}
       <Band title={useCase.closing.title} depth="top-left">
         {useCase.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
@@ -126,9 +129,9 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
         <CtaRow
           tone="band"
           className="mt-10"
-          primary={fitCheckCta(src, "bottom_cta")}
+          primary={closing.primary}
           secondary={[
-            ...(bookCall ? [bookCallCta(src, "bottom_cta")] : []),
+            ...closing.secondary,
             {
               label: parent.name,
               href: servicePath(parent.slug),

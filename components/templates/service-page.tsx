@@ -14,9 +14,9 @@ import {
 } from "@/components/sections";
 import {
   aiPackagesCta,
-  bookCallCta,
   contactCta,
-  fitCheckCta,
+  leadCtas,
+  startsWithCall,
 } from "@/components/templates/ctas";
 import { proofItems } from "@/content/proof";
 import { servicePath } from "@/content/services";
@@ -32,12 +32,15 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * to start · Questions · closing band. Sections with no content (no use
  * cases, proof or testimonials for this service) are left out.
  *
- * Free Fit Check is the primary button in the hero and the closing band. The
- * secondary text link: "See AI packages" in the hero of package services;
- * "Book a free call" in the hero and closing band of quote services.
+ * Hero and closing band: quote services (Website Management, App Development)
+ * lead with "Book a free call" and offer the fit check as a text link; package
+ * services lead with Free Fit Check, plus "See AI packages" in the hero.
  */
 export function ServicePage({ service }: { service: Service }) {
   const src = service.slug;
+  const bookFirst = startsWithCall(service);
+  const hero = leadCtas(bookFirst, src, "hero", true);
+  const closing = leadCtas(bookFirst, src, "bottom_cta");
   const path = servicePath(service.slug);
   const cases = service.useCases.map(getUseCaseBySlug);
   const proof = proofItems(service.proof);
@@ -72,10 +75,11 @@ export function ServicePage({ service }: { service: Service }) {
         <p className="mt-6 max-w-2xl text-lg leading-relaxed">{service.lead}</p>
         <CtaRow
           tone="band"
-          primary={fitCheckCta(src, "hero", true)}
-          secondary={
-            start.kind === "packages" ? aiPackagesCta(src, "hero") : bookCallCta(src, "hero")
-          }
+          primary={hero.primary}
+          secondary={[
+            ...hero.secondary,
+            ...(start.kind === "packages" ? [aiPackagesCta(src, "hero")] : []),
+          ]}
         />
       </Band>
 
@@ -156,8 +160,8 @@ export function ServicePage({ service }: { service: Service }) {
         <CtaRow
           tone="band"
           className="mt-10"
-          primary={fitCheckCta(src, "bottom_cta")}
-          secondary={start.kind === "quote" ? bookCallCta(src, "bottom_cta") : undefined}
+          primary={closing.primary}
+          secondary={closing.secondary}
         />
       </Band>
     </>

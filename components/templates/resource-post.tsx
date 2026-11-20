@@ -9,7 +9,7 @@ import {
   Section,
   type LinkCard,
 } from "@/components/sections";
-import { bookCallCta, fitCheckCta } from "@/components/templates/ctas";
+import { leadCtas, startsWithCall } from "@/components/templates/ctas";
 import { resourcePath } from "@/content/resources";
 import { serviceBySlug, servicePath } from "@/content/services";
 import type { ResourcePost, ServiceSlug } from "@/content/types";
@@ -24,8 +24,9 @@ import { article, breadcrumbs } from "@/lib/seo";
  *
  * Analytics: `source_page` is `resource_<slug>`, because a post can share its
  * slug with a service (`ai-automation`). Posts whose related page is, or
- * belongs to, Website Management also offer "Book a free call" in the closing
- * band.
+ * belongs to, a service that starts with a call and a quote (Website
+ * Management) lead the closing band with "Book a free call" and offer the fit
+ * check as a text link; the rest lead with Free Fit Check.
  */
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -78,7 +79,11 @@ function relatedCard(post: ResourcePost, sourcePage: string): LinkCard {
 export function ResourcePostPage({ post }: { post: ResourcePost }) {
   const src = `resource_${post.slug}`;
   const path = resourcePath(post.slug);
-  const bookCall = relatedService(post) === "website-management";
+  const closing = leadCtas(
+    startsWithCall(serviceBySlug(relatedService(post))),
+    src,
+    "bottom_cta",
+  );
   const jsonLd = [
     breadcrumbs(path, post.name, [{ path: "/resources", name: "Resources" }]),
     article({
@@ -147,8 +152,8 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
         <CtaRow
           tone="band"
           className="mt-10"
-          primary={fitCheckCta(src, "bottom_cta")}
-          secondary={bookCall ? bookCallCta(src, "bottom_cta") : undefined}
+          primary={closing.primary}
+          secondary={closing.secondary}
         />
       </Band>
     </>
