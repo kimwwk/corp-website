@@ -259,6 +259,8 @@ their colors.
 
 **Button idioms:**
 - Primary page CTA: `<Button size="xl" className="rounded-full">` (+ `hover:text-inkdeep` on green bands)
+- Icon-only touch chrome (mobile menu button, sheet Close): `size="icon-touch"` — a 44px tap
+  target, the icon stays 16px
 - Buttons that navigate: `render={<TrackedLink href=… event=… eventProps=…/>}`
   — every CTA is tracked; no bare `<a>` for CTAs.
 - Icon: Lucide, `data-icon="inline-end"` (e.g. `ArrowRight`).
@@ -287,7 +289,9 @@ their colors.
   Mobile sheet: the **Contact us** pill first (`size="xl"`, full width), then the five
   top-level rows (Services, Use Cases, AI Packages, Resources, About; ≥44px, `sheetRow`). The
   current page's row takes the `bg-muted` wash; a top-level row in the current section takes ink
-  text and the desktop's active underline on its label (`sheetSectionMark`).
+  text and the desktop's active underline on its label (`sheetSectionMark`). The menu button
+  and the sheet's Close are `size="icon-touch"` (44×44 around the 16px icon); the menu button's
+  `-mr-1.5` and Close's `top-1 right-1` keep the icons where the 32px / 28px buttons had them.
   Services and Use Cases are Base UI `Collapsible` groups, closed each time the sheet opens:
   the trigger is a row with a `ChevronDown` that turns 180° when open (`aria-expanded` /
   `aria-controls` from the primitive), and the panel eases its height (200ms, system curve,
@@ -438,7 +442,8 @@ One system, defined in `app/globals.css`:
   headings now show the underline and arrow at rest (they hid the arrow until hover, which touch
   never sees). Header: AI Packages, Resources and About are active anywhere in their section, like
   the dropdown triggers; in the mobile sheet a top-level row in the current section takes the
-  active underline.
+  active underline. `Button` gains `size="icon-touch"` (44px); the menu button and the sheet's
+  Close use it (were 32px and 28px).
 - **2026-11-20** — SEO round-2: service and use-case pages add a "Related reading" section
   before "Questions" (a standard section with a `<CardGrid>` of the resource posts whose
   `related` is that page, tracked as `resource_card_clicked`). No new shape: vocabulary #10.

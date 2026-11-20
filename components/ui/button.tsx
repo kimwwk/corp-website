@@ -32,6 +32,9 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
+        /* Touch-only chrome (mobile menu button, sheet close): a 44px tap
+           target around the default 16px icon. */
+        "icon-touch": "size-11",
       },
     },
     defaultVariants: {

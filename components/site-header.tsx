@@ -269,10 +269,12 @@ export function SiteHeader() {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger
               render={
+                /* 44px tap target, 16px icon; -mr-1.5 keeps the icon where
+                   the 32px button had it. */
                 <Button
                   variant="ghost"
-                  size="icon"
-                  className="lg:hidden"
+                  size="icon-touch"
+                  className="-mr-1.5 lg:hidden"
                   aria-label="Toggle navigation menu"
                 />
               }
@@ -282,8 +284,8 @@ export function SiteHeader() {
             <SheetContent side="right" className="bg-background">
               <SheetTitle className="sr-only">Navigation menu</SheetTitle>
               {/* mt-12 starts the scroll area below the absolutely-positioned close
-                  button (top-3, 28px), so rows never scroll under it; pt-2 leaves
-                  room for the pill's focus ring. */}
+                  button (top-1, 44px: its foot is at 48px), so rows never scroll
+                  under it; pt-2 leaves room for the pill's focus ring. */}
               <nav
                 aria-label="Mobile navigation"
                 className="mt-12 flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-2 pb-8"
