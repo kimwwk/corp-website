@@ -359,10 +359,11 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 8. **Testimonial grid** — `<Section staggered eyebrow=…>` → `<TestimonialGrid>`: each quote a
    `<figure>` on a hairline (`border-t border-border pt-7`), paragraphs verbatim in body type
    (`leading-relaxed text-foreground`, curly quotes added around the whole quote), then name +
-   caption-mono role, right under its own quote (cells align to the top; no name pinned to the
-   foot of a row). Two columns for 2+ quotes; one quote keeps `max-w-3xl`. The same
-   component on Home (every testimonial) and service pages (their own). Public quotes only,
-   verbatim from `content/testimonials.ts`; never on About.
+   caption in caption mono ("From LinkedIn", or company and role when there is no public review
+   source), right under its own quote (cells align to the top; no name pinned to the foot of a
+   row; no fixed heights, so short excerpts stay short). Two columns for 2+ quotes; one quote
+   keeps `max-w-3xl`. The same component on Home (every testimonial) and service pages (their
+   own). Public quotes only, verbatim from `content/testimonials.ts`; never on About.
 9. **Proof item** — `<ProofSections>`: one cream `<Section>` per item, eyebrow = its label
    (Client build · Track record · Our product · Demo · Capability; never "Case Study"),
    h2 = title, lead, then optional before → after delta row (the arrow wraps with the "after"
@@ -451,7 +452,8 @@ One system, defined in `app/globals.css`:
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
   the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule). Its FAQ now
   renders through `FaqList` (the answers left are plain text); the Known-drift note keeps only
-  the page header. Build For You moved to AI Automation: a service's `howToStart.offer` renders
+  the page header. `TestimonialGrid`'s `role` prop is now `caption` (quotes are short excerpts
+  captioned "From LinkedIn"). Build For You moved to AI Automation: a service's `howToStart.offer` renders
   one `PriceCard` (`max-w-xl`, left-aligned) under the "How to start" rows, in place of the "See
   AI Starters" button, which also leaves that page's hero.
 

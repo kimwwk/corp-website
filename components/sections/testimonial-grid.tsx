@@ -4,17 +4,18 @@ import { cn } from "@/lib/utils";
 
 /*
  * Testimonial grid — the multi-quote sibling of the pull-quote (vocabulary
- * #7), for real quotes long enough to need body type: each quote is a
- * <figure> on a hairline, paragraphs verbatim in ink, then the name and a
- * caption-mono role. Two columns when there is more than one; a single quote
- * keeps the prose measure. Each name follows its own quote (cells align to
- * the top, not to the taller quote beside them). Home shows every
- * testimonial, a service page its own — the same component on both. Use
- * inside a `staggered` Section.
+ * #7), for real quotes in body type: each quote is a <figure> on a hairline,
+ * paragraphs verbatim in ink, then the name and its caption in caption mono
+ * (where it was published, "From LinkedIn", or company and role). Two
+ * columns when there is more than one; a single quote keeps the prose
+ * measure. Each name follows its own quote (cells align to the top, not to
+ * the taller quote beside them; no fixed heights, so short excerpts stay
+ * short). Home shows every testimonial, a service page its own — the same
+ * component on both. Use inside a `staggered` Section.
  */
 export type Quote = {
   name: React.ReactNode;
-  role?: React.ReactNode;
+  caption?: React.ReactNode;
   /** One string per paragraph, verbatim. */
   quote: string[];
 };
@@ -48,7 +49,7 @@ export function TestimonialGrid({
             </blockquote>
             <figcaption className="flex flex-wrap items-baseline gap-x-4 gap-y-1 pt-6">
               <span className="font-medium text-foreground">{q.name}</span>
-              {q.role ? <MonoLabel tone="caption">{q.role}</MonoLabel> : null}
+              {q.caption ? <MonoLabel tone="caption">{q.caption}</MonoLabel> : null}
             </figcaption>
           </figure>
         </Reveal>
