@@ -147,7 +147,17 @@ export type Service = {
   cardLine: string;
   h1: string;
   lead: string;
-  /** "Sound familiar?": 4–6 problems this service fixes. */
+  /** Each section's h2, under its eyebrow (Pain points, What's included, …).
+      `useCases` is required when the service lists use cases. */
+  headings: {
+    painPoints: string;
+    included: string;
+    howItWorks: string;
+    useCases?: string;
+    howToStart: string;
+    questions: string;
+  };
+  /** "Pain points": 4–6 problems this service fixes. */
   problems: string[];
   /** "What's included": one row each. */
   included: { title: string; body: string }[];
@@ -184,6 +194,8 @@ export type UseCase = {
   h1: string;
   /** The problem in one line, under the H1. */
   problemLine: string;
+  /** Each page-specific section's h2, under its eyebrow. */
+  headings: { problem: string; setup: string; questions: string };
   /** "The problem": paragraphs. */
   problem: string[];
   /** "How we set it up": steps, using the tools the business already has. */
@@ -234,7 +246,10 @@ export type Overview = {
   eyebrow: string;
   h1: string;
   lead: string;
-  /** Eyebrow (h2) over a single, ungrouped card section (/services, /resources). */
+  /** The sr-only h2 of a single, ungrouped card section (/services,
+      /resources): the cards follow the header directly. */
   cardsLabel?: string;
+  /** /use-cases: the h2 under each group's service-name eyebrow. */
+  groupTitles?: Partial<Record<ServiceSlug, string>>;
   closing: { title: string; lead?: string };
 };

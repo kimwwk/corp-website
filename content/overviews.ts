@@ -17,6 +17,10 @@ export const overviews: Record<"services" | "useCases" | "resources", Overview> 
     eyebrow: "Use Cases",
     h1: "Specific problems we solve.",
     lead: "Each one belongs to a service, and each is set up around the tools you already have.",
+    groupTitles: {
+      "website-management": "Get found, and keep the site working.",
+      "ai-automation": "Let AI take on the repetitive work.",
+    },
     closing: { title: "Have a different problem in mind?", lead: "Take the free fit check. It covers lead follow-up, scheduling, data entry, invoices, reporting and more." },
   },
   resources: {

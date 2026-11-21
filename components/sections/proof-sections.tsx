@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { CtaRow } from "@/components/sections/cta-row";
 import { Section } from "@/components/sections/section";
 import { ShowcaseProducts } from "@/components/showcase-products";
+import { sectionHeadings } from "@/content/section-headings";
 import type { Proof } from "@/content/types";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,8 @@ import { cn } from "@/lib/utils";
  * build, Track record, Our product, Demo, Capability; never "Case Study"),
  * the title as h2, the body as a lead, then the optional before → after
  * delta, stat row, mono footnote and pull-line. "Our product" items render
- * together as one Section of ShowcaseProducts cards.
+ * together as one Section of ShowcaseProducts cards, under the shared h2
+ * `sectionHeadings.ourProducts`.
  */
 const rowHeading =
   "font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl";
@@ -28,8 +30,7 @@ function ProofSection({
 }) {
   const hasDelta = Boolean(item.from && item.to);
   return (
-    <Section flush={flush} eyebrow={item.label} title={item.title}>
-      <p className="mt-5 max-w-3xl text-lg leading-relaxed">{item.body}</p>
+    <Section flush={flush} eyebrow={item.label} title={item.title} lead={item.body}>
       {hasDelta ? (
         <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-border py-5">
           <span className="font-medium text-caption">{item.from}</span>
@@ -113,7 +114,11 @@ export function ProofSections({
         />
       ))}
       {products.length ? (
-        <Section flush={flushFirst && others.length === 0} eyebrow="Our product">
+        <Section
+          flush={flushFirst && others.length === 0}
+          eyebrow="Our product"
+          title={sectionHeadings.ourProducts}
+        >
           <div className="mt-8">
             <ShowcaseProducts products={products} />
           </div>

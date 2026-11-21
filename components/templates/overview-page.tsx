@@ -14,10 +14,18 @@ import { breadcrumbs } from "@/lib/seo";
 /*
  * Overview page template (/services, /use-cases, /resources): header (H1 and
  * a one-line lead) · cards (one per page: name, one sentence, link) · closing
- * band. Cards come in groups; /use-cases passes one group per parent
- * service, the others a single unlabelled group.
+ * band. Cards come in groups:
+ * - /use-cases passes one group per parent service, each with a `title`: the
+ *   service name is the eyebrow over that h2.
+ * - /services and /resources pass a single group with no `title`: its cards
+ *   follow the page header directly (no border, no visible header), and its
+ *   `label` is an sr-only h2, so the outline stays H1 → H2 → H3.
  */
-export type CardGroup = { label?: string; cards: LinkCard[] };
+export type CardGroup = { label: string; title?: string; cards: LinkCard[] };
+
+function columnsFor(count: number) {
+  return count >= 4 ? 4 : count === 3 ? 3 : 2;
+}
 
 export function OverviewPage({
   overview,
@@ -38,20 +46,22 @@ export function OverviewPage({
       <PageHeader eyebrow={overview.eyebrow} title={overview.h1} lead={overview.lead} />
 
       {/* 2 — Cards */}
-      {groups.map((group, i) => (
-        <Section
-          key={group.label ?? i}
-          staggered
-          eyebrowAs="h2"
-          eyebrow={group.label}
-        >
-          <CardGrid
-            columns={group.cards.length >= 4 ? 4 : group.cards.length === 3 ? 3 : 2}
-            cards={group.cards}
-            className={group.label ? undefined : "mt-0"}
-          />
-        </Section>
-      ))}
+      {groups.map((group, i) =>
+        group.title ? (
+          <Section key={group.label} staggered eyebrow={group.label} title={group.title}>
+            <CardGrid columns={columnsFor(group.cards.length)} cards={group.cards} />
+          </Section>
+        ) : (
+          <Section key={group.label} staggered flush={i === 0} className="pt-0 md:pt-0">
+            <h2 className="sr-only">{group.label}</h2>
+            <CardGrid
+              columns={columnsFor(group.cards.length)}
+              cards={group.cards}
+              className="mt-0"
+            />
+          </Section>
+        ),
+      )}
 
       {/* 3 — Closing band */}
       <Band title={overview.closing.title} depth="top-left">

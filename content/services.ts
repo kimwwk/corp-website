@@ -26,6 +26,13 @@ export const services: Service[] = [
     cardLine: "Find where AI fits in your business before you spend on tools.",
     h1: "An AI consultant in Toronto who starts with your workflow.",
     lead: "Before we recommend any tool, we learn how your business actually runs. Then we show you where AI fits and what to do first. Kivov Digital was founded by Kim Wong, a former Deloitte and EY consultant.",
+    headings: {
+      painPoints: "You have the tools. The work still gets stuck.",
+      included: "A clear plan for where AI fits.",
+      howItWorks: "From one process to a practical plan.",
+      howToStart: "Three ways to start.",
+      questions: "Common questions about AI consulting.",
+    },
     problems: [
       "You know AI could help, but you are not sure where it belongs.",
       "The owner has become the approval point for everything.",
@@ -127,6 +134,14 @@ export const services: Service[] = [
     cardLine: "Your website, domain and Google listing, kept current, with forms and tracking that work.",
     h1: "Website management for Toronto businesses.",
     lead: "We look after your website, your domain and your Google Business Profile: maintenance, updates and, when it is time, a redesign. Your business stays current, easy to find and easy to contact.",
+    headings: {
+      painPoints: "Your site looks fine. The parts behind it need looking after.",
+      included: "Your site and listings, managed every month.",
+      howItWorks: "From a first look to monthly care.",
+      useCases: "Specific website problems we solve.",
+      howToStart: "Get a quote for your site.",
+      questions: "Common questions about website management.",
+    },
     problems: [
       "Messages from the contact form stop arriving, and no one notices.",
       "Spam comes in through the contact form.",
@@ -225,6 +240,14 @@ export const services: Service[] = [
     cardLine: "Hand the repetitive work to AI, inside the tools your team already uses.",
     h1: "An AI automation agency for the way your team already works.",
     lead: "We take one workflow, like follow-up emails or vendor invoices, and automate it inside the tools you already use. You decide what waits for your approval and what can run on its own, like an AI receptionist booking a caller into your calendar.",
+    headings: {
+      painPoints: "Your team is doing work a system could do.",
+      included: "One workflow, built and handed over.",
+      howItWorks: "From your workflow to a working automation.",
+      useCases: "Specific workflows we automate.",
+      howToStart: "Three ways to start.",
+      questions: "Common questions about AI automation.",
+    },
     problems: [
       "You are copying the same information between platforms.",
       "Follow-ups get delayed when the business gets busy.",
@@ -374,6 +397,13 @@ export const services: Service[] = [
     cardLine: "Web and mobile apps built fast with AI, always starting with discovery.",
     h1: "App development in Toronto, fast with AI.",
     lead: "As app developers in Toronto, we use AI to build quickly, and every project starts with a discovery session, so the first thing we build is what your business needs.",
+    headings: {
+      painPoints: "You need someone technical on your side.",
+      included: "From first idea to a working app.",
+      howItWorks: "Discovery first, then we build.",
+      howToStart: "Get a quote for your app.",
+      questions: "Common questions about app development.",
+    },
     problems: [
       "You have an idea for an app and no tech person.",
       "Off-the-shelf software almost fits, but not quite.",

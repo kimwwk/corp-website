@@ -5,8 +5,9 @@ import { cn } from "@/lib/utils";
  * three inks: green on cream (eyebrow), caption (support / on green bands),
  * ink (list kickers). Tracking is always 0.14em at this size.
  *
- * `as="h2"` makes the label a section heading with the identical look, for
- * sections whose only heading is the eyebrow ("Sound familiar?", "Questions").
+ * `as="h2"` makes the label a heading with the identical look. Its one use is
+ * the resource post's Short answer panel; everywhere else a section's eyebrow
+ * sits above a real section h2.
  */
 const tones = {
   green: "text-primary",

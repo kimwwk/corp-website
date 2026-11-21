@@ -159,16 +159,17 @@ Render with **`<MonoLabel>`** (`components/sections/mono-label.tsx`) — one rec
 
 Tracking is `0.14em` (page labels) or `0.2em` (component eyebrows) — no other values.
 
-`<MonoLabel as="h2">` renders the same label as an `h2` (identical look; preflight resets heading
-size and weight). Use it, via `<Section eyebrowAs="h2">`, when the eyebrow is a section's only
-heading, so the page outline runs H1 → H2 → H3. A section with a `title` keeps the eyebrow a `<p>`
-(its title is the h2); `Section` ignores `eyebrowAs` then. The service, use-case, resource-post
-and overview templates set it on every eyebrow-only section.
+**An eyebrow is a label, never a section's only heading.** Every section with an eyebrow carries
+a section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format), so the page
+outline runs H1 → H2 → H3 and every section reads with a real title. `Section`'s eyebrow is always
+a `<p>`. `<MonoLabel as="h2">` renders the same label as an `h2` (identical look; preflight resets
+heading size and weight) for the one place a label is genuinely the only heading: the resource
+post's Short answer panel (vocabulary #11).
 
 ### Body copy
 
 Default body = Work Sans 17px `text-muted-foreground`. Leads: `text-lg leading-relaxed`,
-constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. Prose blocks
+constrained `max-w-2xl` (bands) or `max-w-3xl` (`<Section lead>`). Emphasis inside prose: `font-medium text-foreground`. Prose blocks
 `max-w-2xl`/`max-w-3xl`; never full-width text.
 
 ### Links (text CTAs)
@@ -217,9 +218,11 @@ New sections are **composed from these**, never re-typed from the recipes above:
   that open without a band: overview pages, resource posts (child: the byline and date,
   "By Kim Wong · November 20, 2026", in one `<MonoLabel tone="caption">`; "Kim Wong" links to
   /about/ in `linkInline`)
-- **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
-  children carry their own `<Reveal delay>` rows; `eyebrowAs="h2"` when the eyebrow is the
-  section's only heading
+- **`Section`** — S2 standard cream section: eyebrow → section h2 → optional lead (`text-lg
+  leading-relaxed max-w-3xl`); `flush` after bands/interludes; `staggered` when children carry
+  their own `<Reveal delay>` rows. `layout="split"`: from `lg` a 12-column grid (`gap-x-10`),
+  the header in columns 1–5 (`lg:sticky lg:top-24 lg:self-start`) and the children in 6–12;
+  below `lg` it stacks like the default. Every FAQ section is split
 - **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link,
   or a list of them rendered in order; `tone="band"` on green) and its mono support line.
   `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
@@ -242,7 +245,9 @@ New sections are **composed from these**, never re-typed from the recipes above:
   to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
 - **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
-  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron.
+  Questions in `text-base md:text-lg font-medium text-foreground`. The trigger takes `gap-4`, so a
+  long question keeps 16px clear of the chevron. `split` (inside a split Section) drops its top
+  margin on `lg`, so the list starts level with the eyebrow.
   The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
   them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
   outside the kit sets it too
@@ -345,8 +350,10 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 
 1. **Hero band** — `<Band hero eyebrow=… depth=…>` → lead paragraphs
    (`max-w-2xl text-lg leading-relaxed`) → `<CtaRow tone="band">` → `<Support>`.
-2. **Standard section (cream)** — `<Section eyebrow=… title=… lead=…>` (+ `flush` after a band)
-   → content (2-col `grid gap-12 md:grid-cols-2`, `<LedgerList>`, `<StatementRows>`,
+2. **Standard section (cream)** — `<Section eyebrow=… title=… lead=…>` (+ `flush` after a band):
+   every section carries eyebrow + h2 (+ optional lead); an eyebrow alone is not a heading. Per-page
+   h2s live in `content/` (`Service.headings`, `UseCase.headings`, `Overview.groupTitles`); the
+   ones every page shares in `content/section-headings.ts` → content (2-col `grid gap-12 md:grid-cols-2`, `<LedgerList>`, `<StatementRows>`,
    `<StepRows>`, or prose) → optional closing `bigLine`.
 3. **Featured band (mid-page)** — `<Band id=… eyebrow=… title=… depth=…>` (id gives `scroll-mt-16`).
 4. **Interlude** — `<Interlude>` between section groups; quiet section follows.
@@ -355,12 +362,13 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
    e.g. "Take the free fit check" and the link back to the parent service on Website Management
    use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
-7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
+7. **Pull-quote (testimonial)** — `<Section eyebrow=… title=…>` → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
    (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
    `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One short quote per
    section. Longer or several quotes use #8.
-8. **Testimonial grid** — `<Section staggered eyebrow=…>` → `<TestimonialGrid>`: each quote a
+8. **Testimonial grid** — `<Section staggered eyebrow=… title=…>` (service pages: Home's title,
+   "What people say about working with Kim.") → `<TestimonialGrid>`: each quote a
    `<figure>` on a hairline (`border-t border-border pt-7`), paragraphs verbatim in body type
    (`leading-relaxed text-foreground`, curly quotes added around the whole quote), then name +
    caption in caption mono ("From LinkedIn", or company and role when there is no public review
@@ -373,16 +381,24 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    h2 = title, lead, then optional before → after delta row (the arrow wraps with the "after"
    pill, never alone at a line end), 3-up stat row (card-h3 numerals
    in `text-primary`), mono footnote, row-heading pull-line. "Our product" items group into one
-   Section of `ShowcaseProducts` cards.
+   Section of `ShowcaseProducts` cards (product names `h3` under the shared h2).
 10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
-    posts), `<LinkList>` for a bare strip of names. Every card section has a heading: the
-    overview pages' single card section takes a mono eyebrow (`Overview.cardsLabel`, an h2:
-    "Our services", "Posts"); /use-cases labels each group with its service. Service and
-    use-case pages carry a "Related reading" section (`RelatedReading` in
-    `components/templates/`: standard section, eyebrow h2, `<CardGrid>` of post name +
-    cardLine) just before "Questions", listing the posts whose `related` is that page (a
-    service page also lists the posts whose `related` is one of its use cases, each post once);
-    no post, no section.
+    posts), `<LinkList>` for a bare strip of names. Every card section has a heading. The
+    overview pages with one card group (/services, /resources) set the cards straight under the
+    page header (`flush`, no top padding, no visible header) with an `sr-only` h2
+    (`Overview.cardsLabel`); /use-cases gives each group its service name as the eyebrow and an
+    h2 from `Overview.groupTitles`. Service and use-case pages carry a "Related reading" section
+    (`RelatedReading` in `components/templates/`: standard section, eyebrow + h2 "Related
+    questions, answered.", `<CardGrid>` of post name + cardLine) just before "Questions", listing
+    the posts whose `related` is that page (a service page also lists the posts whose `related`
+    is one of its use cases, each post once); no post, no section.
+11. **Short answer panel** — a resource post's answer up front: a `rounded-2xl bg-secondary p-7
+    md:p-10` panel (`max-w-3xl`, the prose measure) inside a standard section, headed by
+    `<MonoLabel as="h2">Short answer</MonoLabel>`, the answer in `text-lg md:text-xl font-medium
+    leading-relaxed text-foreground` (`mt-4`). The only section whose heading is a mono label.
+12. **FAQ split** — every "Questions" section: `<Section layout="split" staggered eyebrow=…
+    title=… lead=…>` → `<FaqList split>`. The header sticks in the left five columns on `lg`
+    while the questions scroll beside it (service pages, use-case pages, /ai-starters).
 
 Page templates (`components/templates/`) fix the section order for service, use-case,
 resource-post and overview pages; copy comes from `content/`.
@@ -451,6 +467,16 @@ One system, defined in `app/globals.css`:
   Recompose it when that width is decided.
 
 ## Changelog
+
+- **2026-11-20** — Look and feel round 1. Headings: every section with an eyebrow now has a
+  section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format); per-page
+  strings in `Service.headings` / `UseCase.headings` / `Overview.groupTitles`, shared ones in
+  `content/section-headings.ts`. `Section` loses `eyebrowAs` (no section is headed by its
+  eyebrow any more) and gains `layout="split"`; its `lead` is `text-lg` (was body size), the
+  lead recipe above. Every FAQ section is split, `FaqList` questions are `md:text-lg`. The
+  resource post's Short answer is a callout panel (vocabulary #11). Service "Sound familiar?" is
+  now the "Pain points" eyebrow, as on Home. /services and /resources set their cards straight
+  under the header (sr-only h2). The "Our product" proof group takes an h2; product names are h3.
 
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a

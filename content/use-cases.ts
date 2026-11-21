@@ -36,6 +36,11 @@ export const useCases: UseCase[] = [
     cardLine: "Fixes, updates and care for your WordPress site, plus design when it needs more.",
     h1: "WordPress support for Toronto businesses.",
     problemLine: "Your WordPress site runs, but no one is watching the parts that bring in clients.",
+    headings: {
+      problem: "The site looked fine. The forms were failing.",
+      setup: "From a quick review to monthly updates.",
+      questions: "Common questions about WordPress support.",
+    },
     problem: [
       "On one client's WordPress site, the contact-form emails ran through the previous developer's login and kept failing. The forms had no spam protection, calls from the website were not being counted, and every blog post showed up on Google as a cut-off sentence, because its description was empty.",
       "The site looked fine. These parts are easy to miss when no one is watching them, and looking after them is what WordPress support is for.",
@@ -116,6 +121,11 @@ export const useCases: UseCase[] = [
     cardLine: "SEO for lawyers: help clients find your firm on Google and in AI answers.",
     h1: "Law firm SEO for Google and AI search.",
     problemLine: "Clients across Toronto and the GTA look for a lawyer on Google, and some now ask ChatGPT.",
+    headings: {
+      problem: "The expertise is there. Google and AI need to see it.",
+      setup: "From website fixes to monthly tracking.",
+      questions: "Common questions from law firms.",
+    },
     problem: [
       "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part of law firm marketing that Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
       "Getting cited by AI assistants is called GEO, generative engine optimization. We set up your pages for it: your answer up front, with links to official sources so it can be checked. Legal content suits this well, and your wording stays exactly as written.",
@@ -203,6 +213,11 @@ export const useCases: UseCase[] = [
     cardLine: "Vendor invoice PDFs read by AI and entered as drafts for you to approve.",
     h1: "Invoice automation for vendor PDFs, in any layout.",
     problemLine: "Vendor invoices arrive as PDFs, every layout different, and someone types them in by hand.",
+    headings: {
+      problem: "Why invoices still get typed by hand.",
+      setup: "From PDF to a draft for review, in 4 steps.",
+      questions: "Common questions about invoice automation.",
+    },
     problem: [
       "Accounts payable automation usually trips on the same thing: every supplier sends a different layout. A template for each one means maintaining hundreds of templates, so the work falls back to typing.",
       "The one thing that has to be right is the supplier. A wrong supplier is a payment to the wrong company.",
@@ -281,6 +296,11 @@ export const useCases: UseCase[] = [
     cardLine: "An AI voice agent that answers calls and books by your rules.",
     h1: "An AI receptionist for small business, on the number you already have.",
     problemLine: "Answering the phone is the easy part. Booking the way your front desk does is what matters.",
+    headings: {
+      problem: "Booking takes more than an open calendar slot.",
+      setup: "Set up around the way you book.",
+      questions: "Common questions about AI receptionists.",
+    },
     problem: [
       "Every business has booking rules that live in the front desk's head: lunch breaks, who does which job, how long each appointment takes, which gaps to avoid.",
       "An AI receptionist is useful when it follows those rules. In our test with a demo dental clinic, the agent turned down a lunch slot, offered 3 other times, checked the details once more, then booked.",
@@ -350,6 +370,11 @@ export const useCases: UseCase[] = [
     cardLine: "AI drafts the follow-up email after every call, in your voice, for you to send.",
     h1: "AI follow-up emails, drafted after every call.",
     problemLine: "A good follow-up takes 15 to 30 minutes, and it is the first thing to slip on a busy day.",
+    headings: {
+      problem: "Every client call ends with paperwork.",
+      setup: "From the call to an email ready to send.",
+      questions: "Common questions about AI follow-up emails.",
+    },
     problem: [
       "After a client call, someone has to write the recap, list the documents the client needs to send, and file everything in the right folder.",
       "A generic AI draft has no idea who you are, what you sell or how you sound.",

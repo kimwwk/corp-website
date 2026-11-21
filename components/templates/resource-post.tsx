@@ -12,6 +12,7 @@ import {
 import { leadCtas, startsWithCall } from "@/components/templates/ctas";
 import { TrackedLink } from "@/components/tracked-link";
 import { resourcePath } from "@/content/resources";
+import { sectionHeadings } from "@/content/section-headings";
 import { serviceBySlug, servicePath } from "@/content/services";
 import type { ResourcePost, ServiceSlug } from "@/content/types";
 import { getUseCaseBySlug, pathForUseCase } from "@/content/use-cases";
@@ -122,11 +123,15 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
         </MonoLabel>
       </PageHeader>
 
-      {/* 2 — Short answer */}
-      <Section eyebrowAs="h2" eyebrow="Short answer">
-        <p className="mt-6 max-w-3xl text-lg leading-relaxed font-medium text-foreground">
-          {post.shortAnswer}
-        </p>
+      {/* 2 — Short answer: a callout panel, its mono label the section's h2
+          (the one place a label is a section's only heading) */}
+      <Section>
+        <div className="max-w-3xl rounded-2xl bg-secondary p-7 md:p-10">
+          <MonoLabel as="h2">Short answer</MonoLabel>
+          <p className="mt-4 text-lg leading-relaxed font-medium text-foreground md:text-xl">
+            {post.shortAnswer}
+          </p>
+        </div>
       </Section>
 
       {/* 3 — Full post */}
@@ -137,13 +142,13 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
       </Section>
 
       {/* 4 — Related service */}
-      <Section staggered eyebrowAs="h2" eyebrow="Related">
+      <Section staggered eyebrow="Related" title={sectionHeadings.postRelated}>
         <CardGrid columns={1} cards={[relatedCard(post, src)]} />
       </Section>
 
       {/* 5 — LinkedIn (only when the post has one) */}
       {post.linkedinUrl ? (
-        <Section eyebrowAs="h2" eyebrow="LinkedIn">
+        <Section eyebrow="LinkedIn" title={sectionHeadings.postLinkedIn}>
           <CtaRow
             className="mt-6"
             secondary={{

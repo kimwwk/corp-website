@@ -22,6 +22,7 @@ import {
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
 import { homeSections } from "@/content/home";
+import { sectionHeadings } from "@/content/section-headings";
 import { servicePath, services as servicePages } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { pathForUseCase, useCases } from "@/content/use-cases";
@@ -217,8 +218,8 @@ export default function HomePage() {
       <Section
         eyebrow="Pain points"
         title="Your team may not need another tool. You may need a better flow."
+        lead={sectionHeadings.painPointsLead}
       >
-        <p className="mt-5 text-lg">Does any of this sound familiar?</p>
         <LedgerList items={painPoints} marker="check" columns={2} className="mt-8" />
         <p className={`${bigLine} mt-12`}>
           Technology cannot fix a process that no one fully understands.
@@ -321,7 +322,12 @@ export default function HomePage() {
       </Band>
 
       {/* What Kivov helps you do — hairline statement rows */}
-      <Section flush staggered eyebrow="What Kivov helps you do">
+      <Section
+        flush
+        staggered
+        eyebrow="What Kivov helps you do"
+        title="Understand the work first, then build what is missing."
+      >
         <StatementRows rows={helps} />
       </Section>
 
@@ -390,7 +396,11 @@ export default function HomePage() {
       </Section>
 
       {/* How it works — full-width hairline rows, huge numerals */}
-      <Section staggered eyebrow="How it works">
+      <Section
+        staggered
+        eyebrow="How it works"
+        title="From one process to a practical plan."
+      >
         <StepRows steps={steps} />
       </Section>
 

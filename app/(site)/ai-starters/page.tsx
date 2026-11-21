@@ -386,6 +386,7 @@ export default function AiStartersPage() {
       {/* FAQ — hairline rows (accordion) */}
       <Section
         staggered
+        layout="split"
         eyebrow="Questions"
         title="A few honest answers"
         lead={
@@ -395,7 +396,7 @@ export default function AiStartersPage() {
           </>
         }
       >
-        <FaqList faqs={faqs} />
+        <FaqList split faqs={faqs} />
       </Section>
 
       {/* P12 — closing band */}

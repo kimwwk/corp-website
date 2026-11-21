@@ -204,7 +204,7 @@ export default function AuditPage() {
       </section>
 
       {/* Who it is for */}
-      <Section eyebrow="Who it's for">
+      <Section eyebrow="Who it's for" title="Not sure what kind of fix you need?">
         <p className="mt-6 max-w-3xl text-lg leading-relaxed font-medium text-foreground">
           This is designed for business owners who know something is slowing
           the company down but are not yet sure whether they need:
@@ -218,7 +218,11 @@ export default function AuditPage() {
       </Section>
 
       {/* How it works — full-width hairline rows, huge numerals */}
-      <Section staggered eyebrow="How it works">
+      <Section
+        staggered
+        eyebrow="How it works"
+        title="From one process to a practical plan."
+      >
         <StepRows steps={steps} />
       </Section>
 

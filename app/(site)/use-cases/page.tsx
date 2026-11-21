@@ -19,6 +19,7 @@ export default function UseCasesOverviewPage() {
     .filter((s) => s.useCases.length > 0)
     .map((s) => ({
       label: s.name,
+      title: overviews.useCases.groupTitles?.[s.slug],
       cards: s.useCases.map(getUseCaseBySlug).map((u) => ({
         title: u.name,
         body: u.cardLine,

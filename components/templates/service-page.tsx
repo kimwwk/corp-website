@@ -22,6 +22,7 @@ import {
 } from "@/components/templates/ctas";
 import { RelatedReading } from "@/components/templates/related-reading";
 import { proofItems } from "@/content/proof";
+import { sectionHeadings } from "@/content/section-headings";
 import { servicePath } from "@/content/services";
 import { testimonialsFor } from "@/content/testimonials";
 import { isTodo, type OfferCard, type Service } from "@/content/types";
@@ -38,12 +39,17 @@ function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
 
 /*
  * Service page template (/services/<slug>/). Section order is fixed by the
- * site-structure decision's "Page layouts": hero band · Sound familiar? ·
+ * site-structure decision's "Page layouts": hero band · Pain points ·
  * What's included · How it works · Use cases · Proof · Testimonial(s) · How
  * to start · Related reading · Questions · closing band. Sections with no
  * content (no use cases, proof, testimonials or posts for this service) are
  * left out. Related reading lists the resource posts whose `related` is this
  * service or one of its use cases.
+ *
+ * Headings: every section is eyebrow → h2 (→ lead). The h2s come from
+ * `service.headings`; Pain points' lead, Testimonial(s) and Related reading
+ * use the shared strings in `content/section-headings.ts`. Questions is a
+ * split section.
  *
  * How to start: a package line with an `href` links its package name to
  * that page (fit check, audit, AI Starters). Under the rows, either the
@@ -66,6 +72,10 @@ export function ServicePage({ service }: { service: Service }) {
   const cases = service.useCases.map(getUseCaseBySlug);
   const proof = proofItems(service.proof);
   const quotes = testimonialsFor(service.slug);
+  const h = service.headings;
+  if (cases.length && !h.useCases) {
+    throw new Error(`Service ${service.slug} lists use cases but has no headings.useCases`);
+  }
   const start = service.howToStart;
   const offer = start.kind === "packages" ? start.offer : undefined;
   const showStarters = start.kind === "packages" && !offer;
@@ -107,24 +117,29 @@ export function ServicePage({ service }: { service: Service }) {
         />
       </Band>
 
-      {/* 2 — Sound familiar? */}
-      <Section flush eyebrowAs="h2" eyebrow="Sound familiar?">
+      {/* 2 — Pain points */}
+      <Section
+        flush
+        eyebrow="Pain points"
+        title={h.painPoints}
+        lead={sectionHeadings.painPointsLead}
+      >
         <LedgerList items={service.problems} marker="check" columns={2} className="mt-8" />
       </Section>
 
       {/* 3 — What's included */}
-      <Section staggered eyebrowAs="h2" eyebrow="What’s included">
+      <Section staggered eyebrow="What’s included" title={h.included}>
         <StatementRows rows={service.included} />
       </Section>
 
       {/* 4 — How it works */}
-      <Section staggered eyebrowAs="h2" eyebrow="How it works">
+      <Section staggered eyebrow="How it works" title={h.howItWorks}>
         <StepRows steps={service.steps} />
       </Section>
 
       {/* 5 — Use cases */}
       {cases.length ? (
-        <Section staggered eyebrowAs="h2" eyebrow="Use cases">
+        <Section staggered eyebrow="Use cases" title={h.useCases}>
           <CardGrid
             columns={cases.length >= 4 ? 4 : cases.length === 3 ? 3 : 2}
             cards={cases.map((u) => ({
@@ -145,15 +160,20 @@ export function ServicePage({ service }: { service: Service }) {
       {quotes.length ? (
         <Section
           staggered
-          eyebrowAs="h2"
           eyebrow={quotes.length > 1 ? "Testimonials" : "Testimonial"}
+          title={sectionHeadings.testimonials}
         >
           <TestimonialGrid quotes={quotes} />
         </Section>
       ) : null}
 
       {/* 8 — How to start */}
-      <Section staggered eyebrowAs="h2" eyebrow="How to start">
+      <Section
+        staggered
+        eyebrow="How to start"
+        title={h.howToStart}
+        lead={start.kind === "quote" ? start.line : undefined}
+      >
         {start.kind === "packages" ? (
           <>
             <StatementRows
@@ -175,7 +195,6 @@ export function ServicePage({ service }: { service: Service }) {
           </>
         ) : (
           <Reveal>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed">{start.line}</p>
             <CtaRow primary={bookCallCta(src, "how_to_start")} />
           </Reveal>
         )}
@@ -192,8 +211,8 @@ export function ServicePage({ service }: { service: Service }) {
 
       {/* 9 — Questions */}
       {service.faqs.length ? (
-        <Section staggered eyebrowAs="h2" eyebrow="Questions">
-          <FaqList faqs={service.faqs} />
+        <Section staggered layout="split" eyebrow="Questions" title={h.questions}>
+          <FaqList split faqs={service.faqs} />
         </Section>
       ) : null}
 

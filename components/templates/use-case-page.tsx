@@ -12,6 +12,7 @@ import {
 import { leadCtas, startsWithCall } from "@/components/templates/ctas";
 import { RelatedReading } from "@/components/templates/related-reading";
 import { proofItems } from "@/content/proof";
+import { sectionHeadings } from "@/content/section-headings";
 import { serviceBySlug, servicePath } from "@/content/services";
 import { isTodo, type UseCase } from "@/content/types";
 import { pathForUseCase } from "@/content/use-cases";
@@ -26,6 +27,11 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
  * is this use case) · Questions · closing band (the lead CTA, plus the link
  * back to the parent service).
  *
+ * Headings: every section is eyebrow → h2. The problem, How we set it up and
+ * Questions take `useCase.headings`; Tool or done for you?, Works with and
+ * Related reading use the shared strings in `content/section-headings.ts`.
+ * Questions is a split section.
+ *
  * Use cases whose parent service starts with a call and a quote (Website
  * Management) lead their hero and closing band with "Book a free call" and
  * offer the fit check as a text link; the rest lead with Free Fit Check.
@@ -39,6 +45,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
   const hero = leadCtas(bookFirst, src, "hero", true);
   const closing = leadCtas(bookFirst, src, "bottom_cta");
   const extra = useCase.extraSection;
+  const h = useCase.headings;
   const faqsForLd = useCase.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
     .map((f) => ({ question: f.question, text: f.answer }));
@@ -68,7 +75,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       </Band>
 
       {/* 2 — The problem */}
-      <Section flush eyebrowAs="h2" eyebrow="The problem">
+      <Section flush eyebrow="The problem" title={h.problem}>
         <div className="mt-6 max-w-3xl space-y-4 text-lg leading-relaxed">
           {useCase.problem.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
@@ -77,7 +84,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       </Section>
 
       {/* 3 — How we set it up */}
-      <Section staggered eyebrowAs="h2" eyebrow="How we set it up">
+      <Section staggered eyebrow="How we set it up" title={h.setup}>
         <StepRows steps={useCase.setup} />
       </Section>
 
@@ -94,7 +101,11 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 4 — Tool or done for you? (research pages only) */}
       {useCase.toolOrDone ? (
-        <Section staggered eyebrowAs="h2" eyebrow="Tool or done for you?">
+        <Section
+          staggered
+          eyebrow="Tool or done for you?"
+          title={sectionHeadings.toolOrDone}
+        >
           <StatementRows
             rows={[
               { title: "Tool", body: useCase.toolOrDone.tool },
@@ -109,7 +120,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 6 — Works with */}
       {useCase.worksWith.length ? (
-        <Section eyebrowAs="h2" eyebrow="Works with">
+        <Section eyebrow="Works with" title={sectionHeadings.worksWith}>
           <LedgerList items={useCase.worksWith} columns={2} className="mt-8" />
         </Section>
       ) : null}
@@ -119,8 +130,8 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 7 — Questions */}
       {useCase.faqs.length ? (
-        <Section staggered eyebrowAs="h2" eyebrow="Questions">
-          <FaqList faqs={useCase.faqs} />
+        <Section staggered layout="split" eyebrow="Questions" title={h.questions}>
+          <FaqList split faqs={useCase.faqs} />
         </Section>
       ) : null}
 
