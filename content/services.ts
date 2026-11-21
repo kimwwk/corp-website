@@ -186,7 +186,7 @@ export const services: Service[] = [
     proof: [],
     howToStart: {
       kind: "quote",
-      line: "Every website starts with a free call. Get in touch, and you get a quote once we have seen the site.",
+      line: "Every website starts with a free call. Book one, and you get a quote once we have seen the site.",
     },
     faqs: [
       {
@@ -297,7 +297,7 @@ export const services: Service[] = [
         bullets: [
           {
             lead: "One end-to-end workflow",
-            text: ", with up to roughly two core system integrations.",
+            text: ", with up to roughly 2 core system integrations.",
           },
           {
             lead: "AI & automation architecture",
@@ -347,7 +347,7 @@ export const services: Service[] = [
       {
         question: "What does the Build For You package actually cover?",
         answer:
-          "Every Build For You project begins with discovery or a completed audit. Two tracks come out of it: AI & automation, built around the workflow we mapped together, and custom software development, when off-the-shelf won't fit. The package covers the first track: one end-to-end workflow with up to roughly two core system integrations, including AI and automation architecture, implementation, testing, exception handling, team handoff, and a 30-day stabilization period. Custom software builds, or anything bigger than one workflow, are scoped and quoted separately after discovery.",
+          "Every Build For You project begins with discovery or a completed audit. Two tracks come out of it: AI & automation, built around the workflow we mapped together, and custom software development, when off-the-shelf won't fit. The package covers the first track: one end-to-end workflow with up to roughly 2 core system integrations, including AI and automation architecture, implementation, testing, exception handling, team handoff, and a 30-day stabilization period. Custom software builds, or anything bigger than one workflow, are scoped and quoted separately after discovery.",
       },
     ],
     closing: {
@@ -420,7 +420,7 @@ export const services: Service[] = [
     proof: ["sprinting-run", "our-pot"],
     howToStart: {
       kind: "quote",
-      line: "Every app starts with a free call. Get in touch, and you get a quote after the discovery session.",
+      line: "Every app starts with a free call. Book one, and you get a quote after the discovery session.",
     },
     faqs: [
       {

@@ -112,13 +112,13 @@ export const useCases: UseCase[] = [
     secondaryKeywords: ["seo for lawyers", "law firm marketing"],
     title: "Law Firm SEO and GEO for AI Search — Kivov Digital",
     description:
-      "Law firm SEO and GEO: a website, Google listing and content that help clients find your firm on Google and in AI assistants like ChatGPT.",
+      "Law firm SEO and GEO for Toronto and GTA firms: a website, Google listing and content that help clients find you on Google and in ChatGPT.",
     cardLine: "SEO for lawyers: help clients find your firm on Google and in AI answers.",
     h1: "Law firm SEO for Google and AI search.",
-    problemLine: "Clients look for a lawyer on Google, and some now ask ChatGPT.",
+    problemLine: "Clients across Toronto and the GTA look for a lawyer on Google, and some now ask ChatGPT.",
     problem: [
       "On a law firm client's site, the expertise was already there, in its posts and service pages. What it needed was the part of law firm marketing that Google and AI assistants read first: clear descriptions, a Google Business Profile that says what the firm does, and calls and emails that are counted.",
-      "Getting cited by AI assistants is called GEO, generative engine optimization. We write for it: the answer up front, with links to official sources so it can be checked. Legal content suits this well, with the lawyer's wording kept exactly as written.",
+      "Getting cited by AI assistants is called GEO, generative engine optimization. We set up your pages for it: your answer up front, with links to official sources so it can be checked. Legal content suits this well, and your wording stays exactly as written.",
     ],
     setup: [
       {
@@ -135,7 +135,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Reviews",
-        body: "Your Google reviews shown on your site, and suspicious reviews appealed to Google with evidence.",
+        body: "The Google reviews you choose, shown on your site, and suspicious reviews appealed to Google with evidence.",
       },
       {
         title: "Checking what AI says",
@@ -169,12 +169,17 @@ export const useCases: UseCase[] = [
       {
         question: "Who approves what goes live?",
         answer:
-          "You do. Every title, description, post and Google Business Profile change goes live after you approve it, so it fits your firm and your professional conduct rules.",
+          "You do. Every title, description, post, review shown on your site and Google Business Profile change goes live after you approve it, so it fits your firm and your professional conduct rules.",
       },
       {
         question: "Do the accounts stay in our name?",
         answer:
           "Yes. Your domain, hosting, Google Business Profile and Search Console stay in your firm's name.",
+      },
+      {
+        question: "How is the work priced?",
+        answer:
+          "We quote it after a free call, once we have seen your site and your Google listing.",
       },
     ],
     closing: {
