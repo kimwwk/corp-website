@@ -124,7 +124,7 @@ export function ServicePage({ service }: { service: Service }) {
         title={h.painPoints}
         lead={sectionHeadings.painPointsLead}
       >
-        <LedgerList items={service.problems} marker="check" columns={2} className="mt-8" />
+        <LedgerList items={service.problems} columns={2} className="mt-8" />
       </Section>
 
       {/* 3 — What's included */}

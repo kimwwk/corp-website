@@ -20,7 +20,7 @@
 
 Editorial, warm, studio, premium-but-approachable. A practical, senior, no-hype consultancy —
 "we fix the process first, then automate it." Ledger motifs: mono labels, hairline rules,
-bordered list rows, square bullets, marker underlines.
+bordered list rows, check rows, marker underlines.
 
 ---
 
@@ -199,10 +199,12 @@ least 24px tall: `inline-flex min-h-6 items-center`, or
   Interludes behave like cream sections here — an Interlude after a cream section takes
   `border-t`, and the cream section after an Interlude keeps its own `border-t`.
   Bands never take a border — the color change is the separator (`<Section flush>` after a band).
-- **Radius:** from tokens (`--radius: 0.75rem`); cards `rounded-2xl`, pills `rounded-full`,
-  square list bullets `rounded-[2px]`.
-- **List rows (ledger motif):** `<LedgerList>` — rows `flex gap-3 border-t border-border`
-  with a square bullet (`mt-[0.55em] size-2 rounded-[2px] bg-primary`) or a check.
+- **Radius:** from tokens (`--radius: 0.75rem`); cards `rounded-2xl`, pills `rounded-full`.
+- **List rows (ledger motif) — check rows:** every bullet on the site is a check row: a hairline
+  row (`flex gap-3 border-t border-border`) opening with the check glyph (`<CheckGlyph>`,
+  `components/sections/check-glyph.tsx`: a 16px stroked check, `text-primary`, leaf inside bands),
+  text in ink. `<LedgerList>` renders them; `<PriceCard>` bullets are the same row at `text-sm`.
+  No square or dot bullets.
 
 ---
 
@@ -228,7 +230,10 @@ New sections are **composed from these**, never re-typed from the recipes above:
   `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
   new tab)
 - **`MonoLabel`** — the 0.14em mono label (green / caption / ink); `as="h2"` for a heading
-- **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
+- **`LedgerList`** — check rows only (the check glyph, text `text-foreground`): 1 column
+  `py-3` closed by a `border-b`, or 2 columns `py-4 leading-relaxed`; leaf tone on bands
+- **`CheckGlyph`** — the one bullet glyph, exported once and used by `LedgerList` and
+  `PriceCard`
 - **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; a row's
   optional `link` turns its title into a tracked row-heading link
 - **`StepRows`** — the huge-numeral "How it works" ladder
@@ -477,6 +482,8 @@ One system, defined in `app/globals.css`:
   resource post's Short answer is a callout panel (vocabulary #11). Service "Sound familiar?" is
   now the "Pain points" eyebrow, as on Home. /services and /resources set their cards straight
   under the header (sr-only h2). The "Our product" proof group takes an h2; product names are h3.
+  Bullets: every list row is a check row; `LedgerList` loses its square marker and `marker` prop,
+  its text is ink in every variant, and the check glyph is one export (`CheckGlyph`).
 
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a

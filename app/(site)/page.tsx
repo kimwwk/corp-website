@@ -220,7 +220,7 @@ export default function HomePage() {
         title="Your team may not need another tool. You may need a better flow."
         lead={sectionHeadings.painPointsLead}
       >
-        <LedgerList items={painPoints} marker="check" columns={2} className="mt-8" />
+        <LedgerList items={painPoints} columns={2} className="mt-8" />
         <p className={`${bigLine} mt-12`}>
           Technology cannot fix a process that no one fully understands.
         </p>
@@ -300,7 +300,6 @@ export default function HomePage() {
           </div>
           <LedgerList
             items={fitCheckOutcomes}
-            marker="check"
             tone="leaf"
             className="content-start"
           />

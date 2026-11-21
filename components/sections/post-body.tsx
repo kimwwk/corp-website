@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
  * Post body — a resource post's full text from typed blocks, held to the
  * prose measure (max-w-3xl). Subheads are h2 in the row-heading recipe (the
  * same scale as StatementRows/StepRows titles — not a new size); lists are
- * square-bullet LedgerLists.
+ * LedgerList check rows.
  */
 export function PostBody({
   blocks,

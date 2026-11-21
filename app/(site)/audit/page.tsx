@@ -214,7 +214,7 @@ export default function AuditPage() {
 
       {/* What the audit includes */}
       <Section id="includes" eyebrow="What you get" title="Your audit includes">
-        <LedgerList items={includes} marker="check" columns={2} className="mt-8" />
+        <LedgerList items={includes} columns={2} className="mt-8" />
       </Section>
 
       {/* How it works — full-width hairline rows, huge numerals */}
