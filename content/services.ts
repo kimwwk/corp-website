@@ -25,7 +25,7 @@ export const services: Service[] = [
       "Workflow-first AI consulting in Toronto. We map how your work happens, find where time is lost, and recommend what fits. Start with a free fit check.",
     cardLine: "Find where AI fits in your business before you spend on tools.",
     h1: "An AI consultant in Toronto who starts with your workflow.",
-    lead: "Before we recommend any tool, we learn how your business actually runs. Then we show you where AI fits and what to do first.",
+    lead: "Before we recommend any tool, we learn how your business actually runs. Then we show you where AI fits and what to do first. Kivov Digital was founded by Kim Wong, a former Deloitte and EY consultant.",
     problems: [
       "You know AI could help, but you are not sure where it belongs.",
       "The owner has become the approval point for everything.",

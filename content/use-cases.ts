@@ -258,6 +258,11 @@ export const useCases: UseCase[] = [
         answer:
           "QuickBooks can automate the invoices you send, like recurring invoices. The work we automate is the other side: the bills that arrive from your suppliers.",
       },
+      {
+        question: "How is it priced?",
+        answer:
+          "We quote it on a free call, once we know your invoice volume and the accounting system you use.",
+      },
     ],
     closing: {
       title: "Start with your invoice workflow.",
@@ -307,7 +312,7 @@ export const useCases: UseCase[] = [
     worksWith: [
       "Your business number, mobile or landline",
       "Twilio",
-      "VAPI",
+      "Vapi",
       "GoHighLevel calendars",
     ],
     faqs: [

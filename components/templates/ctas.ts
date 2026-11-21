@@ -10,7 +10,8 @@ import type { PackageHref, Service } from "@/content/types";
  * call and a quote lead with "Book a free call" and keep the fit check as a
  * text link. That is a service whose `howToStart.kind` is "quote", the use
  * cases under it, and the posts whose related page is or belongs to it. Every
- * other page leads with Free Fit Check.
+ * other page leads with Free Fit Check and offers the call as a text link, so
+ * a reader who wants to talk always has a way to (round-4 review).
  */
 export function startsWithCall(service: Service): boolean {
   return service.howToStart.kind === "quote";
@@ -28,7 +29,10 @@ export function leadCtas(
         primary: bookCallCta(sourcePage, ctaLocation, arrow),
         secondary: [fitCheckLinkCta(sourcePage, ctaLocation)],
       }
-    : { primary: fitCheckCta(sourcePage, ctaLocation, arrow), secondary: [] };
+    : {
+        primary: fitCheckCta(sourcePage, ctaLocation, arrow),
+        secondary: [bookCallLinkCta(sourcePage, ctaLocation)],
+      };
 }
 
 export function fitCheckCta(sourcePage: string, ctaLocation: string, arrow = false): Cta {
@@ -56,6 +60,16 @@ export function aiStartersCta(sourcePage: string, ctaLocation: string): Cta {
     label: "See AI Starters",
     href: "/ai-starters",
     event: "ai_starters_cta_clicked",
+    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
+  };
+}
+
+/* The call as a secondary text link, on pages that lead with the fit check. */
+export function bookCallLinkCta(sourcePage: string, ctaLocation: string): Cta {
+  return {
+    label: "Or book a free call",
+    href: "/book",
+    event: "booking_cta_clicked",
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },
   };
 }
