@@ -251,7 +251,7 @@ export const useCases: UseCase[] = [
       {
         question: "Where do the invoices and data go?",
         answer:
-          "It runs inside your own accounting system and mailbox, so the invoices and their data stay in your accounts.",
+          "The PDFs stay in your mailbox, and the bills are created in your own accounting system. To read each invoice, the automation sends the PDF to an AI model. Before anything is built, we go through which model it uses and what that model keeps.",
       },
       {
         question: "Can QuickBooks automate invoicing?",
