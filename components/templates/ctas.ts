@@ -60,15 +60,6 @@ export function aiStartersCta(sourcePage: string, ctaLocation: string): Cta {
   };
 }
 
-export function contactCta(sourcePage: string, ctaLocation: string): Cta {
-  return {
-    label: "Contact us",
-    href: "/contact",
-    event: "contact_cta_clicked",
-    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
-  };
-}
-
 /*
  * "Book a free call": the primary button on pages where work starts with a
  * call and a quote (see `startsWithCall`). Same event as every other /book

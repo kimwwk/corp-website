@@ -15,7 +15,7 @@ import {
 } from "@/components/sections";
 import {
   aiStartersCta,
-  contactCta,
+  bookCallCta,
   leadCtas,
   packageLinkCta,
   startsWithCall,
@@ -49,6 +49,8 @@ function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
  * that page (fit check, audit, AI Starters). Under the rows, either the
  * service's own price card (`howToStart.offer`: AI Automation's Build For
  * You) or, with no offer, the "See AI Starters" button (AI Consulting).
+ * Quote services (Website Management, App Development) show their line and
+ * "Book a free call".
  *
  * Hero and closing band: quote services (Website Management, App Development)
  * lead with "Book a free call" and offer the fit check as a text link; package
@@ -174,7 +176,7 @@ export function ServicePage({ service }: { service: Service }) {
         ) : (
           <Reveal>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed">{start.line}</p>
-            <CtaRow primary={contactCta(src, "how_to_start")} />
+            <CtaRow primary={bookCallCta(src, "how_to_start")} />
           </Reveal>
         )}
       </Section>
