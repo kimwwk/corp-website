@@ -4,19 +4,21 @@ import type { ResourcePost } from "@/content/types";
 
 /*
  * "Related reading" on service and use-case pages: a card for each resource
- * post whose `related` field points at this page (title + cardLine, the
- * CardGrid link cue). Nothing renders when no post points here. Placed just
- * before "Questions". Tracked like the /resources cards
+ * post whose `related` field points at one of `pages` (title + cardLine, the
+ * CardGrid link cue). A use-case page passes itself; a service page passes
+ * itself and its use cases, so a post about a use case also shows on its
+ * service. Each post once. Nothing renders when no post points here. Placed
+ * just before "Questions". Tracked like the /resources cards
  * (`resource_card_clicked`), with `cta_location: "related_reading"`.
  */
 export function RelatedReading({
-  page,
+  pages,
   sourcePage,
 }: {
-  page: ResourcePost["related"];
+  pages: ResourcePost["related"][];
   sourcePage: string;
 }) {
-  const posts = resourcesRelatedTo(page);
+  const posts = resourcesRelatedTo(pages);
   if (!posts.length) return null;
   return (
     <Section staggered eyebrowAs="h2" eyebrow="Related reading">

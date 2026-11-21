@@ -223,10 +223,11 @@ export function resourcePath(slug: ResourceSlug) {
   return `/resources/${slug}`;
 }
 
-/** The posts whose `related` page is this service or use case, for that
-    page's "Related reading" cards. */
-export function resourcesRelatedTo(page: ResourcePost["related"]): ResourcePost[] {
-  return resources.filter(
-    (r) => r.related.kind === page.kind && r.related.slug === page.slug,
+/** The posts whose `related` page is any of `pages` (a service page passes
+    itself and its use cases), for that page's "Related reading" cards. Each
+    post appears once, in /resources order. */
+export function resourcesRelatedTo(pages: ResourcePost["related"][]): ResourcePost[] {
+  return resources.filter((r) =>
+    pages.some((page) => r.related.kind === page.kind && r.related.slug === page.slug),
   );
 }

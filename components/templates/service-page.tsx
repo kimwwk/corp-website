@@ -43,7 +43,7 @@ function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
  * to start · Related reading · Questions · closing band. Sections with no
  * content (no use cases, proof, testimonials or posts for this service) are
  * left out. Related reading lists the resource posts whose `related` is this
- * service.
+ * service or one of its use cases.
  *
  * How to start: a package line with an `href` links its package name to
  * that page (fit check, audit, AI Starters). Under the rows, either the
@@ -181,8 +181,14 @@ export function ServicePage({ service }: { service: Service }) {
         )}
       </Section>
 
-      {/* 8b — Related reading (posts that point at this service) */}
-      <RelatedReading page={{ kind: "service", slug: service.slug }} sourcePage={src} />
+      {/* 8b — Related reading (posts that point at this service or its use cases) */}
+      <RelatedReading
+        pages={[
+          { kind: "service", slug: service.slug },
+          ...service.useCases.map((slug) => ({ kind: "use-case" as const, slug })),
+        ]}
+        sourcePage={src}
+      />
 
       {/* 9 — Questions */}
       {service.faqs.length ? (

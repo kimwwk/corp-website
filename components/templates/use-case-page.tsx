@@ -115,7 +115,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       ) : null}
 
       {/* 6b — Related reading (posts that point at this use case) */}
-      <RelatedReading page={{ kind: "use-case", slug: useCase.slug }} sourcePage={src} />
+      <RelatedReading pages={[{ kind: "use-case", slug: useCase.slug }]} sourcePage={src} />
 
       {/* 7 — Questions */}
       {useCase.faqs.length ? (

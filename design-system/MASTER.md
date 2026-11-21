@@ -380,8 +380,9 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
     "Our services", "Posts"); /use-cases labels each group with its service. Service and
     use-case pages carry a "Related reading" section (`RelatedReading` in
     `components/templates/`: standard section, eyebrow h2, `<CardGrid>` of post name +
-    cardLine) just before "Questions", listing the posts whose `related` is that page; no post,
-    no section.
+    cardLine) just before "Questions", listing the posts whose `related` is that page (a
+    service page also lists the posts whose `related` is one of its use cases, each post once);
+    no post, no section.
 
 Page templates (`components/templates/`) fix the section order for service, use-case,
 resource-post and overview pages; copy comes from `content/`.
@@ -458,6 +459,8 @@ One system, defined in `app/globals.css`:
   per-card "AI Consulting →" back-links (and `PriceCard` its `serviceLink` slot); one line under
   the grid links AI Consulting and the AI Automation page as inline prose links (`linkInline`).
   Resource-post bylines link "Kim Wong" to /about/ (`linkInline`, `author_link_clicked`).
+  A service page's "Related reading" also lists the posts whose related page is one of its use
+  cases (Website Management: the GEO and WordPress SEO posts).
 - **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
   in the header, footer and CTAs). The /ai-starters price cards are one kit component,
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
