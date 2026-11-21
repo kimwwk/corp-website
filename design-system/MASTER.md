@@ -268,20 +268,29 @@ New sections are **composed from these**, never re-typed from the recipes above:
   outside the kit sets it too
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 - **`PriceCard`** — one offer as a price card (data type `OfferCard` in `content/types.ts`):
-  `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl` black price (+ optional
+  `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl md:text-5xl` black price (+ optional
   struck-through `was` in a `<del>`, `text-xl` bold caption, after an `sr-only` "Regular price "
   label) and an optional caption mono unit (none on a free offer); the parts are separated by
   spaces, so the row's text reads "$495 Regular price $750 CAD" (the flex gaps set the look;
   the /audit/ hero price row follows the same rule), a hairline, the intro
-  line (`text-sm`), `size-[7px]` square bullets (a bold `lead` in `font-medium
-  text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
-  text-caption` notes, with the one CTA (`size="xl"` full-width pill,
-  filled or outline) pinned to the foot by `mt-auto`. Tones: `plain` (`bg-card ring-1
-  ring-border`), `highlight` (`ring-2 ring-primary/40`, green eyebrow; the featured card) and
-  `deep` (`band-green bg-background`: leaf bullets, filled pill takes `hover:text-inkdeep`).
-  `h-full`; the caller wraps it in `<Reveal>` and sets the grid (/ai-starters: three across,
-  `lg:grid-cols-3`, 40ms stagger) or the width (a service page's "How to start": one card,
-  `max-w-xl`). At most one filled card per surface
+  line (`text-sm`), the bullets as **check rows** (`PriceBullets`: each a `border-t
+  border-border py-2.5 text-sm` row, the check glyph first, leaf on `deep`; a bold `lead` in
+  `font-medium text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
+  text-caption` notes, with the one CTA (`size="xl"` full-width pill, filled or outline) pinned to
+  the foot by `mt-auto`. Not a link: no hover lift. **Tones, from quiet to premium**
+  (`priceCardTones`), all `rounded-2xl p-7`:
+
+  | Tone | Surface | Used for |
+  |---|---|---|
+  | `quiet` | `bg-transparent ring-1 ring-border`, no shadow: the cream page shows through | Workflow Fit Check |
+  | `highlight` | `bg-card ring-2 ring-primary/40 shadow-lg shadow-foreground/5`, green eyebrow | Workflow-First AI Audit (the featured card, the filled pill); the /audit hero price card |
+  | `deep` | `band-green bg-background`, `shadow-xl shadow-foreground/10` on a wrapper outside the band (inside it `foreground` is cream); leaf checks, a filled pill takes `hover:text-inkdeep` | Build With You (outline pill on the band); Build For You on AI Automation (filled) |
+
+  `h-full`. **`PriceLadder`** sets a row (/ai-starters): three across from `lg`
+  (`lg:grid-cols-3`, 40ms stagger), stepping up left to right — `lg:mt-16` / `lg:mt-8` /
+  `lg:mt-0` on the stretched cells, so each card's top steps and its foot and button stay
+  level; below `lg` they stack with no offsets. A lone card (a service page's "How to start")
+  is wrapped in `<Reveal>` by its caller, `max-w-xl`. At most one filled card per surface
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
 the same commit. One-off compositions (page heroes with portraits, the services
@@ -511,6 +520,11 @@ One system, defined in `app/globals.css`:
   mapped in `card-icon.tsx`) and a hairline foot pinned to the bottom. `ShowcaseProducts` cards
   and the /contact email card move onto the same surface (`ShowcaseProducts` drops the `Card`
   primitive and its 2px lift).
+  Pricing ladder: `PriceCard` tones are `quiet` (new) / `highlight` (now with a soft shadow) /
+  `deep` (with the deepest shadow); `plain` is gone (nothing used it after Build With You moved to
+  `deep`). The price is `md:text-5xl`, the bullets are check rows (`PriceBullets`). `PriceLadder`
+  renders the /ai-starters staircase. The /audit hero price card takes the `highlight` surface
+  (it had an arbitrary rgba shadow) and the same check-row bullets (it used Lucide's `Check`).
 
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a

@@ -99,13 +99,14 @@ export type PackageHref = "/fit-check" | "/audit" | "/ai-starters";
  * One price card (rendered by `PriceCard` in components/sections/). AI Starters
  * holds its three in the page; a service page's `howToStart.offer` holds one.
  *
- * `tone`: "plain" (hairline ring), "highlight" (the featured card, primary
- * ring) or "deep" (a green card, re-themed by `band-green`).
+ * `tone`, from quiet to premium: "quiet" (no fill, hairline ring), "highlight"
+ * (the featured card: white, primary ring, soft shadow) or "deep" (a green
+ * card, re-themed by `band-green`, deepest shadow).
  * A bullet's or guarantee's `text` follows its bold `lead`, with a space
  * unless it starts with punctuation (", so it keeps running…").
  */
 export type OfferCard = {
-  tone: "plain" | "highlight" | "deep";
+  tone: "quiet" | "highlight" | "deep";
   eyebrow: string;
   name: string;
   /** Display price, e.g. "$1,250". */

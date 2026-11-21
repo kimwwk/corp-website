@@ -10,7 +10,7 @@ import {
   CtaRow,
   FaqList,
   MonoLabel,
-  PriceCard,
+  PriceLadder,
   Section,
   StatementRows,
 } from "@/components/sections";
@@ -21,7 +21,7 @@ import type { OfferCard, ServiceSlug } from "@/content/types";
 /*
  * AI Starters (the price cards that lived on /services until 2026-11-20) —
  * Kim's copy on the Green Ledger foundation: P2 header, P13 price slots
- * (Fit Check | audit | Build With You, as PriceCards), then the P8 three-rung
+ * (Fit Check | audit | Build With You, as a PriceLadder), then the P8 three-rung
  * ladder as the sequence view. One line under the cards links AI Consulting
  * (the service all three belong to) and the AI Automation page, where Build
  * For You lives.
@@ -123,10 +123,11 @@ const included = [
   },
 ];
 
-/* The price cards, left to right. */
+/* The price cards, left to right: quiet → featured → deep, the ladder
+   stepping up (PriceLadder). */
 const cards: OfferCard[] = [
   {
-    tone: "plain",
+    tone: "quiet",
     eyebrow: "Free · 3 min",
     name: "Workflow Fit Check",
     price: "$0",
@@ -171,7 +172,7 @@ const cards: OfferCard[] = [
     },
   },
   {
-    tone: "plain",
+    tone: "deep",
     eyebrow: "Ongoing",
     name: "Build With You",
     price: "$1,250",
@@ -305,13 +306,7 @@ export default function AiStartersPage() {
         title="Three ways to start"
         lead="Most people start with the free fit check or the audit, then move into hands-on work once we both know where the real wins are."
       >
-        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
-          {cards.map((card, i) => (
-            <Reveal key={card.name} delay={i * 40} className="h-full">
-              <PriceCard {...card} />
-            </Reveal>
-          ))}
-        </div>
+        <PriceLadder cards={cards} />
         <Reveal>
           <p className="mt-8 text-sm">
             These three are part of{" "}

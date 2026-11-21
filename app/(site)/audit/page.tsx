@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, pageMetadata, service } from "@/lib/seo";
-import { Check as CheckIcon } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
   CtaRow,
   LedgerList,
   MonoLabel,
+  PriceBullets,
+  priceCardTones,
   Section,
   StepRows,
   Support,
@@ -149,7 +151,12 @@ export default function AuditPage() {
 
           {/* Price card — the numbers stated plainly */}
           <Reveal delay={120} className="lg:col-span-5">
-            <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(23,32,27,.02),0_16px_40px_-24px_rgba(23,32,27,.22)] [--card-spacing:--spacing(7)]">
+            <Card
+              className={cn(
+                "rounded-2xl [--card-spacing:--spacing(7)]",
+                priceCardTones.highlight,
+              )}
+            >
               <CardContent>
                 <MonoLabel>The audit</MonoLabel>
                 {/* The spaces are for the text content ("$495 Regular price
@@ -172,31 +179,14 @@ export default function AuditPage() {
                   </span>{" "}
                   for the first five audit clients.
                 </p>
-                <ul className="mt-5 space-y-2.5 border-t border-border pt-5">
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>One priority workflow, mapped end to end</span>
-                  </li>
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>A written report and a prioritized action plan</span>
-                  </li>
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>
-                      CAD $500 credited toward implementation within 30 days
-                    </span>
-                  </li>
-                </ul>
+                <PriceBullets
+                  className="mt-5"
+                  bullets={[
+                    { text: "One priority workflow, mapped end to end" },
+                    { text: "A written report and a prioritized action plan" },
+                    { text: "CAD $500 credited toward implementation within 30 days" },
+                  ]}
+                />
               </CardContent>
             </Card>
           </Reveal>
