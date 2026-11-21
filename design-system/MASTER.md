@@ -247,9 +247,21 @@ New sections are **composed from these**, never re-typed from the recipes above:
   them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
   outside the kit (/ai-starters) sets it too
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
+- **`PriceCard`** — one offer as a price card (data type `OfferCard` in `content/types.ts`):
+  `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl` black price (+ optional
+  struck-through `was`, `text-xl` bold caption) and a caption mono unit, a hairline, the intro
+  line (`text-sm`), `size-[7px]` square bullets (a bold `lead` in `font-medium
+  text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
+  text-caption` notes and a back-link slot, with the one CTA (`size="xl"` full-width pill,
+  filled or outline) pinned to the foot by `mt-auto`. Tones: `plain` (`bg-card ring-1
+  ring-border`), `highlight` (`ring-2 ring-primary/40`, green eyebrow; the featured card) and
+  `deep` (`band-green bg-background`: leaf bullets, filled pill takes `hover:text-inkdeep`).
+  `h-full`; the caller wraps it in `<Reveal>` and sets the grid (/ai-starters: three across,
+  `lg:grid-cols-3`, 40ms stagger) or the width (a service page's "How to start": one card,
+  `max-w-xl`). At most one filled card per surface
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
-the same commit. One-off compositions (page heroes with portraits/price cards, the services
+the same commit. One-off compositions (page heroes with portraits, the services
 ladder) may stay hand-built from the recipes, but still use `MonoLabel`/`CtaRow` for their parts.
 
 ### `components/ui/` — shadcn/Base-UI primitives
@@ -335,7 +347,7 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    `<StepRows>`, or prose) → optional closing `bigLine`.
 3. **Featured band (mid-page)** — `<Band id=… eyebrow=… title=… depth=…>` (id gives `scroll-mt-16`).
 4. **Interlude** — `<Interlude>` between section groups; quiet section follows.
-5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs).
+5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs). Price cards are `<PriceCard>` (its `deep` tone is this green variant).
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
    short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
    e.g. "Take the free fit check" and the link back to the parent service on Website Management
@@ -435,6 +447,11 @@ One system, defined in `app/globals.css`:
   strings `FaqList` takes). Recompose it from the kit when the page is next edited.
 
 ## Changelog
+
+- **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
+  in the header, footer and CTAs). The /ai-starters price cards are one kit component,
+  `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
+  the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule).
 
 - **2026-11-20** — Visual QA round-2 fixes. The link cue is one kit recipe
   (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,

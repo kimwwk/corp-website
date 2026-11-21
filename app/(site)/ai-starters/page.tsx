@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, faqPage, pageMetadata, service } from "@/lib/seo";
-import { ArrowRight } from "lucide-react";
 
 import {
   Accordion,
@@ -10,19 +9,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
   CtaRow,
   MonoLabel,
+  PriceCard,
   Section,
   StatementRows,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
 import { serviceBySlug, servicePath } from "@/content/services";
-import type { ServiceSlug } from "@/content/types";
+import type { OfferCard, ServiceSlug } from "@/content/types";
 
 /*
  * AI Starters (the price cards that lived on /services until 2026-11-20) —
@@ -40,12 +39,8 @@ export const metadata: Metadata = pageMetadata({
     "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You or Build For You. Practical AI and automation for small & mid-sized businesses.",
 });
 
-const eyebrow =
-  "font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase";
 const h2 =
   "font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground";
-const priceUnit =
-  "font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase";
 const rungMeta =
   "font-mono text-xs font-medium tracking-[0.14em] uppercase whitespace-nowrap";
 const rungArrow =
@@ -226,33 +221,128 @@ const included = [
   },
 ];
 
-function Bullet({ tone = "green" }: { tone?: "green" | "leaf" }) {
-  return (
-    <span
-      className={`mt-[0.55em] size-[7px] shrink-0 rounded-[2px] ${tone === "leaf" ? "bg-brand-mint" : "bg-primary"}`}
-      aria-hidden="true"
-    />
-  );
-}
+/* The price cards, left to right, each with the service page it links back to. */
+const cards: { card: OfferCard; service: ServiceSlug }[] = [
+  {
+    service: "ai-consulting",
+    card: {
+      tone: "highlight",
+      eyebrow: "Paid entry offer",
+      name: "Workflow-First AI Audit",
+      price: "$495",
+      was: "$750",
+      unit: "CAD",
+      intro:
+        "A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.",
+      bullets: [
+        { text: "Repetitive admin processes" },
+        { text: "Owner bottlenecks" },
+        { text: "Disconnected tools" },
+        { text: "Delayed follow-ups" },
+        { text: "Manual reporting" },
+      ],
+      cta: {
+        label: "Explore the audit",
+        href: "/audit",
+        event: "audit_cta_clicked",
+        eventProps: { source_page: "ai-starters", cta_location: "packages" },
+        style: "filled",
+        arrow: true,
+      },
+    },
+  },
+  {
+    service: "ai-consulting",
+    card: {
+      tone: "plain",
+      eyebrow: "Ongoing",
+      name: "Build With You",
+      price: "$1,250",
+      unit: "/ month",
+      intro:
+        "Two 45-minute strategy calls a month — one every two weeks. Each call, hands-on:",
+      bullets: [
+        {
+          lead: "You screen-share your real workflows",
+          text: "— we watch how the work actually happens.",
+        },
+        {
+          lead: "You take away AI & agent know-how",
+          text: "that's relevant to your business.",
+        },
+        {
+          lead: "You automate your repetitive workflow",
+          text: "in a way you can replicate without me.",
+        },
+      ],
+      bestFor: "teams that want to stay hands-on and learn as we build.",
+      guarantee: {
+        lead: "100% money-back guarantee",
+        text: "— if you're not satisfied with the results, you get a full refund.",
+      },
+      notes: ["Billed every 4 weeks — two bi-weekly calls."],
+      cta: {
+        label: "Get in touch",
+        href: "/contact?interest=build-with-you",
+        event: "service_inquiry_clicked",
+        eventProps: { service_tier: "do_it_with_you" },
+        style: "outline",
+      },
+    },
+  },
+  {
+    service: "ai-automation",
+    card: {
+      tone: "deep",
+      eyebrow: "Project work",
+      name: "Build For You",
+      price: "$5,500",
+      unit: "/ project",
+      intro: "Every Build For You project begins with discovery or a completed audit.",
+      bullets: [
+        {
+          lead: "One end-to-end workflow",
+          text: ", with up to roughly two core system integrations.",
+        },
+        {
+          lead: "AI & automation architecture",
+          text: "— implementation, testing, and exception handling included.",
+        },
+        {
+          lead: "Team handoff & 30-day stabilization",
+          text: ", so it keeps running after I step back.",
+        },
+      ],
+      bestFor: "teams that want the build handed over, not shared.",
+      notes: ["Larger scopes quoted separately after discovery."],
+      cta: {
+        label: "Book a call",
+        href: "/book",
+        event: "service_inquiry_clicked",
+        eventProps: { service_tier: "do_it_for_you" },
+        style: "filled",
+      },
+    },
+  },
+];
 
-/* The small text link on each paid card back to its service page. */
+/* The small text link on each card back to its service page (PriceCard's
+   `serviceLink` slot, which sets its size and spacing). */
 function ServiceLink({ slug }: { slug: ServiceSlug }) {
   const target = serviceBySlug(slug);
   return (
-    <p className="mt-4 text-sm">
-      <TrackedLink
-        href={servicePath(slug)}
-        event="service_link_clicked"
-        eventProps={{
-          source_page: "ai-starters",
-          cta_location: "packages",
-          service: slug,
-        }}
-        className="inline-flex min-h-6 items-center rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-      >
-        {target.name} →
-      </TrackedLink>
-    </p>
+    <TrackedLink
+      href={servicePath(slug)}
+      event="service_link_clicked"
+      eventProps={{
+        source_page: "ai-starters",
+        cta_location: "packages",
+        service: slug,
+      }}
+      className="inline-flex min-h-6 items-center rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+    >
+      {target.name} →
+    </TrackedLink>
   );
 }
 
@@ -333,220 +423,11 @@ export default function AiStartersPage() {
         lead="Most people start with the free fit check or the audit, then move into hands-on work once we both know where the real wins are."
       >
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
-          {/* 1. Workflow-First AI Audit — the highlighted paid entry */}
-          <Reveal className="h-full">
-            <div className="flex h-full flex-col rounded-2xl bg-card p-7 ring-2 ring-primary/40">
-              <p className={eyebrow}>Paid entry offer</p>
-              <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
-                Workflow-First AI Audit
-              </h3>
-              <p className="mt-4 flex items-baseline gap-2.5">
-                <span className="font-display text-4xl font-black text-foreground tabular-nums">
-                  $495
-                </span>
-                <span className="font-display text-xl font-bold text-caption tabular-nums line-through decoration-[1.5px]">
-                  $750
-                </span>
-                <span className={priceUnit}>CAD</span>
-              </p>
-              <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                A professional review of one priority workflow: map,
-                bottlenecks, prioritized opportunities, recommendations, and
-                a written 30-day action plan.
-              </p>
-              <ul className="mt-4 space-y-2">
-                {[
-                  "Repetitive admin processes",
-                  "Owner bottlenecks",
-                  "Disconnected tools",
-                  "Delayed follow-ups",
-                  "Manual reporting",
-                ].map((item) => (
-                  <li key={item} className="flex gap-3 text-sm">
-                    <Bullet />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <ServiceLink slug="ai-consulting" />
-              <div className="mt-auto pt-6">
-                <Button
-                  size="xl"
-                  className="w-full rounded-full"
-                  render={
-                    <TrackedLink
-                      href="/audit"
-                      event="audit_cta_clicked"
-                      eventProps={{
-                        source_page: "ai-starters",
-                        cta_location: "packages",
-                      }}
-                    />
-                  }
-                >
-                  Explore the audit
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* 2. Build With You */}
-          <Reveal delay={60} className="h-full">
-            <div className="flex h-full flex-col rounded-2xl bg-card p-7 ring-1 ring-border">
-              <p className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
-                Ongoing
-              </p>
-              <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
-                Build With You
-              </h3>
-              <p className="mt-4 flex items-baseline gap-2">
-                <span className="font-display text-4xl font-black text-foreground tabular-nums">
-                  $1,250
-                </span>
-                <span className={priceUnit}>/ month</span>
-              </p>
-              <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                Two 45-minute strategy calls a month — one every two weeks.
-                Each call, hands-on:
-              </p>
-              <ul className="mt-4 space-y-2">
-                <li className="flex gap-3 text-sm">
-                  <Bullet />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      You screen-share your real workflows
-                    </span>{" "}
-                    — we watch how the work actually happens.
-                  </span>
-                </li>
-                <li className="flex gap-3 text-sm">
-                  <Bullet />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      You take away AI &amp; agent know-how
-                    </span>{" "}
-                    that&apos;s relevant to your business.
-                  </span>
-                </li>
-                <li className="flex gap-3 text-sm">
-                  <Bullet />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      You automate your repetitive workflow
-                    </span>{" "}
-                    in a way you can replicate without me.
-                  </span>
-                </li>
-              </ul>
-              <p className="mt-4 text-sm leading-relaxed">
-                <span className="font-medium text-foreground">Best for:</span>{" "}
-                teams that want to stay hands-on and learn as we build.
-              </p>
-              <p className="mt-3 text-sm leading-relaxed">
-                <span className="font-medium text-foreground">
-                  100% money-back guarantee
-                </span>{" "}
-                — if you&apos;re not satisfied with the results, you get a
-                full refund.
-              </p>
-              <p className="mt-3 text-xs text-caption">
-                Billed every 4 weeks — two bi-weekly calls.
-              </p>
-              <ServiceLink slug="ai-consulting" />
-              <div className="mt-auto pt-6">
-                <Button
-                  variant="outline"
-                  size="xl"
-                  className="w-full rounded-full"
-                  render={
-                    <TrackedLink
-                      href="/contact?interest=build-with-you"
-                      event="service_inquiry_clicked"
-                      eventProps={{ service_tier: "do_it_with_you" }}
-                    />
-                  }
-                >
-                  Get in touch
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* 3. Build For You — the deep-green slot */}
-          <Reveal delay={120} className="h-full">
-            <div className="band-green flex h-full flex-col rounded-2xl bg-background p-7">
-              <p className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
-                Project work
-              </p>
-              <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
-                Build For You
-              </h3>
-              <p className="mt-4 flex items-baseline gap-2">
-                <span className="font-display text-4xl font-black text-foreground tabular-nums">
-                  $5,500
-                </span>
-                <span className={priceUnit}>/ project</span>
-              </p>
-              <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">
-                Every Build For You project begins with discovery or a
-                completed audit.
-              </p>
-              <ul className="mt-4 space-y-2">
-                <li className="flex gap-3 text-sm">
-                  <Bullet tone="leaf" />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      One end-to-end workflow
-                    </span>
-                    , with up to roughly two core system integrations.
-                  </span>
-                </li>
-                <li className="flex gap-3 text-sm">
-                  <Bullet tone="leaf" />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      AI &amp; automation architecture
-                    </span>{" "}
-                    — implementation, testing, and exception handling
-                    included.
-                  </span>
-                </li>
-                <li className="flex gap-3 text-sm">
-                  <Bullet tone="leaf" />
-                  <span>
-                    <span className="font-medium text-foreground">
-                      Team handoff &amp; 30-day stabilization
-                    </span>
-                    , so it keeps running after I step back.
-                  </span>
-                </li>
-              </ul>
-              <p className="mt-4 text-sm leading-relaxed">
-                <span className="font-medium text-foreground">Best for:</span>{" "}
-                teams that want the build handed over, not shared.
-              </p>
-              <p className="mt-3 text-xs text-caption">
-                Larger scopes quoted separately after discovery.
-              </p>
-              <ServiceLink slug="ai-automation" />
-              <div className="mt-auto pt-6">
-                <Button
-                  size="xl"
-                  className="w-full rounded-full hover:text-inkdeep"
-                  render={
-                    <TrackedLink
-                      href="/book"
-                      event="service_inquiry_clicked"
-                      eventProps={{ service_tier: "do_it_for_you" }}
-                    />
-                  }
-                >
-                  Book a call
-                </Button>
-              </div>
-            </div>
-          </Reveal>
+          {cards.map(({ card, service }, i) => (
+            <Reveal key={card.name} delay={i * 40} className="h-full">
+              <PriceCard {...card} serviceLink={<ServiceLink slug={service} />} />
+            </Reveal>
+          ))}
         </div>
       </Section>
 

@@ -8,6 +8,7 @@ export { LinkList, type ListLink } from "@/components/sections/link-list";
 export { MonoLabel } from "@/components/sections/mono-label";
 export { PageHeader } from "@/components/sections/page-header";
 export { PostBody } from "@/components/sections/post-body";
+export { PriceCard } from "@/components/sections/price-card";
 export { ProofSections } from "@/components/sections/proof-sections";
 export { Section } from "@/components/sections/section";
 export { StatementRows, type StatementRow } from "@/components/sections/statement-rows";

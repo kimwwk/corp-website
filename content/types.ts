@@ -81,6 +81,44 @@ export type Faq = { question: string; answer: string };
     event (see `packageLinkCta` in components/templates/ctas.ts). */
 export type PackageHref = "/fit-check" | "/audit" | "/ai-starters";
 
+/**
+ * One price card (rendered by `PriceCard` in components/sections/). AI Starters
+ * holds its three in the page; a service page's `howToStart.offer` holds one.
+ *
+ * `tone`: "plain" (hairline ring), "highlight" (the featured card, primary
+ * ring) or "deep" (a green card, re-themed by `band-green`).
+ * A bullet's or guarantee's `text` follows its bold `lead`, with a space
+ * unless it starts with punctuation (", so it keeps running…").
+ */
+export type OfferCard = {
+  tone: "plain" | "highlight" | "deep";
+  eyebrow: string;
+  name: string;
+  /** Display price, e.g. "$1,250". */
+  price: string;
+  /** Struck-through earlier price, e.g. "$750". */
+  was?: string;
+  /** Mono unit after the price, e.g. "/ month", "CAD". */
+  unit: string;
+  /** The line under the hairline. */
+  intro: string;
+  bullets: { lead?: string; text: string }[];
+  /** Follows a bold "Best for:". */
+  bestFor?: string;
+  guarantee?: { lead: string; text: string };
+  /** Small caption lines, e.g. billing terms. */
+  notes?: string[];
+  cta: {
+    label: string;
+    href: string;
+    event: string;
+    eventProps?: Record<string, string>;
+    /** "filled" is the primary pill: at most one filled card per surface. */
+    style: "filled" | "outline";
+    arrow?: boolean;
+  };
+};
+
 export type Testimonial = {
   id: TestimonialId;
   name: string;
