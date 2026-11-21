@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
  * Price card — one offer: mono eyebrow, card name, price (+ optional
  * struck-through earlier price, a `<del>` after a screen-reader "Regular
  * price" label) and optional mono unit, a hairline, the intro line,
- * square-bullet list, then optional "Best for", guarantee, caption notes and
- * a back-link slot (`serviceLink`), with the card's one CTA pinned to the
- * foot (`mt-auto`), so cards in a row line their buttons up.
+ * square-bullet list, then optional "Best for", guarantee and caption notes,
+ * with the card's one CTA pinned to the foot (`mt-auto`), so cards in a row
+ * line their buttons up.
  *
  * Tones: "plain" (`ring-1 ring-border`), "highlight" (`ring-2 ring-primary/40`,
  * green eyebrow; the featured card) and "deep" (`band-green`, which re-themes
@@ -54,13 +54,8 @@ export function PriceCard({
   guarantee,
   notes,
   cta,
-  serviceLink,
   className,
-}: OfferCard & {
-  /** A small back-link under the card body (e.g. to the offer's service page). */
-  serviceLink?: React.ReactNode;
-  className?: string;
-}) {
+}: OfferCard & { className?: string }) {
   return (
     <div className={cn("flex h-full flex-col rounded-2xl p-7", tones[tone], className)}>
       <MonoLabel tone={tone === "highlight" ? "green" : "caption"}>{eyebrow}</MonoLabel>
@@ -124,7 +119,6 @@ export function PriceCard({
           {note}
         </p>
       ))}
-      {serviceLink ? <p className="mt-4 text-sm">{serviceLink}</p> : null}
       <div className="mt-auto pt-6">
         <Button
           variant={cta.style === "outline" ? "outline" : "default"}

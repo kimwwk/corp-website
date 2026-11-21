@@ -182,7 +182,7 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | Link cue (`linkCueLabel` + `<LinkCueArrow>`, `components/sections/link-cue.tsx`) | how a link that isn't running text shows it is a link: its label in linkGreen's look (`underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary` right after it that nudges `group-hover:translate-x-1`. **Visible at rest** on every screen — touch has no hover. Never re-type it; three uses: `<CardGrid>` card foot ("Learn more"; not a link of its own, the whole card is the link), every `<LinkList>` row (the label is the row's name), Home's "Two ways to work together" rows (the label is the card-h3 heading; the arrow scales with it, `size-[0.75em] align-baseline`) |
 
 **Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
-least 24px tall: `inline-flex min-h-6 items-center` (the /ai-starters card back-links), or
+least 24px tall: `inline-flex min-h-6 items-center`, or
 `inline-block` at heading line height (row-heading links). The footer wordmark link is
 `min-h-11`, like the `size-11` social row beside it. Links inside running prose are exempt.
 
@@ -254,7 +254,7 @@ New sections are **composed from these**, never re-typed from the recipes above:
   the /audit/ hero price row follows the same rule), a hairline, the intro
   line (`text-sm`), `size-[7px]` square bullets (a bold `lead` in `font-medium
   text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
-  text-caption` notes and a back-link slot, with the one CTA (`size="xl"` full-width pill,
+  text-caption` notes, with the one CTA (`size="xl"` full-width pill,
   filled or outline) pinned to the foot by `mt-auto`. Tones: `plain` (`bg-card ring-1
   ring-border`), `highlight` (`ring-2 ring-primary/40`, green eyebrow; the featured card) and
   `deep` (`band-green bg-background`: leaf bullets, filled pill takes `hover:text-inkdeep`).
@@ -453,7 +453,9 @@ One system, defined in `app/globals.css`:
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a
   `<del>` after an `sr-only` "Regular price" label, and `OfferCard.unit` is optional (the
-  Fit Check card: eyebrow "Free · 3 min", "$0", no unit).
+  Fit Check card: eyebrow "Free · 3 min", "$0", no unit). The /ai-starters cards lose their
+  per-card "AI Consulting →" back-links (and `PriceCard` its `serviceLink` slot); one line under
+  the grid links AI Consulting and the AI Automation page as inline prose links (`linkInline`).
 - **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
   in the header, footer and CTAs). The /ai-starters price cards are one kit component,
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;

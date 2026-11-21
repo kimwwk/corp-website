@@ -15,15 +15,16 @@ import {
   StatementRows,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
-import { serviceBySlug, servicePath } from "@/content/services";
+import { servicePath } from "@/content/services";
 import type { OfferCard, ServiceSlug } from "@/content/types";
 
 /*
  * AI Starters (the price cards that lived on /services until 2026-11-20) —
  * Kim's copy on the Green Ledger foundation: P2 header, P13 price slots
  * (Fit Check | audit | Build With You, as PriceCards), then the P8 three-rung
- * ladder as the sequence view. Each card links back to its service page;
- * Build For You lives on the AI Automation page, linked under the cards.
+ * ladder as the sequence view. One line under the cards links AI Consulting
+ * (the service all three belong to) and the AI Automation page, where Build
+ * For You lives.
  */
 export const metadata: Metadata = pageMetadata({
   title: "AI Starters — Kivov Digital",
@@ -122,111 +123,100 @@ const included = [
   },
 ];
 
-/* The price cards, left to right, each with the service page it links back to. */
-const cards: { card: OfferCard; service: ServiceSlug }[] = [
+/* The price cards, left to right. */
+const cards: OfferCard[] = [
   {
-    service: "ai-consulting",
-    card: {
-      tone: "plain",
-      eyebrow: "Free · 3 min",
-      name: "Workflow Fit Check",
-      price: "$0",
-      intro:
-        "A three-minute questionnaire that identifies the type of workflow issue you may be facing, and one practical place to begin.",
-      bullets: [
-        { text: "Eight questions, no technical knowledge required" },
-        { text: "The type of workflow issue you likely have" },
-        { text: "One practical place to begin" },
-      ],
-      cta: {
-        label: "Take the free check",
-        href: "/fit-check",
-        event: "fit_check_cta_clicked",
-        eventProps: { source_page: "ai-starters", cta_location: "packages" },
-        style: "outline",
-      },
+    tone: "plain",
+    eyebrow: "Free · 3 min",
+    name: "Workflow Fit Check",
+    price: "$0",
+    intro:
+      "A three-minute questionnaire that identifies the type of workflow issue you may be facing, and one practical place to begin.",
+    bullets: [
+      { text: "Eight questions, no technical knowledge required" },
+      { text: "The type of workflow issue you likely have" },
+      { text: "One practical place to begin" },
+    ],
+    cta: {
+      label: "Take the free check",
+      href: "/fit-check",
+      event: "fit_check_cta_clicked",
+      eventProps: { source_page: "ai-starters", cta_location: "packages" },
+      style: "outline",
     },
   },
   {
-    service: "ai-consulting",
-    card: {
-      tone: "highlight",
-      eyebrow: "Paid entry offer",
-      name: "Workflow-First AI Audit",
-      price: "$495",
-      was: "$750",
-      unit: "CAD",
-      intro:
-        "A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.",
-      bullets: [
-        { text: "Repetitive admin processes" },
-        { text: "Owner bottlenecks" },
-        { text: "Disconnected tools" },
-        { text: "Delayed follow-ups" },
-        { text: "Manual reporting" },
-      ],
-      cta: {
-        label: "Explore the audit",
-        href: "/audit",
-        event: "audit_cta_clicked",
-        eventProps: { source_page: "ai-starters", cta_location: "packages" },
-        style: "filled",
-        arrow: true,
-      },
+    tone: "highlight",
+    eyebrow: "Paid entry offer",
+    name: "Workflow-First AI Audit",
+    price: "$495",
+    was: "$750",
+    unit: "CAD",
+    intro:
+      "A professional review of one priority workflow: map, bottlenecks, prioritized opportunities, recommendations, and a written 30-day action plan.",
+    bullets: [
+      { text: "Repetitive admin processes" },
+      { text: "Owner bottlenecks" },
+      { text: "Disconnected tools" },
+      { text: "Delayed follow-ups" },
+      { text: "Manual reporting" },
+    ],
+    cta: {
+      label: "Explore the audit",
+      href: "/audit",
+      event: "audit_cta_clicked",
+      eventProps: { source_page: "ai-starters", cta_location: "packages" },
+      style: "filled",
+      arrow: true,
     },
   },
   {
-    service: "ai-consulting",
-    card: {
-      tone: "plain",
-      eyebrow: "Ongoing",
-      name: "Build With You",
-      price: "$1,250",
-      unit: "/ month",
-      intro:
-        "Two 45-minute strategy calls a month — one every two weeks. Each call, hands-on:",
-      bullets: [
-        {
-          lead: "You screen-share your real workflows",
-          text: "— we watch how the work actually happens.",
-        },
-        {
-          lead: "You take away AI & agent know-how",
-          text: "that's relevant to your business.",
-        },
-        {
-          lead: "You automate your repetitive workflow",
-          text: "in a way you can replicate without me.",
-        },
-      ],
-      bestFor: "teams that want to stay hands-on and learn as we build.",
-      guarantee: {
-        lead: "100% money-back guarantee",
-        text: "— if you're not satisfied with the results, you get a full refund.",
+    tone: "plain",
+    eyebrow: "Ongoing",
+    name: "Build With You",
+    price: "$1,250",
+    unit: "/ month",
+    intro:
+      "Two 45-minute strategy calls a month — one every two weeks. Each call, hands-on:",
+    bullets: [
+      {
+        lead: "You screen-share your real workflows",
+        text: "— we watch how the work actually happens.",
       },
-      notes: ["Billed every 4 weeks — two bi-weekly calls."],
-      cta: {
-        label: "Get in touch",
-        href: "/contact?interest=build-with-you",
-        event: "service_inquiry_clicked",
-        eventProps: { service_tier: "do_it_with_you" },
-        style: "outline",
+      {
+        lead: "You take away AI & agent know-how",
+        text: "that's relevant to your business.",
       },
+      {
+        lead: "You automate your repetitive workflow",
+        text: "in a way you can replicate without me.",
+      },
+    ],
+    bestFor: "teams that want to stay hands-on and learn as we build.",
+    guarantee: {
+      lead: "100% money-back guarantee",
+      text: "— if you're not satisfied with the results, you get a full refund.",
+    },
+    notes: ["Billed every 4 weeks — two bi-weekly calls."],
+    cta: {
+      label: "Get in touch",
+      href: "/contact?interest=build-with-you",
+      event: "service_inquiry_clicked",
+      eventProps: { service_tier: "do_it_with_you" },
+      style: "outline",
     },
   },
 ];
 
-/* The small text link on each card back to its service page (PriceCard's
-   `serviceLink` slot, which sets its size and spacing), and the same link
-   style for the Build For You line under the cards. */
+/* A service-page link in the line under the cards (inline prose links,
+   linkInline). */
 function ServiceLink({
   slug,
   children,
 }: {
   slug: ServiceSlug;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }) {
-  const target = serviceBySlug(slug);
   return (
     <TrackedLink
       href={servicePath(slug)}
@@ -236,9 +226,9 @@ function ServiceLink({
         cta_location: "packages",
         service: slug,
       }}
-      className="inline-flex min-h-6 items-center rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+      className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
     >
-      {children ?? `${target.name} →`}
+      {children}
     </TrackedLink>
   );
 }
@@ -316,15 +306,17 @@ export default function AiStartersPage() {
         lead="Most people start with the free fit check or the audit, then move into hands-on work once we both know where the real wins are."
       >
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
-          {cards.map(({ card, service }, i) => (
+          {cards.map((card, i) => (
             <Reveal key={card.name} delay={i * 40} className="h-full">
-              <PriceCard {...card} serviceLink={<ServiceLink slug={service} />} />
+              <PriceCard {...card} />
             </Reveal>
           ))}
         </div>
         <Reveal>
           <p className="mt-8 text-sm">
-            Want the whole workflow built for you?{" "}
+            These three are part of{" "}
+            <ServiceLink slug="ai-consulting">AI Consulting</ServiceLink>. Want
+            the whole workflow built for you?{" "}
             <ServiceLink slug="ai-automation">
               Build For You is on the AI Automation page →
             </ServiceLink>
