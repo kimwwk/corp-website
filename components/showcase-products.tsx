@@ -41,8 +41,11 @@ export function ShowcaseProducts({ products }: { products: Proof[] }) {
                   />
                 ) : null}
                 <div className="min-w-0 flex-1">
-                  <div className="mb-2 flex items-baseline justify-between gap-4">
-                    <h2 className="text-xl font-semibold text-foreground transition-colors duration-200 group-hover:text-primary">
+                  {/* Below `sm` the badge takes its own line under the name
+                      (side by side, a narrow card clipped it and squeezed the
+                      name); the name never breaks ("our-pot", not "our-" / "pot"). */}
+                  <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <h2 className="text-xl font-semibold whitespace-nowrap text-foreground transition-colors duration-200 group-hover:text-primary">
                       {product.title}
                     </h2>
                     <span className="shrink-0 font-mono text-xs font-medium tracking-[0.14em] uppercase text-primary">
