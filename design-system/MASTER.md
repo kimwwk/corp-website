@@ -241,11 +241,10 @@ New sections are **composed from these**, never re-typed from the recipes above:
   to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
 - **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
-  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron (/ai-starters
-  matches).
+  The trigger takes `gap-4`, so a long question keeps 16px clear of the chevron.
   The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
   them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
-  outside the kit (/ai-starters) sets it too
+  outside the kit sets it too
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 - **`PriceCard`** — one offer as a price card (data type `OfferCard` in `content/types.ts`):
   `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl` black price (+ optional
@@ -441,17 +440,18 @@ One system, defined in `app/globals.css`:
 
 ## Known drift — do NOT copy these (fix when the file is next open for edits)
 
-- `/ai-starters` (moved from /services on 2026-11-20 with its content unchanged) still
-  re-types the P2 header that `<PageHeader>` now renders, and the FAQ accordion that
-  `<FaqList>` renders (its answers carry inline emphasis, so they are JSX rather than the plain
-  strings `FaqList` takes). Recompose it from the kit when the page is next edited.
+- `/ai-starters` still re-types the P2 header that `<PageHeader>` now renders: its h1 keeps
+  `max-w-[11em]`, which `PageHeader` doesn't set, so a swap would re-wrap the headline.
+  Recompose it when that width is decided.
 
 ## Changelog
 
 - **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
   in the header, footer and CTAs). The /ai-starters price cards are one kit component,
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
-  the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule).
+  the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule). Its FAQ now
+  renders through `FaqList` (the answers left are plain text); the Known-drift note keeps only
+  the page header.
 
 - **2026-11-20** — Visual QA round-2 fixes. The link cue is one kit recipe
   (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,

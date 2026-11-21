@@ -3,17 +3,12 @@ import { JsonLd } from "@/components/json-ld";
 import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, faqPage, pageMetadata, service } from "@/lib/seo";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
   CtaRow,
+  FaqList,
   MonoLabel,
   PriceCard,
   Section,
@@ -80,76 +75,32 @@ const rungs = [
   },
 ];
 
+/* Plain-text answers: FaqList renders them and the FAQPage JSON-LD reads them. */
 const faqs = [
   {
-    value: "fit-check",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "A high-level result: the type of workflow issue you likely have and one practical recommendation. It doesn't include a call, custom research, or a written report. That's what the audit is for.",
     question: "What does the free fit check include?",
-    answer: (
-      <p>
-        A high-level result: the type of workflow issue you likely have and one
-        practical recommendation. It doesn&apos;t include a call, custom
-        research, or a written report. That&apos;s what the audit is for.
-      </p>
-    ),
+    answer:
+      "A high-level result: the type of workflow issue you likely have and one practical recommendation. It doesn't include a call, custom research, or a written report. That's what the audit is for.",
   },
   {
-    value: "why-paid",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Because it's real consulting work: a mapping session, analysis, a written report, and a walkthrough. Charging for it means you get my full attention on one workflow, and a deliverable you keep whether or not we work together afterwards. And if you hire Kivov for implementation within 30 days, CAD $500 of the standard fee is credited toward the project.",
     question: "Why is the audit paid?",
-    answer: (
-      <p>
-        Because it&apos;s real consulting work: a mapping session, analysis, a
-        written report, and a walkthrough. Charging for it means you get my
-        full attention on one workflow, and a deliverable you keep whether or
-        not we work together afterwards. And if you hire Kivov for
-        implementation within 30 days, CAD $500 of the standard fee is credited
-        toward the project.
-      </p>
-    ),
+    answer:
+      "Because it's real consulting work: a mapping session, analysis, a written report, and a walkthrough. Charging for it means you get my full attention on one workflow, and a deliverable you keep whether or not we work together afterwards. And if you hire Kivov for implementation within 30 days, CAD $500 of the standard fee is credited toward the project.",
   },
   {
-    value: "with-you-build",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Whatever the workflow needs. On our calls we build custom Claude skills around the workflows you screen-share, automate the repetitive parts, and bring in off-the-shelf tools when one already solves the problem. There's no fixed menu — if your workflow calls for something else, that's what we build.",
     question: "What do we actually build in Build With You?",
-    answer: (
-      <p>
-        Whatever the workflow needs. On our calls we build custom Claude
-        skills around the workflows you screen-share, automate the repetitive
-        parts, and bring in off-the-shelf tools when one already solves the
-        problem. There&apos;s no fixed menu — if your workflow calls for
-        something else, that&apos;s what we build.
-      </p>
-    ),
+    answer:
+      "Whatever the workflow needs. On our calls we build custom Claude skills around the workflows you screen-share, automate the repetitive parts, and bring in off-the-shelf tools when one already solves the problem. There's no fixed menu — if your workflow calls for something else, that's what we build.",
   },
   {
-    value: "billing",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Build With You is $1,250, billed every 4 weeks — that covers your two bi-weekly strategy calls plus always-on text support and your documentation hub in between.",
     question: "How does billing work on the monthly package?",
-    answer: (
-      <p>
-        Build With You is $1,250, billed every 4 weeks — that covers your two
-        bi-weekly strategy calls plus always-on text support and your
-        documentation hub in between.
-      </p>
-    ),
+    answer:
+      "Build With You is $1,250, billed every 4 weeks — that covers your two bi-weekly strategy calls plus always-on text support and your documentation hub in between.",
   },
   {
-    value: "always-on",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Between calls you can text me quick questions and get unstuck fast, within a 12 business-hour SLA, so a small blocker never sits for two weeks waiting for the next session.",
     question: "What does “always-on between sessions” actually mean?",
-    answer: (
-      <p>
-        Between calls you can text me quick questions and get unstuck fast,
-        within a 12 business-hour SLA, so a small blocker never sits for two
-        weeks waiting for the next session.
-      </p>
-    ),
+    answer:
+      "Between calls you can text me quick questions and get unstuck fast, within a 12 business-hour SLA, so a small blocker never sits for two weeks waiting for the next session.",
   },
 ];
 
@@ -317,7 +268,10 @@ const servicesJsonLd = [
     price: 1250,
     unitText: "4 weeks",
   }),
-  faqPage("/ai-starters", faqs),
+  faqPage(
+    "/ai-starters",
+    faqs.map((f) => ({ question: f.question, text: f.answer })),
+  ),
 ];
 
 export default function AiStartersPage() {
@@ -450,21 +404,7 @@ export default function AiStartersPage() {
           </>
         }
       >
-        <Reveal delay={80}>
-          {/* hiddenUntilFound: closed answers stay in the HTML (see FaqList). */}
-          <Accordion hiddenUntilFound className="mt-8 max-w-3xl border-y border-border">
-            {faqs.map((faq) => (
-              <AccordionItem key={faq.value} value={faq.value}>
-                <AccordionTrigger className="gap-4 py-5 text-base font-medium text-foreground hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="pb-5 leading-relaxed text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+        <FaqList faqs={faqs} />
       </Section>
 
       {/* P12 — closing band */}
