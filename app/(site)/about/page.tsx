@@ -165,7 +165,7 @@ export default function AboutPage() {
                 width={614}
                 height={1024}
                 priority
-                className="relative w-full rounded-2xl ring-1 ring-border"
+                className="relative aspect-[4/5] w-full rounded-2xl object-cover object-[center_15%] ring-1 ring-border"
               />
             </div>
           </Reveal>

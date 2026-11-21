@@ -283,13 +283,13 @@ New sections are **composed from these**, never re-typed from the recipes above:
   |---|---|---|
   | `quiet` | `bg-transparent ring-1 ring-border`, no shadow: the cream page shows through | Workflow Fit Check |
   | `highlight` | `bg-card ring-2 ring-primary/40 shadow-lg shadow-foreground/5`, green eyebrow | Workflow-First AI Audit (the featured card, the filled pill); the /audit hero price card |
-  | `deep` | `band-green bg-background`, `shadow-xl shadow-foreground/10` on a wrapper outside the band (inside it `foreground` is cream); leaf checks, a filled pill takes `hover:text-inkdeep` | Build With You (outline pill on the band); Build For You on AI Automation (filled) |
+  | `deep` | `band-green bg-background`, `shadow-xl shadow-foreground/10` on a wrapper outside the band (inside it `foreground` is cream); leaf checks, a filled pill takes `hover:text-inkdeep` | Build With You on /ai-starters and Build For You on AI Automation, both with the filled cream pill |
 
   `h-full`. **`PriceLadder`** sets a row (/ai-starters): three across from `lg`
   (`lg:grid-cols-3`, 40ms stagger), stepping up left to right — `lg:mt-16` / `lg:mt-8` /
   `lg:mt-0` on the stretched cells, so each card's top steps and its foot and button stay
   level; below `lg` they stack with no offsets. A lone card (a service page's "How to start")
-  is wrapped in `<Reveal>` by its caller, `max-w-xl`. At most one filled card per surface
+  is wrapped in `<Reveal>` by its caller, `max-w-xl`. At most one filled pill per surface; a `deep` card is a band, its own surface, so its cream pill doesn't count against the featured card's green one (the ladder's buttons climb with it: outline, green, cream)
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
 the same commit. One-off compositions (page heroes with portraits, the services
@@ -508,6 +508,7 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
 - **2026-11-20** — Look and feel round 1. Headings: every section with an eyebrow now has a

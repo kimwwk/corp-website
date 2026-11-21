@@ -204,7 +204,7 @@ const cards: OfferCard[] = [
       href: "/contact?interest=build-with-you",
       event: "service_inquiry_clicked",
       eventProps: { service_tier: "do_it_with_you" },
-      style: "outline",
+      style: "filled",
     },
   },
 ];

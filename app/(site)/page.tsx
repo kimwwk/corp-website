@@ -282,7 +282,9 @@ export default function HomePage() {
         }
         depth="top-right"
       >
-        <div className="mt-8 grid gap-12 md:grid-cols-2">
+        {/* Three cells so the list follows the line that introduces it on
+            phones; from md the list takes the right column beside both. */}
+        <div className="mt-8 grid gap-y-6 md:grid-cols-2 md:gap-x-12 md:gap-y-4">
           <div className="space-y-4 leading-relaxed">
             <p>
               Take the free Workflow Fit Check to identify where repetitive
@@ -293,16 +295,16 @@ export default function HomePage() {
               In approximately three minutes, you will get a high-level
               result showing whether your strongest opportunity may be:
             </p>
-            <p className="font-medium text-foreground">
-              You do not need to understand AI. You only need to tell us how
-              the work happens today.
-            </p>
           </div>
           <LedgerList
             items={fitCheckOutcomes}
             tone="leaf"
-            className="content-start"
+            className="content-start md:col-start-2 md:row-span-2 md:row-start-1"
           />
+          <p className="leading-relaxed font-medium text-foreground md:col-start-1">
+            You do not need to understand AI. You only need to tell us how
+            the work happens today.
+          </p>
         </div>
         <CtaRow
           tone="band"

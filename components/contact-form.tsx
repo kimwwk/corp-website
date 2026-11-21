@@ -18,6 +18,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { capture, trackLead } from "@/lib/analytics";
 import { WEBHOOK_URL } from "@/lib/webhook";
+import { cn } from "@/lib/utils";
 
 const COMPANY_SIZES = ["Just me", "2–10", "11–50", "51–200", "200+"];
 
@@ -252,7 +253,7 @@ export function ContactForm() {
           type="submit"
           size="xl"
           disabled={status === "sending"}
-          className={status === "sending" ? "cursor-wait" : undefined}
+          className={cn("rounded-full", status === "sending" && "cursor-wait")}
         >
           {status === "sending" ? (
             "Sending…"
