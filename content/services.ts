@@ -287,6 +287,41 @@ export const services: Service[] = [
           line: "For when you know which process needs attention and want a professional recommendation before the build.",
         },
       ],
+      offer: {
+        tone: "deep",
+        eyebrow: "Project work",
+        name: "Build For You",
+        price: "$5,500",
+        unit: "/ project",
+        intro: "Every Build For You project begins with discovery or a completed audit.",
+        bullets: [
+          {
+            lead: "One end-to-end workflow",
+            text: ", with up to roughly two core system integrations.",
+          },
+          {
+            lead: "AI & automation architecture",
+            text: ", with implementation, testing, and exception handling included.",
+          },
+          {
+            lead: "Team handoff & 30-day stabilization",
+            text: ", so it keeps running after we step back.",
+          },
+        ],
+        bestFor: "teams that want the build handed over, not shared.",
+        notes: ["Larger scopes quoted separately after discovery."],
+        cta: {
+          label: "Book a call",
+          href: "/book",
+          event: "service_inquiry_clicked",
+          eventProps: {
+            service_tier: "do_it_for_you",
+            source_page: "ai-automation",
+            cta_location: "how_to_start",
+          },
+          style: "filled",
+        },
+      },
     },
     faqs: [
       {

@@ -156,9 +156,15 @@ export type Service = {
   useCases: UseCaseSlug[];
   proof: ProofId[];
   /** "How to start": packages (one line each, links to /ai-starters) or a quote after a free call.
-      A line's optional `href` links its package name to that package's page. */
+      A line's optional `href` links its package name to that package's page. An `offer` is
+      a price card under the lines (AI Automation: Build For You); with one, the page drops
+      its "See AI Starters" links. */
   howToStart:
-    | { kind: "packages"; lines: { package: string; line: string; href?: PackageHref }[] }
+    | {
+        kind: "packages";
+        lines: { package: string; line: string; href?: PackageHref }[];
+        offer?: OfferCard;
+      }
     | { kind: "quote"; line: string };
   /** Up to 5. */
   faqs: Faq[];

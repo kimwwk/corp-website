@@ -451,7 +451,9 @@ One system, defined in `app/globals.css`:
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
   the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule). Its FAQ now
   renders through `FaqList` (the answers left are plain text); the Known-drift note keeps only
-  the page header.
+  the page header. Build For You moved to AI Automation: a service's `howToStart.offer` renders
+  one `PriceCard` (`max-w-xl`, left-aligned) under the "How to start" rows, in place of the "See
+  AI Starters" button, which also leaves that page's hero.
 
 - **2026-11-20** — Visual QA round-2 fixes. The link cue is one kit recipe
   (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,

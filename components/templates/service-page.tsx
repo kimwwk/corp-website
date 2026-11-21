@@ -6,6 +6,7 @@ import {
   CtaRow,
   FaqList,
   LedgerList,
+  PriceCard,
   ProofSections,
   Section,
   StatementRows,
@@ -23,9 +24,17 @@ import { RelatedReading } from "@/components/templates/related-reading";
 import { proofItems } from "@/content/proof";
 import { servicePath } from "@/content/services";
 import { testimonialsFor } from "@/content/testimonials";
-import { isTodo, type Service } from "@/content/types";
+import { isTodo, type OfferCard, type Service } from "@/content/types";
 import { getUseCaseBySlug, pathForUseCase } from "@/content/use-cases";
 import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
+
+/* An offer's visible price as its Service entity's Offer (Google wants the
+   schema price to match the page): "$5,500" + "/ project" → 5500, "project". */
+function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
+  const digits = card.price.replace(/[^\d.]/g, "");
+  if (!digits) return {};
+  return { price: Number(digits), unitText: card.unit.replace(/^\/\s*/, "") || undefined };
+}
 
 /*
  * Service page template (/services/<slug>/). Section order is fixed by the
@@ -37,12 +46,14 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
  * service.
  *
  * How to start: a package line with an `href` links its package name to
- * that page (fit check, audit, AI Starters); the "See AI Starters" button
- * stays under the rows.
+ * that page (fit check, audit, AI Starters). Under the rows, either the
+ * service's own price card (`howToStart.offer`: AI Automation's Build For
+ * You) or, with no offer, the "See AI Starters" button (AI Consulting).
  *
  * Hero and closing band: quote services (Website Management, App Development)
  * lead with "Book a free call" and offer the fit check as a text link; package
- * services lead with Free Fit Check, plus "See AI Starters" in the hero.
+ * services lead with Free Fit Check, plus "See AI Starters" in the hero
+ * unless the page has its own offer.
  */
 export function ServicePage({ service }: { service: Service }) {
   const src = service.slug;
@@ -54,6 +65,8 @@ export function ServicePage({ service }: { service: Service }) {
   const proof = proofItems(service.proof);
   const quotes = testimonialsFor(service.slug);
   const start = service.howToStart;
+  const offer = start.kind === "packages" ? start.offer : undefined;
+  const showStarters = start.kind === "packages" && !offer;
   const faqsForLd = service.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
     .map((f) => ({ question: f.question, text: f.answer }));
@@ -65,6 +78,7 @@ export function ServicePage({ service }: { service: Service }) {
       description: service.description,
       path,
       serviceType: service.name,
+      ...(offer ? offerPrice(offer) : {}),
     }),
     ...(faqsForLd.length ? [faqPage(path, faqsForLd)] : []),
   ];
@@ -86,7 +100,7 @@ export function ServicePage({ service }: { service: Service }) {
           primary={hero.primary}
           secondary={[
             ...hero.secondary,
-            ...(start.kind === "packages" ? [aiStartersCta(src, "hero")] : []),
+            ...(showStarters ? [aiStartersCta(src, "hero")] : []),
           ]}
         />
       </Band>
@@ -147,9 +161,15 @@ export function ServicePage({ service }: { service: Service }) {
                 link: l.href ? packageLinkCta(l.href, src, "how_to_start") : undefined,
               }))}
             />
-            <Reveal>
-              <CtaRow primary={aiStartersCta(src, "how_to_start")} />
-            </Reveal>
+            {offer ? (
+              <Reveal className="mt-10 max-w-xl">
+                <PriceCard {...offer} />
+              </Reveal>
+            ) : (
+              <Reveal>
+                <CtaRow primary={aiStartersCta(src, "how_to_start")} />
+              </Reveal>
+            )}
           </>
         ) : (
           <Reveal>
