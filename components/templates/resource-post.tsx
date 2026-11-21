@@ -10,6 +10,7 @@ import {
   type LinkCard,
 } from "@/components/sections";
 import { leadCtas, startsWithCall } from "@/components/templates/ctas";
+import { TrackedLink } from "@/components/tracked-link";
 import { resourcePath } from "@/content/resources";
 import { serviceBySlug, servicePath } from "@/content/services";
 import type { ResourcePost, ServiceSlug } from "@/content/types";
@@ -100,9 +101,19 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
 
       {/* 1 — Header */}
       <PageHeader eyebrow="Resources" title={post.h1}>
-        {/* Byline: the same person entity the Article JSON-LD names as author. */}
+        {/* Byline: the same person entity the Article JSON-LD names as author;
+            the name links to /about/ in the inline-link (linkInline) style. */}
         <MonoLabel tone="caption" className="mt-6">
-          By {person.name} ·{" "}
+          By{" "}
+          <TrackedLink
+            href="/about"
+            event="author_link_clicked"
+            eventProps={{ source_page: src, cta_location: "byline" }}
+            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+          >
+            {person.name}
+          </TrackedLink>{" "}
+          ·{" "}
           {ISO_DATE.test(post.date) ? (
             <time dateTime={post.date}>{formatDate(post.date)}</time>
           ) : (

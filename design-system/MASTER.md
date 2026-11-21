@@ -215,7 +215,8 @@ New sections are **composed from these**, never re-typed from the recipes above:
   use-case heroes), S3 featured, S6 closing (`breathe`); forest ring via `depth`
 - **`PageHeader`** — P2 cream page header (eyebrow → page h1 → lead → children) for inner pages
   that open without a band: overview pages, resource posts (child: the byline and date,
-  "By Kim Wong · November 20, 2026", in one `<MonoLabel tone="caption">`)
+  "By Kim Wong · November 20, 2026", in one `<MonoLabel tone="caption">`; "Kim Wong" links to
+  /about/ in `linkInline`)
 - **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
   children carry their own `<Reveal delay>` rows; `eyebrowAs="h2"` when the eyebrow is the
   section's only heading
@@ -456,6 +457,7 @@ One system, defined in `app/globals.css`:
   Fit Check card: eyebrow "Free · 3 min", "$0", no unit). The /ai-starters cards lose their
   per-card "AI Consulting →" back-links (and `PriceCard` its `serviceLink` slot); one line under
   the grid links AI Consulting and the AI Automation page as inline prose links (`linkInline`).
+  Resource-post bylines link "Kim Wong" to /about/ (`linkInline`, `author_link_clicked`).
 - **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
   in the header, footer and CTAs). The /ai-starters price cards are one kit component,
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
