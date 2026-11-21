@@ -59,6 +59,7 @@ function relatedCard(post: ResourcePost, sourcePage: string): LinkCard {
   if (post.related.kind === "service") {
     const target = serviceBySlug(post.related.slug);
     return {
+      icon: target.icon,
       kicker: "Services",
       title: target.name,
       body: target.cardLine,
@@ -69,6 +70,7 @@ function relatedCard(post: ResourcePost, sourcePage: string): LinkCard {
   }
   const target = getUseCaseBySlug(post.related.slug);
   return {
+    icon: target.icon,
     kicker: "Use Cases",
     title: target.name,
     body: target.cardLine,

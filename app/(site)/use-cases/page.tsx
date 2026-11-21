@@ -21,6 +21,7 @@ export default function UseCasesOverviewPage() {
       label: s.name,
       title: overviews.useCases.groupTitles?.[s.slug],
       cards: s.useCases.map(getUseCaseBySlug).map((u) => ({
+        icon: u.icon,
         title: u.name,
         body: u.cardLine,
         href: pathForUseCase(u.slug),

@@ -14,6 +14,7 @@ export const services: Service[] = [
   {
     slug: "ai-consulting",
     name: "AI Consulting",
+    icon: "compass",
     keyword: "ai consultant toronto",
     secondaryKeywords: [
       "ai consultancy",
@@ -126,6 +127,7 @@ export const services: Service[] = [
   {
     slug: "website-management",
     name: "Website Management",
+    icon: "globe",
     keyword: "website maintenance toronto",
     secondaryKeywords: ["website redesign services", "website maintenance services"],
     title: "Website Management and Maintenance in Toronto — Kivov Digital",
@@ -228,6 +230,7 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     name: "AI Automation",
+    icon: "workflow",
     keyword: "ai automation agency",
     secondaryKeywords: [
       "workflow automation",
@@ -381,6 +384,7 @@ export const services: Service[] = [
   {
     slug: "app-development",
     name: "App Development",
+    icon: "smartphone",
     keyword: "app development toronto",
     secondaryKeywords: [
       "app developers toronto",

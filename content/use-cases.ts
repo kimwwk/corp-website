@@ -17,6 +17,7 @@ export const useCases: UseCase[] = [
   {
     slug: "wordpress-support",
     name: "WordPress Support",
+    icon: "wrench",
     parent: "website-management",
     keyword: "wordpress support toronto",
     secondaryKeywords: [
@@ -112,6 +113,7 @@ export const useCases: UseCase[] = [
   {
     slug: "law-firm-seo",
     name: "Law Firm SEO & GEO",
+    icon: "scale",
     parent: "website-management",
     keyword: "law firm seo",
     secondaryKeywords: ["seo for lawyers", "law firm marketing"],
@@ -200,6 +202,7 @@ export const useCases: UseCase[] = [
   {
     slug: "invoice-automation",
     name: "Invoice Automation",
+    icon: "receipt-text",
     parent: "ai-automation",
     keyword: "invoice automation",
     secondaryKeywords: [
@@ -287,6 +290,7 @@ export const useCases: UseCase[] = [
   {
     slug: "ai-receptionist",
     name: "AI Receptionist",
+    icon: "phone-call",
     parent: "ai-automation",
     keyword: "ai receptionist for small business",
     secondaryKeywords: ["ai voice agent", "virtual receptionist toronto"],
@@ -360,6 +364,7 @@ export const useCases: UseCase[] = [
   {
     slug: "ai-follow-up-emails",
     name: "AI Follow-Up Emails",
+    icon: "mail-check",
     parent: "ai-automation",
     // No measured keyword: Kim kept this use case on 2026-11-20 without one.
     keyword: null,

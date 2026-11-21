@@ -1,5 +1,5 @@
 import { CardGrid, Section } from "@/components/sections";
-import { resourcePath, resourcesRelatedTo } from "@/content/resources";
+import { resourceIcon, resourcePath, resourcesRelatedTo } from "@/content/resources";
 import { sectionHeadings } from "@/content/section-headings";
 import type { ResourcePost } from "@/content/types";
 
@@ -27,6 +27,7 @@ export function RelatedReading({
       <CardGrid
         columns={posts.length === 1 ? 1 : posts.length === 2 ? 2 : 3}
         cards={posts.map((post) => ({
+          icon: resourceIcon,
           title: post.name,
           body: post.cardLine,
           href: resourcePath(post.slug),

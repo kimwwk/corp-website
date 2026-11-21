@@ -23,6 +23,7 @@ export default function ServicesOverviewPage() {
         {
           label: overviews.services.cardsLabel ?? overviews.services.eyebrow,
           cards: services.map((s) => ({
+            icon: s.icon,
             title: s.name,
             body: s.cardLine,
             href: servicePath(s.slug),

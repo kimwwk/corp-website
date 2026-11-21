@@ -1,5 +1,7 @@
 export { Band } from "@/components/sections/band";
 export { CardGrid, type LinkCard } from "@/components/sections/card-grid";
+export { cardIcons } from "@/components/sections/card-icon";
+export { cardLift, cardSurface } from "@/components/sections/card-surface";
 export { CheckGlyph } from "@/components/sections/check-glyph";
 export { CtaRow, Support, type Cta } from "@/components/sections/cta-row";
 export { FaqList } from "@/components/sections/faq-list";

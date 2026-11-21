@@ -48,6 +48,20 @@ export type TestimonialId =
   | "matthew-obrian"
   | "abdou-rakib-abente";
 
+/** A link card's icon tile, by key (serializable): the components layer maps
+    each key to its Lucide icon (components/sections/card-icon.tsx). */
+export type CardIcon =
+  | "compass"
+  | "globe"
+  | "workflow"
+  | "smartphone"
+  | "wrench"
+  | "scale"
+  | "receipt-text"
+  | "phone-call"
+  | "mail-check"
+  | "book-open";
+
 /** Every proof item carries exactly one of these labels. Never "Case Study". */
 export type ProofLabel =
   | "Client build"
@@ -138,6 +152,8 @@ export type Testimonial = {
 export type Service = {
   slug: ServiceSlug;
   name: string;
+  /** Its cards' icon tile (Home, /services, a post's Related card). */
+  icon: CardIcon;
   /** Primary keyword. The title tag must contain it. */
   keyword: string;
   secondaryKeywords: string[];
@@ -184,6 +200,8 @@ export type Service = {
 export type UseCase = {
   slug: UseCaseSlug;
   name: string;
+  /** Its cards' icon tile (/use-cases, its service page, a post's Related card). */
+  icon: CardIcon;
   parent: ServiceSlug;
   /** Primary keyword, or null when none was measured (AI Follow-Up Emails). */
   keyword: string | null;

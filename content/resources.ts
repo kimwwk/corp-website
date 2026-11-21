@@ -1,4 +1,4 @@
-import type { ResourcePost, ResourceSlug } from "@/content/types";
+import type { CardIcon, ResourcePost, ResourceSlug } from "@/content/types";
 
 /*
  * The three resource posts (/resources/<slug>/): posts from Kim's blog or
@@ -218,6 +218,9 @@ export const resources: ResourcePost[] = [
 export function getResource(slug: string): ResourcePost | undefined {
   return resources.find((r) => r.slug === slug);
 }
+
+/** Every post's card takes the same icon tile (/resources, Related reading). */
+export const resourceIcon: CardIcon = "book-open";
 
 export function resourcePath(slug: ResourceSlug) {
   return `/resources/${slug}`;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { OverviewPage } from "@/components/templates/overview-page";
 import { overviews } from "@/content/overviews";
-import { resourcePath, resources } from "@/content/resources";
+import { resourceIcon, resourcePath, resources } from "@/content/resources";
 import { pageMetadata } from "@/lib/seo";
 
 /* Resources overview: the posts as cards. */
@@ -22,6 +22,7 @@ export default function ResourcesOverviewPage() {
         {
           label: overviews.resources.cardsLabel ?? overviews.resources.eyebrow,
           cards: resources.map((r) => ({
+            icon: resourceIcon,
             title: r.name,
             body: r.cardLine,
             href: resourcePath(r.slug),

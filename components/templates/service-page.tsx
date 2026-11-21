@@ -143,6 +143,7 @@ export function ServicePage({ service }: { service: Service }) {
           <CardGrid
             columns={cases.length >= 4 ? 4 : cases.length === 3 ? 3 : 2}
             cards={cases.map((u) => ({
+              icon: u.icon,
               title: u.name,
               body: u.cardLine,
               href: pathForUseCase(u.slug),

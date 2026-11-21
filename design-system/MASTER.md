@@ -237,9 +237,19 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; a row's
   optional `link` turns its title into a tracked row-heading link
 - **`StepRows`** — the huge-numeral "How it works" ladder
-- **`CardGrid`** — vocabulary #5 as a component: link cards (`rounded-2xl bg-card p-7 ring-1
-  ring-border`, hover `ring-primary/40`, row-heading title, one line, then the card link cue —
-  "Learn more" + arrow, always visible; a card's `cta` can relabel it), 1–4 columns. One column
+- **`CardGrid`** — vocabulary #5 as a component: link cards on the card surface (below) at
+  `p-7 md:p-8`, with the link-card lift. Top to bottom: an optional **icon tile** (`LinkCard.icon`,
+  a content key mapped to its Lucide icon in `components/sections/card-icon.tsx`: a `size-11
+  rounded-xl bg-secondary text-primary` tile, icon `size-5`; on card hover it fills `bg-primary
+  text-primary-foreground`, `transition-colors` 200ms), an optional caption kicker, the
+  row-heading title (`mt-6` after the tile), one line, then the **foot**: a hairline (`border-t
+  border-border`, 24px above and below) and the card link cue — "Learn more" + arrow, always
+  visible; a card's `cta` can relabel it — pinned to the bottom with `mt-auto`, so the hairlines
+  and cues in a row line up. Icons: AI Consulting `Compass`, Website Management `Globe`, AI
+  Automation `Workflow`, App Development `Smartphone`, WordPress Support `Wrench`, Law Firm SEO &
+  GEO `Scale`, Invoice Automation `ReceiptText`, AI Receptionist `PhoneCall`, AI Follow-Up Emails
+  `MailCheck`, every resource post `BookOpen`; a post's Related card takes its related page's.
+  1–4 columns. One column
   keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related", a page's one
   "Related reading" post) lines up with the text above it instead of reading as half of a
   two-column grid. The whole card is its one tracked CTA; no filled-primary inside
@@ -329,7 +339,9 @@ their colors.
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
   Terms, Consent Preferences). Every page in the tree is listed here.
-- `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
+- `ContactForm`, `FitCheck`, `BookingWidget`
+- `ShowcaseProducts` — the "Our product" proof cards: each a link card (the card surface + lift,
+  `p-6`) opening the product in a new tab; the product name is an `h3` that turns green on hover
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
   ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
   buttons right on `sm+`, stacked on mobile, `.rise` entrance).
@@ -362,7 +374,15 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    `<StepRows>`, or prose) → optional closing `bigLine`.
 3. **Featured band (mid-page)** — `<Band id=… eyebrow=… title=… depth=…>` (id gives `scroll-mt-16`).
 4. **Interlude** — `<Interlude>` between section groups; quiet section follows.
-5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs). Price cards are `<PriceCard>` (its `deep` tone is this green variant).
+5. **Card grid** — every card on cream sits on **the card surface** (`cardSurface` in
+   `components/sections/card-surface.ts`): `rounded-2xl bg-card ring-1 ring-border shadow-sm
+   shadow-foreground/5`. A card that is a link adds **the lift** (`cardLift`): `hover:-translate-y-1
+   hover:shadow-xl hover:shadow-foreground/5 hover:ring-primary/40`, translate and shadow over
+   200ms on the system curve, `motion-reduce:` no lift; it keeps the focus ring (`ring-3
+   ring-ring/50`). Users: `<CardGrid>` link cards, `ShowcaseProducts` (both with the lift), the
+   /contact email card (resting surface only). Green card variant = `band-green … rounded-2xl
+   bg-background p-7`. Price cards are `<PriceCard>`, whose tones are their own surfaces on the
+   same radius (its `deep` tone is this green variant).
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
    short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
    e.g. "Take the free fit check" and the link back to the parent service on Website Management
@@ -422,14 +442,15 @@ One system, defined in `app/globals.css`:
   Stagger siblings with `delay` in 30–50ms steps.
 - **Hero load-in:** `.rise` (0.6s), staggered via `--rise-delay`.
 - **Signature animations:** marker draw-on-reveal.
-- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms. Link-cue arrows
+- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms. Link cards lift 4px
+  on hover (`cardLift`; `translate` moves the card without reflowing anything). Link-cue arrows
   (`<LinkCueArrow>`) are always visible and only nudge `group-hover:translate-x-1`
   (`motion-reduce:` no nudge). Nothing a reader needs is revealed on hover only — touch never
   sees it.
 - **Reduced motion:** `.reveal` is forced visible in CSS; every custom micro-interaction
   needs its `motion-reduce:` fallback.
 - Transform/opacity only — **no layout-shifting hovers** (no scale that reflows; `translate-y-px`
-  on button active is the sanctioned exception).
+  on button active and the link-card lift, `cardLift`, are the sanctioned translates).
 
 ---
 
@@ -484,6 +505,12 @@ One system, defined in `app/globals.css`:
   under the header (sr-only h2). The "Our product" proof group takes an h2; product names are h3.
   Bullets: every list row is a check row; `LedgerList` loses its square marker and `marker` prop,
   its text is ink in every variant, and the check glyph is one export (`CheckGlyph`).
+  The box: one card surface (`cardSurface`: ring, resting shadow) and one link-card lift
+  (`cardLift`) in `components/sections/card-surface.ts`; `CardGrid` cards take both at `p-7
+  md:p-8`, an icon tile from `LinkCard.icon` (`Service.icon` / `UseCase.icon` / `resourceIcon`,
+  mapped in `card-icon.tsx`) and a hairline foot pinned to the bottom. `ShowcaseProducts` cards
+  and the /contact email card move onto the same surface (`ShowcaseProducts` drops the `Card`
+  primitive and its 2px lift).
 
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a
