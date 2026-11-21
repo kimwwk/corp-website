@@ -165,7 +165,7 @@ export function ResourcePostPage({ post }: { post: ResourcePost }) {
       ) : null}
 
       {/* 6 — Closing band */}
-      <Band title={post.closing.title} depth="top-left">
+      <Band eyebrow="Next step" title={post.closing.title} depth="top-left">
         {post.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">{post.closing.lead}</p>
         ) : null}

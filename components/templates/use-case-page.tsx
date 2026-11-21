@@ -138,7 +138,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
       ) : null}
 
       {/* 8 — Closing band: book-first pages add the link back to the parent service */}
-      <Band title={useCase.closing.title} depth="top-left">
+      <Band eyebrow="Next step" title={useCase.closing.title} depth="top-left">
         {useCase.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
             {useCase.closing.lead}

@@ -64,7 +64,7 @@ export function OverviewPage({
       )}
 
       {/* 3 — Closing band */}
-      <Band title={overview.closing.title} depth="top-left">
+      <Band eyebrow="Next step" title={overview.closing.title} depth="top-left">
         {overview.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
             {overview.closing.lead}

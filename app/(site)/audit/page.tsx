@@ -271,7 +271,7 @@ export default function AuditPage() {
       </Section>
 
       {/* Closing — green band */}
-      <Band title="Stop guessing where the time goes." depth="top-left">
+      <Band eyebrow="Next step" title="Stop guessing where the time goes." depth="top-left">
         <CtaRow
           tone="band"
           className="mt-10"

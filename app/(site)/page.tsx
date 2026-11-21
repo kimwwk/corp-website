@@ -503,7 +503,7 @@ export default function HomePage() {
       </Interlude>
 
       {/* Final CTA — green band, left-aligned like every closing band */}
-      <Band breathe title="Start with one thing." depth="top-left">
+      <Band breathe eyebrow="Next step" title="Start with one thing." depth="top-left">
         <div className="mt-7 max-w-2xl space-y-4 text-lg leading-relaxed">
           <p>
             You do not have to change every system in your business. You do

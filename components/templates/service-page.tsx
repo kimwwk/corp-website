@@ -204,7 +204,7 @@ export function ServicePage({ service }: { service: Service }) {
       ) : null}
 
       {/* 10 — Closing band */}
-      <Band title={service.closing.title} depth="top-left">
+      <Band eyebrow="Next step" title={service.closing.title} depth="top-left">
         {service.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
             {service.closing.lead}

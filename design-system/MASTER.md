@@ -396,7 +396,7 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    /contact email card (resting surface only). Green card variant = `band-green … rounded-2xl
    bg-background p-7`. Price cards are `<PriceCard>`, whose tones are their own surfaces on the
    same radius (its `deep` tone is this green variant).
-6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
+6. **Closing CTA band** — `<Band eyebrow=… title=… depth=…>` (home adds `breathe`): mono eyebrow ("Next step" on Home, /audit and every template page; /ai-starters keeps its own), feature `h2`,
    short lead, `<CtaRow tone="band">` with one primary (+ at most one relevant secondary text
    link — e.g. "Or book a free call" on fit-check-led pages, the link back to Website Management
    on its use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
@@ -508,6 +508,7 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
 - **2026-11-20** — Look and feel round 1. Headings: every section with an eyebrow now has a
   section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format); per-page
