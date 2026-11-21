@@ -33,7 +33,7 @@ import { breadcrumbs, faqPage, service as serviceEntity } from "@/lib/seo";
 function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
   const digits = card.price.replace(/[^\d.]/g, "");
   if (!digits) return {};
-  return { price: Number(digits), unitText: card.unit.replace(/^\/\s*/, "") || undefined };
+  return { price: Number(digits), unitText: card.unit?.replace(/^\/\s*/, "") || undefined };
 }
 
 /*

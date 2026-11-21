@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 
 /*
  * Price card — one offer: mono eyebrow, card name, price (+ optional
- * struck-through earlier price) and mono unit, a hairline, the intro line,
+ * struck-through earlier price, a `<del>` after a screen-reader "Regular
+ * price" label) and optional mono unit, a hairline, the intro line,
  * square-bullet list, then optional "Best for", guarantee, caption notes and
  * a back-link slot (`serviceLink`), with the card's one CTA pinned to the
  * foot (`mt-auto`), so cards in a row line their buttons up.
@@ -66,18 +67,30 @@ export function PriceCard({
       <h3 className="mt-3 font-display text-2xl font-extrabold tracking-tight text-foreground">
         {name}
       </h3>
+      {/* The spaces between the parts are for the text content (crawlers,
+          answer engines, copy-paste: "$495 Regular price $750 CAD"); the flex
+          row drops them from the layout, so the gaps alone set the look. */}
       <p className={cn("mt-4 flex items-baseline", was ? "gap-2.5" : "gap-2")}>
         <span className="font-display text-4xl font-black text-foreground tabular-nums">
           {price}
         </span>
         {was ? (
-          <span className="font-display text-xl font-bold text-caption tabular-nums line-through decoration-[1.5px]">
-            {was}
-          </span>
+          <>
+            {" "}
+            <span className="sr-only">Regular price </span>
+            <del className="font-display text-xl font-bold text-caption tabular-nums line-through decoration-[1.5px]">
+              {was}
+            </del>
+          </>
         ) : null}
-        <span className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
-          {unit}
-        </span>
+        {unit ? (
+          <>
+            {" "}
+            <span className="font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
+              {unit}
+            </span>
+          </>
+        ) : null}
       </p>
       <p className="mt-5 border-t border-border pt-5 text-sm leading-relaxed">{intro}</p>
       <ul className="mt-4 space-y-2">

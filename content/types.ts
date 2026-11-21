@@ -98,8 +98,8 @@ export type OfferCard = {
   price: string;
   /** Struck-through earlier price, e.g. "$750". */
   was?: string;
-  /** Mono unit after the price, e.g. "/ month", "CAD". */
-  unit: string;
+  /** Mono unit after the price, e.g. "/ month", "CAD". None on a free offer. */
+  unit?: string;
   /** The line under the hairline. */
   intro: string;
   bullets: { lead?: string; text: string }[];

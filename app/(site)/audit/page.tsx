@@ -152,13 +152,16 @@ export default function AuditPage() {
             <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(23,32,27,.02),0_16px_40px_-24px_rgba(23,32,27,.22)] [--card-spacing:--spacing(7)]">
               <CardContent>
                 <MonoLabel>The audit</MonoLabel>
+                {/* The spaces are for the text content ("$495 Regular price
+                    $750 CAD"); the flex row drops them from the layout. */}
                 <div className="mt-5 flex items-baseline gap-3">
                   <span className="font-display text-5xl font-black text-foreground tabular-nums">
                     $495
-                  </span>
-                  <span className="font-display text-2xl font-bold text-caption tabular-nums line-through decoration-2">
+                  </span>{" "}
+                  <span className="sr-only">Regular price </span>
+                  <del className="font-display text-2xl font-bold text-caption tabular-nums line-through decoration-2">
                     $750
-                  </span>
+                  </del>{" "}
                   <span className="font-mono text-xs tracking-[0.14em] text-caption uppercase">
                     CAD
                   </span>

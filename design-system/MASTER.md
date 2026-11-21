@@ -248,7 +248,10 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
 - **`PriceCard`** — one offer as a price card (data type `OfferCard` in `content/types.ts`):
   `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl` black price (+ optional
-  struck-through `was`, `text-xl` bold caption) and a caption mono unit, a hairline, the intro
+  struck-through `was` in a `<del>`, `text-xl` bold caption, after an `sr-only` "Regular price "
+  label) and an optional caption mono unit (none on a free offer); the parts are separated by
+  spaces, so the row's text reads "$495 Regular price $750 CAD" (the flex gaps set the look;
+  the /audit/ hero price row follows the same rule), a hairline, the intro
   line (`text-sm`), `size-[7px]` square bullets (a bold `lead` in `font-medium
   text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
   text-caption` notes and a back-link slot, with the one CTA (`size="xl"` full-width pill,
@@ -447,6 +450,10 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
+  hero price) separate price, struck price and unit with spaces, put the struck price in a
+  `<del>` after an `sr-only` "Regular price" label, and `OfferCard.unit` is optional (the
+  Fit Check card: eyebrow "Free · 3 min", "$0", no unit).
 - **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
   in the header, footer and CTAs). The /ai-starters price cards are one kit component,
   `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;

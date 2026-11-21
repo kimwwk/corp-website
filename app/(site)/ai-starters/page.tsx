@@ -128,10 +128,9 @@ const cards: { card: OfferCard; service: ServiceSlug }[] = [
     service: "ai-consulting",
     card: {
       tone: "plain",
-      eyebrow: "Free",
+      eyebrow: "Free · 3 min",
       name: "Workflow Fit Check",
       price: "$0",
-      unit: "3 min",
       intro:
         "A three-minute questionnaire that identifies the type of workflow issue you may be facing, and one practical place to begin.",
       bullets: [
