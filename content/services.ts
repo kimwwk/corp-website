@@ -103,7 +103,7 @@ export const services: Service[] = [
       {
         question: "How much does an AI consultant cost?",
         answer:
-          "Our AI consulting services and their prices are on the AI Starters page. The Workflow Fit Check is free.",
+          "Our AI consulting services and their prices are under AI Starters in the menu. The Workflow Fit Check is free.",
       },
       {
         question: "What does AI consulting mean?",

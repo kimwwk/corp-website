@@ -36,6 +36,19 @@ export default function BookPage() {
           </TrackedLink>{" "}
           instead: you&apos;ll get further, faster.
         </p>
+        <p className="mt-4 leading-relaxed">
+          Booking the AI Workflow Audit? Pick a time to talk it through first,
+          or buy it directly on the{" "}
+          <TrackedLink
+            href="/audit"
+            event="audit_cta_clicked"
+            eventProps={{ source_page: "book", cta_location: "intro" }}
+            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+          >
+            audit page
+          </TrackedLink>
+          .
+        </p>
       </div>
 
       <BookingWidget />
