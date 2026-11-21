@@ -198,7 +198,7 @@ export function ServicePage({ service }: { service: Service }) {
 
       {/* 9 — Questions */}
       {service.faqs.length ? (
-        <Section staggered layout="split" eyebrow="Questions" title={h.questions}>
+        <Section staggered layout="split" eyebrow="FAQ" title={h.questions}>
           <FaqList split faqs={service.faqs} />
         </Section>
       ) : null}

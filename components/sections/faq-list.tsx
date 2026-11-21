@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * FAQ — hairline accordion rows (the /ai-starters recipe): question in ink,
  * answer in body copy, capped at the prose measure. Plain-text answers, so
  * the same strings feed the FAQPage JSON-LD. Use inside a `staggered`
- * `layout="split"` Section ("Questions"), with `split` set: on `lg` the list
+ * `layout="split"` Section (eyebrow "FAQ"), with `split` set: on `lg` the list
  * then starts level with the section's eyebrow (no top margin).
  *
  * `hiddenUntilFound` keeps closed answers in the DOM (server HTML ships them

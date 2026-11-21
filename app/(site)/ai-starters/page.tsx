@@ -382,7 +382,7 @@ export default function AiStartersPage() {
       <Section
         staggered
         layout="split"
-        eyebrow="Questions"
+        eyebrow="FAQ"
         title="A few honest answers"
         lead={
           <>

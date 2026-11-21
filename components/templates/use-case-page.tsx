@@ -132,7 +132,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
 
       {/* 7 — Questions */}
       {useCase.faqs.length ? (
-        <Section staggered layout="split" eyebrow="Questions" title={h.questions}>
+        <Section staggered layout="split" eyebrow="FAQ" title={h.questions}>
           <FaqList split faqs={useCase.faqs} />
         </Section>
       ) : null}

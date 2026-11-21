@@ -258,7 +258,7 @@ New sections are **composed from these**, never re-typed from the recipes above:
 - **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote; cells align
   to the top (`items-start`), so each name follows its own quote
 - **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
-- **`FaqList`** — the hairline accordion FAQ ("Questions"); plain-text answers feed FAQPage JSON-LD.
+- **`FaqList`** — the hairline accordion FAQ (eyebrow "FAQ"); plain-text answers feed FAQPage JSON-LD.
   Questions in `text-base md:text-lg font-medium text-foreground`. The trigger takes `gap-4`, so a
   long question keeps 16px clear of the chevron. `split` (inside a split Section) drops its top
   margin on `lg`, so the list starts level with the eyebrow.
@@ -427,14 +427,14 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
     (`Overview.cardsLabel`); /use-cases gives each group its service name as the eyebrow and an
     h2 from `Overview.groupTitles`. Service and use-case pages carry a "Related reading" section
     (`RelatedReading` in `components/templates/`: standard section, eyebrow + h2 "Related
-    questions, answered.", `<CardGrid>` of post name + cardLine) just before "Questions", listing
+    questions, answered.", `<CardGrid>` of post name + cardLine) just before the FAQ, listing
     the posts whose `related` is that page (a service page also lists the posts whose `related`
     is one of its use cases, each post once); no post, no section.
 11. **Short answer panel** — a resource post's answer up front: a `rounded-2xl bg-secondary p-7
     md:p-10` panel (`max-w-3xl`, the prose measure) inside a standard section, headed by
     `<MonoLabel as="h2">Short answer</MonoLabel>`, the answer in `text-lg md:text-xl font-medium
     leading-relaxed text-foreground` (`mt-4`). The only section whose heading is a mono label.
-12. **FAQ split** — every "Questions" section: `<Section layout="split" staggered eyebrow=…
+12. **FAQ split** — every FAQ section (eyebrow "FAQ"): `<Section layout="split" staggered eyebrow=…
     title=… lead=…>` → `<FaqList split>`. The header sticks in the left five columns on `lg`
     while the questions scroll beside it (service pages, use-case pages, /ai-starters).
 
@@ -508,6 +508,7 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
 - **2026-11-20** — Look and feel round 1. Headings: every section with an eyebrow now has a
   section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format); per-page
   strings in `Service.headings` / `UseCase.headings` / `Overview.groupTitles`, shared ones in

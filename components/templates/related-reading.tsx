@@ -9,7 +9,7 @@ import type { ResourcePost } from "@/content/types";
  * CardGrid link cue). A use-case page passes itself; a service page passes
  * itself and its use cases, so a post about a use case also shows on its
  * service. Each post once. Nothing renders when no post points here. Placed
- * just before "Questions", under the shared h2 (`sectionHeadings`). Tracked
+ * just before the FAQ, under the shared h2 (`sectionHeadings`). Tracked
  * like the /resources cards (`resource_card_clicked`), with
  * `cta_location: "related_reading"`.
  */
