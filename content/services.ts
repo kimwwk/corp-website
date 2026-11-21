@@ -245,7 +245,7 @@ export const services: Service[] = [
       included: "One workflow, built and handed over.",
       howItWorks: "From your workflow to a working automation.",
       useCases: "Specific workflows we automate.",
-      howToStart: "Three ways to start.",
+      howToStart: "Start small, then have it built.",
       questions: "Common questions about AI automation.",
     },
     problems: [
