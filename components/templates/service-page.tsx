@@ -17,7 +17,6 @@ import {
   aiStartersCta,
   bookCallCta,
   leadCtas,
-  packageLinkCta,
   startsWithCall,
 } from "@/components/templates/ctas";
 import { RelatedReading } from "@/components/templates/related-reading";
@@ -51,17 +50,16 @@ function offerPrice(card: OfferCard): { price?: number; unitText?: string } {
  * use the shared strings in `content/section-headings.ts`. Questions is a
  * split section.
  *
- * How to start: a package line with an `href` links its package name to
- * that page (fit check, audit, AI Starters). Under the rows, either the
- * service's own price card (`howToStart.offer`: AI Automation's Build For
- * You) or, with no offer, the "See AI Starters" button (AI Consulting).
- * Quote services (Website Management, App Development) show their line and
- * "Book a free call".
- *
- * Hero and closing band: quote services (Website Management, App Development)
- * lead with "Book a free call" and offer the fit check as a text link; package
- * services lead with Free Fit Check, plus "See AI Starters" in the hero
- * unless the page has its own offer.
+ * CTAs: at most 2 per section (see ctas.ts).
+ * - Hero and closing band: quote services (Website Management, App
+ *   Development) show "Book a free call" alone; package services (AI
+ *   Consulting, AI Automation) show "Free Fit Check" plus "Or book a free
+ *   call".
+ * - How to start keeps one CTA. Package services list their packages as
+ *   plain row headings (no row links), then either the service's own price
+ *   card's button (`howToStart.offer`: AI Automation's Build For You) or the
+ *   "See AI Starters" button (AI Consulting). Quote services show their line
+ *   as the section lead and "Book a free call".
  */
 export function ServicePage({ service }: { service: Service }) {
   const src = service.slug;
@@ -78,7 +76,6 @@ export function ServicePage({ service }: { service: Service }) {
   }
   const start = service.howToStart;
   const offer = start.kind === "packages" ? start.offer : undefined;
-  const showStarters = start.kind === "packages" && !offer;
   const faqsForLd = service.faqs
     .filter((f) => !isTodo(f.question) && !isTodo(f.answer))
     .map((f) => ({ question: f.question, text: f.answer }));
@@ -107,14 +104,7 @@ export function ServicePage({ service }: { service: Service }) {
         depth="bottom-right"
       >
         <p className="mt-6 max-w-2xl text-lg leading-relaxed">{service.lead}</p>
-        <CtaRow
-          tone="band"
-          primary={hero.primary}
-          secondary={[
-            ...hero.secondary,
-            ...(showStarters ? [aiStartersCta(src, "hero")] : []),
-          ]}
-        />
+        <CtaRow tone="band" primary={hero.primary} secondary={hero.secondary} />
       </Band>
 
       {/* 2 — Pain points */}
@@ -178,11 +168,7 @@ export function ServicePage({ service }: { service: Service }) {
         {start.kind === "packages" ? (
           <>
             <StatementRows
-              rows={start.lines.map((l) => ({
-                title: l.package,
-                body: l.line,
-                link: l.href ? packageLinkCta(l.href, src, "how_to_start") : undefined,
-              }))}
+              rows={start.lines.map((l) => ({ title: l.package, body: l.line }))}
             />
             {offer ? (
               <Reveal className="mt-10 max-w-xl">

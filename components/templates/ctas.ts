@@ -1,23 +1,28 @@
 import type { Cta } from "@/components/sections";
-import type { PackageHref, Service } from "@/content/types";
+import type { Service } from "@/content/types";
 
 /*
  * The CTAs the page templates repeat. `source_page` is the page slug (resource
  * posts prefix theirs with `resource_`) so analytics can tell the new pages
  * apart.
  *
- * Which CTA leads the hero and closing band: pages where work starts with a
- * call and a quote lead with "Book a free call" and keep the fit check as a
- * text link. That is a service whose `howToStart.kind` is "quote", the use
- * cases under it, and the posts whose related page is or belongs to it. Every
- * other page leads with Free Fit Check and offers the call as a text link, so
- * a reader who wants to talk always has a way to (round-4 review).
+ * At most 2 CTAs per section, the second only when it is relevant to this
+ * page's reader (look and feel round 1). Which CTA leads the hero and closing
+ * band:
+ * - Pages where work starts with a call and a quote show "Book a free call"
+ *   alone: a service whose `howToStart.kind` is "quote" (Website Management,
+ *   App Development), the use cases under it, and the posts whose related
+ *   page is or belongs to it. The fit check is an AI questionnaire, so it
+ *   is not offered to a website or app buyer.
+ * - Every other page leads with "Free Fit Check" and offers "Or book a free
+ *   call" as a text link, so a reader who wants to talk always has a way to.
  */
 export function startsWithCall(service: Service): boolean {
   return service.howToStart.kind === "quote";
 }
 
-/** The hero or closing-band pair: one primary pill, the other as a text link. */
+/** The hero or closing-band CTAs: one primary pill, plus the call as a text
+    link on fit-check-led pages. */
 export function leadCtas(
   bookFirst: boolean,
   sourcePage: string,
@@ -25,10 +30,7 @@ export function leadCtas(
   arrow = false,
 ): { primary: Cta; secondary: Cta[] } {
   return bookFirst
-    ? {
-        primary: bookCallCta(sourcePage, ctaLocation, arrow),
-        secondary: [fitCheckLinkCta(sourcePage, ctaLocation)],
-      }
+    ? { primary: bookCallCta(sourcePage, ctaLocation, arrow), secondary: [] }
     : {
         primary: fitCheckCta(sourcePage, ctaLocation, arrow),
         secondary: [bookCallLinkCta(sourcePage, ctaLocation)],
@@ -45,16 +47,7 @@ export function fitCheckCta(sourcePage: string, ctaLocation: string, arrow = fal
   };
 }
 
-/* The fit check as a secondary text link, on pages that lead with the call. */
-export function fitCheckLinkCta(sourcePage: string, ctaLocation: string): Cta {
-  return {
-    label: "Or see where AI fits your work",
-    href: "/fit-check",
-    event: "fit_check_cta_clicked",
-    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
-  };
-}
-
+/* "See AI Starters": AI Consulting's one "How to start" CTA. */
 export function aiStartersCta(sourcePage: string, ctaLocation: string): Cta {
   return {
     label: "See AI Starters",
@@ -76,8 +69,8 @@ export function bookCallLinkCta(sourcePage: string, ctaLocation: string): Cta {
 
 /*
  * "Book a free call": the primary button on pages where work starts with a
- * call and a quote (see `startsWithCall`). Same event as every other /book
- * link on the site.
+ * call and a quote (see `startsWithCall`), and their "How to start". Same
+ * event as every other /book link on the site.
  */
 export function bookCallCta(sourcePage: string, ctaLocation: string, arrow = false): Cta {
   return {
@@ -85,28 +78,6 @@ export function bookCallCta(sourcePage: string, ctaLocation: string, arrow = fal
     arrow,
     href: "/book",
     event: "booking_cta_clicked",
-    eventProps: { source_page: sourcePage, cta_location: ctaLocation },
-  };
-}
-
-/*
- * A "How to start" package name linked to its page. Same event as every
- * other link to that page: fit check, audit, or AI Starters.
- */
-const PACKAGE_LINK_EVENTS: Record<PackageHref, string> = {
-  "/fit-check": "fit_check_cta_clicked",
-  "/audit": "audit_cta_clicked",
-  "/ai-starters": "ai_starters_cta_clicked",
-};
-
-export function packageLinkCta(
-  href: PackageHref,
-  sourcePage: string,
-  ctaLocation: string,
-): Omit<Cta, "label"> {
-  return {
-    href,
-    event: PACKAGE_LINK_EVENTS[href],
     eventProps: { source_page: sourcePage, cta_location: ctaLocation },
   };
 }

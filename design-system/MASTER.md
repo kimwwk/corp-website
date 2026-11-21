@@ -179,12 +179,10 @@ constrained `max-w-2xl` (bands) or `max-w-3xl` (`<Section lead>`). Emphasis insi
 | `linkGreen` (on cream) | `inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (`<CtaRow>` secondary) |
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
-| Row-heading link (`<StatementRows>` row `link`) | the row-heading recipe plus `inline-block rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (linkGreen's underline and hover, keeping the heading's own type; `inline-block` makes the box the heading's line height, 28px / 32px from `md`) — service "How to start" package names |
 | Link cue (`linkCueLabel` + `<LinkCueArrow>`, `components/sections/link-cue.tsx`) | how a link that isn't running text shows it is a link: its label in linkGreen's look (`underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary` right after it that nudges `group-hover:translate-x-1`. **Visible at rest** on every screen — touch has no hover. Never re-type it; three uses: `<CardGrid>` card foot ("Learn more"; not a link of its own, the whole card is the link), every `<LinkList>` row (the label is the row's name), Home's "Two ways to work together" rows (the label is the card-h3 heading; the arrow scales with it, `size-[0.75em] align-baseline`) |
 
 **Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
-least 24px tall: `inline-flex min-h-6 items-center`, or
-`inline-block` at heading line height (row-heading links). The footer wordmark link is
+least 24px tall: `inline-flex min-h-6 items-center`. The footer wordmark link is
 `min-h-11`, like the `size-11` social row beside it. Links inside running prose are exempt.
 
 ---
@@ -226,7 +224,8 @@ New sections are **composed from these**, never re-typed from the recipes above:
   the header in columns 1–5 (`lg:sticky lg:top-24 lg:self-start`) and the children in 6–12;
   below `lg` it stacks like the default. Every FAQ section is split
 - **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link,
-  or a list of them rendered in order; `tone="band"` on green) and its mono support line.
+  or a list of them rendered in order, **at most 2 actions in all**: it throws at build time
+  past 2; `tone="band"` on green) and its mono support line.
   `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
   new tab)
 - **`MonoLabel`** — the 0.14em mono label (green / caption / ink); `as="h2"` for a heading
@@ -234,8 +233,8 @@ New sections are **composed from these**, never re-typed from the recipes above:
   `py-3` closed by a `border-b`, or 2 columns `py-4 leading-relaxed`; leaf tone on bands
 - **`CheckGlyph`** — the one bullet glyph, exported once and used by `LedgerList` and
   `PriceCard`
-- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; a row's
-  optional `link` turns its title into a tracked row-heading link
+- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; titles are
+  plain row headings (service "How to start" package names included), never links
 - **`StepRows`** — the huge-numeral "How it works" ladder
 - **`CardGrid`** — vocabulary #5 as a component: link cards on the card surface (below) at
   `p-7 md:p-8`, with the link-card lift. Top to bottom: an optional **icon tile** (`LinkCard.icon`,
@@ -309,6 +308,11 @@ their colors.
   — every CTA is tracked; no bare `<a>` for CTAs.
 - Icon: Lucide, `data-icon="inline-end"` (e.g. `ArrowRight`).
 - **One primary button per section.** Secondary action = `linkGreen`/`linkLeaf` text link.
+- **At most 2 CTAs per section** (a CTA = a button or a CTA-styled text link; inline prose links
+  and the one CTA per card in a card grid don't count). The second only when it is relevant to
+  this page's reader; if it isn't, the section has 1. Website and app pages (their use cases and
+  posts too) show "Book a free call" alone in the hero; fit-check-led pages pair "Free Fit Check"
+  with "Or book a free call". Service "How to start" keeps one CTA.
   *Card-grid exception:* in a card grid each card may carry one CTA; at most one filled-primary
   per surface (featured card filled, others outline / band-pill).
 
@@ -393,9 +397,9 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
    bg-background p-7`. Price cards are `<PriceCard>`, whose tones are their own surfaces on the
    same radius (its `deep` tone is this green variant).
 6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
-   short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text links —
-   e.g. "Take the free fit check" and the link back to the parent service on Website Management
-   use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
+   short lead, `<CtaRow tone="band">` with one primary (+ at most one relevant secondary text
+   link — e.g. "Or book a free call" on fit-check-led pages, the link back to Website Management
+   on its use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
 7. **Pull-quote (testimonial)** — `<Section eyebrow=… title=…>` → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
    (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
@@ -473,6 +477,7 @@ One system, defined in `app/globals.css`:
 - ❌ Emojis as icons — Lucide SVG only
 - ❌ Inline-restyling `ui/` component colors; per-page style constants that fork existing recipes
 - ❌ More than one primary button per section (card grids: one CTA per card, one filled-primary per surface)
+- ❌ More than 2 CTAs in a section, or a second one that isn't relevant to the page's reader
 - ❌ Untracked CTAs (always `TrackedLink`)
 - ❌ Layout-shifting hovers; instant state changes (always 150–300ms transitions)
 - ❌ Low contrast: 4.5:1 minimum on text (`caption` is the floor on cream)
@@ -486,7 +491,7 @@ One system, defined in `app/globals.css`:
 - [ ] Headings match a type-scale row exactly (the kit renders them; don't override)
 - [ ] `border-t` rhythm respected (`flush` after bands/interludes)
 - [ ] Content wrapped in `<Reveal>`; stagger 30–50ms; `motion-reduce` fallbacks present
-- [ ] One primary CTA per section; CTAs via `TrackedLink` with event props
+- [ ] One primary CTA per section, at most 2 CTAs in all; CTAs via `TrackedLink` with event props
 - [ ] Focus states visible (ring tokens); contrast ≥ 4.5:1 both on cream and on green
 - [ ] Every link shows it is a link without hover (touch); touch targets ≥24px, CTAs ≥44px
 - [ ] Responsive at 375 / 768 / 1024 / 1440; no horizontal scroll on mobile
@@ -525,6 +530,13 @@ One system, defined in `app/globals.css`:
   `deep`). The price is `md:text-5xl`, the bullets are check rows (`PriceBullets`). `PriceLadder`
   renders the /ai-starters staircase. The /audit hero price card takes the `highlight` surface
   (it had an arbitrary rgba shadow) and the same check-row bullets (it used Lucide's `Check`).
+  CTAs: at most 2 per section, the second only when relevant (Buttons rule; `CtaRow` throws past
+  2). Website and app pages, their use cases and posts show "Book a free call" alone in the hero
+  ("Or see where AI fits your work" is gone, with `fitCheckLinkCta`); service heroes drop "See AI
+  Starters"; fit-check-led use cases close with "Free Fit Check" + "Or book a free call" and no
+  parent-service link. Service "How to start" package names are plain row headings: the row
+  `link` on `StatementRows`, the row-heading link recipe, `packageLinkCta` and `PackageHref` are
+  removed.
 
 - **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
   hero price) separate price, struck price and unit with spaces, put the struck price in a

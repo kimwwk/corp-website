@@ -24,17 +24,19 @@ import { breadcrumbs, faqPage } from "@/lib/seo";
  * set it up · extra section (only when the page has one, e.g. WordPress
  * website design) · Tool or done for you? (research pages only) · Proof (if
  * any) · Works with · Related reading (only when a resource post's `related`
- * is this use case) · Questions · closing band (the lead CTA, plus the link
- * back to the parent service).
+ * is this use case) · Questions · closing band.
  *
  * Headings: every section is eyebrow → h2. The problem, How we set it up and
  * Questions take `useCase.headings`; Tool or done for you?, Works with and
  * Related reading use the shared strings in `content/section-headings.ts`.
  * Questions is a split section.
  *
- * Use cases whose parent service starts with a call and a quote (Website
- * Management) lead their hero and closing band with "Book a free call" and
- * offer the fit check as a text link; the rest lead with Free Fit Check.
+ * CTAs: at most 2 per section (see ctas.ts). Use cases whose parent service
+ * starts with a call and a quote (Website Management: WordPress Support, Law
+ * Firm SEO & GEO) show "Book a free call" alone in the hero, and "Book a free
+ * call" plus the link back to the parent service in the closing band. The
+ * rest show "Free Fit Check" plus "Or book a free call" in both, with no
+ * parent-service link.
  */
 export function UseCasePage({ useCase }: { useCase: UseCase }) {
   const src = useCase.slug;
@@ -135,7 +137,7 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
         </Section>
       ) : null}
 
-      {/* 8 — Closing band: the lead CTA, plus the link back to the parent service */}
+      {/* 8 — Closing band: book-first pages add the link back to the parent service */}
       <Band title={useCase.closing.title} depth="top-left">
         {useCase.closing.lead ? (
           <p className="mt-6 max-w-2xl text-lg leading-relaxed">
@@ -146,19 +148,22 @@ export function UseCasePage({ useCase }: { useCase: UseCase }) {
           tone="band"
           className="mt-10"
           primary={closing.primary}
-          secondary={[
-            ...closing.secondary,
-            {
-              label: parent.name,
-              href: servicePath(parent.slug),
-              event: "service_link_clicked",
-              eventProps: {
-                source_page: src,
-                cta_location: "bottom_cta",
-                service: parent.slug,
-              },
-            },
-          ]}
+          secondary={
+            bookFirst
+              ? [
+                  {
+                    label: parent.name,
+                    href: servicePath(parent.slug),
+                    event: "service_link_clicked",
+                    eventProps: {
+                      source_page: src,
+                      cta_location: "bottom_cta",
+                      service: parent.slug,
+                    },
+                  },
+                ]
+              : closing.secondary
+          }
         />
       </Band>
     </>

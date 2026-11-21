@@ -1,26 +1,16 @@
 import { Reveal } from "@/components/reveal";
-import { TrackedLink } from "@/components/tracked-link";
 
 /*
  * Statement rows — the title-left / body-right hairline rows ("What Kivov
  * helps you do", ai-starters "Included", service "What's included"). Rows reveal
- * with a 40ms stagger; use inside a `staggered` Section.
- *
- * A row with a `link` renders its title as a tracked link (service "How to
- * start": each package name links to its page): the heading keeps its type,
- * plus linkGreen's underline and hover.
+ * with a 40ms stagger; use inside a `staggered` Section. Titles are plain
+ * row headings, never links (service "How to start" package names included).
  */
 export type StatementRow = {
   title: React.ReactNode;
   body: React.ReactNode;
   note?: React.ReactNode | null;
-  link?: { href: string; event: string; eventProps?: Record<string, unknown> };
 };
-
-/* inline-block: the link box takes the heading's line height (28px, 32px
-   from md), so it is a ≥24px touch target. */
-const titleLink =
-  "inline-block rounded-sm underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary";
 
 export function StatementRows({ rows }: { rows: StatementRow[] }) {
   return (
@@ -29,18 +19,7 @@ export function StatementRows({ rows }: { rows: StatementRow[] }) {
         <Reveal key={i} delay={i * 40}>
           <div className="grid gap-3 border-t border-border py-8 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] md:gap-12">
             <h3 className="font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl">
-              {row.link ? (
-                <TrackedLink
-                  href={row.link.href}
-                  event={row.link.event}
-                  eventProps={row.link.eventProps}
-                  className={titleLink}
-                >
-                  {row.title}
-                </TrackedLink>
-              ) : (
-                row.title
-              )}
+              {row.title}
             </h3>
             <div>
               <p className="max-w-[52ch] leading-relaxed">{row.body}</p>

@@ -91,10 +91,6 @@ export type Proof = {
 
 export type Faq = { question: string; answer: string };
 
-/** Pages a "How to start" package line can link to. Each has its own click
-    event (see `packageLinkCta` in components/templates/ctas.ts). */
-export type PackageHref = "/fit-check" | "/audit" | "/ai-starters";
-
 /**
  * One price card (rendered by `PriceCard` in components/sections/). AI Starters
  * holds its three in the page; a service page's `howToStart.offer` holds one.
@@ -182,14 +178,14 @@ export type Service = {
   steps: { title: string; body: string }[];
   useCases: UseCaseSlug[];
   proof: ProofId[];
-  /** "How to start": packages (one line each, links to /ai-starters) or a quote after a free call.
-      A line's optional `href` links its package name to that package's page. An `offer` is
-      a price card under the lines (AI Automation: Build For You); with one, the page drops
-      its "See AI Starters" links. */
+  /** "How to start": packages (one line each, the package name a plain row heading) or a
+      quote after a free call. An `offer` is a price card under the lines (AI Automation:
+      Build For You) whose button is the section's one CTA; without one, the section's CTA is
+      "See AI Starters" (AI Consulting). */
   howToStart:
     | {
         kind: "packages";
-        lines: { package: string; line: string; href?: PackageHref }[];
+        lines: { package: string; line: string }[];
         offer?: OfferCard;
       }
     | { kind: "quote"; line: string };

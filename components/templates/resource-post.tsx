@@ -27,8 +27,8 @@ import { article, breadcrumbs, person } from "@/lib/seo";
  * Analytics: `source_page` is `resource_<slug>`, because a post can share its
  * slug with a service (`ai-automation`). Posts whose related page is, or
  * belongs to, a service that starts with a call and a quote (Website
- * Management) lead the closing band with "Book a free call" and offer the fit
- * check as a text link; the rest lead with Free Fit Check.
+ * Management) show "Book a free call" alone in the closing band; the rest
+ * show "Free Fit Check" plus "Or book a free call" (see ctas.ts).
  */
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
