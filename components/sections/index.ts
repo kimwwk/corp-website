@@ -1,7 +1,24 @@
 export { Band } from "@/components/sections/band";
+export { CardGrid, type LinkCard } from "@/components/sections/card-grid";
+export { cardIcons } from "@/components/sections/card-icon";
+export { cardLift, cardSurface } from "@/components/sections/card-surface";
+export { CheckGlyph } from "@/components/sections/check-glyph";
 export { CtaRow, Support, type Cta } from "@/components/sections/cta-row";
+export { FaqList } from "@/components/sections/faq-list";
 export { LedgerList } from "@/components/sections/ledger-list";
+export { LinkCueArrow, linkCueLabel } from "@/components/sections/link-cue";
+export { LinkList, type ListLink } from "@/components/sections/link-list";
 export { MonoLabel } from "@/components/sections/mono-label";
+export { PageHeader } from "@/components/sections/page-header";
+export { PostBody } from "@/components/sections/post-body";
+export {
+  PriceBullets,
+  PriceCard,
+  priceCardTones,
+  PriceLadder,
+} from "@/components/sections/price-card";
+export { ProofSections } from "@/components/sections/proof-sections";
 export { Section } from "@/components/sections/section";
-export { StatementRows } from "@/components/sections/statement-rows";
+export { StatementRows, type StatementRow } from "@/components/sections/statement-rows";
 export { StepRows } from "@/components/sections/step-rows";
+export { TestimonialGrid, type Quote } from "@/components/sections/testimonial-grid";

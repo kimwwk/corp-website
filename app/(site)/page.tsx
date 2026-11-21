@@ -7,22 +7,34 @@ import { Marker } from "@/components/marker";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
+  CardGrid,
   CtaRow,
   LedgerList,
+  LinkCueArrow,
+  linkCueLabel,
+  LinkList,
   MonoLabel,
   Section,
   StatementRows,
   StepRows,
   Support,
+  TestimonialGrid,
 } from "@/components/sections";
 import { TrackedLink } from "@/components/tracked-link";
+import { homeSections } from "@/content/home";
+import { sectionHeadings } from "@/content/section-headings";
+import { servicePath, services as servicePages } from "@/content/services";
+import { testimonials } from "@/content/testimonials";
+import { pathForUseCase, useCases } from "@/content/use-cases";
 import { pageMetadata } from "@/lib/seo";
 
 /*
  * Home — Green Ledger (Direction C). Conversion spine per the 002 split plan:
- * identity lives on /about, service depth on /services, offer detail on
- * /audit. Copy: Lindsay report 2026-07-26 with Kim's hero + CTA revisions.
- * Composed from the section kit (components/sections/).
+ * identity lives on /about, service depth on /services/*, prices on
+ * /ai-starters, offer detail on /audit. Copy: Lindsay report 2026-07-26 with
+ * Kim's hero + CTA revisions. The Services cards, Use Cases strip and
+ * Testimonials render from content/. Composed from the section kit
+ * (components/sections/).
  */
 
 export const metadata: Metadata = pageMetadata({
@@ -114,11 +126,13 @@ const steps = [
 const services = [
   {
     title: "Build With You",
+    href: "/ai-starters",
     lead: "For teams that want to remain actively involved in the work.",
     note: "This is not traditional coaching. We build things with you.",
   },
   {
     title: "Build For You",
+    href: servicePath("ai-automation"),
     lead: "For businesses that want Kivov to design and implement the solution.",
     note: "Every project begins with understanding how the work happens. We do not build technology first and ask questions later.",
   },
@@ -204,9 +218,9 @@ export default function HomePage() {
       <Section
         eyebrow="Pain points"
         title="Your team may not need another tool. You may need a better flow."
+        lead={sectionHeadings.painPointsLead}
       >
-        <p className="mt-5 text-lg">Does any of this sound familiar?</p>
-        <LedgerList items={painPoints} marker="check" columns={2} className="mt-8" />
+        <LedgerList items={painPoints} columns={2} className="mt-8" />
         <p className={`${bigLine} mt-12`}>
           Technology cannot fix a process that no one fully understands.
         </p>
@@ -268,7 +282,9 @@ export default function HomePage() {
         }
         depth="top-right"
       >
-        <div className="mt-8 grid gap-12 md:grid-cols-2">
+        {/* Three cells so the list follows the line that introduces it on
+            phones; from md the list takes the right column beside both. */}
+        <div className="mt-8 grid gap-y-6 md:grid-cols-2 md:gap-x-12 md:gap-y-4">
           <div className="space-y-4 leading-relaxed">
             <p>
               Take the free Workflow Fit Check to identify where repetitive
@@ -279,17 +295,16 @@ export default function HomePage() {
               In approximately three minutes, you will get a high-level
               result showing whether your strongest opportunity may be:
             </p>
-            <p className="font-medium text-foreground">
-              You do not need to understand AI. You only need to tell us how
-              the work happens today.
-            </p>
           </div>
           <LedgerList
             items={fitCheckOutcomes}
-            marker="check"
             tone="leaf"
-            className="content-start"
+            className="content-start md:col-start-2 md:row-span-2 md:row-start-1"
           />
+          <p className="leading-relaxed font-medium text-foreground md:col-start-1">
+            You do not need to understand AI. You only need to tell us how
+            the work happens today.
+          </p>
         </div>
         <CtaRow
           tone="band"
@@ -308,8 +323,48 @@ export default function HomePage() {
       </Band>
 
       {/* What Kivov helps you do — hairline statement rows */}
-      <Section flush staggered eyebrow="What Kivov helps you do">
+      <Section
+        flush
+        staggered
+        eyebrow="What Kivov helps you do"
+        title="Understand the work first, then build what is missing."
+      >
         <StatementRows rows={helps} />
+      </Section>
+
+      {/* Services — the four service pages as cards (content/services.ts) */}
+      <Section
+        staggered
+        eyebrow={homeSections.services.eyebrow}
+        title={homeSections.services.title}
+        lead={homeSections.services.lead}
+      >
+        <CardGrid
+          columns={4}
+          cards={servicePages.map((s) => ({
+            icon: s.icon,
+            title: s.name,
+            body: s.cardLine,
+            href: servicePath(s.slug),
+            event: "service_card_clicked",
+            eventProps: { source_page: "home", service: s.slug },
+          }))}
+        />
+      </Section>
+
+      {/* Use Cases strip — every use-case page (content/use-cases.ts) */}
+      <Section
+        eyebrow={homeSections.useCases.eyebrow}
+        title={homeSections.useCases.title}
+      >
+        <LinkList
+          links={useCases.map((u) => ({
+            label: u.name,
+            href: pathForUseCase(u.slug),
+            event: "use_case_link_clicked",
+            eventProps: { source_page: "home", use_case: u.slug },
+          }))}
+        />
       </Section>
 
       {/* Audit — condensed, links out */}
@@ -343,29 +398,31 @@ export default function HomePage() {
       </Section>
 
       {/* How it works — full-width hairline rows, huge numerals */}
-      <Section staggered eyebrow="How it works">
+      <Section
+        staggered
+        eyebrow="How it works"
+        title="From one process to a practical plan."
+      >
         <StepRows steps={steps} />
       </Section>
 
-      {/* Services teaser rows */}
-      <Section staggered eyebrow="Services" title="Two ways to work together">
+      {/* Services teaser rows — each row is one link to where its offer is
+          priced: Build With You on /ai-starters, Build For You on the AI
+          Automation page. Its heading carries the link cue at rest
+          (underline + arrow scaled to the heading), since touch has no hover */}
+      <Section staggered eyebrow="Building with AI" title="Two ways to work together">
         <div className="mt-8 border-b border-border">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 40}>
               <TrackedLink
-                href="/services"
+                href={s.href}
                 event="services_teaser_clicked"
                 eventProps={{ service: s.title }}
                 className="group grid gap-4 border-t border-border py-10 transition-colors hover:bg-card md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-12 md:py-12"
               >
                 <h3 className="font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground">
-                  {s.title}
-                  <span
-                    className="ml-3 inline-block -translate-x-2 text-primary opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
+                  <span className={linkCueLabel}>{s.title}</span>
+                  <LinkCueArrow className="ml-3 inline-block size-[0.75em] align-baseline" />
                 </h3>
                 <div>
                   <p className="max-w-[30ch] font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
@@ -379,6 +436,15 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+      </Section>
+
+      {/* Testimonials — every public testimonial (content/testimonials.ts) */}
+      <Section
+        staggered
+        eyebrow={homeSections.testimonials.eyebrow}
+        title={homeSections.testimonials.title}
+      >
+        <TestimonialGrid quotes={testimonials} />
       </Section>
 
       {/* About Kim — short founder block with the original portrait */}
@@ -439,7 +505,7 @@ export default function HomePage() {
       </Interlude>
 
       {/* Final CTA — green band, left-aligned like every closing band */}
-      <Band breathe title="Start with one thing." depth="top-left">
+      <Band breathe eyebrow="Next step" title="Start with one thing." depth="top-left">
         <div className="mt-7 max-w-2xl space-y-4 text-lg leading-relaxed">
           <p>
             You do not have to change every system in your business. You do

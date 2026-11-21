@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/json-ld";
 import { AUDIT_PRICE } from "@/lib/payments";
 import { breadcrumbs, pageMetadata, service } from "@/lib/seo";
-import { Check as CheckIcon } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import {
   Band,
   CtaRow,
   LedgerList,
   MonoLabel,
+  PriceBullets,
+  priceCardTones,
   Section,
   StepRows,
   Support,
@@ -149,16 +151,24 @@ export default function AuditPage() {
 
           {/* Price card — the numbers stated plainly */}
           <Reveal delay={120} className="lg:col-span-5">
-            <Card className="ring-2 ring-primary/40 shadow-[0_1px_0_rgba(23,32,27,.02),0_16px_40px_-24px_rgba(23,32,27,.22)] [--card-spacing:--spacing(7)]">
+            <Card
+              className={cn(
+                "rounded-2xl [--card-spacing:--spacing(7)]",
+                priceCardTones.highlight,
+              )}
+            >
               <CardContent>
                 <MonoLabel>The audit</MonoLabel>
+                {/* The spaces are for the text content ("$495 Regular price
+                    $750 CAD"); the flex row drops them from the layout. */}
                 <div className="mt-5 flex items-baseline gap-3">
                   <span className="font-display text-5xl font-black text-foreground tabular-nums">
                     $495
-                  </span>
-                  <span className="font-display text-2xl font-bold text-caption tabular-nums line-through decoration-2">
+                  </span>{" "}
+                  <span className="sr-only">Regular price </span>
+                  <del className="font-display text-2xl font-bold text-caption tabular-nums line-through decoration-2">
                     $750
-                  </span>
+                  </del>{" "}
                   <span className="font-mono text-xs tracking-[0.14em] text-caption uppercase">
                     CAD
                   </span>
@@ -169,31 +179,14 @@ export default function AuditPage() {
                   </span>{" "}
                   for the first five audit clients.
                 </p>
-                <ul className="mt-5 space-y-2.5 border-t border-border pt-5">
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>One priority workflow, mapped end to end</span>
-                  </li>
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>A written report and a prioritized action plan</span>
-                  </li>
-                  <li className="flex gap-3 text-sm">
-                    <CheckIcon
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>
-                      CAD $500 credited toward implementation within 30 days
-                    </span>
-                  </li>
-                </ul>
+                <PriceBullets
+                  className="mt-5"
+                  bullets={[
+                    { text: "One priority workflow, mapped end to end" },
+                    { text: "A written report and a prioritized action plan" },
+                    { text: "CAD $500 credited toward implementation within 30 days" },
+                  ]}
+                />
               </CardContent>
             </Card>
           </Reveal>
@@ -201,7 +194,7 @@ export default function AuditPage() {
       </section>
 
       {/* Who it is for */}
-      <Section eyebrow="Who it's for">
+      <Section eyebrow="Who it's for" title="Not sure what kind of fix you need?">
         <p className="mt-6 max-w-3xl text-lg leading-relaxed font-medium text-foreground">
           This is designed for business owners who know something is slowing
           the company down but are not yet sure whether they need:
@@ -211,11 +204,15 @@ export default function AuditPage() {
 
       {/* What the audit includes */}
       <Section id="includes" eyebrow="What you get" title="Your audit includes">
-        <LedgerList items={includes} marker="check" columns={2} className="mt-8" />
+        <LedgerList items={includes} columns={2} className="mt-8" />
       </Section>
 
       {/* How it works — full-width hairline rows, huge numerals */}
-      <Section staggered eyebrow="How it works">
+      <Section
+        staggered
+        eyebrow="How it works"
+        title="From one process to a practical plan."
+      >
         <StepRows steps={steps} />
       </Section>
 
@@ -274,7 +271,7 @@ export default function AuditPage() {
       </Section>
 
       {/* Closing — green band */}
-      <Band title="Stop guessing where the time goes." depth="top-left">
+      <Band eyebrow="Next step" title="Stop guessing where the time goes." depth="top-left">
         <CtaRow
           tone="band"
           className="mt-10"

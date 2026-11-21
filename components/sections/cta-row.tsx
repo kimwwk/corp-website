@@ -5,11 +5,16 @@ import { TrackedExternalLink, TrackedLink } from "@/components/tracked-link";
 import { cn } from "@/lib/utils";
 
 /*
- * The CTA row: one primary pill + optional secondary text link, wrapping with
- * the standard gaps. `tone="band"` switches to the on-green idiom (cream pill
- * darkens to inkdeep, leaf underline on the text link). One primary per
- * section — the second action is always the text link.
+ * The CTA row: one primary pill + optional secondary text link(s), wrapping
+ * with the standard gaps. `tone="band"` switches to the on-green idiom (cream
+ * pill darkens to inkdeep, leaf underline on the text link). One primary per
+ * section — every other action is a text link — and at most 2 actions in
+ * all: the second only when it is relevant to this page's reader. The row
+ * throws at build time past 2. `secondary` takes one link or a list, rendered
+ * in order. An `external` secondary opens in a new tab (e.g. a LinkedIn
+ * original).
  */
+const MAX_ACTIONS = 2;
 export type Cta = {
   label: React.ReactNode;
   href: string;
@@ -33,9 +38,13 @@ export function CtaRow({
 }: {
   tone?: keyof typeof links;
   primary?: Cta;
-  secondary?: Cta;
+  secondary?: Cta | Cta[];
   className?: string;
 }) {
+  const secondaries = secondary ? (Array.isArray(secondary) ? secondary : [secondary]) : [];
+  if ((primary ? 1 : 0) + secondaries.length > MAX_ACTIONS) {
+    throw new Error(`CtaRow: at most ${MAX_ACTIONS} CTAs per section`);
+  }
   return (
     <div
       className={cn("mt-9 flex flex-wrap items-center gap-x-8 gap-y-4", className)}
@@ -66,16 +75,31 @@ export function CtaRow({
           ) : null}
         </Button>
       ) : null}
-      {secondary ? (
-        <TrackedLink
-          href={secondary.href}
-          event={secondary.event}
-          eventProps={secondary.eventProps}
-          className={links[tone]}
-        >
-          {secondary.label}
-        </TrackedLink>
-      ) : null}
+      {secondaries.map((link) =>
+        link.external ? (
+          <TrackedExternalLink
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            event={link.event}
+            eventProps={link.eventProps}
+            className={links[tone]}
+          >
+            {link.label}
+          </TrackedExternalLink>
+        ) : (
+          <TrackedLink
+            key={link.href}
+            href={link.href}
+            event={link.event}
+            eventProps={link.eventProps}
+            className={links[tone]}
+          >
+            {link.label}
+          </TrackedLink>
+        ),
+      )}
     </div>
   );
 }

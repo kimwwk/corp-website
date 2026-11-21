@@ -16,11 +16,23 @@ const CALENDLY_URL = "https://calendly.com/kimwong-wwk/let-s-meet";
 const EMBED_SRC = `${CALENDLY_URL}?hide_gdpr_banner=1&embed_type=Inline&embed_domain=kivov.ca`;
 
 export function BookingWidget() {
+  const frame = React.useRef<HTMLIFrameElement>(null);
+
   React.useEffect(() => {
-    // Fire the GA conversion when a visitor completes a booking in the iframe.
     function onCalendlyMessage(e: MessageEvent) {
       if (e.origin !== "https://calendly.com") return;
-      const data = e.data as { event?: unknown } | null | undefined;
+      const data = e.data as
+        | { event?: unknown; payload?: { height?: unknown } }
+        | null
+        | undefined;
+      // Calendly reports its content height; fit the iframe to it, so the
+      // whole calendar shows at every width (no inner cut-off).
+      if (data?.event === "calendly.page_height") {
+        const height = Number.parseInt(String(data.payload?.height ?? ""), 10);
+        if (frame.current && height > 0) frame.current.style.height = `${Math.max(height, 640)}px`;
+        return;
+      }
+      // Fire the GA conversion when a visitor completes a booking in the iframe.
       if (data?.event === "calendly.event_scheduled") {
         trackLead("book_call");
         capture("assessment_booked", { method: "calendly" });
@@ -33,16 +45,18 @@ export function BookingWidget() {
   return (
     <div>
       {/*
-        Calendly switches to its two-column horizontal layout once the iframe
-        is ≥ ~1000px wide; below that it renders single-column (tall). So we
-        give it a short height on wide screens (two-column fits in ~700px)
-        and a tall height on narrow/mobile screens (single-column needs room).
+        Calendly renders its page single-column at every width we use (the
+        old two-column layout no longer appears at ~1100px), so the iframe
+        starts tall enough for the whole month everywhere, then follows the
+        height Calendly reports (calendly.page_height, above). A short desktop
+        height cut the calendar off above the bookable dates (round-6 review).
       */}
       <iframe
+        ref={frame}
         src={EMBED_SRC}
         title="Schedule a meeting with Kivov Digital"
         loading="lazy"
-        className="h-[1180px] w-full min-[1100px]:h-[720px]"
+        className="h-[1180px] w-full"
         style={{ minWidth: 320, border: 0 }}
       />
       <p className="mt-4 text-center text-sm text-caption">

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { Mail } from "lucide-react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { cardSurface } from "@/components/sections";
 import { ContactForm } from "@/components/contact-form";
 import { TrackedLink } from "@/components/tracked-link";
 
@@ -141,30 +141,28 @@ export default function ContactPage() {
               </TrackedLink>{" "}
               and pick a time directly.
             </p>
-            <Card className="ring-border [--card-spacing:--spacing(5)]">
-              <CardContent>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary"
-                    aria-hidden="true"
-                  >
-                    <Mail className="size-5 text-primary" strokeWidth={1.6} />
-                  </div>
-                  <div>
-                    <p className="mb-0.5 font-mono text-[0.65rem] tracking-[0.14em] uppercase text-caption">
-                      Email
-                    </p>
-                    <a
-                      href="mailto:hello@kivov.ca"
-                      className="rounded-sm font-medium text-foreground transition-colors hover:text-primary"
-                      aria-label="Send email to hello@kivov.ca"
-                    >
-                      hello@kivov.ca
-                    </a>
-                  </div>
+            <div className={`${cardSurface} p-5 text-sm`}>
+              <div className="flex items-center gap-4">
+                <div
+                  className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary"
+                  aria-hidden="true"
+                >
+                  <Mail className="size-5 text-primary" strokeWidth={1.6} />
                 </div>
-              </CardContent>
-            </Card>
+                <div>
+                  <p className="mb-0.5 font-mono text-[0.65rem] tracking-[0.14em] uppercase text-caption">
+                    Email
+                  </p>
+                  <a
+                    href="mailto:hello@kivov.ca"
+                    className="rounded-sm font-medium text-foreground transition-colors hover:text-primary"
+                    aria-label="Send email to hello@kivov.ca"
+                  >
+                    hello@kivov.ca
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </aside>
       </div>

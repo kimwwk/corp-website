@@ -32,6 +32,11 @@ type PageMetaInput = {
   /** Optional og/twitter description when it should differ from the meta one. */
   socialDescription?: string;
   robots?: Metadata["robots"];
+  /** Open Graph type: "website" (default) or "article" (resource posts). */
+  type?: "website" | "article";
+  /** `article:published_time` for an article, ISO date (YYYY-MM-DD). Only
+      emitted when `type` is "article" and the value is an ISO date. */
+  publishedTime?: string;
 };
 
 export function pageMetadata({
@@ -40,22 +45,33 @@ export function pageMetadata({
   path,
   socialDescription,
   robots,
+  type = "website",
+  publishedTime,
 }: PageMetaInput): Metadata {
   const url = absoluteUrl(path);
   const social = socialDescription ?? description;
+  const og = {
+    title,
+    description: social,
+    url,
+    siteName: SITE_NAME,
+    locale: "en_CA",
+    images: [OG_IMAGE],
+  };
   return {
     title,
     description,
     alternates: { canonical: url },
-    openGraph: {
-      title,
-      description: social,
-      url,
-      siteName: SITE_NAME,
-      locale: "en_CA",
-      type: "website",
-      images: [OG_IMAGE],
-    },
+    openGraph:
+      type === "article"
+        ? {
+            ...og,
+            type: "article",
+            ...(publishedTime && /^\d{4}-\d{2}-\d{2}/.test(publishedTime)
+              ? { publishedTime }
+              : {}),
+          }
+        : { ...og, type: "website" },
     twitter: {
       card: "summary_large_image",
       title,
@@ -120,6 +136,8 @@ export const organization = {
     "Claude skills and AI assistants",
     "Systems integration",
     "Custom software development",
+    "Website management and maintenance",
+    "SEO and generative engine optimization (GEO)",
   ],
   hasMap: GBP_URL,
   sameAs: ORG_SAME_AS,
@@ -154,45 +172,52 @@ export const website = {
   inLanguage: "en-CA",
 };
 
-/** A schema.org Service offered by Kivov, priced in CAD. */
+/** A schema.org Service offered by Kivov, priced in CAD. Leave `price` out
+    for services quoted after a call: the entity then carries no Offer. */
 export function service({
   name,
   description,
   path,
   price,
   unitText,
+  serviceType = "AI workflow consulting",
 }: {
   name: string;
   description: string;
   path: string;
-  price: number;
+  price?: number;
   unitText?: string;
+  serviceType?: string;
 }) {
   return {
     "@type": "Service",
     "@id": `${absoluteUrl(path)}#service-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
     name,
     description,
-    serviceType: "AI workflow consulting",
+    serviceType,
     provider: { "@id": ORG_ID },
     areaServed: organization.areaServed,
     url: absoluteUrl(path),
-    offers: {
-      "@type": "Offer",
-      price: price.toFixed(2),
-      priceCurrency: "CAD",
-      availability: "https://schema.org/InStock",
-      ...(unitText
-        ? {
-            priceSpecification: {
-              "@type": "UnitPriceSpecification",
-              price: price.toFixed(2),
-              priceCurrency: "CAD",
-              unitText,
-            },
-          }
-        : {}),
-    },
+    ...(price === undefined
+      ? {}
+      : {
+          offers: {
+            "@type": "Offer",
+            price: price.toFixed(2),
+            priceCurrency: "CAD",
+            availability: "https://schema.org/InStock",
+            ...(unitText
+              ? {
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    price: price.toFixed(2),
+                    priceCurrency: "CAD",
+                    unitText,
+                  },
+                }
+              : {}),
+          },
+        }),
   };
 }
 
@@ -208,12 +233,51 @@ export function faqPage(path: string, items: { question: string; text: string }[
   };
 }
 
-export function breadcrumbs(path: string, name: string) {
+/** Home › …parents › this page. `parents` sit between Home and the page,
+    e.g. `[{ path: "/services", name: "Services" }]` on a service page. */
+export function breadcrumbs(
+  path: string,
+  name: string,
+  parents: { path: string; name: string }[] = [],
+) {
+  const trail = [{ path: "/", name: "Home" }, ...parents, { path, name }];
   return {
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-      { "@type": "ListItem", position: 2, name, item: absoluteUrl(path) },
-    ],
+    itemListElement: trail.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: absoluteUrl(crumb.path),
+    })),
+  };
+}
+
+/** A schema.org Article for a resource post, written by Kim and published
+    by Kivov. `datePublished` is only emitted when it is an ISO date. */
+export function article({
+  path,
+  headline,
+  description,
+  datePublished,
+}: {
+  path: string;
+  headline: string;
+  description: string;
+  datePublished?: string;
+}) {
+  return {
+    "@type": "Article",
+    "@id": `${absoluteUrl(path)}#article`,
+    headline,
+    description,
+    url: absoluteUrl(path),
+    mainEntityOfPage: absoluteUrl(path),
+    image: `${SITE_URL}${OG_IMAGE.url}`,
+    inLanguage: "en-CA",
+    author: { "@id": PERSON_ID },
+    publisher: { "@id": ORG_ID },
+    ...(datePublished && /^\d{4}-\d{2}-\d{2}/.test(datePublished)
+      ? { datePublished }
+      : {}),
   };
 }

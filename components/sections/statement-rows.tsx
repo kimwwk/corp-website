@@ -2,14 +2,17 @@ import { Reveal } from "@/components/reveal";
 
 /*
  * Statement rows — the title-left / body-right hairline rows ("What Kivov
- * helps you do", services "Included", showcase "Track record"). Rows reveal
- * with a 40ms stagger; use inside a `staggered` Section.
+ * helps you do", ai-starters "Included", service "What's included"). Rows reveal
+ * with a 40ms stagger; use inside a `staggered` Section. Titles are plain
+ * row headings, never links (service "How to start" package names included).
  */
-export function StatementRows({
-  rows,
-}: {
-  rows: { title: React.ReactNode; body: React.ReactNode; note?: React.ReactNode | null }[];
-}) {
+export type StatementRow = {
+  title: React.ReactNode;
+  body: React.ReactNode;
+  note?: React.ReactNode | null;
+};
+
+export function StatementRows({ rows }: { rows: StatementRow[] }) {
   return (
     <div className="mt-8 border-b border-border">
       {rows.map((row, i) => (

@@ -1,4 +1,7 @@
 import type { MetadataRoute } from "next";
+import { resourcePath, resources } from "@/content/resources";
+import { servicePath, services } from "@/content/services";
+import { pathForUseCase, useCases } from "@/content/use-cases";
 import { absoluteUrl } from "@/lib/seo";
 
 // Required for `output: "export"` — the sitemap is emitted at build time.
@@ -17,12 +20,17 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "/",
+    "/services",
+    ...services.map((s) => servicePath(s.slug)),
+    "/use-cases",
+    ...useCases.map((u) => pathForUseCase(u.slug)),
+    "/resources",
+    ...resources.map((r) => resourcePath(r.slug)),
+    "/ai-starters",
     "/fit-check",
     "/audit",
-    "/services",
     "/about",
     "/book",
     "/contact",
-    "/showcase",
   ].map((path) => ({ url: absoluteUrl(path) }));
 }

@@ -4,15 +4,18 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Menu } from "lucide-react";
+import { Collapsible } from "@base-ui/react/collapsible";
+import { ChevronDown, Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import {
   Sheet,
@@ -21,24 +24,172 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { TrackedLink } from "@/components/tracked-link";
+import {
+  contactLink,
+  menuGroups,
+  primaryLinks,
+  type NavGroup,
+} from "@/content/navigation";
 
-const navLinks = [
-  { label: "Services", href: "/services" },
-  { label: "AI Audit", href: "/audit" },
-  { label: "Showcase", href: "/showcase" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
+/*
+ * Header: Services ▾ · Use Cases ▾ · AI Starters · Resources · About ·
+ * [Contact us]. The two dropdowns and the mobile sheet are built from
+ * content/navigation.ts. Contact us is the one highlighted button.
+ *
+ * The dropdown contents are kept mounted, so their links are in the static
+ * HTML. The mobile sheet's links are not: Base UI portals render only on the
+ * client. The desktop dropdowns (in the HTML at every width) cover them.
+ *
+ * Mobile sheet: Contact us first, then the five top-level rows. Services and
+ * Use Cases are collapsible groups, closed each time the sheet opens, so the
+ * button and every top-level link fit the first screen of a small phone.
+ */
+
+/* Desktop nav from lg: six items plus the button don't fit a 768px header,
+   so tablets get the sheet. Top-level link and trigger share one recipe, and
+   every top-level item is active anywhere in its section (Resources on a
+   post, Services on a service page). */
+const topItem =
+  "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2";
+const topItemIdle = "text-muted-foreground hover:text-foreground";
+const topItemActive = "text-foreground underline decoration-primary decoration-2";
+
+/* Mobile sheet row: ≥44px tall for touch. The current page's row takes the
+   muted wash. A top-level row (group trigger or link) in the current section
+   takes ink text and the desktop's active underline on its label. */
+const sheetRow = "rounded-lg px-3 py-3 text-sm font-medium transition-colors";
+const sheetRowIdle = "text-muted-foreground hover:bg-muted hover:text-foreground";
+const sheetRowActive = "bg-muted text-foreground";
+const sheetRowSection = "text-foreground hover:bg-muted";
+const sheetSectionMark =
+  "underline decoration-primary decoration-2 underline-offset-[6px]";
+
+/* A sheet group (Services, Use Cases): a disclosure row that opens the
+   group's pages, indented beneath it, with the "All …" link last. Base UI's
+   Collapsible gives the trigger aria-expanded / aria-controls; the panel
+   eases its height on the system curve. px-1/-mx-1 keeps focus rings clear
+   of the panel's overflow clip. */
+function SheetGroup({
+  group,
+  active,
+  link,
+}: {
+  group: NavGroup;
+  active: boolean;
+  link: (href: string, label: string, indent?: 1 | 2) => React.ReactNode;
+}) {
+  return (
+    <Collapsible.Root>
+      <Collapsible.Trigger
+        className={cn(
+          sheetRow,
+          "group flex w-full items-center justify-between gap-4 text-left",
+          active ? sheetRowSection : sheetRowIdle,
+        )}
+      >
+        <span className={cn(active && sheetSectionMark)}>{group.label}</span>
+        <ChevronDown
+          className="size-4 shrink-0 transition-transform duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-data-panel-open:rotate-180 motion-reduce:transition-none"
+          aria-hidden="true"
+        />
+      </Collapsible.Trigger>
+      <Collapsible.Panel className="-mx-1 h-(--collapsible-panel-height) overflow-hidden px-1 transition-[height] duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)] data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none">
+        <div className="flex flex-col pb-2">
+          {group.items.map((item) => (
+            <React.Fragment key={item.href}>
+              {link(item.href, item.label, 1)}
+              {item.children?.map((c) => link(c.href, c.label, 2))}
+            </React.Fragment>
+          ))}
+          {link(group.all.href, group.all.label, 1)}
+        </div>
+      </Collapsible.Panel>
+    </Collapsible.Root>
+  );
+}
+
+function DropdownPanel({
+  group,
+  isActive,
+}: {
+  group: NavGroup;
+  isActive: (href: string) => boolean;
+}) {
+  const link = (href: string, label: string, child = false) => (
+    <NavigationMenuLink
+      closeOnClick
+      render={<Link href={href} />}
+      aria-current={isActive(href) ? "page" : undefined}
+      className={cn(
+        "rounded-md px-3 py-2",
+        child
+          ? "pl-6 text-muted-foreground hover:text-foreground"
+          : "font-medium text-foreground",
+        isActive(href) && "bg-muted",
+      )}
+    >
+      {label}
+    </NavigationMenuLink>
+  );
+  return (
+    <ul className="flex flex-col">
+      {group.items.map((item) => (
+        <li key={item.href}>
+          {link(item.href, item.label)}
+          {item.children?.length ? (
+            <ul className="flex flex-col">
+              {item.children.map((c) => (
+                <li key={c.href}>{link(c.href, c.label, true)}</li>
+              ))}
+            </ul>
+          ) : null}
+        </li>
+      ))}
+      <li className="mt-1 border-t border-border pt-1">
+        {link(group.all.href, group.all.label)}
+      </li>
+    </ul>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
-  // trailingSlash is on (static export), so the pathname is "/showcase/"
-  // while nav hrefs are "/showcase" — strip it before comparing.
+  // trailingSlash is on (static export), so the pathname is "/services/"
+  // while nav hrefs are "/services" — strip it before comparing.
   const currentPath = pathname.replace(/\/+$/, "") || "/";
   const isActive = (href: string) => currentPath === href;
+  // A top-level item's section: its own page and every page under it.
+  const inSection = (href: string) =>
+    currentPath === href || currentPath.startsWith(`${href}/`);
   // Every link inside the sheet closes it via onClick, so no
   // route-change effect is needed.
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  // Rows inside a group are indented; a top-level row (no indent) also
+  // marks its section.
+  const sheetLink = (href: string, label: string, indent?: 1 | 2) => {
+    const section = !indent && inSection(href);
+    return (
+      <Link
+        key={href}
+        href={href}
+        aria-current={isActive(href) ? "page" : undefined}
+        onClick={() => setMobileOpen(false)}
+        className={cn(
+          sheetRow,
+          indent === 1 && "pl-7",
+          indent === 2 && "pl-11",
+          isActive(href)
+            ? sheetRowActive
+            : section
+              ? sheetRowSection
+              : sheetRowIdle,
+        )}
+      >
+        {section ? <span className={sheetSectionMark}>{label}</span> : label}
+      </Link>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-sm">
@@ -61,19 +212,35 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-4 md:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             <NavigationMenu aria-label="Main navigation">
               <NavigationMenuList className="gap-1">
-                {navLinks.map((link) => (
+                {menuGroups.map((group) => (
+                  <NavigationMenuItem key={group.label} value={group.href}>
+                    <NavigationMenuTrigger
+                      className={cn(
+                        topItem,
+                        "h-auto",
+                        inSection(group.href) ? topItemActive : topItemIdle,
+                      )}
+                    >
+                      {group.label}
+                    </NavigationMenuTrigger>
+                    {/* keepMounted: the dropdown links ship in the server HTML
+                        (hidden until opened), so crawlers see the header's links. */}
+                    <NavigationMenuContent keepMounted className="w-72 p-2">
+                      <DropdownPanel group={group} isActive={isActive} />
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+                {primaryLinks.map((link) => (
                   <NavigationMenuItem key={link.label}>
                     <NavigationMenuLink
                       render={<Link href={link.href} />}
                       aria-current={isActive(link.href) ? "page" : undefined}
                       className={cn(
-                        "px-3 py-2 font-medium underline-offset-[6px] hover:underline hover:decoration-primary hover:decoration-2",
-                        isActive(link.href)
-                          ? "text-foreground underline decoration-primary decoration-2"
-                          : "text-muted-foreground hover:text-foreground",
+                        topItem,
+                        inSection(link.href) ? topItemActive : topItemIdle,
                       )}
                     >
                       {link.label}
@@ -87,15 +254,14 @@ export function SiteHeader() {
               className="rounded-full px-5 font-semibold"
               render={
                 <TrackedLink
-                  href="/fit-check"
-                  event="fit_check_cta_clicked"
+                  href={contactLink.href}
+                  event="contact_cta_clicked"
                   eventProps={{ cta_location: "header" }}
                 />
               }
-              aria-current={isActive("/fit-check") ? "page" : undefined}
+              aria-current={isActive(contactLink.href) ? "page" : undefined}
             >
-              Free Fit Check
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
+              {contactLink.label}
             </Button>
           </div>
 
@@ -103,10 +269,12 @@ export function SiteHeader() {
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger
               render={
+                /* 44px tap target, 16px icon; -mr-1.5 keeps the icon where
+                   the 32px button had it. */
                 <Button
                   variant="ghost"
-                  size="icon"
-                  className="md:hidden"
+                  size="icon-touch"
+                  className="-mr-1.5 lg:hidden"
                   aria-label="Toggle navigation menu"
                 />
               }
@@ -115,43 +283,39 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-background">
               <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-              {/* pt-14 clears the absolutely-positioned close button (top-3, 28px). */}
+              {/* mt-12 starts the scroll area below the absolutely-positioned close
+                  button (top-1, 44px: its foot is at 48px), so rows never scroll
+                  under it; pt-2 leaves room for the pill's focus ring. */}
               <nav
                 aria-label="Mobile navigation"
-                className="flex flex-col gap-1 px-4 pt-14"
+                className="mt-12 flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pt-2 pb-8"
               >
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    aria-current={isActive(link.href) ? "page" : undefined}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "rounded-lg px-3 py-3 text-sm font-medium transition-colors",
-                      isActive(link.href)
-                        ? "bg-muted text-foreground"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
                 <Button
                   size="xl"
-                  className="mt-3 w-full rounded-full"
+                  className="w-full shrink-0 rounded-full"
                   render={
                     <TrackedLink
-                      href="/fit-check"
-                      event="fit_check_cta_clicked"
+                      href={contactLink.href}
+                      event="contact_cta_clicked"
                       eventProps={{ cta_location: "mobile_menu" }}
                     />
                   }
-                  aria-current={isActive("/fit-check") ? "page" : undefined}
+                  aria-current={isActive(contactLink.href) ? "page" : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
-                  Free Fit Check
-                  <ArrowRight data-icon="inline-end" aria-hidden="true" />
+                  {contactLink.label}
                 </Button>
+                <div className="mt-6 flex flex-col">
+                  {menuGroups.map((group) => (
+                    <SheetGroup
+                      key={group.label}
+                      group={group}
+                      active={inSection(group.href)}
+                      link={sheetLink}
+                    />
+                  ))}
+                  {primaryLinks.map((link) => sheetLink(link.href, link.label))}
+                </div>
               </nav>
             </SheetContent>
           </Sheet>

@@ -2,29 +2,18 @@
 
 import Image from "next/image";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { cardLift, cardSurface } from "@/components/sections/card-surface";
+import type { Proof } from "@/content/types";
+import { cn } from "@/lib/utils";
 import { capture } from "@/lib/analytics";
 
-const products = [
-  {
-    title: "sprinting.run",
-    description:
-      "Periodization software for sprint coaches, with AI session planning built in.",
-    status: "Live on Web",
-    href: "https://sprinting.run",
-    icon: "/sprinting-run-icon.png",
-  },
-  {
-    title: "our-pot",
-    description:
-      "Household expense tracking. Say what you spent, review the entry, approve.",
-    status: "Available on Android",
-    href: "https://our-pot-site.kivov-digital.workers.dev/",
-    icon: "/our-pot-icon.png",
-  },
-];
-
-export function ShowcaseProducts() {
+/*
+ * Product cards for the "Our product" proof items (content/proof.ts), shown
+ * on App Development. Each card is a link card on the shared card surface
+ * (card-surface.ts: ring, resting shadow, hover lift) and opens the product
+ * in a new tab.
+ */
+export function ShowcaseProducts({ products }: { products: Proof[] }) {
   return (
     <div className="grid max-w-3xl gap-6">
       {products.map((product) => (
@@ -34,7 +23,11 @@ export function ShowcaseProducts() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Learn more about ${product.title}`}
-          className="group rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+          className={cn(
+            "group block p-6 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+            cardSurface,
+            cardLift,
+          )}
           onClick={() =>
             capture("showcase_product_clicked", {
               product_title: product.title,
@@ -42,32 +35,33 @@ export function ShowcaseProducts() {
             })
           }
         >
-          <Card className="ring-border transition-all duration-200 [--card-spacing:--spacing(6)] group-hover:-translate-y-0.5 group-hover:shadow-lg group-hover:ring-primary/40 motion-reduce:transform-none">
-            <CardContent>
-              <div className="flex items-start gap-5">
-                <Image
-                  src={product.icon}
-                  alt={`${product.title} icon`}
-                  width={64}
-                  height={64}
-                  className="size-16 shrink-0 rounded-xl"
-                />
-                <div className="min-w-0 flex-1">
-                  <div className="mb-2 flex items-baseline justify-between gap-4">
-                    <h2 className="text-xl font-semibold text-foreground transition-colors duration-200 group-hover:text-primary">
-                      {product.title}
-                    </h2>
-                    <span className="shrink-0 font-mono text-xs font-medium tracking-[0.14em] uppercase text-primary">
-                      {product.status}
-                    </span>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {product.description}
-                  </p>
-                </div>
+          <div className="flex items-start gap-5">
+            {product.icon ? (
+              <Image
+                src={product.icon}
+                alt={`${product.title} icon`}
+                width={64}
+                height={64}
+                className="size-16 shrink-0 rounded-xl"
+              />
+            ) : null}
+            <div className="min-w-0 flex-1">
+              {/* Below `sm` the badge takes its own line under the name
+                  (side by side, a narrow card clipped it and squeezed the
+                  name); the name never breaks ("our-pot", not "our-" / "pot"). */}
+              <div className="mb-2 flex flex-col items-start gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <h3 className="text-xl font-semibold whitespace-nowrap text-foreground transition-colors duration-200 group-hover:text-primary">
+                  {product.title}
+                </h3>
+                <span className="shrink-0 font-mono text-xs font-medium tracking-[0.14em] uppercase text-primary">
+                  {product.status}
+                </span>
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {product.body}
+              </p>
+            </div>
+          </div>
         </a>
       ))}
     </div>

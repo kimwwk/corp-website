@@ -7,7 +7,7 @@ import { TrackedLink } from "@/components/tracked-link";
 export const metadata: Metadata = pageMetadata({
   title: "Book a Call — Kivov Digital",
   description:
-    "Pick a time and we'll talk it through live on Zoom. If you're still exploring, start with the free Workflow Fit Check instead.",
+    "Pick a time and we'll talk it through on a 30-minute video call. If you're still exploring, start with the free Workflow Fit Check instead.",
   path: "/book",
 });
 
@@ -24,8 +24,8 @@ export default function BookPage() {
           Book a call.
         </h1>
         <p className="text-lg leading-relaxed">
-          The fastest way to talk it through, live on Zoom. If you&apos;re
-          exploring, start with the{" "}
+          The fastest way to talk it through: a free 30-minute video call. If you&apos;re
+          exploring where AI fits your work, start with the{" "}
           <TrackedLink
             href="/fit-check"
             event="fit_check_cta_clicked"
@@ -35,6 +35,19 @@ export default function BookPage() {
             free fit check
           </TrackedLink>{" "}
           instead: you&apos;ll get further, faster.
+        </p>
+        <p className="mt-4 leading-relaxed">
+          Booking the AI Workflow Audit? Pick a time to talk it through first,
+          or buy it directly on the{" "}
+          <TrackedLink
+            href="/audit"
+            event="audit_cta_clicked"
+            eventProps={{ source_page: "book", cta_location: "intro" }}
+            className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
+          >
+            audit page
+          </TrackedLink>
+          .
         </p>
       </div>
 

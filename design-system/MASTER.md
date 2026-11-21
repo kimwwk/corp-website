@@ -20,7 +20,7 @@
 
 Editorial, warm, studio, premium-but-approachable. A practical, senior, no-hype consultancy —
 "we fix the process first, then automate it." Ledger motifs: mono labels, hairline rules,
-bordered list rows, square bullets, marker underlines.
+bordered list rows, check rows, marker underlines.
 
 ---
 
@@ -136,14 +136,15 @@ recipes for you.
 | Role | Recipe | Used |
 |---|---|---|
 | Home hero `h1` | `max-w-[11em] font-display text-[clamp(2.1rem,8vw,6rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` (`<Band hero>`) | home only |
-| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | services, about, audit, contact, book, thanks, showcase, fit-check |
+| Page `h1` (inner pages) | `font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-balance text-foreground` | ai-starters, about, audit, contact, book, thanks, fit-check; service + use-case heroes (`<Band hero="page">`); overview pages + resource posts (`<PageHeader>`) |
 | Feature `h2` (green bands) | `max-w-3xl font-display text-[clamp(2.1rem,5vw,3.6rem)] leading-[1.05] font-black tracking-tight text-balance text-foreground` (`<Band>`) | featured + closing bands |
 | Section `h2` | `font-display text-[clamp(1.9rem,4.2vw,3rem)] leading-[1.06] font-extrabold tracking-tight text-balance text-foreground` (usually `mt-5 max-w-3xl` after an eyebrow; `<Section>`) | standard cream sections |
 | Card `h3` (large) | `font-display text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | home offer cards |
-| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | services rungs, showcase stat numerals |
+| Card `h3` | `font-display text-[clamp(1.55rem,3.4vw,2.5rem)] leading-[1.06] font-extrabold tracking-tight text-foreground` | ai-starters rungs, proof stat numerals (`<ProofSections>`) |
 | Step numeral | `font-display text-[clamp(2.4rem,6vw,4.2rem)] leading-none font-black text-primary` (`<StepRows>`) | "How it works" ladders (home, audit) |
 | Interlude statement | `<Interlude>` component — `clamp(2rem,5.5vw,4.2rem)`, black, centered, `max-w-[16em]` | between sections |
 | Big line (pull-line) | `max-w-[24em] font-display text-[clamp(1.55rem,3.4vw,2.4rem)] leading-[1.16] font-extrabold tracking-tight text-foreground` | closing statement inside a section |
+| Row heading | `font-display text-xl font-extrabold tracking-tight text-foreground md:text-2xl` | StatementRows / StepRows titles, `<CardGrid>` card titles, proof pull-lines, resource-post subheads (`<PostBody>`, as `h2`) |
 
 ### Mono label system
 
@@ -158,10 +159,17 @@ Render with **`<MonoLabel>`** (`components/sections/mono-label.tsx`) — one rec
 
 Tracking is `0.14em` (page labels) or `0.2em` (component eyebrows) — no other values.
 
+**An eyebrow is a label, never a section's only heading.** Every section with an eyebrow carries
+a section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format), so the page
+outline runs H1 → H2 → H3 and every section reads with a real title. `Section`'s eyebrow is always
+a `<p>`. `<MonoLabel as="h2">` renders the same label as an `h2` (identical look; preflight resets
+heading size and weight) for the one place a label is genuinely the only heading: the resource
+post's Short answer panel (vocabulary #11).
+
 ### Body copy
 
 Default body = Work Sans 17px `text-muted-foreground`. Leads: `text-lg leading-relaxed`,
-constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. Prose blocks
+constrained `max-w-2xl` (bands) or `max-w-3xl` (`<Section lead>`). Emphasis inside prose: `font-medium text-foreground`. Prose blocks
 `max-w-2xl`/`max-w-3xl`; never full-width text.
 
 ### Links (text CTAs)
@@ -171,23 +179,30 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 | `linkGreen` (on cream) | `inline-flex min-h-11 items-center rounded-sm font-semibold text-foreground underline decoration-primary decoration-2 underline-offset-[7px] transition-colors hover:text-primary` (`<CtaRow>` secondary) |
 | `linkLeaf` (on green bands) | same with `decoration-brand-mint` … `hover:text-caption` (`<CtaRow tone="band">` secondary) |
 | `linkInline` (inside prose) | `rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary` — always via `TrackedLink` when it's a conversion link |
+| Link cue (`linkCueLabel` + `<LinkCueArrow>`, `components/sections/link-cue.tsx`) | how a link that isn't running text shows it is a link: its label in linkGreen's look (`underline decoration-primary decoration-2 underline-offset-[7px]`, `group-hover:text-primary`) + a Lucide `ArrowRight` `size-4 text-primary` right after it that nudges `group-hover:translate-x-1`. **Visible at rest** on every screen — touch has no hover. Never re-type it; three uses: `<CardGrid>` card foot ("Learn more"; not a link of its own, the whole card is the link), every `<LinkList>` row (the label is the row's name), Home's "Two ways to work together" rows (the label is the card-h3 heading; the arrow scales with it, `size-[0.75em] align-baseline`) |
+
+**Touch targets.** CTA text links keep linkGreen's `min-h-11`. Small standalone links are at
+least 24px tall: `inline-flex min-h-6 items-center`. The footer wordmark link is
+`min-h-11`, like the `size-11` social row beside it. Links inside running prose are exempt.
 
 ---
 
 ## Layout & spacing
 
 - **Section shell:** `px-6 py-20 md:py-28`. Hero/closing bands on home breathe more: `py-24 md:py-32`
-  (`<Band breathe>`). Utility pages (contact, book) and the showcase hero use the compact shell
+  (`<Band breathe>`). Utility pages (contact, book) use the compact shell
   `py-16 md:py-24`; contact narrows its container to `max-w-5xl`.
 - **Container:** `mx-auto max-w-6xl` (inside a `<Reveal>` in nearly every section).
 - **Separators:** a cream section following another cream section takes `border-t border-border`.
   Interludes behave like cream sections here — an Interlude after a cream section takes
   `border-t`, and the cream section after an Interlude keeps its own `border-t`.
   Bands never take a border — the color change is the separator (`<Section flush>` after a band).
-- **Radius:** from tokens (`--radius: 0.75rem`); cards `rounded-2xl`, pills `rounded-full`,
-  square list bullets `rounded-[2px]`.
-- **List rows (ledger motif):** `<LedgerList>` — rows `flex gap-3 border-t border-border`
-  with a square bullet (`mt-[0.55em] size-2 rounded-[2px] bg-primary`) or a check.
+- **Radius:** from tokens (`--radius: 0.75rem`); cards `rounded-2xl`, pills `rounded-full`.
+- **List rows (ledger motif) — check rows:** every bullet on the site is a check row: a hairline
+  row (`flex gap-3 border-t border-border`) opening with the check glyph (`<CheckGlyph>`,
+  `components/sections/check-glyph.tsx`: a 16px stroked check, `text-primary`, leaf inside bands),
+  text in ink. `<LedgerList>` renders them; `<PriceCard>` bullets are the same row at `text-sm`.
+  No square or dot bullets.
 
 ---
 
@@ -197,18 +212,87 @@ constrained `max-w-2xl`. Emphasis inside prose: `font-medium text-foreground`. P
 
 New sections are **composed from these**, never re-typed from the recipes above:
 
-- **`Band`** — S1 hero (`hero`), S3 featured, S6 closing (`breathe`); forest ring via `depth`
-- **`Section`** — S2 standard cream section; `flush` after bands/interludes; `staggered` when
-  children carry their own `<Reveal delay>` rows
-- **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link;
-  `tone="band"` on green) and its mono support line
-- **`MonoLabel`** — the 0.14em mono label (green / caption / ink)
-- **`LedgerList`** — square-bullet or check hairline rows, 1–2 columns, leaf tone on bands
-- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger
+- **`Band`** — S1 hero (`hero` = home h1; `hero="page"` = inner-page h1, for service and
+  use-case heroes), S3 featured, S6 closing (`breathe`); forest ring via `depth`
+- **`PageHeader`** — P2 cream page header (eyebrow → page h1 → lead → children) for inner pages
+  that open without a band: overview pages, resource posts (child: the byline and date,
+  "By Kim Wong · November 20, 2026", in one `<MonoLabel tone="caption">`; "Kim Wong" links to
+  /about/ in `linkInline`)
+- **`Section`** — S2 standard cream section: eyebrow → section h2 → optional lead (`text-lg
+  leading-relaxed max-w-3xl`); `flush` after bands/interludes; `staggered` when children carry
+  their own `<Reveal delay>` rows. `layout="split"`: from `lg` a 12-column grid (`gap-x-10`),
+  the header in columns 1–5 (`lg:sticky lg:top-24 lg:self-start`) and the children in 6–12;
+  below `lg` it stacks like the default. Every FAQ section is split
+- **`CtaRow` + `Support`** — the CTA row (one primary pill + optional secondary text link,
+  or a list of them rendered in order, **at most 2 actions in all**: it throws at build time
+  past 2; `tone="band"` on green) and its mono support line.
+  `external` on any action renders a `TrackedExternalLink` (an external secondary opens in a
+  new tab)
+- **`MonoLabel`** — the 0.14em mono label (green / caption / ink); `as="h2"` for a heading
+- **`LedgerList`** — check rows only (the check glyph, text `text-foreground`): 1 column
+  `py-3` closed by a `border-b`, or 2 columns `py-4 leading-relaxed`; leaf tone on bands
+- **`CheckGlyph`** — the one bullet glyph, exported once and used by `LedgerList` and
+  `PriceCard`
+- **`StatementRows`** — title-left / body-right hairline rows with 40ms stagger; titles are
+  plain row headings (service "How to start" package names included), never links
 - **`StepRows`** — the huge-numeral "How it works" ladder
+- **`CardGrid`** — vocabulary #5 as a component: link cards on the card surface (below) at
+  `p-7 md:p-8`, with the link-card lift. Top to bottom: an optional **icon tile** (`LinkCard.icon`,
+  a content key mapped to its Lucide icon in `components/sections/card-icon.tsx`: a `size-11
+  rounded-xl bg-secondary text-primary` tile, icon `size-5`; on card hover it fills `bg-primary
+  text-primary-foreground`, `transition-colors` 200ms), an optional caption kicker, the
+  row-heading title (`mt-6` after the tile), one line, then the **foot**: a hairline (`border-t
+  border-border`, 24px above and below) and the card link cue — "Learn more" + arrow, always
+  visible; a card's `cta` can relabel it — pinned to the bottom with `mt-auto`, so the hairlines
+  and cues in a row line up. Icons: AI Consulting `Compass`, Website Management `Globe`, AI
+  Automation `Workflow`, App Development `Smartphone`, WordPress Support `Wrench`, Law Firm SEO &
+  GEO `Scale`, Invoice Automation `ReceiptText`, AI Receptionist `PhoneCall`, AI Follow-Up Emails
+  `MailCheck`, every resource post `BookOpen`; a post's Related card takes its related page's.
+  1–4 columns. One column
+  keeps the prose measure (`max-w-3xl`), so a lone card (a post's "Related", a page's one
+  "Related reading" post) lines up with the text above it instead of reading as half of a
+  two-column grid. The whole card is its one tracked CTA; no filled-primary inside
+- **`LinkList`** — the ledger list's linked twin: hairline rows of tracked links, each name in
+  the link cue (underline + arrow, visible at rest), 1–3 columns, ≥44px rows (Home "Use Cases"
+  strip)
+- **`TestimonialGrid`** — vocabulary #8, the multi-quote sibling of the pull-quote; cells align
+  to the top (`items-start`), so each name follows its own quote
+- **`ProofSections`** — vocabulary #9: labelled proof items from `content/proof.ts`
+- **`FaqList`** — the hairline accordion FAQ (eyebrow "FAQ"); plain-text answers feed FAQPage JSON-LD.
+  Questions in `text-base md:text-lg font-medium text-foreground`. The trigger takes `gap-4`, so a
+  long question keeps 16px clear of the chevron. `split` (inside a split Section) drops its top
+  margin on `lg`, so the list starts level with the eyebrow.
+  The accordion takes `hiddenUntilFound`, so closed answers stay in the HTML (crawlers read
+  them, find-in-page opens them) while the panels still look closed. Any FAQ accordion
+  outside the kit sets it too
+- **`PostBody`** — a resource post's typed blocks (h2 / p / ul) at the prose measure
+- **`PriceCard`** — one offer as a price card (data type `OfferCard` in `content/types.ts`):
+  `MonoLabel` eyebrow, `text-2xl` extrabold name, `text-4xl md:text-5xl` black price (+ optional
+  struck-through `was` in a `<del>`, `text-xl` bold caption, after an `sr-only` "Regular price "
+  label) and an optional caption mono unit (none on a free offer); the parts are separated by
+  spaces, so the row's text reads "$495 Regular price $750 CAD" (the flex gaps set the look;
+  the /audit/ hero price row follows the same rule), a hairline, the intro
+  line (`text-sm`), the bullets as **check rows** (`PriceBullets`: each a `border-t
+  border-border py-2.5 text-sm` row, the check glyph first, leaf on `deep`; a bold `lead` in
+  `font-medium text-foreground` before its text), then optional "Best for:", guarantee, `text-xs
+  text-caption` notes, with the one CTA (`size="xl"` full-width pill, filled or outline) pinned to
+  the foot by `mt-auto`. Not a link: no hover lift. **Tones, from quiet to premium**
+  (`priceCardTones`), all `rounded-2xl p-7`:
+
+  | Tone | Surface | Used for |
+  |---|---|---|
+  | `quiet` | `bg-transparent ring-1 ring-border`, no shadow: the cream page shows through | Workflow Fit Check |
+  | `highlight` | `bg-card ring-2 ring-primary/40 shadow-lg shadow-foreground/5`, green eyebrow | Workflow-First AI Audit (the featured card, the filled pill); the /audit hero price card |
+  | `deep` | `band-green bg-background`, `shadow-xl shadow-foreground/10` on a wrapper outside the band (inside it `foreground` is cream); leaf checks, a filled pill takes `hover:text-inkdeep` | Build With You on /ai-starters and Build For You on AI Automation, both with the filled cream pill |
+
+  `h-full`. **`PriceLadder`** sets a row (/ai-starters): three across from `lg`
+  (`lg:grid-cols-3`, 40ms stagger), stepping up left to right — `lg:mt-16` / `lg:mt-8` /
+  `lg:mt-0` on the stretched cells, so each card's top steps and its foot and button stay
+  level; below `lg` they stack with no offsets. A lone card (a service page's "How to start")
+  is wrapped in `<Reveal>` by its caller, `max-w-xl`. At most one filled pill per surface; a `deep` card is a band, its own surface, so its cream pill doesn't count against the featured card's green one (the ladder's buttons climb with it: outline, green, cream)
 
 A section shape the kit can't express is a design decision: extend the kit and this file in
-the same commit. One-off compositions (page heroes with portraits/price cards, the services
+the same commit. One-off compositions (page heroes with portraits, the services
 ladder) may stay hand-built from the recipes, but still use `MonoLabel`/`CtaRow` for their parts.
 
 ### `components/ui/` — shadcn/Base-UI primitives
@@ -218,10 +302,17 @@ their colors.
 
 **Button idioms:**
 - Primary page CTA: `<Button size="xl" className="rounded-full">` (+ `hover:text-inkdeep` on green bands)
+- Icon-only touch chrome (mobile menu button, sheet Close): `size="icon-touch"` — a 44px tap
+  target, the icon stays 16px
 - Buttons that navigate: `render={<TrackedLink href=… event=… eventProps=…/>}`
   — every CTA is tracked; no bare `<a>` for CTAs.
 - Icon: Lucide, `data-icon="inline-end"` (e.g. `ArrowRight`).
 - **One primary button per section.** Secondary action = `linkGreen`/`linkLeaf` text link.
+- **At most 2 CTAs per section** (a CTA = a button or a CTA-styled text link; inline prose links
+  and the one CTA per card in a card grid don't count). The second only when it is relevant to
+  this page's reader; if it isn't, the section has 1. Website and app pages (their use cases and
+  posts too) show "Book a free call" alone in the hero; fit-check-led pages pair "Free Fit Check"
+  with "Or book a free call". Service "How to start" keeps one CTA.
   *Card-grid exception:* in a card grid each card may carry one CTA; at most one filled-primary
   per surface (featured card filled, others outline / band-pill).
 
@@ -233,7 +324,37 @@ their colors.
   stay clean; `tone="green"` on cream, `tone="leaf"` on bands
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
-- `SiteHeader` / `SiteFooter`, `ContactForm`, `FitCheck`, `BookingWidget`, `ShowcaseProducts`
+- `SiteHeader` — `Services ▾ · Use Cases ▾ · AI Starters · Resources · About · [Contact us]`,
+  built from `content/navigation.ts`. Dropdowns are `NavigationMenuTrigger` + `NavigationMenuContent`
+  (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
+  ink (AI Consulting → Fit Check, AI Workflow Audit), then the "All …" overview link after a
+  hairline. Triggers share the top-level link recipe. Every top-level item (both triggers, AI
+  Starters, Resources, About) shows the active underline anywhere in its section: its own page
+  and every page under it (Resources on a post). `aria-current="page"` stays on the exact page
+  only. Each `NavigationMenuContent` is `keepMounted`, so the dropdown links are in
+  the server HTML (rendered `hidden` until a trigger opens them). **Contact us** is the
+  header's one `size="lg"` rounded-full primary (the slot Free Fit Check had until 2026-11).
+  Mobile sheet: the **Contact us** pill first (`size="xl"`, full width), then the five
+  top-level rows (Services, Use Cases, AI Starters, Resources, About; ≥44px, `sheetRow`). The
+  current page's row takes the `bg-muted` wash; a top-level row in the current section takes ink
+  text and the desktop's active underline on its label (`sheetSectionMark`). The menu button
+  and the sheet's Close are `size="icon-touch"` (44×44 around the 16px icon); the menu button's
+  `-mr-1.5` and Close's `top-1 right-1` keep the icons where the 32px / 28px buttons had them.
+  Services and Use Cases are Base UI `Collapsible` groups, closed each time the sheet opens:
+  the trigger is a row with a `ChevronDown` that turns 180° when open (`aria-expanded` /
+  `aria-controls` from the primitive), and the panel eases its height (200ms, system curve,
+  `motion-reduce:transition-none`) to the group's pages indented `pl-7` (AI Consulting's
+  sub-links `pl-11`) with the "All …" link last. Closed, everything fits the first screen at
+  375×667. The nav scrolls (`overflow-y-auto`) and starts below the close button (`mt-12`), so
+  rows never scroll under it. The desktop nav shows from `lg`; below that (tablets included)
+  the sheet takes over.
+- `SiteFooter` — wordmark (links home, `min-h-11` hit area) + social row; then the site map: four link columns
+  (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
+  `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
+  Terms, Consent Preferences). Every page in the tree is listed here.
+- `ContactForm`, `FitCheck`, `BookingWidget`
+- `ShowcaseProducts` — the "Our product" proof cards: each a link card (the card surface + lift,
+  `p-6`) opening the product in a new tab; the product name is an `h3` that turns green on hover
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
   ring-1 ring-foreground/10`, `mx-auto max-w-3xl` inset from the viewport edges, copy left /
   buttons right on `sm+`, stacked on mobile, `.rise` entrance).
@@ -259,20 +380,66 @@ Every page is composed from these shapes (via the section kit). A "new page" = t
 
 1. **Hero band** — `<Band hero eyebrow=… depth=…>` → lead paragraphs
    (`max-w-2xl text-lg leading-relaxed`) → `<CtaRow tone="band">` → `<Support>`.
-2. **Standard section (cream)** — `<Section eyebrow=… title=… lead=…>` (+ `flush` after a band)
-   → content (2-col `grid gap-12 md:grid-cols-2`, `<LedgerList>`, `<StatementRows>`,
+2. **Standard section (cream)** — `<Section eyebrow=… title=… lead=…>` (+ `flush` after a band):
+   every section carries eyebrow + h2 (+ optional lead); an eyebrow alone is not a heading. Per-page
+   h2s live in `content/` (`Service.headings`, `UseCase.headings`, `Overview.groupTitles`); the
+   ones every page shares in `content/section-headings.ts` → content (2-col `grid gap-12 md:grid-cols-2`, `<LedgerList>`, `<StatementRows>`,
    `<StepRows>`, or prose) → optional closing `bigLine`.
 3. **Featured band (mid-page)** — `<Band id=… eyebrow=… title=… depth=…>` (id gives `scroll-mt-16`).
 4. **Interlude** — `<Interlude>` between section groups; quiet section follows.
-5. **Card grid** — `Card`/custom cards `rounded-2xl`; green card variant = `band-green … rounded-2xl bg-background p-7` (services rungs).
-6. **Closing CTA band** — `<Band title=… depth=…>` (home adds `breathe`), feature `h2`,
-   short lead, `<CtaRow tone="band">` with one primary (+ optional secondary text link),
-   `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
-7. **Pull-quote (testimonial)** — `<Section eyebrow=…>` (no title) → `<figure>` with the
+5. **Card grid** — every card on cream sits on **the card surface** (`cardSurface` in
+   `components/sections/card-surface.ts`): `rounded-2xl bg-card ring-1 ring-border shadow-sm
+   shadow-foreground/5`. A card that is a link adds **the lift** (`cardLift`): `hover:-translate-y-1
+   hover:shadow-xl hover:shadow-foreground/5 hover:ring-primary/40`, translate and shadow over
+   200ms on the system curve, `motion-reduce:` no lift; it keeps the focus ring (`ring-3
+   ring-ring/50`). Users: `<CardGrid>` link cards, `ShowcaseProducts` (both with the lift), the
+   /contact email card (resting surface only). Green card variant = `band-green … rounded-2xl
+   bg-background p-7`. Price cards are `<PriceCard>`, whose tones are their own surfaces on the
+   same radius (its `deep` tone is this green variant).
+6. **Closing CTA band** — `<Band eyebrow=… title=… depth=…>` (home adds `breathe`): mono eyebrow ("Next step" on Home, /audit and every template page; /ai-starters keeps its own), feature `h2`,
+   short lead, `<CtaRow tone="band">` with one primary (+ at most one relevant secondary text
+   link — e.g. "Or book a free call" on fit-check-led pages, the link back to Website Management
+   on its use cases), `<Support>`. **Closing bands are left-aligned on every page** (home included, 2026-08-10).
+7. **Pull-quote (testimonial)** — `<Section eyebrow=… title=…>` → `<figure>` with the
    quote in the **big-line recipe** inside a `<blockquote>`, then a hairline `<figcaption>`
    (`border-t border-border pt-5`): name in `font-medium text-foreground` + role as
-   `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One quote per section;
-   first use: showcase.
+   `<MonoLabel tone="caption">`. Real quotes only — never fabricate. One short quote per
+   section. Longer or several quotes use #8.
+8. **Testimonial grid** — `<Section staggered eyebrow=… title=…>` (service pages: Home's title,
+   "What people say about working with Kim.") → `<TestimonialGrid>`: each quote a
+   `<figure>` on a hairline (`border-t border-border pt-7`), paragraphs verbatim in body type
+   (`leading-relaxed text-foreground`, curly quotes added around the whole quote), then name +
+   caption in caption mono ("From LinkedIn", or company and role when there is no public review
+   source), right under its own quote (cells align to the top; no name pinned to the foot of a
+   row; no fixed heights, so short excerpts stay short). Two columns for 2+ quotes; one quote
+   keeps `max-w-3xl`. The same component on Home (every testimonial) and service pages (their
+   own). Public quotes only, verbatim from `content/testimonials.ts`; never on About.
+9. **Proof item** — `<ProofSections>`: one cream `<Section>` per item, eyebrow = its label
+   (Client build · Track record · Our product · Demo · Capability; never "Case Study"),
+   h2 = title, lead, then optional before → after delta row (the arrow wraps with the "after"
+   pill, never alone at a line end), 3-up stat row (card-h3 numerals
+   in `text-primary`), mono footnote, row-heading pull-line. "Our product" items group into one
+   Section of `ShowcaseProducts` cards (product names `h3` under the shared h2).
+10. **Link cards / link list** — `<CardGrid>` for pages with a line each (services, use cases,
+    posts), `<LinkList>` for a bare strip of names. Every card section has a heading. The
+    overview pages with one card group (/services, /resources) set the cards straight under the
+    page header (`flush`, no top padding, no visible header) with an `sr-only` h2
+    (`Overview.cardsLabel`); /use-cases gives each group its service name as the eyebrow and an
+    h2 from `Overview.groupTitles`. Service and use-case pages carry a "Related reading" section
+    (`RelatedReading` in `components/templates/`: standard section, eyebrow + h2 "Related
+    questions, answered.", `<CardGrid>` of post name + cardLine) just before the FAQ, listing
+    the posts whose `related` is that page (a service page also lists the posts whose `related`
+    is one of its use cases, each post once); no post, no section.
+11. **Short answer panel** — a resource post's answer up front: a `rounded-2xl bg-secondary p-7
+    md:p-10` panel (`max-w-3xl`, the prose measure) inside a standard section, headed by
+    `<MonoLabel as="h2">Short answer</MonoLabel>`, the answer in `text-lg md:text-xl font-medium
+    leading-relaxed text-foreground` (`mt-4`). The only section whose heading is a mono label.
+12. **FAQ split** — every FAQ section (eyebrow "FAQ"): `<Section layout="split" staggered eyebrow=…
+    title=… lead=…>` → `<FaqList split>`. The header sticks in the left five columns on `lg`
+    while the questions scroll beside it (service pages, use-case pages, /ai-starters).
+
+Page templates (`components/templates/`) fix the section order for service, use-case,
+resource-post and overview pages; copy comes from `content/`.
 
 Canonical page rhythm (see home): hero band → cream sections alternating `border-t` →
 featured band mid-page → interlude → cream sections → closing CTA band.
@@ -288,13 +455,15 @@ One system, defined in `app/globals.css`:
   Stagger siblings with `delay` in 30–50ms steps.
 - **Hero load-in:** `.rise` (0.6s), staggered via `--rise-delay`.
 - **Signature animations:** marker draw-on-reveal.
-- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms; hover arrows
-  slide in via `-translate-x-2 opacity-0 → group-hover` and must carry
-  `motion-reduce:translate-x-0 motion-reduce:opacity-100`.
+- **Micro-interactions:** `transition-colors`/`transition-all` at 150–300ms. Link cards lift 4px
+  on hover (`cardLift`; `translate` moves the card without reflowing anything). Link-cue arrows
+  (`<LinkCueArrow>`) are always visible and only nudge `group-hover:translate-x-1`
+  (`motion-reduce:` no nudge). Nothing a reader needs is revealed on hover only — touch never
+  sees it.
 - **Reduced motion:** `.reveal` is forced visible in CSS; every custom micro-interaction
   needs its `motion-reduce:` fallback.
 - Transform/opacity only — **no layout-shifting hovers** (no scale that reflows; `translate-y-px`
-  on button active is the sanctioned exception).
+  on button active and the link-card lift, `cardLift`, are the sanctioned translates).
 
 ---
 
@@ -308,6 +477,7 @@ One system, defined in `app/globals.css`:
 - ❌ Emojis as icons — Lucide SVG only
 - ❌ Inline-restyling `ui/` component colors; per-page style constants that fork existing recipes
 - ❌ More than one primary button per section (card grids: one CTA per card, one filled-primary per surface)
+- ❌ More than 2 CTAs in a section, or a second one that isn't relevant to the page's reader
 - ❌ Untracked CTAs (always `TrackedLink`)
 - ❌ Layout-shifting hovers; instant state changes (always 150–300ms transitions)
 - ❌ Low contrast: 4.5:1 minimum on text (`caption` is the floor on cream)
@@ -321,8 +491,9 @@ One system, defined in `app/globals.css`:
 - [ ] Headings match a type-scale row exactly (the kit renders them; don't override)
 - [ ] `border-t` rhythm respected (`flush` after bands/interludes)
 - [ ] Content wrapped in `<Reveal>`; stagger 30–50ms; `motion-reduce` fallbacks present
-- [ ] One primary CTA per section; CTAs via `TrackedLink` with event props
+- [ ] One primary CTA per section, at most 2 CTAs in all; CTAs via `TrackedLink` with event props
 - [ ] Focus states visible (ring tokens); contrast ≥ 4.5:1 both on cream and on green
+- [ ] Every link shows it is a link without hover (touch); touch targets ≥24px, CTAs ≥44px
 - [ ] Responsive at 375 / 768 / 1024 / 1440; no horizontal scroll on mobile
 - [ ] No content hidden behind the fixed header (`scroll-mt-16` on anchor targets — the kit
       adds it whenever a `Band`/`Section` gets an `id`)
@@ -331,11 +502,110 @@ One system, defined in `app/globals.css`:
 
 ## Known drift — do NOT copy these (fix when the file is next open for edits)
 
-*(empty — everything found in the 2026-08-10 audit was fixed in the same change; add new
-entries here as they're discovered)*
+- `/ai-starters` still re-types the P2 header that `<PageHeader>` now renders: its h1 keeps
+  `max-w-[11em]`, which `PageHeader` doesn't set, so a swap would re-wrap the headline.
+  Recompose it when that width is decided.
 
 ## Changelog
 
+- **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
+- **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
+- **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
+- **2026-11-20** — Look and feel round 1. Headings: every section with an eyebrow now has a
+  section h2 under it (eyebrow → h2 → optional lead, Home's "Pain points" format); per-page
+  strings in `Service.headings` / `UseCase.headings` / `Overview.groupTitles`, shared ones in
+  `content/section-headings.ts`. `Section` loses `eyebrowAs` (no section is headed by its
+  eyebrow any more) and gains `layout="split"`; its `lead` is `text-lg` (was body size), the
+  lead recipe above. Every FAQ section is split, `FaqList` questions are `md:text-lg`. The
+  resource post's Short answer is a callout panel (vocabulary #11). Service "Sound familiar?" is
+  now the "Pain points" eyebrow, as on Home. /services and /resources set their cards straight
+  under the header (sr-only h2). The "Our product" proof group takes an h2; product names are h3.
+  Bullets: every list row is a check row; `LedgerList` loses its square marker and `marker` prop,
+  its text is ink in every variant, and the check glyph is one export (`CheckGlyph`).
+  The box: one card surface (`cardSurface`: ring, resting shadow) and one link-card lift
+  (`cardLift`) in `components/sections/card-surface.ts`; `CardGrid` cards take both at `p-7
+  md:p-8`, an icon tile from `LinkCard.icon` (`Service.icon` / `UseCase.icon` / `resourceIcon`,
+  mapped in `card-icon.tsx`) and a hairline foot pinned to the bottom. `ShowcaseProducts` cards
+  and the /contact email card move onto the same surface (`ShowcaseProducts` drops the `Card`
+  primitive and its 2px lift).
+  Pricing ladder: `PriceCard` tones are `quiet` (new) / `highlight` (now with a soft shadow) /
+  `deep` (with the deepest shadow); `plain` is gone (nothing used it after Build With You moved to
+  `deep`). The price is `md:text-5xl`, the bullets are check rows (`PriceBullets`). `PriceLadder`
+  renders the /ai-starters staircase. The /audit hero price card takes the `highlight` surface
+  (it had an arbitrary rgba shadow) and the same check-row bullets (it used Lucide's `Check`).
+  CTAs: at most 2 per section, the second only when relevant (Buttons rule; `CtaRow` throws past
+  2). Website and app pages, their use cases and posts show "Book a free call" alone in the hero
+  ("Or see where AI fits your work" is gone, with `fitCheckLinkCta`); service heroes drop "See AI
+  Starters"; fit-check-led use cases close with "Free Fit Check" + "Or book a free call" and no
+  parent-service link. Service "How to start" package names are plain row headings: the row
+  `link` on `StatementRows`, the row-heading link recipe, `packageLinkCta` and `PackageHref` are
+  removed.
+
+- **2026-11-20** — Round-4 review fixes. Price rows read as text: `PriceCard` (and the /audit/
+  hero price) separate price, struck price and unit with spaces, put the struck price in a
+  `<del>` after an `sr-only` "Regular price" label, and `OfferCard.unit` is optional (the
+  Fit Check card: eyebrow "Free · 3 min", "$0", no unit). The /ai-starters cards lose their
+  per-card "AI Consulting →" back-links (and `PriceCard` its `serviceLink` slot); one line under
+  the grid links AI Consulting and the AI Automation page as inline prose links (`linkInline`).
+  Resource-post bylines link "Kim Wong" to /about/ (`linkInline`, `author_link_clicked`).
+  A service page's "Related reading" also lists the posts whose related page is one of its use
+  cases (Website Management: the GEO and WordPress SEO posts).
+- **2026-11-20** — Kim's review round 1. /ai-packages renamed to /ai-starters ("AI Starters"
+  in the header, footer and CTAs). The /ai-starters price cards are one kit component,
+  `PriceCard` (`components/sections/price-card.tsx`, data type `OfferCard`), rendered as before;
+  the grid's reveal stagger is 40ms (was 60ms, outside the 30–50ms rule). Its FAQ now
+  renders through `FaqList` (the answers left are plain text); the Known-drift note keeps only
+  the page header. `TestimonialGrid`'s `role` prop is now `caption` (quotes are short excerpts
+  captioned "From LinkedIn"). Build For You moved to AI Automation: a service's `howToStart.offer` renders
+  one `PriceCard` (`max-w-xl`, left-aligned) under the "How to start" rows, in place of the "See
+  AI Starters" button, which also leaves that page's hero.
+
+- **2026-11-20** — Visual QA round-2 fixes. The link cue is one kit recipe
+  (`components/sections/link-cue.tsx`: `linkCueLabel` + `LinkCueArrow`), used by `CardGrid`,
+  `LinkList` and Home's "Two ways to work together" rows; `LinkList` rows and the "Two ways"
+  headings now show the underline and arrow at rest (they hid the arrow until hover, which touch
+  never sees). Header: AI Starters, Resources and About are active anywhere in their section, like
+  the dropdown triggers; in the mobile sheet a top-level row in the current section takes the
+  active underline. `Button` gains `size="icon-touch"` (44px); the menu button and the sheet's
+  Close use it (were 32px and 28px).
+- **2026-11-20** — SEO round-2: service and use-case pages add a "Related reading" section
+  before "Questions" (a standard section with a `<CardGrid>` of the resource posts whose
+  `related` is that page, tracked as `resource_card_clicked`). No new shape: vocabulary #10.
+- **2026-11-20** — Visual QA round-1 fixes. `CardGrid` cards show a link cue at rest ("Learn
+  more" in linkGreen's look + a primary arrow that nudges on hover; it replaces the hover-only
+  arrow touch never saw); one column is now `max-w-3xl` (was `max-w-xl`). Mobile sheet: Contact
+  us first, Services and Use Cases collapse (closed by default), the scroll area starts below
+  the close button. `TestimonialGrid` cells align to the top, names follow their quotes.
+  `ProofSections` delta row wraps the arrow with its "after" pill. `FaqList` (and /ai-starters)
+  trigger `gap-4`. Touch targets: row-heading links `inline-block`, /ai-starters card back-links
+  `min-h-6`, footer wordmark `min-h-11`; the touch-target rule and a checklist line added.
+  Overview pages' single card section takes an eyebrow from `Overview.cardsLabel`.
+- **2026-11-20** — SEO round-1 fixes. FAQ accordions (`FaqList` and /ai-starters) set
+  `hiddenUntilFound`: every answer is in the server HTML, panels still look closed. Header
+  dropdowns are `keepMounted`, so their links are in the server HTML too (the mobile sheet's
+  links are client-only, since Base UI portals don't render on the server). `MonoLabel` takes
+  `as="h2"` and `Section` takes `eyebrowAs="h2"`: eyebrow-only sections on the service,
+  use-case, resource-post and overview templates now head their section with an h2 in the
+  same mono-label look. `StatementRows` rows take an optional `link` (row-heading link
+  recipe above); service "How to start" package lines carry an `href` (fit check, audit, AI
+  packages) and link their package names with the event each page already uses. Resource
+  posts show "By Kim Wong" before the date in the header's caption mono label.
+- **2026-11-20** — `CtaRow` `secondary` takes a list as well as one link, so a closing band
+  can carry two text links beside its one primary (Website Management use cases: "Book a
+  free call" and the parent-service link). Still one primary per section. Use-case pages
+  render an optional extra standard section (eyebrow, section h2, paragraphs) after "How we
+  set it up" — no new shape.
+- **2026-11-20** — Site restructure (branch `site/restructure-2026-11`): section kit extended
+  with `PageHeader`, `CardGrid`, `LinkList`, `TestimonialGrid`, `ProofSections`, `FaqList`,
+  `PostBody`, `Band hero="page"` and external secondary links on `CtaRow`; vocabulary #8–#10
+  (testimonial grid, proof item, link cards / link list) and the row-heading type row
+  registered. `ShowcaseProducts` now takes its products from `content/proof.ts`. The
+  `ui/navigation-menu` primitive's popup motion moved onto the system curve and 300ms (it
+  shipped with `cubic-bezier(0.22,1,0.36,1)` at 350ms). /showcase is gone; its items are
+  proof on the use-case and service pages. Header: Services and Use Cases dropdowns, AI
+  Starters / Resources / About links, Contact us replaces Free Fit Check as the highlighted
+  button; mobile sheet grouped by section and used below `lg` (was `md`). Footer: site-map
+  columns above the legal row.
 - **2026-08-18** — Mobile nav sheet: the wordmark is out of the sheet header (the site header
   behind the sheet already shows it); the Brand marks table above no longer lists the sheet as a
   wordmark placement. The empty `SheetHeader` went with it — the sheet's `sr-only` title is now a
