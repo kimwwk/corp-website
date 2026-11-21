@@ -25,18 +25,18 @@ import type { OfferCard, ServiceSlug } from "@/content/types";
 
 /*
  * AI Starters (the price cards that lived on /services until 2026-11-20) —
- * Kim's copy on the Green Ledger foundation: P2 header, P13 price slots (the paid
- * tiers: audit | Build With You | Build For You, layout restored from PR #11),
- * then the P8 four-rung ladder as the sequence view. Each paid card links
- * back to its service page.
+ * Kim's copy on the Green Ledger foundation: P2 header, P13 price slots
+ * (Fit Check | audit | Build With You, as PriceCards), then the P8 three-rung
+ * ladder as the sequence view. Each card links back to its service page;
+ * Build For You lives on the AI Automation page, linked under the cards.
  */
 export const metadata: Metadata = pageMetadata({
   title: "AI Starters — Kivov Digital",
   description:
-    "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You at $1,250/mo or Build For You at $5,500 per project.",
+    "Start with the workflow: a free Workflow Fit Check, the Workflow-First AI Audit at a founding price of CAD $495, or Build With You at $1,250 a month.",
   path: "/ai-starters",
   socialDescription:
-    "Start with the workflow. A free Workflow Fit Check, a CAD $750 Workflow-First AI Audit, then Build With You or Build For You. Practical AI and automation for small & mid-sized businesses.",
+    "Start with the workflow: a free Workflow Fit Check, the Workflow-First AI Audit, or Build With You. Practical AI and automation for small & mid-sized businesses.",
 });
 
 const h2 =
@@ -46,7 +46,7 @@ const rungMeta =
 const rungArrow =
   "ml-2 inline-block -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100 motion-reduce:translate-x-0 motion-reduce:opacity-100";
 
-/* The four rungs, in order of how much of the work I take on. */
+/* The three rungs, in order of how much of the work I take on. */
 const rungs = [
   {
     featured: true,
@@ -77,16 +77,6 @@ const rungs = [
     href: "/contact?interest=build-with-you",
     event: "service_inquiry_clicked",
     eventProps: { service_tier: "do_it_with_you" },
-  },
-  {
-    featured: false,
-    name: "Build For You",
-    desc: "One workflow taken end-to-end — architecture, implementation, testing, team handoff, and a 30-day stabilization period. Begins with discovery or a completed audit.",
-    meta: "$5,500 / project",
-    cta: "Book a call",
-    href: "/book",
-    event: "service_inquiry_clicked",
-    eventProps: { service_tier: "do_it_for_you" },
   },
 ];
 
@@ -121,23 +111,6 @@ const faqs = [
     ),
   },
   {
-    value: "with-vs-for",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Build With You keeps you in the driver's seat: we coach, build Claude skills, and automate alongside your team on a monthly rhythm. Build For You hands the build to me — one workflow taken end-to-end at a flat project price. Every Build For You project starts with discovery or a completed audit.",
-    question: "What's the difference between “with you” and “for you”?",
-    answer: (
-      <p>
-        <span className="font-medium text-foreground">Build With You</span>{" "}
-        keeps you in the driver&apos;s seat: we coach, build Claude skills, and
-        automate alongside your team on a monthly rhythm.{" "}
-        <span className="font-medium text-foreground">Build For You</span> hands
-        the build to me — one workflow taken end-to-end at a flat project
-        price. Every Build For You project starts with discovery or a
-        completed audit.
-      </p>
-    ),
-  },
-  {
     value: "with-you-build",
     // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
     text: "Whatever the workflow needs. On our calls we build custom Claude skills around the workflows you screen-share, automate the repetitive parts, and bring in off-the-shelf tools when one already solves the problem. There's no fixed menu — if your workflow calls for something else, that's what we build.",
@@ -149,29 +122,6 @@ const faqs = [
         parts, and bring in off-the-shelf tools when one already solves the
         problem. There&apos;s no fixed menu — if your workflow calls for
         something else, that&apos;s what we build.
-      </p>
-    ),
-  },
-  {
-    value: "for-you-scope",
-    // Plain-text twin of `answer` for the FAQPage JSON-LD — keep in sync.
-    text: "Every Build For You project begins with discovery or a completed audit. Two tracks come out of it: AI & automation, built around the workflow we mapped together, and custom software development, when off-the-shelf won't fit. The package covers the first track: one end-to-end workflow with up to roughly two core system integrations — AI and automation architecture, implementation, testing, exception handling, team handoff, and a 30-day stabilization period. Custom software builds, or anything bigger than one workflow, are scoped and quoted separately after discovery.",
-    question: "What does the Build For You package actually cover?",
-    answer: (
-      <p>
-        Every Build For You project begins with discovery or a completed
-        audit. Two tracks come out of it:{" "}
-        <span className="font-medium text-foreground">AI &amp; automation</span>
-        , built around the workflow we mapped together, and{" "}
-        <span className="font-medium text-foreground">
-          custom software development
-        </span>
-        , when off-the-shelf won&apos;t fit. The package covers the first
-        track: one end-to-end workflow with up to roughly two core system
-        integrations — AI and automation architecture, implementation,
-        testing, exception handling, team handoff, and a 30-day stabilization
-        period. Custom software builds, or anything bigger than one workflow,
-        are scoped and quoted separately after discovery.
       </p>
     ),
   },
@@ -223,6 +173,30 @@ const included = [
 
 /* The price cards, left to right, each with the service page it links back to. */
 const cards: { card: OfferCard; service: ServiceSlug }[] = [
+  {
+    service: "ai-consulting",
+    card: {
+      tone: "plain",
+      eyebrow: "Free",
+      name: "Workflow Fit Check",
+      price: "$0",
+      unit: "3 min",
+      intro:
+        "A three-minute questionnaire that identifies the type of workflow issue you may be facing, and one practical place to begin.",
+      bullets: [
+        { text: "Eight questions, no technical knowledge required" },
+        { text: "The type of workflow issue you likely have" },
+        { text: "One practical place to begin" },
+      ],
+      cta: {
+        label: "Take the free check",
+        href: "/fit-check",
+        event: "fit_check_cta_clicked",
+        eventProps: { source_page: "ai-starters", cta_location: "packages" },
+        style: "outline",
+      },
+    },
+  },
   {
     service: "ai-consulting",
     card: {
@@ -290,45 +264,18 @@ const cards: { card: OfferCard; service: ServiceSlug }[] = [
       },
     },
   },
-  {
-    service: "ai-automation",
-    card: {
-      tone: "deep",
-      eyebrow: "Project work",
-      name: "Build For You",
-      price: "$5,500",
-      unit: "/ project",
-      intro: "Every Build For You project begins with discovery or a completed audit.",
-      bullets: [
-        {
-          lead: "One end-to-end workflow",
-          text: ", with up to roughly two core system integrations.",
-        },
-        {
-          lead: "AI & automation architecture",
-          text: "— implementation, testing, and exception handling included.",
-        },
-        {
-          lead: "Team handoff & 30-day stabilization",
-          text: ", so it keeps running after I step back.",
-        },
-      ],
-      bestFor: "teams that want the build handed over, not shared.",
-      notes: ["Larger scopes quoted separately after discovery."],
-      cta: {
-        label: "Book a call",
-        href: "/book",
-        event: "service_inquiry_clicked",
-        eventProps: { service_tier: "do_it_for_you" },
-        style: "filled",
-      },
-    },
-  },
 ];
 
 /* The small text link on each card back to its service page (PriceCard's
-   `serviceLink` slot, which sets its size and spacing). */
-function ServiceLink({ slug }: { slug: ServiceSlug }) {
+   `serviceLink` slot, which sets its size and spacing), and the same link
+   style for the Build For You line under the cards. */
+function ServiceLink({
+  slug,
+  children,
+}: {
+  slug: ServiceSlug;
+  children?: React.ReactNode;
+}) {
   const target = serviceBySlug(slug);
   return (
     <TrackedLink
@@ -341,7 +288,7 @@ function ServiceLink({ slug }: { slug: ServiceSlug }) {
       }}
       className="inline-flex min-h-6 items-center rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
     >
-      {target.name} →
+      {children ?? `${target.name} →`}
     </TrackedLink>
   );
 }
@@ -369,13 +316,6 @@ const servicesJsonLd = [
     path: "/ai-starters",
     price: 1250,
     unitText: "4 weeks",
-  }),
-  service({
-    name: "Build For You",
-    description: rungs[3].desc,
-    path: "/ai-starters",
-    price: 5500,
-    unitText: "project",
   }),
   faqPage("/ai-starters", faqs),
 ];
@@ -419,7 +359,7 @@ export default function AiStartersPage() {
         id="packages"
         staggered
         eyebrow="Packages"
-        title="Four ways to work together"
+        title="Three ways to start"
         lead="Most people start with the free fit check or the audit, then move into hands-on work once we both know where the real wins are."
       >
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
@@ -429,9 +369,17 @@ export default function AiStartersPage() {
             </Reveal>
           ))}
         </div>
+        <Reveal>
+          <p className="mt-8 text-sm">
+            Want the whole workflow built for you?{" "}
+            <ServiceLink slug="ai-automation">
+              Build For You is on the AI Automation page →
+            </ServiceLink>
+          </p>
+        </Reveal>
       </Section>
 
-      {/* P8 — the four-rung ladder: the sequence view */}
+      {/* P8 — the three-rung ladder: the sequence view */}
       <section className="border-t border-border">
         <Reveal className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28">
           <MonoLabel>Sequence</MonoLabel>
@@ -479,19 +427,13 @@ export default function AiStartersPage() {
         </div>
       </section>
 
-      {/* P6 — what's included, either way */}
+      {/* P6 — what's included with Build With You */}
       <Section
         flush
         staggered
         eyebrow="Included"
-        title={<>What&apos;s included, either way</>}
-        lead={
-          <>
-            Both build packages, Build With You{" "}
-            <span className="text-caption">and</span> Build For You, come
-            with all three.
-          </>
-        }
+        title="What’s included with Build With You"
+        lead="Build With You comes with all three."
       >
         <StatementRows rows={included} />
       </Section>
