@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Kivov Digital",
+  title: "Privacy Policy | Kivov Digital",
   description: "Privacy Policy for Kivov Digital.",
   robots: { index: false },
 };

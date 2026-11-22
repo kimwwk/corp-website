@@ -8,7 +8,7 @@ import { ContactForm } from "@/components/contact-form";
 import { TrackedLink } from "@/components/tracked-link";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact — Kivov Digital",
+  title: "Contact | Kivov Digital",
   description:
     "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
   path: "/contact",

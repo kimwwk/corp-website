@@ -5,7 +5,7 @@ import { BookingWidget } from "@/components/booking-widget";
 import { TrackedLink } from "@/components/tracked-link";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Book a Call — Kivov Digital",
+  title: "Book a Call | Kivov Digital",
   description:
     "Pick a time and we'll talk it through on a 30-minute video call. If you're still exploring, start with the free Workflow Fit Check instead.",
   path: "/book",

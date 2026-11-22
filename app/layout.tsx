@@ -25,9 +25,9 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kivov.ca"),
-  title: "Kivov Digital — Workflow-First AI for Small Business",
+  title: "Workflow-First AI Consulting in Toronto | Kivov Digital",
   description:
-    "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
+    "Workflow-first AI consulting in Toronto. We help growing businesses understand how their work actually happens, find where time is lost, and build what fits.",
   verification: {
     google: "V86yYgZYa0b2uAqQxbhb9teevK2zoUKKHVYPdT3IZHo",
   },
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
      /thanks). No canonical here on purpose — it would be inherited by every
      route and point them all at the home page. */
   openGraph: {
-    title: "Kivov Digital — Workflow-First AI for Small Business",
+    title: "Workflow-First AI Consulting in Toronto | Kivov Digital",
     description:
-      "Your business should not have to fit the system. We help growing businesses understand how their work actually happens, find where time is being lost, and build practical AI systems around the way their people already work.",
+      "Workflow-first AI consulting in Toronto. We help growing businesses understand how their work actually happens, find where time is lost, and build what fits.",
     siteName: SITE_NAME,
     locale: "en_CA",
     type: "website",
