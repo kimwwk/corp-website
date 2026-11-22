@@ -27,9 +27,9 @@ import type { OfferCard, ServiceSlug } from "@/content/types";
  * For You lives.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "AI Starters — Kivov Digital",
+  title: "AI for Small Business: Where to Start | Kivov Digital",
   description:
-    "Start with the workflow: a free Workflow Fit Check, the Workflow-First AI Audit at a founding price of CAD $495, or Build With You at $1,250 a month.",
+    "Not sure where to start with AI? A free Workflow Fit Check, the AI Workflow Audit at a founding price of CAD $495, or Build With You at $1,250 a month.",
   path: "/ai-starters",
   socialDescription:
     "Start with the workflow: a free Workflow Fit Check, the Workflow-First AI Audit, or Build With You. Practical AI and automation for small & mid-sized businesses.",

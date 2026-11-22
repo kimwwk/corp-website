@@ -31,7 +31,7 @@ export const useCases: UseCase[] = [
       "wordpress maintenance toronto",
       "wordpress emergency support",
     ],
-    title: "WordPress Support and Website Design in Toronto — Kivov Digital",
+    title: "WordPress Support and Website Design in Toronto | Kivov Digital",
     description:
       "WordPress support in Toronto: fixes, updates, contact forms, tracking and Google listings, plus WordPress website design when the site needs more.",
     cardLine: "Fixes, updates and care for your WordPress site, plus design when it needs more.",
@@ -66,7 +66,7 @@ export const useCases: UseCase[] = [
     ],
     extraSection: {
       eyebrow: "WordPress website design",
-      title: "When the site needs more than support.",
+      title: "WordPress website design, when the site needs more.",
       body: [
         "We also design WordPress websites. We start from what your clients need to find and do on the site, then design around it.",
         "Your domain and hosting stay in your company's name, so the site is always yours.",
@@ -115,13 +115,13 @@ export const useCases: UseCase[] = [
     name: "Law Firm SEO & GEO",
     icon: "scale",
     parent: "website-management",
-    keyword: "law firm seo",
+    keyword: "law firm seo toronto",
     secondaryKeywords: ["seo for lawyers", "law firm marketing"],
-    title: "Law Firm SEO and GEO for AI Search — Kivov Digital",
+    title: "Law Firm SEO in Toronto, for Google and AI Search | Kivov Digital",
     description:
       "Law firm SEO and GEO for Toronto and GTA firms: a website, Google listing and content that help clients find you on Google and in ChatGPT.",
     cardLine: "SEO for lawyers: help clients find your firm on Google and in AI answers.",
-    h1: "Law firm SEO for Google and AI search.",
+    h1: "Law firm SEO in Toronto, for Google and AI search.",
     problemLine: "Clients across Toronto and the GTA look for a lawyer on Google, and some now ask ChatGPT.",
     headings: {
       problem: "The expertise is there. Google and AI need to see it.",
@@ -210,7 +210,7 @@ export const useCases: UseCase[] = [
       "quickbooks integration",
       "quickbooks automation",
     ],
-    title: "Invoice Automation for Vendor PDFs — Kivov Digital",
+    title: "Invoice Automation for Vendor PDFs | Kivov Digital",
     description:
       "AI invoice automation: vendor PDFs read, checked and prepared as drafts for QuickBooks or your ERP, with a person approving every invoice.",
     cardLine: "Vendor invoice PDFs read by AI and entered as drafts for you to approve.",
@@ -294,7 +294,7 @@ export const useCases: UseCase[] = [
     parent: "ai-automation",
     keyword: "ai receptionist for small business",
     secondaryKeywords: ["ai voice agent", "virtual receptionist toronto"],
-    title: "AI Receptionist for Small Business — Kivov Digital",
+    title: "AI Receptionist for Small Business | Kivov Digital",
     description:
       "An AI receptionist that answers your calls, follows your booking rules and books into your calendar, set up on the phone number you already have.",
     cardLine: "An AI voice agent that answers calls and books by your rules.",
@@ -369,7 +369,7 @@ export const useCases: UseCase[] = [
     // No measured keyword: Kim kept this use case on 2026-11-20 without one.
     keyword: null,
     secondaryKeywords: [],
-    title: "AI Follow-Up Emails After Every Client Call — Kivov Digital",
+    title: "AI Follow-Up Emails After Every Client Call | Kivov Digital",
     description:
       "After every client call, AI drafts the follow-up email in your voice and files the documents. You review and send. It never sends on its own.",
     cardLine: "AI drafts the follow-up email after every call, in your voice, for you to send.",

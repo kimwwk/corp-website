@@ -21,7 +21,7 @@ export const resources: ResourcePost[] = [
       "chatgpt seo",
       "how do i get chatgpt to recommend my business",
     ],
-    title: "Generative Engine Optimization for Small Business — Kivov Digital",
+    title: "Generative Engine Optimization for Small Business | Kivov Digital",
     h1: "Generative engine optimization: how do I get ChatGPT to recommend my business?",
     description:
       "Generative engine optimization (GEO) for small businesses: how ChatGPT picks who to recommend, and what to put on your site so it can pick you.",
@@ -90,7 +90,7 @@ export const resources: ResourcePost[] = [
     shortName: "AI automation for small business",
     keyword: "ai automation",
     secondaryKeywords: [],
-    title: "AI Automation: What Should You Automate First? — Kivov Digital",
+    title: "AI Automation: What Should You Automate First? | Kivov Digital",
     h1: "AI automation for small business: what should I automate first?",
     description:
       "What to automate first with AI in a small business: count how often a task happens and what it costs each time, then start with the biggest number.",
@@ -153,7 +153,7 @@ export const resources: ResourcePost[] = [
     shortName: "WordPress SEO",
     keyword: "wordpress seo",
     secondaryKeywords: [],
-    title: "WordPress SEO: Why Isn't My Site on Google? — Kivov Digital",
+    title: "WordPress SEO: Why Isn't My Site on Google? | Kivov Digital",
     h1: "WordPress SEO: why isn't my WordPress site showing up on Google?",
     description:
       "WordPress SEO starts with what Google has actually indexed. How to check it in Search Console, and the WordPress leftovers that crowd out your real pages.",

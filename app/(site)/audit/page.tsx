@@ -25,9 +25,9 @@ import { AUDIT_PAYMENT_URL } from "@/lib/payments";
  * price, and the $500 implementation credit stay.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "AI Workflow Audit — Kivov Digital",
+  title: "AI Workflow Audit | Kivov Digital",
   description:
-    "Before you invest in technology, understand the work. A focused review of one priority business process, with a practical plan for improving it: CAD $750, founding clients $495.",
+    "Before you invest in technology, understand the work. A focused review of one priority business process, with a practical plan: CAD $750, founding clients $495.",
   path: "/audit",
 });
 

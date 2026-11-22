@@ -10,7 +10,7 @@ import { TrackedLink } from "@/components/tracked-link";
  * successful checkout. Noindexed and deliberately absent from the sitemap.
  */
 export const metadata: Metadata = {
-  title: "Payment received — Kivov Digital",
+  title: "Payment received | Kivov Digital",
   description: "Your AI Workflow Audit is booked.",
   robots: { index: false, follow: false },
 };

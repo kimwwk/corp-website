@@ -25,9 +25,9 @@ import {
  * original page.
  */
 export const metadata: Metadata = pageMetadata({
-  title: "About Kim — Kivov Digital",
+  title: "About Kim Wong | Kivov Digital",
   description:
-    "Kim Wong is the founder of Kivov Digital and a former Deloitte and EY consultant with more than seven years of experience across software development, enterprise integrations, cloud architecture, AI, websites, portals, and custom systems.",
+    "Kim Wong is the founder of Kivov Digital and a former Deloitte and EY consultant, with more than seven years in software, integrations, cloud, AI and websites.",
   path: "/about",
 });
 
@@ -49,7 +49,7 @@ const aboutJsonLd = [
     "@type": "ProfilePage",
     "@id": `${absoluteUrl("/about")}#profile`,
     url: absoluteUrl("/about"),
-    name: "About Kim — Kivov Digital",
+    name: "About Kim Wong | Kivov Digital",
     mainEntity: { "@id": PERSON_ID },
   },
 ];
