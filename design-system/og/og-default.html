@@ -1,0 +1,38 @@
+<!doctype html>
+<!--
+  Source for public/og-default.png, the 1200x630 share card (og:image) on every page.
+  Render: open this file in headless Chrome (Playwright) at a 1200x630 viewport, wait for
+  document.fonts.ready, screenshot to public/og-default.png, then bump ?v= on OG_IMAGE.url in
+  lib/seo.ts so social sites fetch the new image. Text and colours follow the site:
+  eyebrow = Home's positioning line, headline = Home's H1, colours = app/globals.css tokens.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&display=block">
+<style>
+  :root { --background: #fbfaf4; --foreground: #17201b; --primary: #0a6e48; --brand-mint: #8fe3ae; --caption: #6b756d; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--background); }
+  .card { position: relative; width: 1200px; height: 630px; }
+  .logo { position: absolute; left: 82px; top: 66px; width: 166px; }
+  .eyebrow { position: absolute; left: 82px; top: 300px; font: 500 21px/1 "IBM Plex Mono", monospace;
+             letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); }
+  h1 { position: absolute; left: 80px; top: 352px; margin: 0; width: 1000px;
+       font: 800 77px/1 "Archivo", sans-serif; letter-spacing: -0.025em; color: var(--foreground); }
+  .domain { position: absolute; left: 82px; top: 538px; font: 400 24px/1 "IBM Plex Mono", monospace;
+            letter-spacing: 0.02em; color: var(--caption); }
+  .bar { position: absolute; left: 0; bottom: 0; height: 18px; width: 960px; background: var(--primary); }
+  .bar.leaf { left: 960px; width: 240px; background: var(--brand-mint); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="../../public/kivov-wordmark.png" alt="">
+    <div class="eyebrow">Workflow-first AI consulting · Toronto</div>
+    <h1>Build the system that fits your business.</h1>
+    <div class="domain">kivov.ca</div>
+    <div class="bar"></div><div class="bar leaf"></div>
+  </div>
+</body>
+</html>

@@ -10,10 +10,10 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://kivov.ca";
 export const SITE_NAME = "Kivov Digital";
 export const OG_IMAGE = {
-  url: "/og-default.png",
+  url: "/og-default.png?v=2",
   width: 1200,
   height: 630,
-  alt: "Kivov Digital — Workflow-First AI for Small Business",
+  alt: "Kivov Digital: workflow-first AI consulting in Toronto. Build the system that fits your business.",
 };
 
 /** Absolute URL for a site path. Paths use trailing slashes to match

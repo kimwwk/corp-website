@@ -1,6 +1,6 @@
 # Kivov Digital Design System — "Green Ledger" (MASTER)
 
-> **Read this before any UI work.** This file is the design constitution for kivov.work.
+> **Read this before any UI work.** This file is the design constitution for kivov.ca.
 > It documents the system the live site actually uses (Direction C "Green Ledger",
 > approved 2026-07; origin sample: `prototypes/foundation-2026/c-green-ledger.html`).
 >
