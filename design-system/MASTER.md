@@ -524,7 +524,8 @@ One system, defined in `app/globals.css`:
   You, App Development, Not sure yet; pick any); team size uses the Fit Check's bands as pills;
   the dropdowns are gone; message comes before contact details; inline errors replace the
   browser's bubbles. `?interest=` takes the new keys, and `build-for-you` maps to AI Automation.
-  `BookingWidget`: Calendly → Cal.com (`kim-wong/30min`), in the site's colours.
+  `BookingWidget`: Calendly → Cal.com (`kim-wong/30min`), in the site's colours. `Input` and
+  `Textarea` placeholders take `text-caption` (they matched body ink and read as typed values).
 - **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
