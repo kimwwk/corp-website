@@ -1,172 +1,48 @@
-import * as React from "react";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import { Mail } from "lucide-react";
 
-import { cardSurface } from "@/components/sections";
-import { ContactForm } from "@/components/contact-form";
-import { TrackedLink } from "@/components/tracked-link";
+import { ChannelTiles, KimCard, MessageProfiles } from "@/components/contact/contact-channels";
+import { ContactTabs } from "@/components/contact/contact-tabs";
+import { Band } from "@/components/sections";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact | Kivov Digital",
   description:
-    "Send me a few lines about where work is getting stuck. I reply within one business day. Or take the free Workflow Fit Check first.",
+    "WhatsApp, call or email Kim Wong in Toronto, send a message, or book a free 30-minute call. I reply within 1 business day.",
   path: "/contact",
 });
 
-const afterYouSend = [
-  {
-    when: "Within 1 business day",
-    what: "My first reply, with any questions I need answered before I can be useful.",
-  },
-  {
-    when: "If you're booking the audit",
-    what: "The intake questionnaire, plus times for your 60-minute workflow-mapping session.",
-  },
-  {
-    when: "If you're not sure yet",
-    what: "I'll point you at the smallest useful next step, even when that isn't hiring me.",
-  },
-];
-
-/* The form reads `?interest=` via useSearchParams, so it has to sit inside a
-   Suspense boundary for the static export build to prerender this page. The
-   fallback keeps the form's three steps' rough height so nothing jumps. */
-function FormFallback() {
-  return (
-    <div
-      aria-hidden="true"
-      className="space-y-8"
-      style={{ minHeight: "56rem" }}
-    >
-      {[17, 8, 16].map((h, i) => (
-        <div key={i} className="space-y-5 border-t border-border pt-8">
-          <div className="h-5 w-56 rounded bg-muted" />
-          <div
-            className="w-full rounded-xl bg-muted"
-            style={{ height: `${h}rem` }}
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
-
+/*
+ * Contact (2026-11-25, picked by Kim and six client personas): the green band
+ * carries who and the direct lines (Kim, WhatsApp, call or text, email, DMs);
+ * below it, one switch between the message form and the Cal.com calendar.
+ * The band's bottom padding is trimmed on phones so the switch starts close
+ * to the first screen; the cream column is B's width (max-w-4xl), left-aligned
+ * with the band's content.
+ */
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16 md:py-24">
-      <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
-        {/* Left column: intro + form */}
-        <div className="lg:col-span-3">
-          <p className="mb-6 font-mono text-xs font-medium tracking-[0.14em] text-primary uppercase">
-            Contact
+    <>
+      <Band hero="page" eyebrow="Contact" title="Let’s talk." depth="top-right" className="pb-12">
+        <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <p className="max-w-xl text-lg leading-relaxed">
+            WhatsApp me, book a call, or send a message. I read and answer
+            everything myself.
           </p>
-
-          <h1 className="mb-6 font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.02] font-black tracking-[-0.022em] text-foreground">
-            Send me a few lines.
-          </h1>
-
-          <p className="mb-4 text-lg leading-relaxed">
-            Tell me what your business does and where the work is getting
-            stuck. I reply within one business day, and I read everything
-            myself.
-          </p>
-          <p className="mb-12 text-lg leading-relaxed">
-            Not sure what to ask for yet? Take the{" "}
-            <TrackedLink
-              href="/fit-check"
-              event="fit_check_cta_clicked"
-              eventProps={{ source_page: "contact", cta_location: "intro" }}
-              className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-            >
-              free fit check
-            </TrackedLink>{" "}
-            first, or read how the{" "}
-            <TrackedLink
-              href="/audit"
-              event="audit_cta_clicked"
-              eventProps={{ source_page: "contact", cta_location: "intro" }}
-              className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-            >
-              AI Workflow Audit
-            </TrackedLink>{" "}
-            works.
-          </p>
-
-          <React.Suspense fallback={<FormFallback />}>
-            <ContactForm />
-          </React.Suspense>
+          <KimCard className="shrink-0" detail />
         </div>
-
-        {/* Right column: what happens next + other ways */}
-        <aside className="space-y-10 lg:col-span-2">
-          <div>
-            <h2 className="mb-6 font-display text-lg font-extrabold tracking-tight text-foreground">
-              What happens after you send
-            </h2>
-            <ol className="space-y-5">
-              {afterYouSend.map((item, i) => (
-                <li key={item.when} className="flex gap-4">
-                  <span
-                    className="mt-0.5 shrink-0 font-mono text-sm text-primary"
-                    aria-hidden="true"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="mb-1 text-sm font-medium text-foreground">
-                      {item.when}
-                    </p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {item.what}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+        <div className="mt-8 md:mt-10">
+          <ChannelTiles sourcePage="contact" />
+        </div>
+        <MessageProfiles sourcePage="contact" className="mt-3" />
+      </Band>
+      <section className="px-6 pt-8 pb-16 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="max-w-4xl">
+            <ContactTabs />
           </div>
-
-          <div>
-            <h2 className="mb-4 font-display text-lg font-extrabold tracking-tight text-foreground">
-              Other ways to reach me
-            </h2>
-            <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-              Would rather talk it through?{" "}
-              <TrackedLink
-                href="/book"
-                event="booking_cta_clicked"
-                eventProps={{ source_page: "contact", cta_location: "aside" }}
-                className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
-              >
-                Book a call
-              </TrackedLink>{" "}
-              and pick a time directly.
-            </p>
-            <div className={`${cardSurface} p-5 text-sm`}>
-              <div className="flex items-center gap-4">
-                <div
-                  className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary"
-                  aria-hidden="true"
-                >
-                  <Mail className="size-5 text-primary" strokeWidth={1.6} />
-                </div>
-                <div>
-                  <p className="mb-0.5 font-mono text-[0.65rem] tracking-[0.14em] uppercase text-caption">
-                    Email
-                  </p>
-                  <a
-                    href="mailto:hello@kivov.ca"
-                    className="rounded-sm font-medium text-foreground transition-colors hover:text-primary"
-                    aria-label="Send email to hello@kivov.ca"
-                  >
-                    hello@kivov.ca
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 }

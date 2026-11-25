@@ -352,17 +352,27 @@ their colors.
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
   Terms, Consent Preferences). Every page in the tree is listed here.
-- `ContactForm` — three numbered steps under hairlines (01 What can I help with? · 02 Tell me
-  about your situation · 03 Where should I reply?); each step heading is the contact page's
-  mono index + side-heading recipe (`font-display text-lg font-extrabold`). Choices are native
-  checkbox/radio inputs styled as the Fit Check's option cards (`rounded-xl bg-card ring-1`,
-  `ring-2 ring-primary` when picked) and, for team size, pills of the same states (`min-h-11`).
-  Field labels share the Fit Check's mono label. Errors show inline under the field in
-  `text-destructive`, and the first invalid field takes focus.
+- `ContactForm` — the short form: Name + Email (side by side from `sm`), optional Phone or
+  WhatsApp, "What's it about?" topic chips (pick any; checkbox pills with the Fit Check's states,
+  `min-h-11`), Message. Labels share the Fit Check's mono label; errors show inline in
+  `text-destructive` and the first invalid field takes focus. `?interest=` ticks a topic
+  (older values such as `audit`, `build-with-you`, `build-for-you` map onto the new topics).
 - `FitCheck`
-- `BookingWidget` — Cal.com inline embed (`@calcom/embed-react`, event `kim-wong/30min`,
-  month view). Its colours are the site tokens, read from `:root` at runtime and passed as
-  Cal.com CSS variables (the booker is in Cal.com's iframe, out of reach of our CSS).
+- `components/contact/` — the contact page's parts, with `content/contact.ts` as the one source
+  for email, phone, WhatsApp link, city, reach and languages: `KimCard` (round `kim-avatar.jpg`,
+  name, role · city, optional quiet caption line), `ChannelTiles` (WhatsApp · Call or text · Email,
+  one tap each, `contact_channel_clicked`), `MessageProfiles` ("Or message me on" + LinkedIn
+  (Kim's personal profile), X, Facebook), `ContactTabs` (a two-option pill switch, "Send a
+  message" | "Book a free 30-min call", short labels and no icons below `sm`; the booking panel
+  shows the call's three ticks above `BookingWidget`). /contact is a `<Band hero="page">` holding
+  Kim and the channels (`pb-12` on phones so the switch starts near the first screen), then the
+  switch on cream in a `max-w-4xl` column.
+- `BookingWidget` — Cal.com inline embed (`@calcom/embed-react`, event
+  `kim-wong/free-30-min-discovery-call`, month view). Its colours are the site tokens, read from
+  `:root` at runtime and passed as Cal.com CSS variables. Until Cal.com fires `linkReady`, a
+  card-surface loading panel holds the calendar's place with "Loading available times…" and the
+  new-tab link near its top (after 6 s: "Still loading…"; on `linkFailed`: "The calendar didn't
+  load."), so the way out is never below the fold.
 - `ShowcaseProducts` — the "Our product" proof cards: each a link card (the card surface + lift,
   `p-6`) opening the product in a new tab; the product name is an `h3` that turns green on hover
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
@@ -526,6 +536,12 @@ One system, defined in `app/globals.css`:
   browser's bubbles. `?interest=` takes the new keys, and `build-for-you` maps to AI Automation.
   `BookingWidget`: Calendly → Cal.com (`kim-wong/30min`), in the site's colours. `Input` and
   `Textarea` placeholders take `text-caption` (they matched body ink and read as typed values).
+- **2026-11-25** — /contact rebuilt after Kim's review ("too much on the left and the right, the
+  descriptions too long"): six client personas reviewed the old page, then three layouts, then B
+  vs a revised C; all six picked the revised C (green band with Kim and the one-tap channels,
+  then the message / booking switch). The three-step form and "What happens after you send"
+  are gone; the form is name, email, optional phone, topic chips, message. Booking moves to the
+  `free-30-min-discovery-call` event with a loading panel.
 - **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
