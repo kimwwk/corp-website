@@ -86,22 +86,22 @@ export function BookingWidget() {
           href={CAL_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+          className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
         >
           Open it in a new tab
         </a>
-        . Using an AI assistant?{" "}
+        . Use Claude?{" "}
         <TrackedExternalLink
           href={ASSISTANT_URL}
           target="_blank"
           rel="noopener noreferrer"
           event="booking_assistant_clicked"
           eventProps={{ source_page: "book", assistant: "claude" }}
-          className="rounded-sm font-medium text-primary transition-colors hover:text-primary-hover"
+          className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
         >
           Book through Claude
-        </TrackedExternalLink>
-        .
+        </TrackedExternalLink>{" "}
+        (it connects Cal.com).
       </p>
     </div>
   );

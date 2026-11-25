@@ -20,10 +20,10 @@ import { cn } from "@/lib/utils";
  * a CTA can pass (`/contact?interest=build-with-you`) to tick it in advance.
  */
 const INTERESTS = [
-  { key: "website", label: "Website Management", hint: "Maintenance, updates, redesigns" },
+  { key: "website", label: "Website Management", hint: "Fixes, updates, redesigns" },
   { key: "ai-automation", label: "AI Automation", hint: "One workflow, automated in your tools" },
   { key: "audit", label: "AI Workflow Audit", hint: "Where AI fits, before any tool" },
-  { key: "build-with-you", label: "Build With You", hint: "Two strategy calls a month" },
+  { key: "build-with-you", label: "Build With You", hint: "2 strategy calls a month" },
   { key: "app", label: "App Development", hint: "Starts with a discovery session" },
   { key: "not-sure", label: "Not sure yet", hint: "Tell me what's going on" },
 ] as const;
@@ -155,7 +155,9 @@ function ChoicePill({
 }
 
 /* A step's heading: the mono index (as in "What happens after you send")
-   and a title in the page's side-heading recipe. */
+   and a title in the page's side-heading recipe. The index column is w-6 so,
+   with the gap, the title lines up with the step body's sm:pl-10. The hint
+   is the Fit Check's question hint (mono caption caps). */
 function StepHeading({
   index,
   hint,
@@ -168,7 +170,7 @@ function StepHeading({
   return (
     <span className="flex gap-4">
       <span
-        className="mt-0.5 shrink-0 font-mono text-sm text-primary"
+        className="mt-0.5 w-6 shrink-0 font-mono text-sm text-primary"
         aria-hidden="true"
       >
         {index}
@@ -178,7 +180,7 @@ function StepHeading({
           {children}
         </span>
         {hint ? (
-          <span className="mt-1 block text-sm font-normal text-caption">
+          <span className="mt-2 block font-mono text-xs font-medium tracking-[0.14em] text-caption uppercase">
             {hint}
           </span>
         ) : null}
@@ -220,7 +222,7 @@ export function ContactForm() {
 
   function validate(): Errors {
     const found: Errors = {};
-    if (!message.trim()) found.message = "A line or two is enough.";
+    if (!message.trim()) found.message = "Please add a line or two about it.";
     if (!name.trim()) found.name = "Please add your name.";
     if (!email.trim()) found.email = "Please add your email.";
     else if (!EMAIL_PATTERN.test(email.trim()))
