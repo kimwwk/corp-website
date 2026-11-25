@@ -12,8 +12,8 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function BookPage() {
-  /* Wider than the standard content column so the Calendly iframe clears
-     ~1000px and renders its two-column horizontal layout. */
+  /* Wider than the standard content column so Cal.com's month view has room
+     for its three columns (event details, month, times) on desktop. */
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
       <div className="mb-10 max-w-3xl">
