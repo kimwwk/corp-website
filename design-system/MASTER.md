@@ -352,7 +352,17 @@ their colors.
   (Services, Use Cases, Resources, Company — 2-up on mobile, 4-up from `md`) under ink
   `MonoLabel` headings, links in `footerLinkClass`; then the legal row (Privacy, Cookies,
   Terms, Consent Preferences). Every page in the tree is listed here.
-- `ContactForm`, `FitCheck`, `BookingWidget`
+- `ContactForm` — three numbered steps under hairlines (01 What can I help with? · 02 Tell me
+  about your situation · 03 Where should I reply?); each step heading is the contact page's
+  mono index + side-heading recipe (`font-display text-lg font-extrabold`). Choices are native
+  checkbox/radio inputs styled as the Fit Check's option cards (`rounded-xl bg-card ring-1`,
+  `ring-2 ring-primary` when picked) and, for team size, pills of the same states (`min-h-11`).
+  Field labels share the Fit Check's mono label. Errors show inline under the field in
+  `text-destructive`, and the first invalid field takes focus.
+- `FitCheck`
+- `BookingWidget` — Cal.com inline embed (`@calcom/embed-react`, event `kim-wong/30min`,
+  month view). Its colours are the site tokens, read from `:root` at runtime and passed as
+  Cal.com CSS variables (the booker is in Cal.com's iframe, out of reach of our CSS).
 - `ShowcaseProducts` — the "Our product" proof cards: each a link card (the card surface + lift,
   `p-6`) opening the product in a new tab; the product name is an `h3` that turns green on hover
 - `CookieConsent` — compact bottom banner, centred (`rounded-xl bg-card shadow-lg
@@ -508,6 +518,13 @@ One system, defined in `app/globals.css`:
 
 ## Changelog
 
+- **2026-11-25** — Contact form and booking. `ContactForm`: "What you're after" (a dropdown of the
+  old audit / Build With You / Build For You offers) becomes "What can I help with?", six choice
+  cards for the current offer (Website Management, AI Automation, AI Workflow Audit, Build With
+  You, App Development, Not sure yet; pick any); team size uses the Fit Check's bands as pills;
+  the dropdowns are gone; message comes before contact details; inline errors replace the
+  browser's bubbles. `?interest=` takes the new keys, and `build-for-you` maps to AI Automation.
+  `BookingWidget`: Calendly → Cal.com (`kim-wong/30min`), in the site's colours.
 - **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.
