@@ -30,20 +30,21 @@ const afterYouSend = [
 ];
 
 /* The form reads `?interest=` via useSearchParams, so it has to sit inside a
-   Suspense boundary for the static export build to prerender this page. */
+   Suspense boundary for the static export build to prerender this page. The
+   fallback keeps the form's three steps' rough height so nothing jumps. */
 function FormFallback() {
   return (
     <div
       aria-hidden="true"
-      className="space-y-6"
-      style={{ minHeight: "42rem" }}
+      className="space-y-8"
+      style={{ minHeight: "56rem" }}
     >
-      {[11, 11, 11, 11, 11, 24].map((h, i) => (
-        <div key={i} className="space-y-2">
-          <div className="h-4 w-32 rounded bg-muted" />
+      {[17, 8, 16].map((h, i) => (
+        <div key={i} className="space-y-5 border-t border-border pt-8">
+          <div className="h-5 w-56 rounded bg-muted" />
           <div
-            className="w-full rounded-lg bg-muted"
-            style={{ height: `${h * 0.25}rem` }}
+            className="w-full rounded-xl bg-muted"
+            style={{ height: `${h}rem` }}
           />
         </div>
       ))}
@@ -87,7 +88,7 @@ export default function ContactPage() {
               eventProps={{ source_page: "contact", cta_location: "intro" }}
               className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 transition-colors hover:decoration-primary"
             >
-              Workflow-First AI Audit
+              AI Workflow Audit
             </TrackedLink>{" "}
             works.
           </p>
