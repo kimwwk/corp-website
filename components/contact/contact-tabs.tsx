@@ -6,7 +6,7 @@ import { CalendarDays, Send } from "lucide-react";
 import { BookingWidget } from "@/components/booking-widget";
 import { ContactForm } from "@/components/contact-form";
 import { CheckGlyph, cardSurface } from "@/components/sections";
-import { capture } from "@/lib/analytics";
+import { capture, gaEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
 /*
@@ -51,6 +51,7 @@ export function ContactTabs() {
               onClick={() => {
                 setTab(t.key);
                 capture("contact_tab_selected", { tab: t.key });
+                gaEvent("contact_tab_select", { tab: t.key });
               }}
               className={cn(
                 "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-3 py-1.5 text-center text-sm leading-tight font-medium whitespace-nowrap transition-all duration-200 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 sm:px-5",

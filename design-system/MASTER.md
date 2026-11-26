@@ -324,6 +324,8 @@ their colors.
   stay clean; `tone="green"` on cream, `tone="leaf"` on bands
 - `Reveal` — scroll-reveal wrapper (see Motion)
 - `TrackedLink` / `TrackedExternalLink` — analytics-wrapped links; required for CTAs
+  (PostHog `event` + `eventProps`; add `ga={{ event, params }}` to send a GA4 event too, via
+  `gaEvent()` in `lib/analytics.ts`, which no-ops until analytics consent)
 - `SiteHeader` — `Services ▾ · Use Cases ▾ · AI Starters · Resources · About · [Contact us]`,
   built from `content/navigation.ts`. Dropdowns are `NavigationMenuTrigger` + `NavigationMenuContent`
   (`w-72 p-2` panel on the popover surface): one row per page, sub-links indented `pl-6` in body
@@ -546,6 +548,12 @@ One system, defined in `app/globals.css`:
   the footer keeps them). Kim's personal LinkedIn moves to a mark after her name in `KimCard`;
   four of six client personas picked that over a fourth tile or a "Prefer LinkedIn?" line, and it
   keeps the switch on a 390px phone's first screen.
+- **2026-11-25** — GA4 events for the contact and booking buttons (before this, GA4 only got
+  `generate_lead`): `contact_click` (`method` whatsapp / phone / email / linkedin, `source_page`,
+  `cta_location` tiles / name / form_success / form_error), `contact_tab_select` (`tab`),
+  `booking_new_tab` (`source_page`, `cta_location` loading_panel / caption), `booking_via_claude`
+  (`source_page`). `generate_lead` now carries `source_page` for contact_form and book_call. The
+  calendar's "Open the calendar in a new tab" caption link was untracked; it now fires both.
 - **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.

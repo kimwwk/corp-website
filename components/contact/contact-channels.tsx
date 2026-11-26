@@ -40,6 +40,10 @@ export function KimCard({
               aria-label="Kim Wong on LinkedIn"
               event="contact_channel_clicked"
               eventProps={{ source_page: linkedin, channel: "linkedin" }}
+              ga={{
+                event: "contact_click",
+                params: { method: "linkedin", source_page: linkedin, cta_location: "name" },
+              }}
               className="-my-3 -ml-1 flex size-11 items-center justify-center rounded-full text-primary transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               <LinkedInIcon className="size-5" />
@@ -98,6 +102,10 @@ export function ChannelTiles({ sourcePage }: { sourcePage: string }) {
             {...(t.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             event="contact_channel_clicked"
             eventProps={{ source_page: sourcePage, channel: t.key }}
+            ga={{
+              event: "contact_click",
+              params: { method: t.key, source_page: sourcePage, cta_location: "tiles" },
+            }}
             className="group flex min-h-11 items-center gap-3 rounded-xl bg-card px-4 py-3.5 ring-1 ring-border transition-all duration-200 outline-none hover:ring-primary/50 focus-visible:ring-3 focus-visible:ring-ring/50"
           >
             <span

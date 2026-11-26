@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TrackedExternalLink } from "@/components/tracked-link";
 import { contact } from "@/content/contact";
 import { capture, trackLead } from "@/lib/analytics";
 import { WEBHOOK_URL } from "@/lib/webhook";
@@ -170,7 +171,7 @@ export function ContactForm({ sourcePage = "contact" }: { sourcePage?: string })
       });
       if (!res.ok) throw new Error(`status-${res.status}`);
       setStatus("success");
-      trackLead("contact_form");
+      trackLead("contact_form", sourcePage);
       capture("contact_form_submitted", {
         interest: topicLabels.join(", "),
         has_phone: Boolean(phone.trim()),
@@ -196,14 +197,20 @@ export function ContactForm({ sourcePage = "contact" }: { sourcePage?: string })
           <h2 className="mb-2 font-semibold text-foreground">Thanks, I got it.</h2>
           <p className="leading-relaxed text-muted-foreground">
             {contact.reply} If it&apos;s urgent, WhatsApp me on{" "}
-            <a
+            <TrackedExternalLink
               href={contact.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
+              event="contact_channel_clicked"
+              eventProps={{ source_page: sourcePage, channel: "whatsapp", cta_location: "form_success" }}
+              ga={{
+                event: "contact_click",
+                params: { method: "whatsapp", source_page: sourcePage, cta_location: "form_success" },
+              }}
               className="rounded-sm font-medium text-primary underline decoration-2 decoration-primary/30 underline-offset-4 hover:decoration-primary"
             >
               {contact.phoneDisplay}
-            </a>
+            </TrackedExternalLink>
             .
           </p>
         </div>
@@ -329,12 +336,18 @@ export function ContactForm({ sourcePage = "contact" }: { sourcePage?: string })
           <CardContent>
             <p className="text-sm leading-relaxed text-muted-foreground">
               Something went wrong sending your message. Please email{" "}
-              <a
+              <TrackedExternalLink
                 href={`mailto:${contact.email}?subject=Website%20enquiry`}
+                event="contact_channel_clicked"
+                eventProps={{ source_page: sourcePage, channel: "email", cta_location: "form_error" }}
+                ga={{
+                  event: "contact_click",
+                  params: { method: "email", source_page: sourcePage, cta_location: "form_error" },
+                }}
                 className="rounded-sm font-medium text-primary hover:text-primary-hover"
               >
                 {contact.email}
-              </a>{" "}
+              </TrackedExternalLink>{" "}
               or WhatsApp {contact.phoneDisplay}.
             </p>
           </CardContent>

@@ -82,7 +82,7 @@ export function BookingWidget({ sourcePage = "book" }: { sourcePage?: string }) 
       cal("on", {
         action: "bookingSuccessfulV2",
         callback: () => {
-          trackLead("book_call");
+          trackLead("book_call", sourcePage);
           capture("assessment_booked", { method: "cal.com", source_page: sourcePage });
         },
       });
@@ -135,7 +135,11 @@ export function BookingWidget({ sourcePage = "book" }: { sourcePage?: string }) 
                   target="_blank"
                   rel="noopener noreferrer"
                   event="booking_new_tab_clicked"
-                  eventProps={{ source_page: sourcePage, state: load }}
+                  eventProps={{ source_page: sourcePage, state: load, cta_location: "loading_panel" }}
+                  ga={{
+                    event: "booking_new_tab",
+                    params: { source_page: sourcePage, cta_location: "loading_panel" },
+                  }}
                   className={linkClass}
                 >
                   open it in a new tab
@@ -148,9 +152,20 @@ export function BookingWidget({ sourcePage = "book" }: { sourcePage?: string }) 
       </div>
       <p className="mt-4 text-center text-sm text-caption">
         Prefer a full page?{" "}
-        <a href={CAL_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+        <TrackedExternalLink
+          href={CAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          event="booking_new_tab_clicked"
+          eventProps={{ source_page: sourcePage, cta_location: "caption" }}
+          ga={{
+            event: "booking_new_tab",
+            params: { source_page: sourcePage, cta_location: "caption" },
+          }}
+          className={linkClass}
+        >
           Open the calendar in a new tab
-        </a>
+        </TrackedExternalLink>
         . Use Claude?{" "}
         <TrackedExternalLink
           href={ASSISTANT_URL}
@@ -158,6 +173,7 @@ export function BookingWidget({ sourcePage = "book" }: { sourcePage?: string }) 
           rel="noopener noreferrer"
           event="booking_assistant_clicked"
           eventProps={{ source_page: sourcePage, assistant: "claude" }}
+          ga={{ event: "booking_via_claude", params: { source_page: sourcePage } }}
           className={linkClass}
         >
           Book through Claude

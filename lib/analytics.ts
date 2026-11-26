@@ -131,13 +131,20 @@ export function capture(
 }
 
 /**
- * Fire a GA4 `generate_lead` conversion. gtag.js only exists once analytics
- * consent is given, so this no-ops for visitors who declined.
+ * Send a GA4 event. gtag.js only exists once analytics consent is given, so
+ * this no-ops for visitors who declined. Event and parameter names are
+ * GA4-style snake_case; a parameter shows in GA4 reports only after it is
+ * registered there as an event-scoped custom dimension.
  */
-export function trackLead(method: LeadMethod): void {
+export function gaEvent(name: string, params?: Record<string, unknown>): void {
   if (typeof window === "undefined") return;
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void })
     .gtag;
   if (typeof gtag !== "function") return;
-  gtag("event", "generate_lead", { method });
+  gtag("event", name, params);
+}
+
+/** Fire the GA4 `generate_lead` conversion (method + where it happened). */
+export function trackLead(method: LeadMethod, sourcePage?: string): void {
+  gaEvent("generate_lead", sourcePage ? { method, source_page: sourcePage } : { method });
 }
