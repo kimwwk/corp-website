@@ -360,9 +360,9 @@ their colors.
 - `FitCheck`
 - `components/contact/` — the contact page's parts, with `content/contact.ts` as the one source
   for email, phone, WhatsApp link, city, reach and languages: `KimCard` (round `kim-avatar.jpg`,
-  name, role · city, optional quiet caption line), `ChannelTiles` (WhatsApp · Call or text · Email,
-  one tap each, `contact_channel_clicked`), `MessageProfiles` ("Or message me on" + LinkedIn
-  (Kim's personal profile), X, Facebook), `ContactTabs` (a two-option pill switch, "Send a
+  name, role · city, optional quiet caption line, optional LinkedIn mark after the name linking
+  Kim's personal profile; X and Facebook stay in the footer only), `ChannelTiles` (WhatsApp ·
+  Call or text · Email, one tap each, `contact_channel_clicked`), `ContactTabs` (a two-option pill switch, "Send a
   message" | "Book a free 30-min call", short labels and no icons below `sm`; the booking panel
   shows the call's three ticks above `BookingWidget`). /contact is a `<Band hero="page">` holding
   Kim and the channels (`pb-12` on phones so the switch starts near the first screen), then the
@@ -542,6 +542,10 @@ One system, defined in `app/globals.css`:
   then the message / booking switch). The three-step form and "What happens after you send"
   are gone; the form is name, email, optional phone, topic chips, message. Booking moves to the
   `free-30-min-discovery-call` event with a loading panel.
+- **2026-11-25** — /contact socials: X and Facebook leave the band (a hundred-odd followers each;
+  the footer keeps them). Kim's personal LinkedIn moves to a mark after her name in `KimCard`;
+  four of six client personas picked that over a fourth tile or a "Prefer LinkedIn?" line, and it
+  keeps the switch on a 390px phone's first screen.
 - **2026-11-21** — Round-7 review fixes. The `deep` price card always takes the filled cream pill (Build With You on /ai-starters was a faint outline, weaker than the cards below it); a deep card counts as its own surface. /about's portrait uses Home's crop (`aspect-[4/5] object-cover object-[center_15%]`), so both pages frame the photo the same way. The contact form's submit is a `rounded-full` pill like every other page CTA. Home's Fit Check band: on phones the outcome list follows the sentence that introduces it.
 - **2026-11-21** — Round-6 review fixes. Every closing band carries a mono eyebrow ("Next step"; /ai-starters keeps "Start with the workflow"), like every other section. `BookingWidget`: the Calendly iframe is 1180px tall at every width (the 720px desktop height cut the month off above the bookable dates; Calendly no longer switches to two columns at ~1100px) and then follows the height Calendly reports (`calendly.page_height`, floor 640px).
 - **2026-11-21** — FAQ sections are labelled "FAQ" (was "Questions") on every page: service and use-case templates and /ai-starters. Kim's call.

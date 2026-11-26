@@ -11,15 +11,7 @@ export const contact = {
   reach: "Clients across Canada and the US",
   languages: "English, Cantonese, Mandarin",
   reply: "I reply within 1 business day.",
+  /* Her personal profile: where buyers check who she is, and DMs. */
+  linkedinHref: "https://www.linkedin.com/in/kim-wong-wwk/",
+  linkedinHandle: "in/kim-wong-wwk",
 };
-
-/* Where people can message Kim directly (profiles that take DMs). */
-export const messageProfiles = [
-  { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/kim-wong-wwk/" },
-  { key: "x", label: "X", href: "https://x.com/kimwong_wwk" },
-  {
-    key: "facebook",
-    label: "Facebook",
-    href: "https://www.facebook.com/profile.php?id=61591254942653",
-  },
-] as const;

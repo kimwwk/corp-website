@@ -1,26 +1,24 @@
 import Image from "next/image";
 import { Mail, Phone } from "lucide-react";
 
-import { contact, messageProfiles } from "@/content/contact";
-import {
-  FacebookIcon,
-  LinkedInIcon,
-  WhatsAppIcon,
-  XIcon,
-} from "@/components/social-icons";
+import { contact } from "@/content/contact";
+import { LinkedInIcon, WhatsAppIcon } from "@/components/social-icons";
 import { TrackedExternalLink } from "@/components/tracked-link";
 import { cn } from "@/lib/utils";
 
-const profileIcons = { linkedin: LinkedInIcon, x: XIcon, facebook: FacebookIcon };
-
 /* Kim, named and pictured: who reads the message. `detail` adds a quiet
-   caption line (who she works with, languages) under the role. */
+   caption line (who she works with, languages) under the role; `linkedin`
+   puts her LinkedIn mark beside her name, where buyers go to check who she
+   is (the site footer keeps X and Facebook). */
 export function KimCard({
   className,
   detail = false,
+  linkedin,
 }: {
   className?: string;
   detail?: boolean;
+  /* source_page for the LinkedIn click event; omit for no LinkedIn mark. */
+  linkedin?: string;
 }) {
   return (
     <div className={cn("flex items-center gap-4", className)}>
@@ -32,7 +30,22 @@ export function KimCard({
         className="size-14 shrink-0 rounded-full object-cover ring-1 ring-border"
       />
       <div>
-        <p className="font-medium text-foreground">Kim Wong</p>
+        <p className="flex items-center font-medium text-foreground">
+          Kim Wong
+          {linkedin ? (
+            <TrackedExternalLink
+              href={contact.linkedinHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Kim Wong on LinkedIn"
+              event="contact_channel_clicked"
+              eventProps={{ source_page: linkedin, channel: "linkedin" }}
+              className="-my-3 -ml-1 flex size-11 items-center justify-center rounded-full text-primary transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+            >
+              <LinkedInIcon className="size-5" />
+            </TrackedExternalLink>
+          ) : null}
+        </p>
         <p className="text-sm text-muted-foreground">
           Founder, Kivov Digital · {contact.city}
         </p>
@@ -105,37 +118,5 @@ export function ChannelTiles({ sourcePage }: { sourcePage: string }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-/* "Or message me on" + the profiles that take DMs. */
-export function MessageProfiles({
-  sourcePage,
-  className,
-}: {
-  sourcePage: string;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex flex-wrap items-center gap-x-2 gap-y-1", className)}>
-      <p className="mr-1 text-sm text-muted-foreground">Or message me on</p>
-      {messageProfiles.map((p) => {
-        const Icon = profileIcons[p.key];
-        return (
-          <TrackedExternalLink
-            key={p.key}
-            href={p.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Message Kim on ${p.label}`}
-            event="contact_channel_clicked"
-            eventProps={{ source_page: sourcePage, channel: p.key }}
-            className="flex size-11 items-center justify-center rounded-full text-caption transition-colors hover:text-primary"
-          >
-            <Icon className="size-5" />
-          </TrackedExternalLink>
-        );
-      })}
-    </div>
   );
 }

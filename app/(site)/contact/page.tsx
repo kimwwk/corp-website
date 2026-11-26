@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 
-import { ChannelTiles, KimCard, MessageProfiles } from "@/components/contact/contact-channels";
+import { ChannelTiles, KimCard } from "@/components/contact/contact-channels";
 import { ContactTabs } from "@/components/contact/contact-tabs";
 import { Band } from "@/components/sections";
 
@@ -29,12 +29,11 @@ export default function ContactPage() {
             WhatsApp me, book a call, or send a message. I read and answer
             everything myself.
           </p>
-          <KimCard className="shrink-0" detail />
+          <KimCard className="shrink-0" detail linkedin="contact" />
         </div>
         <div className="mt-8 md:mt-10">
           <ChannelTiles sourcePage="contact" />
         </div>
-        <MessageProfiles sourcePage="contact" className="mt-3" />
       </Band>
       <section className="px-6 pt-8 pb-16 md:py-20">
         <div className="mx-auto max-w-6xl">
