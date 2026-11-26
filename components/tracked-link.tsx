@@ -3,21 +3,27 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { capture } from "@/lib/analytics";
+import { capture, gaEvent } from "@/lib/analytics";
+
+/* Optional GA4 event sent with the PostHog one. */
+type GaEvent = { event: string; params?: Record<string, unknown> };
 
 /**
- * next/link that fires a PostHog event on click. Composes into shadcn
+ * next/link that fires a PostHog event on click, and a GA4 event when `ga`
+ * is given. Composes into shadcn
  * components via the `render` prop, e.g.
  * `<Button render={<TrackedLink href="/book" event="…" />}>`.
  */
 export function TrackedLink({
   event,
   eventProps,
+  ga,
   onClick,
   ...props
 }: React.ComponentProps<typeof Link> & {
   event: string;
   eventProps?: Record<string, unknown>;
+  ga?: GaEvent;
 }) {
   return (
     <Link
@@ -25,6 +31,7 @@ export function TrackedLink({
       onClick={(e) => {
         onClick?.(e);
         capture(event, eventProps);
+        if (ga) gaEvent(ga.event, ga.params);
       }}
     />
   );
@@ -38,11 +45,13 @@ export function TrackedLink({
 export function TrackedExternalLink({
   event,
   eventProps,
+  ga,
   onClick,
   ...props
 }: React.ComponentProps<"a"> & {
   event: string;
   eventProps?: Record<string, unknown>;
+  ga?: GaEvent;
 }) {
   return (
     <a
@@ -50,6 +59,7 @@ export function TrackedExternalLink({
       onClick={(e) => {
         onClick?.(e);
         capture(event, eventProps);
+        if (ga) gaEvent(ga.event, ga.params);
       }}
     />
   );
