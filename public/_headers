@@ -1,0 +1,4 @@
+# Cloudflare Pages response headers.
+# The email headshot is for the Fit Check reply emails; keep it out of image search.
+/kim-email-headshot.png
+  X-Robots-Tag: noindex
