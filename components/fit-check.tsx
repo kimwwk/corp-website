@@ -449,7 +449,7 @@ export function FitCheck() {
 
         <p className="mt-6 text-sm text-caption">
           I&apos;ll follow up at {email || "your inbox"} with one practical
-          next step.
+          next step, sent from kimwong@kivov.ca.
         </p>
       </div>
     );
