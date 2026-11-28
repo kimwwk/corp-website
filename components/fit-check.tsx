@@ -65,9 +65,6 @@ const QUESTIONS: Question[] = [
   {
     key: "stuck_where",
     prompt: "Where does work get stuck most often?",
-    hint: "Select up to two.",
-    multi: true,
-    max: 2,
     options: [
       "Lead follow-up",
       "Quotes or proposals",
